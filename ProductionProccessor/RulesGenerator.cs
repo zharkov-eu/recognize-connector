@@ -21,20 +21,26 @@ namespace ExpertSystem.ProductionProccessor
             {
                 foreach (var fieldValue in fieldsWithValues[valuesArray[i]])
                 {
+                    var newNode = new GraphNode();
+                    //Если i==0 - то спускаемся от корня древа
+                    if (i == 0)
+                        newNode.FactsList = new List<string> {fieldValue};
+                    else
+                    {
+                        
+                    }
                     //rulesGraph.NodesList.Add(
                     //});
 
-                    var newNode  = new GraphNode
-                    {
-                        ParentNode = null,
-                        FactsList = new List<string> {fieldValue}
-                    };
+                   
 
                     //Если нет разъемов с полем следующего уровня дерева - записываем узел как лист
                     var nextLevelField = customSocketType.GetField(valuesArray[i + 1]);
                     if (!sockets.Any(p => string.IsNullOrEmpty((string)nextLevelField.GetValue(p))))
                     {
-
+                        //ищем разъем со свойствами из списка фактов текущего узла
+                        //sockets.Where(p=>p.)
+                        newNode.SocketName = "i dont know";
                     }
                 }
             }
