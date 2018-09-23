@@ -1,4 +1,9 @@
-class Rule {
-    string left { get; set; };
-    string right { get; set; };
+namespace ExpertSystem.Models
+{
+    public class Rule
+    {
+        public string Left { get; set; }
+        public string Right { get; set; }
+    }
 }
+
