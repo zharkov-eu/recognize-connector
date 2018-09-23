@@ -1,5 +1,5 @@
 ﻿using System;
-using ExpertSystem.Parse;
+using ExpertSystem.Models;
 
 namespace ExpertSystem
 {
@@ -9,9 +9,8 @@ namespace ExpertSystem
         {
             Console.WriteLine("Hello World!");
 
-            //const string fileName = @"C:\Temp\file.csv";
-            var parse = new Sort();
-            parse.Parse();
+            var socketFieldsProcessor = new SocketFieldsProcessor();
+            socketFieldsProcessor.GetFieldsWithPossibleValues();
             Console.ReadLine();
         }
     }
