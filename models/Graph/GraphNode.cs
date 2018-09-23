@@ -4,6 +4,8 @@ namespace ExpertSystem.Models.Graph
 {
     public class GraphNode
     {
+        public int LevelNum { get; set; }
+
         public List<string> FactsList { set; get; }
 
         public GraphNode ParentNode { get; set; }
