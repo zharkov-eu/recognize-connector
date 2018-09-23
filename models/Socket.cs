@@ -1,6 +1,8 @@
 namespace ExpertSystem.Models
 {
     public class CustomSocket {
+
+        public string SocketName {get; set; }
         public string gender {get; set; }
         public string contact_material {get; set; }
         public string contact_plating {get; set; }
