@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using ExpertSystem.Models;
 
 namespace ExpertSystem.Parse
@@ -67,13 +68,19 @@ namespace ExpertSystem.Parse
                 }
             }
 
+            var fieldsValues = new Dictionary<string, List<string>>();
             var customSocketType = typeof(CustomSocket);
-
-
-
             foreach (var property in ORDER_BY)
             {
-                var propertyValues = entries.GroupBy(p => customSocketType.GetField(property).GetValue(p)).ToList();
+                var field = customSocketType.GetField(property);
+
+                var propertyValues = entries.GroupBy(p => (string)field.GetValue(p)).ToList();
+                var currentPropValues = new List<string>();
+                foreach (var value in propertyValues)
+                    currentPropValues.Add(value.Key);
+
+                fieldsValues.Add(property, currentPropValues);
+
             }
         }
     }
