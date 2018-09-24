@@ -24,5 +24,14 @@ namespace ExpertSystem.Models.Graph
             node.ParentNode = this;
             return node;
         }
+
+        public override string ToString() {
+            List<string> rules = new List<string>();
+            if (ParentNode != null) rules.Add(ParentNode.GetHashCode().ToString());
+            foreach (var Fact in FactSet.Facts)
+                if (Fact.Value != "") rules.Add($"({Fact.Domain}: {Fact.Value})");
+            string result = string.IsNullOrEmpty(SocketName) ? this.GetHashCode().ToString() : SocketName;
+            return $"{string.Join(" & ", rules.ToArray())} -> {result}";
+        }
     }
 }

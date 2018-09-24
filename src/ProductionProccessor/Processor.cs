@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Models;
@@ -35,10 +36,13 @@ namespace ExpertSystem.ProductionProccessor
             GraphNode targetSocket = null;
 
             // Осуществляем поиск в ширину
+            Console.WriteLine("Осуществляем поиск в ширину");
             Queue<GraphNode> queue = new Queue<GraphNode>();
             queue.Enqueue(graph.Root);
             while (queue.Count != 0) {
                 var node = queue.Dequeue();
+                if (node != graph.Root) Console.WriteLine(node.ToString());
+
                 if (node.SocketName == socketName)
                 {
                     targetSocket = node;
@@ -50,10 +54,13 @@ namespace ExpertSystem.ProductionProccessor
             if (targetSocket == null) throw new System.Exception("Socket '{" + socketName + "}' not found");
 
             // Разворачиваем лист правил
+            Console.WriteLine("Разворачиваем лист правил");
             FactSet facts = new FactSet();
             GraphNode currentNode = targetSocket;
             while (currentNode.ParentNode != null)
             {
+                Console.WriteLine(currentNode.ToString());
+
                 facts.Add(currentNode.FactSet.ToArray());
                 currentNode = currentNode.ParentNode;
             }
