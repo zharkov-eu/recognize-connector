@@ -40,6 +40,10 @@ namespace ExpertSystem.ProductionProccessor
                     if (node == null)
                         node = currentNode.AddChild(new GraphNode(facts));
 
+                    // Если это последний домен - записываем название разъема
+                    if (domain == domains.Last())
+                        node.SocketName = socket.SocketName;
+
                     currentNode = node;
                 }
             }
@@ -53,8 +57,12 @@ namespace ExpertSystem.ProductionProccessor
         private void compress(GraphNode currentNode) {
             if (currentNode.ChildNodes.Count == 1)
             {
-                currentNode.Facts.Add(currentNode.ChildNodes.ElementAt(0).Facts.ToArray());
-                currentNode.ChildNodes.RemoveAt(0);
+                var replaceNode = currentNode.ChildNodes.ElementAt(0);
+                currentNode.Facts.Add(replaceNode.Facts.ToArray());
+                if (replaceNode.SocketName != null)
+                    currentNode.SocketName = replaceNode.SocketName;
+                currentNode.ChildNodes = replaceNode.ChildNodes;
+                if (currentNode.ChildNodes.Count == 1) compress(currentNode);
             }
             foreach (var node in currentNode.ChildNodes)
                 compress(node);
