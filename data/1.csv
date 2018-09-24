@@ -1,0 +1,101 @@
+mpn;color;contact_material;contact_plating;gender;housing_color;housing_material;mounting_style;number_of_contacts;number_of_positions;number_of_rows;orientation;pin_pitch;material;size_diameter;size_length;size_height;size_width
+5145167-4;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Through Hole;120;60;2;Vertical;0.00127;;;;;
+1-329631-2;Silver;;;;;;;;;;;;;;;;
+1-5145154-2;White;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Solder;120;60;2;Vertical;0.00127;Thermoplastic;;;;
+R3MZ;;;Nickel;Male;;;Solder;3;3;;;;;0.024384;0.06985;;
+A3MB;Black;;Silver;Male;Black;;Solder;3;3;;;;;0.018796;0.070612;;
+211882-1;;;;Male;Gray;Thermoplastic;;4;4;;;;Thermoplastic;;;;
+5145154-4;White;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Solder;120;60;2;Straight;0.00127;Thermoplastic;;;;
+1-208657-1;Black;Phosphor Bronze;Gold;Female;Black;Nylon;Flange;8;8;;;;;;;;
+CR2-M;Natural;;;;;;;;;;;;Nylon;;0.0084;0.005;0.0051
+2106710-1;Natural;Phosphor Bronze;Tin;Female;Natural;;Screw;;;;;;;;;;
+MS3476W14-19P;;;Gold;Male;;;;19;;;;;;;;;
+C3M;Silver;;Nickel;Male;;;Panel;3;3;;;;;0.0206502;0.0256032;;
+8-215570-0;Red;Phosphor Bronze;Tin;Male;Red;Polyester;Through Hole;10;10;;Vertical;0.00127;Polyester;;;;
+D5M;Silver;Gold;Gold;Male;;;Panel;5;5;;;;;0.018923;0.0206502;;
+8-215570-2;Red;Phosphor Bronze;Tin;Male;Red;Polyester;Through Hole;12;12;;Vertical;0.00127;Polyester;;;;
+MS3476L22-55P;;;Gold;Male;;;;55;;;;;;;;;
+EE-1003A;;;;;;;Bracket;;;;;;;;;;
+5145154-1;Natural;Phosphor Bronze;Gold Flash;Female;Natural;Thermoplastic;Through Hole;120;;;Vertical;;;;;;
+84952-8;Natural;Phosphor Bronze;Tin;Female;White;;Surface Mount;8;;;Right Angle;0.001;Thermoplastic;;;;
+1-206455-2;Black;;Gold;Male;Black;Thermoplastic;Flange;63;63;;;;;;;;
+20ESRM-3;;;;Male;;;Panel;;;;;;;;;;
+CR4H-M0;Natural;;;;;;;;;;;;Nylon;;0.0146;0.0076;0.0091
+TA5FLX;;Copper Alloy;Tin;Male;;;Solder;5;;;;;;;;;
+6331G1;Red;Copper;Silver;Male;Red;;Solder;2;;;;;;;;;
+2106739-1;Natural;Phosphor Bronze;Tin;;Natural;;Panel;;;;;;;;;;
+MS3126F16-8P;Olive;Copper Alloy;Gold;Male;;;;8;16;;;;;;;;
+K3FS;;;Nickel;Female;;;Panel;3;;;;;;0.0238;;;
+CR4H-M;Natural;;;;;;;;;;;;Nylon;;0.0145;0.0076;0.0091
+97-3106A20-4S-639;;Copper Alloy;Silver;Male;;;Solder;4;;;;;;;;;
+JT02RE-12-98P-014;;Copper Alloy;Gold;Female;;;Panel;10;;;;;;;;;
+1445957-4;Green;;Tin;;Green;Polycarbonate;;8;1;;;;;;0.007899;0.024587;0.007899
+5145165-8;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Through Hole;184;92;2;Vertical;0.00127;;;;;
+97-3106A-16S-1P(946);Black;;Silver;Male;;;Solder;7;7;;;;;;;;
+A6M;Green;Copper Alloy;Silver;Male;;;Solder;6;6;;;;;0.018796;0.070612;;
+MS3476W14-5S;;;Gold;Male;;;;5;;;;;;;;;
+1-1102271-1;;;;;;Aluminum Alloy;;;;;;;Aluminum;;;;
+MS3476W14-4S;;;Gold;Male;;;;4;;;;;;;;;
+4-640443-0;Green;Copper Alloy;Tin;Female;Green;Nylon;;10;10;1;;0.00254;;;0.0254;0.013208;0.006985
+5145098-1;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Surface Mount;120;60;2;Vertical;0.00127;;;;;
+XS5CD4S1;;Brass;Gold;Female;;;Screw;4;;;;;;;;;
+KPSE02E14-15PZ;;Copper Alloy;Gold;Female;;;Box;15;;;;;;;;;
+MBG30P-1;Black;;;Male;;;;30;30;;;;;;;;
+LJT06RE-21-41S;;Copper Alloy;Gold;Male;;;;41;;;;;;;;;
+05GM3MX;Gray;;Tin;Male;;;Solder;3;;;;;;;;;
+208485-1;;;;Female;Black;Thermoplastic;Flange;7;7;;;;;;;;
+KPSE00A16-26P;;Copper Alloy;Gold;Female;;;Flange;26;;;;;;;;;
+1-329632-2;Nickel;;;;;;;;;;;;;;;;
+5749230-1;Black;Copper Alloy;Tin;Male;Black;Thermoplastic;Through Hole;4;;;Right Angle;;;;;;
+LJT06RT-25-19S-014;;Copper Alloy;Gold;Male;;;;19;;;;;;;;;
+LJT06RT-13-98S-014;Olive;Copper Alloy;Gold;Male;;Aluminum;;10;;;;;;;;;
+213650-1;Black;Brass;;Female;Black;Nylon;Panel;14;;;;;;;;;
+185636-1;Black;;;;;;;;;;;;;;;;
+LJTPQ00RT-13-8S-014;;Copper Alloy;Gold;Female;;;Flange;8;;;;;;;;;
+LJT06RT-17-8S-014;;Copper Alloy;Gold;Male;;;;8;;;;;;;;;
+LJT06RT-17-8P-023;;Copper Alloy;Gold;Male;;;;8;;;;;;;;;
+XF2U-0815-3A;;Copper Alloy;Gold;Female;;;Surface Mount;8;;;;;;;;;
+202114;Silver;Brass;Gold;Male;;;;;;;;;;;;;
+XN2A-1470;Black;Phosphor Bronze;Gold;Male;;;;4;;;;;;;;;
+PT06E-14-19S;;Copper Alloy;Gold;Male;;;Solder;19;;;;;;;;;
+1761468-1;Black;Copper Alloy;Tin;Female;Black;Polyester;Through Hole;64;;;Right Angle;;;;;;
+KPSE01F12-10PWA206;;Copper;Gold;Male;;;;10;;;;;;;;;
+54489-3;Natural;;;Male;Natural;Nylon;Panel;3;3;1;;0.00792;;;0.023774;0.024511;0.007925
+206127-1;Black;Copper Alloy;Gold;Female;Black;Thermoplastic;Flange;28;28;;;;;;;;
+84952-4;Natural;Phosphor Bronze;Tin;Female;White;;Surface Mount;4;4;;Right Angle;0.001;Thermoplastic;;;;
+554944-1;Black;;;;;Plastic;;;24;;;;Plastic;;;;
+LJT06RE-25-37S-014;;Copper Alloy;Gold;Male;;;;37;;;;;;;;;
+LJT00RT-17-6S-014;Olive;Copper Alloy;Gold;Female;;Aluminum;Flange;6;;;;;;;;;
+1367337-1;Black;Phosphor Bronze;Gold;Female;Black;;Surface Mount;70;70;;;;;;;;
+JTG06RT-14-35S-014;;Copper Alloy;Gold;Male;;;;37;;;;;;;;;
+12BL5MX;;;Tin;Male;;;;5;5;;;;;;;;
+C5M;;;Nickel;Male;;;Panel;5;5;;;;;0.0206502;0.0256032;;
+208478-1;;;;Male;Black;Thermoplastic;Panel;16;16;;;;;;;;
+1551920-2;;Copper;Tin;Female;Black;;Surface Mount;38;;;;;;;;;
+PT06E-8-4S(SR);Olive;Copper Alloy;Gold;Male;;;Solder;4;;;;;;;;;
+LJT06RT-13-35P-014;Olive;Copper Alloy;Gold;Male;;Aluminum;;22;;;;;;;;;
+XS2GD5S7;;;;Male;;;;;;;;;;;;;
+206126-1;Black;;;Female;Black;Thermoplastic;;28;28;;;;;;;;
+97-3106A16-11P-559;;Copper Alloy;Silver;Male;;;Solder;2;;;;;;;;;
+C4F;;Copper Alloy;Nickel;Female;;;Panel;4;4;;;;;0.036322;0.0281686;;
+4-643814-2;White;Copper Alloy;Tin;Female;White;Nylon;Through Hole;12;12;1;;0.00254;;;0.03048;0.006985;0.013208
+KPSE00E20-16P;;Copper Alloy;Gold;Female;;;Flange;16;;;;;;;;;
+KPT02A14-15SA71;;Copper Alloy;Gold;Female;;;Solder;15;;;;;;;;;
+1658525-9;;Beryllium Copper;Tin;Male;Blue;;PC Board;20;;;Vertical;0.00254;Thermoplastic;;;;
+;;;;;;;;;;;;;;;;;
+LJT06RE-17-35S-014;;Copper Alloy;Gold;Male;;;;55;;;;;;;;;
+JTPQ00RT-12-35S-023;;Copper Alloy;Gold;Female;;;Flange;22;;;;;;;;;
+R3FZ;;;Nickel;Male;;;Solder;3;3;;;;;0.024384;0.06985;;
+LJT00RT-17-8S-014;;Copper Alloy;Gold;Female;;;Flange;8;;;;;;;;;
+XS5CD4S2;;Brass;Gold;Female;;;Screw;4;;;;;;;;;
+1747981-1;Black;Copper Alloy;Gold Flash;Female;Black;Plastic;Surface Mount;19;19;;;;;;0.01155;0.00608;0.015
+LJTPQ00RT-11-99P-014;;Copper Alloy;Gold;Female;;;Flange;7;;;;;;;;;
+LJT06RE-15-5S-014;;Copper Alloy;Gold;Male;;;;5;;;;;;;;;
+LJT00RE17-35P-014;;Copper Alloy;Gold;Male;;;Flange;55;;;;;;;;;
+JTPQ00RE-16-35P-014;;Copper Alloy;Gold;Female;;;Flange;55;;;;;;;;;
+62GB-12E14-12PN(416);;Copper Alloy;Gold;Male;;;Panel;12;;;;;;;;;
+1-84953-0;;Phosphor Bronze;Tin;Female;White;;Surface Mount;10;;;Right Angle;;;;;;
+LJT06RE-25-29S-014;;Copper Alloy;Gold;Male;;;;29;;;;;;;;;
+5145154-8;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Solder;120;60;2;Vertical;0.00127;;;;;
+2057631-1;;;;;;;;;;;;;;;;;
+1445420-1;Black;;;;;;Solder Lug;;19;;;;Neoprene;0.0153;;;

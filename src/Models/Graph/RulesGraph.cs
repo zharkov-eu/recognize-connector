@@ -8,7 +8,7 @@ namespace ExpertSystem.Models.Graph
 
         public RulesGraph() {
             NodesList = new List<GraphNode>();
-            GraphNode root = new GraphNode(new Fact(ROOT_DOMAIN, null));
+            GraphNode root = new GraphNode(new Fact(ROOT_DOMAIN, ""));
             NodesList.Add(root);
         }
     }

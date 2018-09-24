@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,24 +7,24 @@ using ExpertSystem.Parse;
 namespace ExpertSystem.Models
 {
     public class CustomSocket {
-        public string SocketName {get; set; }
-        public string Gender { get; set; }
-        public string ContactMaterial { get; set; }
-        public string ContactPlating { get; set; }
-        public string Color { get; set; }
-        public string HousingColor { get; set; }
-        public string HousingMaterial { get; set; }
-        public string MountingStyle { get; set; }
-        public string NumberOfContacts { get; set; }
-        public string NumberOfPositions { get; set; }
-        public string NumberOfRows { get; set; }
-        public string Orientation { get; set; }
-        public string PinPitch { get; set; }
-        public string Material { get; set; }
-        public string SizeDiameter { get; set; }
-        public string SizeLength { get; set; }
-        public string SizeHeight { get; set; }
-        public string SizeWidth { get; set; }         
+        public string SocketName;
+        public string Gender;
+        public string ContactMaterial;
+        public string ContactPlating;
+        public string Color;
+        public string HousingColor;
+        public string HousingMaterial;
+        public string MountingStyle;
+        public string NumberOfContacts;
+        public string NumberOfPositions;
+        public string NumberOfRows;
+        public string Orientation;
+        public string PinPitch;
+        public string Material;
+        public string SizeDiameter;
+        public string SizeLength;
+        public string SizeHeight;
+        public string SizeWidth;         
     }
 
     public class SocketFieldsProcessor
@@ -49,20 +50,20 @@ namespace ExpertSystem.Models
             "SizeWidth"
         };
 
-        public Dictionary<string, List<string>> GetFieldsWithPossibleValues()
+        public List<CustomSocket> GetSockets()
         {
-            var fileName = Directory.GetCurrentDirectory() + "\\1.csv";
+            var fileName = Directory.GetCurrentDirectory() + "\\data\\1.csv";
 
             var entries = new List<CustomSocket>();
             using (var stream = File.OpenRead(fileName))
             using (var reader = new StreamReader(stream))
             {
-                var data = CsvParser.ParseHeadAndTail(reader, ',', '"');
+                var data = CsvParser.ParseHeadAndTail(reader, ';', '"');
                 var lines = data.Item2;
             
                 foreach (var line in lines)
                 {
-                    if (line!=null && line.Any())
+                    if (line != null && line.Any())
                     {
                         entries.Add(new CustomSocket
                         {
@@ -88,13 +89,18 @@ namespace ExpertSystem.Models
                 }
             }
 
+            return entries;
+        }
+
+        public Dictionary<string, List<string>> GetFieldsWithPossibleValues(List<CustomSocket> sockets)
+        {
             var fieldsValues = new Dictionary<string, List<string>>();
             var customSocketType = typeof(CustomSocket);
             foreach (var property in ORDER_BY)
             {
                 var field = customSocketType.GetField(property);
-
-                var propertyValues = entries.GroupBy(p => (string)field.GetValue(p)).ToList();
+                
+                var propertyValues = sockets.GroupBy(p => (string)field.GetValue(p)).ToList();
                 var currentPropValues = new List<string>();
                 foreach (var value in propertyValues)
                     currentPropValues.Add(value.Key);
