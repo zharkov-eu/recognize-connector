@@ -1,9 +1,10 @@
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ExpertSystem.Models
 {
-    public class Fact : IEqualityComparer<Fact> {
+    public class Fact : IEqualityComparer<Fact>
+    {
         public string Domain { get; set; }
         public string Value { get; set; }
 
@@ -15,9 +16,11 @@ namespace ExpertSystem.Models
 
         public override bool Equals(object obj)
         {
-            if (obj == null) return false;
-            Fact fact = obj as Fact;
-            if (fact as Fact == null) return false;
+            if (obj == null) 
+                return false;
+            var fact = obj as Fact;
+            if (fact == null) 
+                return false;
             return Domain == fact.Domain && Value == fact.Value;
         }
 
@@ -40,7 +43,8 @@ namespace ExpertSystem.Models
         }
     }
 
-    public class FactSet {
+    public class FactSet
+    {
         public HashSet<Fact> Facts;
 
         public FactSet(params Fact[] facts)
@@ -63,9 +67,11 @@ namespace ExpertSystem.Models
 
         public override bool Equals(object obj)
         {
-            if (obj == null) return false;
-            FactSet facts = obj as FactSet;
-            if (facts as FactSet == null) return false;
+            if (obj == null) 
+                return false;
+            var facts = obj as FactSet;
+            if (facts == null) 
+                return false;
             return Facts.SetEquals(facts.Facts);
         }
 

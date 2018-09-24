@@ -14,13 +14,12 @@ namespace ExpertSystem.ProductionProccessor
             //Сортировка полей по числу принимаемых ими значений
             fieldsValues = fieldsValues.OrderBy(p => p.Value.Count).ToDictionary(x => x.Key, x => x.Value);
             var domains = fieldsValues.Keys.ToArray();
-
             var customSocketType = typeof(CustomSocket);
 
             foreach (var socket in sockets)
             {
                 // Начинаем с корня
-                GraphNode currentNode = rulesGraph.Root;
+                var currentNode = rulesGraph.Root;
 
                 // Итерируемся по списку доменов
                 foreach (var domain in domains)
@@ -28,13 +27,14 @@ namespace ExpertSystem.ProductionProccessor
                     GraphNode node = null;
 
                     // Конструируем факт
-                    FactSet facts = new FactSet(
-                        new Fact(domain, (string)customSocketType.GetField(domain).GetValue(socket))
+                    var facts = new FactSet(
+                        new Fact(domain, (string) customSocketType.GetField(domain).GetValue(socket))
                     );
 
                     // Проверяем текущий список фактов, возможно, там уже есть этот факт
                     foreach (var childNode in currentNode.ChildNodes)
-                        if (facts.Equals(childNode.FactSet)) node = childNode;
+                        if (facts.Equals(childNode.FactSet))
+                            node = childNode;
 
                     // В списке фактов нет этого факта, добавляем
                     if (node == null)
@@ -49,12 +49,12 @@ namespace ExpertSystem.ProductionProccessor
             }
 
             // Сжимаем граф
-            compress(rulesGraph.Root);
-            
+            Compress(rulesGraph.Root);
             return rulesGraph;
         }
 
-        private void compress(GraphNode currentNode) {
+        private void Compress(GraphNode currentNode)
+        {
             if (currentNode.ChildNodes.Count == 1)
             {
                 var replaceNode = currentNode.ChildNodes.ElementAt(0);
@@ -62,10 +62,12 @@ namespace ExpertSystem.ProductionProccessor
                 if (replaceNode.SocketName != null)
                     currentNode.SocketName = replaceNode.SocketName;
                 currentNode.ChildNodes = replaceNode.ChildNodes;
-                if (currentNode.ChildNodes.Count == 1) compress(currentNode);
+                if (currentNode.ChildNodes.Count == 1) 
+                    Compress(currentNode);
             }
+
             foreach (var node in currentNode.ChildNodes)
-                compress(node);
+                Compress(node);
         }
     }
 }

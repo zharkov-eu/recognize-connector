@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-namespace ExpertSystem.Models.Graph
+﻿namespace ExpertSystem.Models.Graph
 {
     public class RulesGraph
     {
         public static readonly string ROOT_DOMAIN = ".";
         public GraphNode Root { get; set; }
 
-        public RulesGraph() {
+        public RulesGraph()
+        {
             Root = new GraphNode(new Fact(ROOT_DOMAIN, ""));
         }
     }
