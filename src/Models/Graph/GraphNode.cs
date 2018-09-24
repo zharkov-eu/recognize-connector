@@ -4,18 +4,18 @@ namespace ExpertSystem.Models.Graph
 {
     public class GraphNode
     {
-        public FactSet Facts { set; get; }
+        public FactSet FactSet { set; get; }
         public GraphNode ParentNode { get; set; }
         public List<GraphNode> ChildNodes { get; set; }
         public string SocketName { get; set; }
 
         public GraphNode(params Fact[] facts) {
-            Facts = new FactSet(facts);
+            FactSet = new FactSet(facts);
             ChildNodes = new List<GraphNode>();
         }
 
         public GraphNode(FactSet facts) {
-            Facts = facts;
+            FactSet = facts;
             ChildNodes = new List<GraphNode>();
         }
 

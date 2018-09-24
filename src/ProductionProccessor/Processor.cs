@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Models;
 using ExpertSystem.Models.Graph;
@@ -12,8 +13,20 @@ namespace ExpertSystem.ProductionProccessor
             this.graph = graph;
         }
 
-        public bool ForwardProcessing(HashSet<string> facts, string socketName)
+        public bool ForwardProcessing(FactSet factSet, string socketName)
         {
+            Queue<GraphNode> queue = new Queue<GraphNode>();
+            queue.Enqueue(graph.Root);
+            while (queue.Count != 0)
+            {
+                var currentNode = queue.Dequeue();
+                foreach (var node in currentNode.ChildNodes)
+                {
+                    if (node.FactSet.Facts.Except(factSet.Facts).Count() == 0)
+                        queue.Enqueue(node);
+                }
+            }
+
             return false;
         }
 
@@ -41,7 +54,7 @@ namespace ExpertSystem.ProductionProccessor
             GraphNode currentNode = targetSocket;
             while (currentNode.ParentNode != null)
             {
-                facts.Add(currentNode.Facts.ToArray());
+                facts.Add(currentNode.FactSet.ToArray());
                 currentNode = currentNode.ParentNode;
             }
 

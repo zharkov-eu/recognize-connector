@@ -34,7 +34,7 @@ namespace ExpertSystem.ProductionProccessor
 
                     // Проверяем текущий список фактов, возможно, там уже есть этот факт
                     foreach (var childNode in currentNode.ChildNodes)
-                        if (facts.Equals(childNode.Facts)) node = childNode;
+                        if (facts.Equals(childNode.FactSet)) node = childNode;
 
                     // В списке фактов нет этого факта, добавляем
                     if (node == null)
@@ -58,7 +58,7 @@ namespace ExpertSystem.ProductionProccessor
             if (currentNode.ChildNodes.Count == 1)
             {
                 var replaceNode = currentNode.ChildNodes.ElementAt(0);
-                currentNode.Facts.Add(replaceNode.Facts.ToArray());
+                currentNode.FactSet.Add(replaceNode.FactSet.ToArray());
                 if (replaceNode.SocketName != null)
                     currentNode.SocketName = replaceNode.SocketName;
                 currentNode.ChildNodes = replaceNode.ChildNodes;
