@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +5,8 @@ using ExpertSystem.Parse;
 
 namespace ExpertSystem.Models
 {
-    public class CustomSocket {
+    public class CustomSocket
+    {
         public string SocketName;
         public string Gender;
         public string ContactMaterial;
@@ -24,7 +24,7 @@ namespace ExpertSystem.Models
         public string SizeDiameter;
         public string SizeLength;
         public string SizeHeight;
-        public string SizeWidth;         
+        public string SizeWidth;
     }
 
     public class SocketFieldsProcessor
@@ -60,11 +60,9 @@ namespace ExpertSystem.Models
             {
                 var data = CsvParser.ParseHeadAndTail(reader, ';', '"');
                 var lines = data.Item2;
-            
+
                 foreach (var line in lines)
-                {
                     if (line != null && line.Any())
-                    {
                         entries.Add(new CustomSocket
                         {
                             SocketName = line[0],
@@ -86,8 +84,6 @@ namespace ExpertSystem.Models
                             SizeHeight = line[16],
                             SizeWidth = line[17]
                         });
-                    }                  
-                }
             }
 
             return entries;
@@ -100,8 +96,8 @@ namespace ExpertSystem.Models
             foreach (var property in ORDER_BY)
             {
                 var field = customSocketType.GetField(property);
-                
-                var propertyValues = sockets.GroupBy(p => (string)field.GetValue(p)).ToList();
+
+                var propertyValues = sockets.GroupBy(p => (string) field.GetValue(p)).ToList();
                 var currentPropValues = new List<string>();
                 foreach (var value in propertyValues)
                     currentPropValues.Add(value.Key);

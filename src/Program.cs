@@ -8,7 +8,6 @@ namespace ExpertSystem
     {
         private static void Main(string[] args)
         {
-
             var socketFieldsProcessor = new SocketFieldsProcessor();
             var sockets = socketFieldsProcessor.GetSockets();
             var fieldValues = socketFieldsProcessor.GetFieldsWithPossibleValues(sockets);
@@ -21,9 +20,9 @@ namespace ExpertSystem
             var facts = processor.BackProcessing("5145167-4");
 
             // Пример прямого продукционного вывода
-            Fact numberOfPositions = new Fact("NumberOfPositions", "60");
-            Fact numberOfContacts = new Fact("NumberOfContacts", "120");
-            Fact gender = new Fact("Gender", "Female");
+            var numberOfPositions = new Fact("NumberOfPositions", "60");
+            var numberOfContacts = new Fact("NumberOfContacts", "120");
+            var gender = new Fact("Gender", "Female");
             var isSocket = processor.ForwardProcessing(
                 new FactSet(numberOfPositions, numberOfContacts, gender),
                 "5145167-4"

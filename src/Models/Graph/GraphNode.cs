@@ -9,17 +9,20 @@ namespace ExpertSystem.Models.Graph
         public List<GraphNode> ChildNodes { get; set; }
         public string SocketName { get; set; }
 
-        public GraphNode(params Fact[] facts) {
+        public GraphNode(params Fact[] facts)
+        {
             FactSet = new FactSet(facts);
             ChildNodes = new List<GraphNode>();
         }
 
-        public GraphNode(FactSet facts) {
+        public GraphNode(FactSet facts)
+        {
             FactSet = facts;
             ChildNodes = new List<GraphNode>();
         }
 
-        public GraphNode AddChild(GraphNode node) {
+        public GraphNode AddChild(GraphNode node)
+        {
             ChildNodes.Add(node);
             node.ParentNode = this;
             return node;
