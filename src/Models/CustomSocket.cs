@@ -74,16 +74,17 @@ namespace ExpertSystem.Models
                             Gender = line[4],
                             HousingColor = line[5],
                             HousingMaterial = line[6],
-                            NumberOfContacts = line[7],
-                            NumberOfPositions = line[8],
-                            NumberOfRows = line[9],
-                            Orientation = line[10],
-                            PinPitch = line[11],
-                            Material = line[12],
-                            SizeDiameter = line[13],
-                            SizeLength = line[14],
-                            SizeHeight = line[15],
-                            SizeWidth = line[16]
+                            MountingStyle = line[7],
+                            NumberOfContacts = line[8],
+                            NumberOfPositions = line[9],
+                            NumberOfRows = line[10],
+                            Orientation = line[11],
+                            PinPitch = line[12],
+                            Material = line[13],
+                            SizeDiameter = line[14],
+                            SizeLength = line[15],
+                            SizeHeight = line[16],
+                            SizeWidth = line[17]
                         });
                     }                  
                 }

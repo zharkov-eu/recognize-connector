@@ -4,12 +4,10 @@ namespace ExpertSystem.Models.Graph
     public class RulesGraph
     {
         public static readonly string ROOT_DOMAIN = ".";
-        public List<GraphNode> NodesList { get; set; }
+        public GraphNode Root { get; set; }
 
         public RulesGraph() {
-            NodesList = new List<GraphNode>();
-            GraphNode root = new GraphNode(new Fact(ROOT_DOMAIN, ""));
-            NodesList.Add(root);
+            Root = new GraphNode(new Fact(ROOT_DOMAIN, ""));
         }
     }
 }

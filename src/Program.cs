@@ -8,6 +8,7 @@ namespace ExpertSystem
     {
         private static void Main(string[] args)
         {
+
             var socketFieldsProcessor = new SocketFieldsProcessor();
             var sockets = socketFieldsProcessor.GetSockets();
             var fieldValues = socketFieldsProcessor.GetFieldsWithPossibleValues(sockets);
