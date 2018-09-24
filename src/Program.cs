@@ -15,6 +15,10 @@ namespace ExpertSystem
 
             var rulesGenerator = new RulesGenerator();
             var rulesGraph = rulesGenerator.GenerateRules(sockets, fieldValues);
+            var processor = new Processor(rulesGraph);
+
+            // Пример поиска
+            var facts = processor.BackProcessing("5145167-4");
 
             Console.ReadLine();
         }
