@@ -16,6 +16,7 @@ namespace ExpertSystem.ProductionProccessor
             var domains = fieldsValues.Keys.ToArray();
 
             var customSocketType = typeof(CustomSocket);
+
             foreach (var socket in sockets)
             {
                 // Начинаем с корня
@@ -43,7 +44,20 @@ namespace ExpertSystem.ProductionProccessor
                 }
             }
 
+            // Сжимаем граф
+            compress(rulesGraph.Root);
+            
             return rulesGraph;
+        }
+
+        private void compress(GraphNode currentNode) {
+            if (currentNode.ChildNodes.Count == 1)
+            {
+                currentNode.Facts.Add(currentNode.ChildNodes.ElementAt(0).Facts.ToArray());
+                currentNode.ChildNodes.RemoveAt(0);
+            }
+            foreach (var node in currentNode.ChildNodes)
+                compress(node);
         }
     }
 }

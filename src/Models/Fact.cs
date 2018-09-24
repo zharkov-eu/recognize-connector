@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 namespace ExpertSystem.Models
@@ -47,6 +48,17 @@ namespace ExpertSystem.Models
             Facts = new HashSet<Fact>();
             foreach (var fact in facts)
                 Facts.Add(fact);
+        }
+
+        public void Add(params Fact[] facts)
+        {
+            foreach (var fact in facts)
+                Facts.Add(fact);
+        }
+
+        public Fact[] ToArray()
+        {
+            return Facts.ToArray();
         }
 
         public override bool Equals(object obj)
