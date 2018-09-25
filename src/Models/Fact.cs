@@ -41,6 +41,11 @@ namespace ExpertSystem.Models
         {
             return fact.GetHashCode();
         }
+
+        public override string ToString()
+        {
+            return $"{Domain}: {Value}";
+        }
     }
 
     public class FactSet
@@ -79,6 +84,11 @@ namespace ExpertSystem.Models
         {
             var hash = 19;
             return hash * 37 + Facts.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "{ " + string.Join(", ", Facts.Select(it => it.ToString())) + " }";
         }
     }
 }
