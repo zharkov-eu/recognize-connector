@@ -3,7 +3,7 @@ using System.Linq;
 using ExpertSystem.Models;
 using ExpertSystem.Models.Graph;
 
-namespace ExpertSystem.ProductionProccessor
+namespace ExpertSystem.Processor
 {
     public class RulesGenerator
     {

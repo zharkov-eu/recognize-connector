@@ -4,23 +4,26 @@ using System.Collections.Generic;
 using ExpertSystem.Models;
 using ExpertSystem.Models.Graph;
 
-namespace ExpertSystem.ProductionProccessor
+namespace ExpertSystem.Processor
 {
-    public struct ProcessorOptions
+    public class ProductionProcessor : AbstractProcessor
     {
-        public bool Debug;
-    }
-    public class Processor
-    {
-        private readonly RulesGraph _graph;
-        private readonly bool _debug;
+        public ProductionProcessor(RulesGraph graph, ProcessorOptions options) : base(graph, options) {}
 
-        public Processor(RulesGraph graph, ProcessorOptions options)
-        {
-            _graph = graph;
-            _debug = options.Debug;
-        }
-
+        /// <summary> 
+        /// Прямой продукционный вывод
+        /// </summary>
+        /// <param name="factSet">Множество входных фактов</param>
+        /// <example>
+        /// Поиск разъемов для множества входных фактов
+        /// <code>
+        /// var numberOfPositions = new Fact("NumberOfPositions", "60");
+        /// var numberOfContacts = new Fact("NumberOfContacts", "120");
+        /// var gender = new Fact("Gender", "Female");
+        /// FactSet factSet = new FactSet(numberOfPositions, numberOfContacts, gender);
+        /// var socketList = processor.ForwardProcessing(factSet);
+        /// </code>
+        /// </example>
         public List<string> ForwardProcessing(FactSet factSet)
         {
             List<string> socketList = new List<string>();
@@ -41,6 +44,16 @@ namespace ExpertSystem.ProductionProccessor
             return socketList;
         }
 
+        /// <summary>
+        /// Обратный продукционный вывод
+        /// </summary>
+        /// <param name="socketName">Наименование разъема</param>
+        /// <example>
+        /// Поиск фактов для разъема 5145167-4
+        /// <code>
+        /// FactSet set = processor.BackProcessing("5145167-4")
+        /// </code>
+        /// </example>
         public FactSet BackProcessing(string socketName)
         {
             GraphNode targetSocket = null;
@@ -61,7 +74,8 @@ namespace ExpertSystem.ProductionProccessor
                 node.ChildNodes.ForEach(it => queue.Enqueue(it));
             }
 
-            if (targetSocket == null) throw new Exception("Socket '{" + socketName + "}' not found");
+            if (targetSocket == null)
+                throw new Exception("Разъем '{" + socketName + "}' не найден");
 
             // Разворачиваем лист правил
             debug("Разворачиваем лист правил");
@@ -87,11 +101,6 @@ namespace ExpertSystem.ProductionProccessor
                 if (facts.ContainsKey(fact.Domain) && facts[fact.Domain] != fact.Value)
                     compared = false;
             return compared;
-        }
-
-        private void debug(string message)
-        {
-            if (_debug) Console.WriteLine(message);
         }
     }
 }

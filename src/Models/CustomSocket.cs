@@ -52,7 +52,7 @@ namespace ExpertSystem.Models
 
         public List<CustomSocket> GetSockets()
         {
-            var fileName = Path.Combine(Directory.GetCurrentDirectory(), "data", "1.csv");
+            var fileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "data", "1.csv");
 
             var entries = new List<CustomSocket>();
             using (var stream = File.OpenRead(fileName))
