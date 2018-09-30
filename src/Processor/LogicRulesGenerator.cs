@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Models;
+using static ExpertSystem.Models.LogicOperation;
 
 namespace ExpertSystem.Processor
 {
@@ -18,8 +19,9 @@ namespace ExpertSystem.Processor
                     currentSocketFacts.AddLast(new LogicFact(
                         domain,
                         customSocketType.GetField(domain).GetValue(socket).ToString(),
-                        CustomSocket.DOMAINS.Last().Equals(domain) ? LogicOperation.None : LogicOperation.Conjunction)
+                        CustomSocket.DOMAINS.Last().Equals(domain) ? Operations.Implication : Operations.Conjunction)
                     );
+                currentSocketFacts.AddLast(new LogicFact("SocketName", socket.SocketName, Operations.None));
                 socketsFacts.Add(currentSocketFacts);
             }
 

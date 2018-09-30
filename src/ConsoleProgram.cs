@@ -40,6 +40,15 @@ namespace ExpertSystem
         {
             string choice;
             PrintCommands();
+            ///
+            FactSet facts = new FactSet(
+                new Fact("NumberOfPositions", "60"),
+				new Fact("NumberOfContacts", "120"),
+				new Fact("MountingStyle", "Through Hole")
+            );
+            _logicProcessor.Processing(facts, "5145167-4");
+            ///
+
             while ((choice = Console.ReadLine()) != ((int)Command.Exit).ToString())
             {
                 var choiceNum = (Command)int.Parse(choice);
@@ -85,6 +94,14 @@ namespace ExpertSystem
             var socketList = _productionProcessor.ForwardProcessing(factSet);
             WritePaddedTop("Возможные разъемы: " + string.Join(", ", socketList));
             return socketList;
+        }
+
+        private bool LogicProcessing(FactSet factSet, string socketName)
+        {
+            WritePaddedBottom($"Логический вывод {factSet}");
+            var isCorrect = _logicProcessor.Processing(factSet, socketName);
+            WritePaddedTop(isCorrect ? $"Предположение для {socketName} верно" : "Предположение неверно");
+            return isCorrect;
         }
 
         private static void PrintCommands()
