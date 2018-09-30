@@ -105,13 +105,14 @@ namespace ExpertSystem
             Console.WriteLine($"{(int)SocketDomain.ContactPlating} - контактная плата");
             Console.WriteLine($"{(int)SocketDomain.ContactMaterial} - контактный материал");
             Console.WriteLine($"{(int)SocketDomain.Color} - цвет");
-            Console.WriteLine($"{(int)SocketDomain.HousingColor} - цвет хаусинг?)))");
+            Console.WriteLine($"{(int)SocketDomain.HousingColor} - цвет корпуса)))");
+            Console.WriteLine($"{(int)SocketDomain.HousingMaterial} - материал корпуса)))");
             Console.WriteLine($"{(int)SocketDomain.MountingStyle} - тип установки");
             Console.WriteLine($"{(int)SocketDomain.NumberOfContacts} - число контактов");
             Console.WriteLine($"{(int)SocketDomain.NumberOfPositions} - число позиций");
             Console.WriteLine($"{(int)SocketDomain.NumberOfRows} - число строк");
             Console.WriteLine($"{(int)SocketDomain.Orientation} - положение разъема");
-            Console.WriteLine($"{(int)SocketDomain.PinPitch} - пич пина");
+            Console.WriteLine($"{(int)SocketDomain.PinPitch} - Шаг между контактами");
             Console.WriteLine($"{(int)SocketDomain.Material} - материал разъема");
             Console.WriteLine($"{(int)SocketDomain.SizeDiameter} - диаметр разъема");
             Console.WriteLine($"{(int)SocketDomain.SizeLength} - длина разъема");
