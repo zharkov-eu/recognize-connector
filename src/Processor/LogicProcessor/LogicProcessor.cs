@@ -31,8 +31,8 @@ namespace ExpertSystem.Processor.LogicProcessor
 
             HashSet<LinkedList<LogicFact>> statements = new HashSet<LinkedList<LogicFact>>();
             statements.Add(logicInputFacts);
-            // foreach (var factStatement in _facts)
-            //     statements.Add(factStatement);
+            foreach (var factStatement in _facts)
+                statements.Add(factStatement);
             statements.Add(socketNegation);
 
             HashSet<LinkedList<LogicFact>> cnfStatements = new HashSet<LinkedList<LogicFact>>();
@@ -40,6 +40,23 @@ namespace ExpertSystem.Processor.LogicProcessor
                 cnfStatements.Add(LogicFact.ConjuctionNormalFrom(statement));
 
             return false;
+        }
+
+        public HashSet<LinkedList<LogicFact>> Resolve(HashSet<LinkedList<LogicFact>> statements)
+        {
+            var currentStatement = statements.First();
+            foreach (var statement in statements)
+            {
+                if (statements.First() == statement) continue;
+                foreach (var currentFact in currentStatement)
+                    foreach (var fact in statement)
+                        if (fact.Domain == currentFact.Domain && fact.Value == currentFact.Value && fact.Negation != currentFact.Negation)
+                        {
+
+                        }
+            }
+
+            return statements;
         }
     }
 }

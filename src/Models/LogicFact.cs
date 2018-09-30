@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using static ExpertSystem.Models.LogicOperation;
@@ -9,9 +10,28 @@ namespace ExpertSystem.Models
         /// <summary>
         /// Возвращает конъюктивно нормальную форму
         /// <summary>
-        public static LinkedList<LogicFact> ConjuctionNormalFrom(LinkedList<LogicFact> facts) {
+        public static LinkedList<LogicFact> ConjuctionNormalFrom(LinkedList<LogicFact> facts, int priority = 100) {
             if (facts.Count <= 1) return facts;
-            return facts;
+            int maxPriority = facts.Select(fact => Priority[fact.RightOperation]).Max();
+            foreach (var fact in facts)
+            {
+                if (Priority[fact.RightOperation] == Math.Min(priority, maxPriority))
+                {
+                    switch (fact.RightOperation)
+                    {
+                        case Operations.Implication:
+                            break;
+                        case Operations.Conjunction:
+                            break;
+                        case Operations.Disjunction:
+                            break;
+                        case Operations.None:
+                            return facts;
+                    }
+                }
+            }
+
+            return ConjuctionNormalFrom(facts, maxPriority - 1);
         }
 
         public bool Negation { get; set; }
@@ -28,6 +48,27 @@ namespace ExpertSystem.Models
         {
             Negation = negation;
             RightOperation = operation;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            var fact = obj as LogicFact;
+            if (fact == null)
+                return false;
+            return Domain == fact.Domain &&
+                   Value == fact.Value &&
+                   Negation == fact.Negation &&
+                   RightOperation == fact.RightOperation;
+        }
+        
+        public override int GetHashCode()
+        {
+            int hashCode = base.GetHashCode();
+            hashCode += 27 * Negation.GetHashCode();
+            hashCode += 27 * RightOperation.GetHashCode();
+            return hashCode;
         }
     }
 }

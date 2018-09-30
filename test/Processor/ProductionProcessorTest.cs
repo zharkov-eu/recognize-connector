@@ -9,7 +9,7 @@ using ExpertSystem.Models;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace ExpertSystem.Processor
+namespace ExpertSystem.Processor.ProductionProccessor
 {
 	public class ProductionProcessorTest
 	{
