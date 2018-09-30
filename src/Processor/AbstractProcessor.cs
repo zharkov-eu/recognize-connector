@@ -10,12 +10,10 @@ namespace ExpertSystem.Processor
 
     public abstract class AbstractProcessor
     {
-        protected readonly RulesGraph _graph;
         protected readonly bool _debug;
 
-        protected AbstractProcessor(RulesGraph graph, ProcessorOptions options)
+        protected AbstractProcessor(ProcessorOptions options)
         {
-            _graph = graph;
             _debug = options.Debug;
         }
 

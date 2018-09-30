@@ -1,9 +1,15 @@
-using ExpertSystem.Models.Graph;
+using System.Collections.Generic;
+using ExpertSystem.Models;
 
 namespace ExpertSystem.Processor
 {
     public class LogicProcessor : AbstractProcessor
     {
-        public LogicProcessor(RulesGraph graph, ProcessorOptions options) : base(graph, options) {}
+        private List<LinkedList<LogicFact>> _facts;
+
+        public LogicProcessor(List<LinkedList<LogicFact>> facts, ProcessorOptions options) : base(options)
+        {
+            _facts = facts;
+        }
     }
 }

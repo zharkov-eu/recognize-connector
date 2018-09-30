@@ -1,0 +1,37 @@
+enum LogicOperation {
+    Implication,
+    Conjunction,
+    Disjunction,
+}
+
+LogicFact : Fact
+{
+    bool Negation
+    LogicOperation RightOperation
+}
+
+Операций: Set<LinkedList<LogicFact>>
+
+LinkedList<LogicFact> conjunctionNormalForm(LinkedList<LogicFact> facts)
+
+---
+
+Fact<Color: "Natural"> & Fact<ContactPlating: "Gold"> это "5145167-4"  ???
+---
+Fact<Color: "Natural">
+^ Fact<ContactPlating: "Gold">
+^ Fact<ContactMaterial: "Phosphor Bronze"> -> "5145167-4";
+---
+
+Шаг 1:
+Fact<Color: "Natural"> ^ Fact<ContactPlating: "Gold">,
+(Fact<Color: "Natural"> ^ Fact<ContactPlating: "Gold"> ^ Fact<ContactMaterial: "Phosphor Bronze"> -> "5145167-4"),
+~"5145167-4"g
+
+Шаг 2: 
+Fact<Color: "Natural">,
+Fact<ContactPlating: "Gold">,
+(~Fact<Color: "Natural"> v ~Fact<ContactPlating: "Gold"> v ~Fact<ContactMaterial: "Phosphor Bronze"> v "5145167-4"),
+~"5145167-4"g
+
+Шаг 3:

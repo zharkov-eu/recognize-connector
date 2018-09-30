@@ -8,7 +8,12 @@ namespace ExpertSystem.Processor
 {
     public class ProductionProcessor : AbstractProcessor
     {
-        public ProductionProcessor(RulesGraph graph, ProcessorOptions options) : base(graph, options) {}
+        private RulesGraph _graph;
+
+        public ProductionProcessor(RulesGraph graph, ProcessorOptions options) : base(options)
+        {
+            _graph = graph;
+        }
 
         /// <summary> 
         /// Прямой продукционный вывод

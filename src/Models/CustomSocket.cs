@@ -8,6 +8,27 @@ namespace ExpertSystem.Models
 {
     public class CustomSocket
     {
+        public static readonly string[] DOMAINS =
+        {
+            "Gender",
+            "ContactMaterial",
+            "ContactPlating",
+            "Color",
+            "HousingColor",
+            "HousingMaterial",
+            "MountingStyle",
+            "NumberOfContacts",
+            "NumberOfPositions",
+            "NumberOfRows",
+            "Orientation",
+            "PinPitch",
+            "Material",
+            "SizeDiameter",
+            "SizeLength",
+            "SizeHeight",
+            "SizeWidth"
+        };
+
         public string SocketName;
         public string Gender;
         public string ContactMaterial;
@@ -81,27 +102,6 @@ namespace ExpertSystem.Models
 
     public class SocketFieldsProcessor
     {
-        private static readonly string[] ORDER_BY =
-        {
-            "Gender",
-            "ContactMaterial",
-            "ContactPlating",
-            "Color",
-            "HousingColor",
-            "HousingMaterial",
-            "MountingStyle",
-            "NumberOfContacts",
-            "NumberOfPositions",
-            "NumberOfRows",
-            "Orientation",
-            "PinPitch",
-            "Material",
-            "SizeDiameter",
-            "SizeLength",
-            "SizeHeight",
-            "SizeWidth"
-        };
-
         public List<CustomSocket> GetSockets(Stream stream)
         {
             var entries = new List<CustomSocket>();
@@ -142,7 +142,7 @@ namespace ExpertSystem.Models
         {
             var fieldsValues = new Dictionary<string, List<string>>();
             var customSocketType = typeof(CustomSocket);
-            foreach (var property in ORDER_BY)
+            foreach (var property in CustomSocket.DOMAINS)
             {
                 var field = customSocketType.GetField(property);
 

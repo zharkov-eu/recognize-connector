@@ -28,7 +28,10 @@ namespace ExpertSystem
             var fieldValues = socketFieldsProcessor.GetFieldsWithPossibleValues(sockets);
 
             var rulesGenerator = new RulesGenerator();
+            var logicRulesGenerator = new LogicRulesGenerator();
+
             var rulesGraph = rulesGenerator.GenerateRules(sockets, fieldValues);
+            var logicRules = logicRulesGenerator.GenerateRules(sockets);
 
             _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions{ Debug = options.Debug });
             _logicProcessor = new LogicProcessor(rulesGraph, new ProcessorOptions{ Debug = options.Debug });
