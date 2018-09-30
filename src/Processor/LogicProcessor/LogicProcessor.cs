@@ -52,7 +52,7 @@ namespace ExpertSystem.Processor.LogicProcessor
                     foreach (var fact in statement)
                         if (fact.Domain == currentFact.Domain && fact.Value == currentFact.Value && fact.Negation != currentFact.Negation)
                         {
-
+                            
                         }
             }
 

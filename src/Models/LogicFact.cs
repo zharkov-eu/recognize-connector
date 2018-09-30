@@ -5,42 +5,104 @@ using static ExpertSystem.Models.LogicOperation;
 
 namespace ExpertSystem.Models
 {
+    public struct LogicFactLevel
+    {
+        public int Depth;
+        public bool Negation;
+
+        public override bool Equals(object obj) 
+        {
+            if (!(obj is LogicFactLevel))
+                return false;
+
+            LogicFactLevel fact = (LogicFactLevel) obj;
+            return Depth == fact.Depth && Negation == fact.Negation;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 17;
+            hashCode += Depth.GetHashCode();
+            hashCode += Negation.GetHashCode();
+            return hashCode;
+        } 
+    }
+
     public class LogicFact : Fact
     {
         /// <summary>
         /// Возвращает конъюктивно нормальную форму
         /// <summary>
         public static LinkedList<LogicFact> ConjuctionNormalFrom(LinkedList<LogicFact> facts, int priority = 100) {
+            // Если список пуст или содержит один факт - вернуть его
             if (facts.Count <= 1) return facts;
-            int maxPriority = facts.Select(fact => Priority[fact.RightOperation]).Max();
-            foreach (var fact in facts)
+
+            // Получить максимальный приоритет операции
+            int maxPriority = Math.Min(facts.Select(fact => Priority[fact.RightOperation]).Max(), priority);
+
+            // Получить первый элемент списка
+            var node = facts.First;
+
+            // Итерируемся по элементам списка
+            while (node != null)
             {
-                if (Priority[fact.RightOperation] == Math.Min(priority, maxPriority))
+                if (Priority[node.Value.RightOperation] == maxPriority)
                 {
-                    switch (fact.RightOperation)
+                    switch (node.Value.RightOperation)
                     {
                         case Operations.Implication:
+                            // Заменяем импликацию дизъюнцией
+                            node.Value.RightOperation = Operations.Disjunction;
+
+                            // Создаем уровень ниже
+                            var level = new LogicFactLevel { Depth = node.Value.Level.Depth + 1, Negation = true };
+                            // Помещаем всю левую часть на уровень ниже
+                            var currentNode = node;
+                            while (currentNode != null)
+                            {
+                                currentNode.Value.Level = level;
+                                currentNode = currentNode.Previous;
+                            }
+
                             break;
+
                         case Operations.Conjunction:
+                            if (node.Value.Level.Depth != 0 && node.Value.Level.Negation)
+                            {
+                                node.Value.Negation = !node.Value.Negation;
+                                node.Value.RightOperation = Operations.Disjunction;
+                                node.Value.Level = new LogicFactLevel { Depth = node.Value.Level.Depth - 1, Negation = false };
+                            }
                             break;
+
                         case Operations.Disjunction:
+                            if (node.Value.Level.Depth != 0 && node.Value.Level.Negation)
+                            {
+                                node.Value.Negation = !node.Value.Negation;
+                                node.Value.Level = new LogicFactLevel { Depth = node.Value.Level.Depth - 1, Negation = false };
+                            }
                             break;
+
                         case Operations.None:
                             return facts;
                     }
                 }
+
+                node = node.Next;
             }
 
             return ConjuctionNormalFrom(facts, maxPriority - 1);
         }
-
+        
         public bool Negation { get; set; }
         public Operations RightOperation { get; set; }
+        public LogicFactLevel Level { get; set; }
 
         public LogicFact(string domain, string value) : base(domain, value)
-        {
+        {    
             Negation = false;
             RightOperation = LogicOperation.Operations.None;
+            Level = new LogicFactLevel { Depth = 0, Negation = false };
         }
 
         public LogicFact(string domain, string value, Operations operation, bool negation = false) 
@@ -48,6 +110,7 @@ namespace ExpertSystem.Models
         {
             Negation = negation;
             RightOperation = operation;
+            Level = new LogicFactLevel { Depth = 0, Negation = false };
         }
 
         public override bool Equals(object obj)

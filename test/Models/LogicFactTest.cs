@@ -25,6 +25,22 @@ namespace ExpertSystem.Models
 
             Assert.True(disjuctionFactA.Equals(disjuctionFacts.First.Value));
             Assert.True(disjuctionFactB.Equals(disjuctionFacts.Last.Value));
+
+            LogicFact implicationFactA = new LogicFact("domainA", "valueA", Operations.Conjunction);
+            LogicFact implicationFactB = new LogicFact("domainB", "valueB", Operations.Implication);
+            LogicFact implicationResult = new LogicFact("domainC", "valueC", Operations.None);
+            LinkedList<LogicFact> implicationFacts = new LinkedList<LogicFact>();
+            implicationFacts.AddLast(implicationFactA);
+            implicationFacts.AddLast(implicationFactB);
+            implicationFacts.AddLast(implicationResult);
+            implicationFacts = LogicFact.ConjuctionNormalFrom(implicationFacts);
+
+            LogicFact cnfImplicationFactA = new LogicFact("domainA", "valueA", Operations.Disjunction, true);
+            LogicFact cnfImplicationFactB = new LogicFact("domainB", "valueB", Operations.Disjunction, true);
+
+            Assert.True(cnfImplicationFactA.Equals(implicationFacts.First.Value));
+            Assert.True(cnfImplicationFactB.Equals(implicationFacts.First.Next.Value));
+            Assert.True(implicationResult.Equals(implicationFacts.Last.Value));
         }
     }
 }
