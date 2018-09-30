@@ -10,7 +10,7 @@ namespace ExpertSystem.Models
         /// <summary>
         /// Возвращает конъюктивно нормальную форму
         /// <summary>
-        public static LinkedList<LogicFact> ConjuctionNormalFrom(LinkedList<LogicFact> facts, int priority = 100) {
+        public static LinkedList<LogicFact> ConjunctionNormalForm(LinkedList<LogicFact> facts, int priority = 100) {
             if (facts.Count <= 1) return facts;
             int maxPriority = facts.Select(fact => Priority[fact.RightOperation]).Max();
             foreach (var fact in facts)
@@ -31,7 +31,7 @@ namespace ExpertSystem.Models
                 }
             }
 
-            return ConjuctionNormalFrom(facts, maxPriority - 1);
+            return ConjunctionNormalForm(facts, maxPriority - 1);
         }
 
         public bool Negation { get; set; }

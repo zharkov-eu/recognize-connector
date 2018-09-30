@@ -1,30 +1,42 @@
-using Xunit;
 using System.Collections.Generic;
+using Xunit;
 using static ExpertSystem.Models.LogicOperation;
-
 
 namespace ExpertSystem.Models
 {
     public class LogicFactTest
     {
         [Fact]
-        public void ConjuctionNormalFrom_IsCorrect()
+        public void ConjunctionNormalForm_IsCorrectWithSingleFact()
         {
+            // Arrange
             LogicFact singleFact = new LogicFact("domain", "value", Operations.None, true);
             LinkedList<LogicFact> singleFacts = new LinkedList<LogicFact>();
             singleFacts.AddLast(singleFact);
 
-            Assert.True(singleFact.Equals(LogicFact.ConjuctionNormalFrom(singleFacts).First.Value));
+            // Act
+            LinkedList<LogicFact> cnfStatement = LogicFact.ConjunctionNormalForm(singleFacts);
+            
+            // Assert
+            Assert.True(singleFact.Equals(cnfStatement.First.Value), "Исходный факт не соответвует полученному");
+        }
+        
+        [Fact]
+        public void ConjunctionNormalForm_IsCorrectWith2Facts()
+        {
+            // Arrange
+            LogicFact disjunctionFactA = new LogicFact("domainA", "valueA", Operations.Disjunction);
+            LogicFact disjunctionFactB = new LogicFact("domainB", "valueB", Operations.None);
+            LinkedList<LogicFact> disjunctionFacts = new LinkedList<LogicFact>();
+            disjunctionFacts.AddLast(disjunctionFactA);
+            disjunctionFacts.AddLast(disjunctionFactB);
 
-            LogicFact disjuctionFactA = new LogicFact("domainA", "valueA", Operations.Disjunction);
-            LogicFact disjuctionFactB = new LogicFact("domainB", "valueB", Operations.None);
-            LinkedList<LogicFact> disjuctionFacts = new LinkedList<LogicFact>();
-            disjuctionFacts.AddLast(disjuctionFactA);
-            disjuctionFacts.AddLast(disjuctionFactB);
-            disjuctionFacts = LogicFact.ConjuctionNormalFrom(disjuctionFacts);
+            // Act
+            disjunctionFacts = LogicFact.ConjunctionNormalForm(disjunctionFacts);
 
-            Assert.True(disjuctionFactA.Equals(disjuctionFacts.First.Value));
-            Assert.True(disjuctionFactB.Equals(disjuctionFacts.Last.Value));
+            // Assert
+            Assert.True(disjunctionFactA.Equals(disjunctionFacts.First.Value), "Первый исходный факт не сооветвует первому полученному");
+            Assert.True(disjunctionFactB.Equals(disjunctionFacts.Last.Value), "Последний исходный факт не сооветвует последнему полученному");
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ExpertSystem.Models;
 using ExpertSystem.Models.Graph;
 
-namespace ExpertSystem.Processor.ProductionProccessor
+namespace ExpertSystem.Processor.ProductionProcessor
 {
     public class ProductionProcessor : AbstractProcessor
     {

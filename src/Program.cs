@@ -4,7 +4,7 @@ using ExpertSystem.Models;
 using ExpertSystem.Processor;
 using ExpertSystem.Processor.FuzzyProcessor;
 using ExpertSystem.Processor.LogicProcessor;
-using ExpertSystem.Processor.ProductionProccessor;
+using ExpertSystem.Processor.ProductionProcessor;
 
 namespace ExpertSystem
 {

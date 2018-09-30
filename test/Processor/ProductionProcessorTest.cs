@@ -1,15 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Xml.Schema;
-using ExpertSystem;
 using ExpertSystem.Models;
 using Xunit;
-using Xunit.Abstractions;
 
-namespace ExpertSystem.Processor.ProductionProccessor
+namespace ExpertSystem.Processor.ProductionProcessor
 {
 	public class ProductionProcessorTest
 	{
@@ -80,10 +75,10 @@ namespace ExpertSystem.Processor.ProductionProccessor
 		}
 		
 		[Fact]
-		public void BackwardProcessing_shouldWork()
+		public void BackwardProcessing_isCorrect()
 		{
 			// Arrange
-			Fact[] expectedFacts =
+			HashSet<Fact> expectedFactSet = new HashSet<Fact>()
 			{
 				new Fact("NumberOfPositions", "60"),
 				new Fact("NumberOfContacts", "120"),
@@ -104,10 +99,6 @@ namespace ExpertSystem.Processor.ProductionProccessor
 				new Fact("Gender", "Female"),
 			};
 			
-			var expectedFactSet = new HashSet<Fact>();
-			foreach (var fact in expectedFacts)
-				expectedFactSet.Add(fact);
-			
 			const string socketName = "5145167-4";
 			
 			// Act
@@ -118,20 +109,19 @@ namespace ExpertSystem.Processor.ProductionProccessor
 		}
 
 		[Fact]
-		public void ForwardProcessing_shouldWork()
+		public void ForwardProcessing_isCorrect()
 		{
 			// Arrange
-			Fact[] initialFacts =
-			{
+			FactSet initialFacts = new FactSet(
 				new Fact("NumberOfPositions", "60"),
 				new Fact("NumberOfContacts", "120"),
-				new Fact("MountingStyle", "Through Hole"),
-			};
+				new Fact("MountingStyle", "Through Hole")
+			);
 			
 			const string expectedSocketName = "5145167-4";
 			
 			// Act
-			var socketNameList = _productionProcessor.ForwardProcessing(new FactSet(initialFacts));
+			var socketNameList = _productionProcessor.ForwardProcessing(initialFacts);
 			
 			// Assert
 			Assert.Contains(expectedSocketName, socketNameList);
