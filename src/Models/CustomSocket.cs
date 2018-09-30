@@ -146,7 +146,7 @@ namespace ExpertSystem.Models
             {
                 var field = customSocketType.GetField(property);
 
-                var propertyValues = sockets.GroupBy(p => (string) field.GetValue(p)).ToList();
+                var propertyValues = sockets.GroupBy(p => field.GetValue(p).ToString()).ToList();
                 var currentPropValues = new List<string>();
                 foreach (var value in propertyValues)
                     currentPropValues.Add(value.Key);
