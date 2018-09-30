@@ -7,7 +7,7 @@ namespace ExpertSystem.Models
     public class LogicFactTest
     {
         [Fact]
-        public void ConjunctionNormalForm_IsCorrectWithSingleFact()
+        public void CojunctionNormalForm_IsCorrectWithSingleFact()
         {
             // Arrange
             LogicFact singleFact = new LogicFact("domain", "value", Operations.None, true);
@@ -22,7 +22,7 @@ namespace ExpertSystem.Models
         }
         
         [Fact]
-        public void ConjunctionNormalForm_IsCorrectWith2Facts()
+        public void CojunctionNormalForm_IsCorrectWithDisjunction()
         {
             // Arrange
             LogicFact disjunctionFactA = new LogicFact("domainA", "valueA", Operations.Disjunction);
@@ -35,8 +35,12 @@ namespace ExpertSystem.Models
             disjunctionFacts = LogicFact.ConjuctionNormalFrom(disjunctionFacts);
 
             Assert.True(disjunctionFactA.Equals(disjunctionFacts.First.Value));
-            Assert.True(disjunctionFactA.Equals(disjunctionFacts.Last.Value));
+            Assert.True(disjunctionFactB.Equals(disjunctionFacts.Last.Value));
+        }
 
+        [Fact]
+        public void CojunctionNormalForm_IsCorrectWithImplication()
+        {
             LogicFact implicationFactA = new LogicFact("domainA", "valueA", Operations.Conjunction);
             LogicFact implicationFactB = new LogicFact("domainB", "valueB", Operations.Implication);
             LogicFact implicationResult = new LogicFact("domainC", "valueC", Operations.None);
