@@ -35,4 +35,24 @@ namespace ExpertSystem.Models
             Assert.False(_fact.Equals(_fact, factNotEqual), "Факт не должен быть равен различному по содержанию факту");
         }
     }
+
+    public class FactSet_IsCorrect {
+        private readonly FactSet _factSet;
+        public FactSet_IsCorrect()
+        {
+            _factSet = new FactSet(new Fact("domain_a", "value_a"), new Fact("domain_b", "value_b"));
+        }
+
+        [Fact]
+        public void FactSet_IsEqual()
+        {
+            var factSetEqual = new FactSet(new Fact("domain_a", "value_a"), new Fact("domain_b", "value_b"));
+            var factSetNotEqual = new FactSet(new Fact("domain_a", "value_a"), new Fact("domain_b", "value_notequal"));
+
+            Assert.True(_factSet.Equals(_factSet), "Множество фактов должно быть равено самому себе");
+            Assert.True(_factSet.Equals(factSetEqual), "Множество фактов должно быть равно аналогичному по содержанию множеству фактов");
+            Assert.False(_factSet.Equals(null), "Множество фактов не должно быть равен null");
+            Assert.False(_factSet.Equals(factSetNotEqual), "Множество фактов не должно быть равно различному по содержанию множеству фактов");
+        }
+    }
 }

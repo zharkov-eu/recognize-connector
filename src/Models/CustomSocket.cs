@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Globalization;
+using System.Collections.Generic;
 using ExpertSystem.Parse;
 
 namespace ExpertSystem.Models
@@ -15,16 +16,67 @@ namespace ExpertSystem.Models
         public string HousingColor;
         public string HousingMaterial;
         public string MountingStyle;
-        public string NumberOfContacts;
-        public string NumberOfPositions;
-        public string NumberOfRows;
+        public int NumberOfContacts;
+        public int NumberOfPositions;
+        public int NumberOfRows;
         public string Orientation;
-        public string PinPitch;
+        public float PinPitch;
         public string Material;
-        public string SizeDiameter;
-        public string SizeLength;
-        public string SizeHeight;
-        public string SizeWidth;
+        public float SizeDiameter;
+        public float SizeLength;
+        public float SizeHeight;
+        public float SizeWidth;
+
+        public override bool Equals(object obj)
+        {            
+            if (obj == null) 
+                return false;
+            var socket = obj as CustomSocket;
+            if (socket == null) 
+                return false;
+            return SocketName == socket.SocketName &&
+                   Gender == socket.Gender &&
+                   ContactMaterial == socket.ContactMaterial &&
+                   ContactPlating == socket.ContactPlating &&
+                   Color == socket.Color &&
+                   HousingColor == socket.HousingColor &&
+                   HousingMaterial == socket.HousingMaterial &&
+                   MountingStyle == socket.MountingStyle &&
+                   NumberOfContacts == socket.NumberOfContacts &&
+                   NumberOfPositions == socket.NumberOfPositions &&
+                   NumberOfRows == socket.NumberOfRows &&
+                   Orientation == socket.Orientation &&
+                   PinPitch == socket.PinPitch &&
+                   Material == socket.Material &&
+                   SizeDiameter == socket.SizeDiameter &&
+                   SizeLength == socket.SizeLength &&
+                   SizeHeight == socket.SizeHeight &&
+                   SizeWidth == socket.SizeWidth;
+        }
+        
+        public override int GetHashCode()
+        {
+            var hash = 19;
+            hash += SocketName.GetHashCode();
+            hash += Gender.GetHashCode();
+            hash += ContactMaterial.GetHashCode();
+            hash += ContactPlating.GetHashCode();
+            hash += Color.GetHashCode();
+            hash += HousingColor.GetHashCode();
+            hash += HousingMaterial.GetHashCode();
+            hash += MountingStyle.GetHashCode();
+            hash += NumberOfContacts.GetHashCode();
+            hash += NumberOfPositions.GetHashCode();
+            hash += NumberOfRows.GetHashCode();
+            hash += Orientation.GetHashCode();
+            hash += PinPitch.GetHashCode();
+            hash += Material.GetHashCode();
+            hash += SizeDiameter.GetHashCode();
+            hash += SizeLength.GetHashCode();
+            hash += SizeHeight.GetHashCode();
+            hash += SizeWidth.GetHashCode();
+            return base.GetHashCode();
+        }
     }
 
     public class SocketFieldsProcessor
@@ -50,12 +102,9 @@ namespace ExpertSystem.Models
             "SizeWidth"
         };
 
-        public List<CustomSocket> GetSockets()
+        public List<CustomSocket> GetSockets(Stream stream)
         {
-            var fileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "data", "1.csv");
-
             var entries = new List<CustomSocket>();
-            using (var stream = File.OpenRead(fileName))
             using (var reader = new StreamReader(stream))
             {
                 var data = CsvParser.ParseHeadAndTail(reader, ';', '"');
@@ -73,16 +122,16 @@ namespace ExpertSystem.Models
                             HousingColor = line[5],
                             HousingMaterial = line[6],
                             MountingStyle = line[7],
-                            NumberOfContacts = line[8],
-                            NumberOfPositions = line[9],
-                            NumberOfRows = line[10],
+                            NumberOfContacts = string.IsNullOrEmpty(line[8]) ? -1 : int.Parse(line[8]),
+                            NumberOfPositions = string.IsNullOrEmpty(line[9]) ? -1 : int.Parse(line[9]),
+                            NumberOfRows = string.IsNullOrEmpty(line[10]) ? -1 : int.Parse(line[10]),
                             Orientation = line[11],
-                            PinPitch = line[12],
+                            PinPitch = string.IsNullOrEmpty(line[12]) ? -1.0f : float.Parse(line[12], CultureInfo.InvariantCulture),
                             Material = line[13],
-                            SizeDiameter = line[14],
-                            SizeLength = line[15],
-                            SizeHeight = line[16],
-                            SizeWidth = line[17]
+                            SizeDiameter = string.IsNullOrEmpty(line[14]) ? -1.0f : float.Parse(line[14], CultureInfo.InvariantCulture),
+                            SizeLength = string.IsNullOrEmpty(line[15]) ? -1.0f : float.Parse(line[15], CultureInfo.InvariantCulture),
+                            SizeHeight = string.IsNullOrEmpty(line[16]) ? -1.0f : float.Parse(line[16], CultureInfo.InvariantCulture),
+                            SizeWidth = string.IsNullOrEmpty(line[17]) ? -1.0f : float.Parse(line[17], CultureInfo.InvariantCulture)
                         });
             }
 

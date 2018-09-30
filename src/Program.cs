@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Collections.Generic;
 using ExpertSystem.Models;
 using ExpertSystem.Processor;
 
@@ -17,8 +19,12 @@ namespace ExpertSystem
 
         protected Program(ProgramOptions options)
         {
+            List<CustomSocket> sockets;
             var socketFieldsProcessor = new SocketFieldsProcessor();
-            var sockets = socketFieldsProcessor.GetSockets();
+
+            var fileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "data", "1.csv");
+            using (var stream = File.OpenRead(fileName))
+                sockets = socketFieldsProcessor.GetSockets(stream);
             var fieldValues = socketFieldsProcessor.GetFieldsWithPossibleValues(sockets);
 
             var rulesGenerator = new RulesGenerator();
