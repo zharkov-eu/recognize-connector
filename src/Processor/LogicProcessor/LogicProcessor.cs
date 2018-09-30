@@ -16,28 +16,33 @@ namespace ExpertSystem.Processor.LogicProcessor
 
         public bool Processing(FactSet inputFacts, string socketName)
         {
-            LinkedList<LogicFact> logicInputFacts = new LinkedList<LogicFact>();
+            HashSet<LinkedList<LogicFact>> statements = new HashSet<LinkedList<LogicFact>>();
+
+            // Добавляем входные параметры, объединенные союзом "или"
+            LinkedList<LogicFact> logicInputFacts;
             foreach (var inputFact in inputFacts.Facts)
             {
+                logicInputFacts = new LinkedList<LogicFact>();
                 logicInputFacts.AddLast(new LogicFact(
                     inputFact.Domain,
                     inputFact.Value,
                     inputFacts.Facts.Last() == inputFact ? LogicOperation.Operations.None : LogicOperation.Operations.Conjunction)
                 );
+                statements.Add(logicInputFacts);
             }
-
-            LinkedList<LogicFact> socketNegation = new LinkedList<LogicFact>();
-            socketNegation.AddLast(new LogicFact("SocketName", socketName, LogicOperation.Operations.None, true));
-
-            HashSet<LinkedList<LogicFact>> statements = new HashSet<LinkedList<LogicFact>>();
-            statements.Add(logicInputFacts);
+            
+            // Добавляем имеющиеся правила
             foreach (var factStatement in _facts)
                 statements.Add(factStatement);
+
+            // Добавляем отрицание утверждения
+            LinkedList<LogicFact> socketNegation = new LinkedList<LogicFact>();
+            socketNegation.AddLast(new LogicFact("SocketName", socketName, LogicOperation.Operations.None, true));
             statements.Add(socketNegation);
 
             HashSet<LinkedList<LogicFact>> cnfStatements = new HashSet<LinkedList<LogicFact>>();
             foreach (var statement in statements)
-                cnfStatements.Add(LogicFact.ConjunctionNormalForm(statement));
+                cnfStatements.Add(LogicFact.ConjuctionNormalFrom(statement));
 
             return false;
         }
