@@ -49,11 +49,11 @@ namespace ExpertSystem.Models
         public float SizeWidth;
 
         public override bool Equals(object obj)
-        {            
-            if (obj == null) 
+        {
+            if (obj == null)
                 return false;
             var socket = obj as CustomSocket;
-            if (socket == null) 
+            if (socket == null)
                 return false;
             return SocketName == socket.SocketName &&
                    Gender == socket.Gender &&
@@ -74,7 +74,7 @@ namespace ExpertSystem.Models
                    SizeHeight == socket.SizeHeight &&
                    SizeWidth == socket.SizeWidth;
         }
-        
+
         public override int GetHashCode()
         {
             var hash = 19;

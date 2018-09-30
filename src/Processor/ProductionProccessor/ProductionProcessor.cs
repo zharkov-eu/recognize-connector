@@ -1,16 +1,16 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Models;
 using ExpertSystem.Models.Graph;
 
-namespace ExpertSystem.Processor
+namespace ExpertSystem.Processor.ProductionProccessor
 {
     public class ProductionProcessor : AbstractProcessor
     {
-        private RulesGraph _graph;
+        private readonly RulesGraph _graph;
 
-        public ProductionProcessor(RulesGraph graph, ProcessorOptions options) : base(options)
+        public ProductionProcessor(RulesGraph graph, ProcessorOptions options)
+            : base(options)
         {
             _graph = graph;
         }
@@ -31,7 +31,7 @@ namespace ExpertSystem.Processor
         /// </example>
         public List<string> ForwardProcessing(FactSet factSet)
         {
-            List<string> socketList = new List<string>();
+            var socketList = new List<string>();
             var queue = new Queue<GraphNode>();
             queue.Enqueue(_graph.Root);
             while (queue.Count != 0)
@@ -42,7 +42,7 @@ namespace ExpertSystem.Processor
                 if (currentNode.SocketName != null)
                     socketList.Add(currentNode.SocketName);
                 foreach (var node in currentNode.ChildNodes)
-                    if (compareDomains(factSet, node.FactSet))
+                    if (CompareDomains(factSet, node.FactSet))
                         queue.Enqueue(node);
             }
 
@@ -65,9 +65,10 @@ namespace ExpertSystem.Processor
 
             // Осуществляем поиск в ширину
             debug("Осуществляем поиск в ширину");
-            Queue<GraphNode> queue = new Queue<GraphNode>();
+            var queue = new Queue<GraphNode>();
             queue.Enqueue(_graph.Root);
-            while (queue.Count != 0) {
+            while (queue.Count != 0)
+            {
                 var node = queue.Dequeue();
                 if (node != _graph.Root) debug(node.ToString());
 
@@ -84,8 +85,8 @@ namespace ExpertSystem.Processor
 
             // Разворачиваем лист правил
             debug("Разворачиваем лист правил");
-            FactSet facts = new FactSet();
-            GraphNode currentNode = targetSocket;
+            var facts = new FactSet();
+            var currentNode = targetSocket;
             while (currentNode.ParentNode != null)
             {
                 debug(currentNode.ToString());
@@ -96,10 +97,10 @@ namespace ExpertSystem.Processor
             return facts;
         }
 
-        private bool compareDomains(FactSet current, FactSet expected)
+        private static bool CompareDomains(FactSet current, FactSet expected)
         {
-            bool compared = true;
-            Dictionary<string, string> facts = new Dictionary<string, string>();
+            var compared = true;
+            var facts = new Dictionary<string, string>();
             foreach (var fact in expected.Facts)
                 facts.Add(fact.Domain, fact.Value);
             foreach (var fact in current.Facts)

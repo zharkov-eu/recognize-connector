@@ -62,7 +62,7 @@ namespace ExpertSystem.Processor
                 if (replaceNode.SocketName != null)
                     currentNode.SocketName = replaceNode.SocketName;
                 currentNode.ChildNodes = replaceNode.ChildNodes;
-                if (currentNode.ChildNodes.Count == 1) 
+                if (currentNode.ChildNodes.Count == 1)
                     Compress(currentNode);
             }
 

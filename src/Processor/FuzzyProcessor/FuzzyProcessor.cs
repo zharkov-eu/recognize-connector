@@ -1,9 +1,8 @@
-using ExpertSystem.Models.Graph;
-
-namespace ExpertSystem.Processor
+namespace ExpertSystem.Processor.FuzzyProcessor
 {
     public class FuzzyProcessor : AbstractProcessor
     {
-        public FuzzyProcessor(ProcessorOptions options) : base(options) {}
+        public FuzzyProcessor(ProcessorOptions options)
+            : base(options) { }
     }
 }

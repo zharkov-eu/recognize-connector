@@ -5,6 +5,6 @@ namespace ExpertSystem.Models
         None,
         Implication,
         Conjunction,
-        Disjunction,
+        Disjunction
     }
 }

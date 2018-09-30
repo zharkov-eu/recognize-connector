@@ -16,10 +16,10 @@ namespace ExpertSystem.Models
 
         public override bool Equals(object obj)
         {
-            if (obj == null) 
+            if (obj == null)
                 return false;
             var fact = obj as Fact;
-            if (fact == null) 
+            if (fact == null)
                 return false;
             return Domain == fact.Domain && Value == fact.Value;
         }
@@ -72,10 +72,10 @@ namespace ExpertSystem.Models
 
         public override bool Equals(object obj)
         {
-            if (obj == null) 
+            if (obj == null)
                 return false;
             var facts = obj as FactSet;
-            if (facts == null) 
+            if (facts == null)
                 return false;
             return Facts.SetEquals(facts.Facts);
         }

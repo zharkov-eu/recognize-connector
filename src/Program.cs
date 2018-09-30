@@ -1,8 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
 using ExpertSystem.Models;
 using ExpertSystem.Processor;
+using ExpertSystem.Processor.FuzzyProcessor;
+using ExpertSystem.Processor.LogicProcessor;
+using ExpertSystem.Processor.ProductionProccessor;
 
 namespace ExpertSystem
 {
@@ -13,7 +15,7 @@ namespace ExpertSystem
         protected readonly FuzzyProcessor _fuzzyProcessor;
 
         public struct ProgramOptions
-        { 
+        {
             public bool Debug;
         }
 
@@ -33,14 +35,14 @@ namespace ExpertSystem
             var rulesGraph = rulesGenerator.GenerateRules(sockets, fieldValues);
             var logicRules = logicRulesGenerator.GenerateRules(sockets);
 
-            _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions{ Debug = options.Debug });
-            _logicProcessor = new LogicProcessor(rulesGraph, new ProcessorOptions{ Debug = options.Debug });
-            _fuzzyProcessor = new FuzzyProcessor(rulesGraph, new ProcessorOptions{ Debug = options.Debug });
+            _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = options.Debug });
+            _logicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = options.Debug });
+            _fuzzyProcessor = new FuzzyProcessor(new ProcessorOptions { Debug = options.Debug });
         }
 
         private static void Main(string[] args)
         {
-            var program = new ConsoleProgram(new ProgramOptions{ Debug = true });
+            var program = new ConsoleProgram(new ProgramOptions { Debug = true });
             program.Run();
         }
     }
