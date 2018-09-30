@@ -37,7 +37,7 @@ namespace ExpertSystem.Processor.LogicProcessor
 
             HashSet<LinkedList<LogicFact>> cnfStatements = new HashSet<LinkedList<LogicFact>>();
             foreach (var statement in statements)
-                cnfStatements.Add(LogicFact.ConjuctionNormalFrom(statement));
+                cnfStatements.Add(LogicFact.ConjunctionNormalForm(statement));
 
             return false;
         }
