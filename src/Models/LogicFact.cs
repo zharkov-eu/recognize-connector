@@ -136,7 +136,8 @@ namespace ExpertSystem.Models
         public override string ToString()
         {
             string output = Negation ? "~" : "";
-            return output + $"({Domain}: {Value}) {GetOutput(RightOperation)}";
+            output += $"({Domain}: {Value})";
+            return string.IsNullOrEmpty(GetOutput(RightOperation)) ? output : output + $" {GetOutput(RightOperation)}";
         }
     }
 }

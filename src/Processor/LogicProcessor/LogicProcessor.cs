@@ -5,6 +5,21 @@ using static ExpertSystem.Models.LogicOperation;
 
 namespace ExpertSystem.Processor.LogicProcessor
 {
+    public class LogicFactSet : HashSet<LinkedList<LogicFact>>
+    {
+        public override string ToString()
+        {
+            string output = "";
+            foreach(var statement in this)
+            {
+                output += string.Join(" ", statement);
+                if (this.Last() != statement)
+                    output += ", ";
+            }
+            return output;
+        }
+    }
+
     public class LogicProcessor : AbstractProcessor
     {
         private List<LinkedList<LogicFact>> _facts;
@@ -17,30 +32,45 @@ namespace ExpertSystem.Processor.LogicProcessor
 
         public bool Processing(FactSet inputFacts, string socketName)
         {
-            HashSet<LinkedList<LogicFact>> statements = new HashSet<LinkedList<LogicFact>>();
+            LogicFactSet statements = new LogicFactSet();
 
-            // Добавляем входные параметры, объединенные союзом "или"
+            // Добавляем входные параметры, объединенные союзом "и"
+            List<string> inputDomains = new List<string>();
             LinkedList<LogicFact> logicInputFacts;
             foreach (var inputFact in inputFacts.Facts.Where(p => !p.IsDefaultValue()))
             {
+                inputDomains.Add(inputFact.Domain);
                 logicInputFacts = new LinkedList<LogicFact>();
                 logicInputFacts.AddLast(new LogicFact(inputFact.Domain, inputFact.Value, inputFact.Type, Operation.None));
                 statements.Add(logicInputFacts);
             }
             
-            // Добавляем имеющиеся правила
+            // Добавляем имеющиеся правила (отфильтрованные по входным св-м домена)
             foreach (var factStatement in _facts)
-                statements.Add(factStatement);
+            {
+                var statementFiltered = new LinkedList<LogicFact>(factStatement.Where(p => inputDomains.Contains(p.Domain)));
+                if (statementFiltered.Count == 0) continue;
+
+                statementFiltered.Last.Value.RightOperation = Operation.Implication;
+                statementFiltered.AddLast(factStatement.Last.Value);
+                statements.Add(statementFiltered);
+            }
 
             // Добавляем отрицание утверждения
             LinkedList<LogicFact> socketNegation = new LinkedList<LogicFact>();
             socketNegation.AddLast(new LogicFact("SocketName", socketName, typeof(string), Operation.None, true));
             statements.Add(socketNegation);
 
-            // Получаем конъюнктивно нормальную форму
+            // Выводим отладочную информацию первого шага
+            debug("Начальная диспозиция: " + statements.ToString());
+
+            // Получаем конъюнктивно-нормальную форму
             HashSet<LinkedList<LogicFact>> cnfStatements = new HashSet<LinkedList<LogicFact>>();
             foreach (var statement in statements)
                 cnfStatements.Add(LogicFact.ConjuctionNormalFrom(statement));
+
+            // Выводим отладочную информацию КНФ
+            debug("Конъюнктивно-нормальная форма: " + statements.ToString());
 
             return false;
         }
