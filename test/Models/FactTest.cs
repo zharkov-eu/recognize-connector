@@ -8,14 +8,26 @@ namespace ExpertSystem.Models
 
         public Fact_IsCorrect()
         {
-            _fact = new Fact("domain", "value");
+            _fact = new Fact("domain", "value", typeof(string));
+        }
+
+        [Fact]
+        public void Fact_IsDefaultValue()
+        {
+            var intDefault = new Fact("domain", -1, typeof(int));
+            var floatDefault = new Fact("domain", -1.0f, typeof(float));
+            var stringDefault = new Fact("domain", "", typeof(string));
+
+            Assert.True(intDefault.IsDefaultValue(), "Факт типа int должен являться фактом по умолчанию");
+            Assert.True(floatDefault.IsDefaultValue(), "Факт типа float должен являться фактом по умолчанию");
+            Assert.True(stringDefault.IsDefaultValue(), "Факт типа string должен являться фактом по умолчанию");
         }
 
         [Fact]
         public void Fact_IsEqual()
         {
-            var factEqual = new Fact("domain", "value");
-            var factNotEqual = new Fact("domain", "notequal");
+            var factEqual = new Fact("domain", "value", typeof(string));
+            var factNotEqual = new Fact("domain", "notequal", typeof(string));
 
             Assert.True(_fact.Equals(_fact), "Факт должен быть равен самому себе");
             Assert.True(_fact.Equals(factEqual), "Факт должен быть равен аналогичному по содержанию факту");
@@ -26,8 +38,8 @@ namespace ExpertSystem.Models
         [Fact]
         public void Fact_IsEqualityEqual()
         {
-            var factEqual = new Fact("domain", "value");
-            var factNotEqual = new Fact("domain", "notequal");
+            var factEqual = new Fact("domain", "value", typeof(string));
+            var factNotEqual = new Fact("domain", "notequal", typeof(string));
 
             Assert.True(_fact.Equals(_fact, _fact), "Факт должен быть равен самому себе");
             Assert.True(_fact.Equals(_fact, factEqual), "Факт должен быть равен аналогичному по содержанию факту");
@@ -40,14 +52,23 @@ namespace ExpertSystem.Models
             private readonly FactSet _factSet;
             public FactSet_IsCorrect()
             {
-                _factSet = new FactSet(new Fact("domain_a", "value_a"), new Fact("domain_b", "value_b"));
+                _factSet = new FactSet(
+                    new Fact("domain_a", "value_a", typeof(string)),
+                    new Fact("domain_b", "value_b", typeof(string))
+                );
             }
 
             [Fact]
             public void FactSet_IsEqual()
             {
-                var factSetEqual = new FactSet(new Fact("domain_a", "value_a"), new Fact("domain_b", "value_b"));
-                var factSetNotEqual = new FactSet(new Fact("domain_a", "value_a"), new Fact("domain_b", "value_notequal"));
+                var factSetEqual = new FactSet(
+                    new Fact("domain_a", "value_a", typeof(string)),
+                    new Fact("domain_b", "value_b", typeof(string))
+                );
+                var factSetNotEqual = new FactSet(
+                    new Fact("domain_a", "value_a", typeof(string)),
+                    new Fact("domain_b", "value_notequal", typeof(string))
+                );
 
                 Assert.True(_factSet.Equals(_factSet), "Множество фактов должно быть равено самому себе");
                 Assert.True(_factSet.Equals(factSetEqual), "Множество фактов должно быть равно аналогичному по содержанию множеству фактов");

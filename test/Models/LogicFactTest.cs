@@ -10,7 +10,7 @@ namespace ExpertSystem.Models
         public void CojunctionNormalForm_IsCorrectWithSingleFact()
         {
             // Arrange
-            LogicFact singleFact = new LogicFact("domain", "value", Operations.None, true);
+            LogicFact singleFact = new LogicFact("domain", "value", typeof(string), Operation.None, true);
             LinkedList<LogicFact> singleFacts = new LinkedList<LogicFact>();
             singleFacts.AddLast(singleFact);
 
@@ -25,8 +25,8 @@ namespace ExpertSystem.Models
         public void CojunctionNormalForm_IsCorrectWithDisjunction()
         {
             // Arrange
-            LogicFact disjunctionFactA = new LogicFact("domainA", "valueA", Operations.Disjunction);
-            LogicFact disjunctionFactB = new LogicFact("domainB", "valueB", Operations.None);
+            LogicFact disjunctionFactA = new LogicFact("domainA", "valueA", typeof(string), Operation.Disjunction);
+            LogicFact disjunctionFactB = new LogicFact("domainB", "valueB", typeof(string), Operation.None);
             LinkedList<LogicFact> disjunctionFacts = new LinkedList<LogicFact>();
             disjunctionFacts.AddLast(disjunctionFactA);
             disjunctionFacts.AddLast(disjunctionFactB);
@@ -41,17 +41,17 @@ namespace ExpertSystem.Models
         [Fact]
         public void CojunctionNormalForm_IsCorrectWithImplication()
         {
-            LogicFact implicationFactA = new LogicFact("domainA", "valueA", Operations.Conjunction);
-            LogicFact implicationFactB = new LogicFact("domainB", "valueB", Operations.Implication);
-            LogicFact implicationResult = new LogicFact("domainC", "valueC", Operations.None);
+            LogicFact implicationFactA = new LogicFact("domainA", "valueA", typeof(string), Operation.Conjunction);
+            LogicFact implicationFactB = new LogicFact("domainB", "valueB", typeof(string), Operation.Implication);
+            LogicFact implicationResult = new LogicFact("domainC", "valueC", typeof(string), Operation.None);
             LinkedList<LogicFact> implicationFacts = new LinkedList<LogicFact>();
             implicationFacts.AddLast(implicationFactA);
             implicationFacts.AddLast(implicationFactB);
             implicationFacts.AddLast(implicationResult);
             implicationFacts = LogicFact.ConjuctionNormalFrom(implicationFacts);
 
-            LogicFact cnfImplicationFactA = new LogicFact("domainA", "valueA", Operations.Disjunction, true);
-            LogicFact cnfImplicationFactB = new LogicFact("domainB", "valueB", Operations.Disjunction, true);
+            LogicFact cnfImplicationFactA = new LogicFact("domainA", "valueA", typeof(string), Operation.Disjunction, true);
+            LogicFact cnfImplicationFactB = new LogicFact("domainB", "valueB", typeof(string), Operation.Disjunction, true);
 
             Assert.True(cnfImplicationFactA.Equals(implicationFacts.First.Value));
             Assert.True(cnfImplicationFactB.Equals(implicationFacts.First.Next.Value));
