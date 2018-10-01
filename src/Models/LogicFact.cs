@@ -31,7 +31,7 @@ namespace ExpertSystem.Models
     public class LogicFact : Fact
     {
         /// <summary>
-        /// Возвращает конъюктивно нормальную форму
+        /// Возвращает конъюктивную нормальную форму
         /// <summary>
         public static LinkedList<LogicFact> ConjuctionNormalFrom(LinkedList<LogicFact> facts, int priority = 100) {
             // Если список пуст или содержит один факт - вернуть его

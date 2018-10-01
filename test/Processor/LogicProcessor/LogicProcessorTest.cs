@@ -15,7 +15,7 @@ namespace ExpertSystem.Processor.LogicProcessor
             var rulesGenerator = new LogicRulesGenerator();
 			var logicRules = rulesGenerator.GenerateRules(sockets);
 
-            _logicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = false });
+            _logicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = true });
         }
 
         [Fact]
@@ -28,6 +28,7 @@ namespace ExpertSystem.Processor.LogicProcessor
             );
 
             Assert.True(_logicProcessor.Processing(facts, "5145167-4"));
+            Assert.False(_logicProcessor.Processing(facts, "8-215570-0"));
         }
     }
 }

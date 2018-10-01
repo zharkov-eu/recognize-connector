@@ -62,34 +62,66 @@ namespace ExpertSystem.Processor.LogicProcessor
             statements.Add(socketNegation);
 
             // Выводим отладочную информацию первого шага
+            debug("".PadLeft(40, '-'));
             debug("Начальная диспозиция: " + statements.ToString());
 
             // Получаем конъюнктивно-нормальную форму
-            HashSet<LinkedList<LogicFact>> cnfStatements = new HashSet<LinkedList<LogicFact>>();
+            LogicFactSet cnfStatements = new LogicFactSet();
             foreach (var statement in statements)
                 cnfStatements.Add(LogicFact.ConjuctionNormalFrom(statement));
 
             // Выводим отладочную информацию КНФ
-            debug("Конъюнктивно-нормальная форма: " + statements.ToString());
+            debug("".PadLeft(40, '-'));
+            debug("Конъюнктивная нормальная форма: " + cnfStatements.ToString());
 
-            return false;
+            return Resolve(cnfStatements, new LogicFact("SocketName", socketName, typeof(string), Operation.None));
         }
 
-        public HashSet<LinkedList<LogicFact>> Resolve(HashSet<LinkedList<LogicFact>> statements)
+        public bool Resolve(LogicFactSet statements, LogicFact result)
         {
+            LogicFactSet currentStatements = new LogicFactSet();
+
+            // Если множество утверждений пусто - значит утверждение неверно
+            if (statements.Count == 0)
+                return false;
             var currentStatement = statements.First();
+
+            // Проверим, не найдено ли утверждение посылки
+            if (currentStatement.Count == 1 && currentStatement.First.Value.Equals(result))
+                return true;
+
             foreach (var statement in statements)
             {
-                if (statements.First() == statement) continue;
+                // Пропустим текущий элемент
+                if (statement == currentStatement) continue;
+
+                // Проверим, не найдено ли утверждение посылки
+                if (statement.Count == 1 && statement.First.Value.Equals(result)) {
+                    return true;
+                }
+
                 foreach (var currentFact in currentStatement)
+                {
+                    bool domainExist = false;
                     foreach (var fact in statement)
-                        if (fact.Domain == currentFact.Domain && fact.Value == currentFact.Value && fact.Negation != currentFact.Negation)
+                    {
+                        if (fact.Domain == currentFact.Domain && fact.Negation != currentFact.Negation)
                         {
-                            
+                            domainExist = true;
+                            if (fact.Value.Equals(currentFact.Value))
+                                currentStatements.Add(new LinkedList<LogicFact>(statement.Where(p => p != fact)));
+                            break;
                         }
+                    }
+                    if (!domainExist) currentStatements.Add(statement);
+                }
             }
 
-            return statements;
+            // Отладочный вывод
+            debug("".PadLeft(40, '-'));
+            debug(currentStatements.ToString());
+
+            return Resolve(currentStatements, result);
         }
     }
 }
