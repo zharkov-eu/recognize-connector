@@ -50,9 +50,9 @@ namespace ExpertSystem.Models
                 {
                     switch (node.Value.RightOperation)
                     {
-                        case Operations.Implication:
+                        case Operation.Implication:
                             // Заменяем импликацию дизъюнцией
-                            node.Value.RightOperation = Operations.Disjunction;
+                            node.Value.RightOperation = Operation.Disjunction;
 
                             // Создаем уровень ниже
                             var level = new LogicFactLevel { Depth = node.Value.Level.Depth + 1, Negation = true };
@@ -66,16 +66,16 @@ namespace ExpertSystem.Models
 
                             break;
 
-                        case Operations.Conjunction:
+                        case Operation.Conjunction:
                             if (node.Value.Level.Depth != 0 && node.Value.Level.Negation)
                             {
                                 node.Value.Negation = !node.Value.Negation;
-                                node.Value.RightOperation = Operations.Disjunction;
+                                node.Value.RightOperation = Operation.Disjunction;
                                 node.Value.Level = new LogicFactLevel { Depth = node.Value.Level.Depth - 1, Negation = false };
                             }
                             break;
 
-                        case Operations.Disjunction:
+                        case Operation.Disjunction:
                             if (node.Value.Level.Depth != 0 && node.Value.Level.Negation)
                             {
                                 node.Value.Negation = !node.Value.Negation;
@@ -83,7 +83,7 @@ namespace ExpertSystem.Models
                             }
                             break;
 
-                        case Operations.None:
+                        case Operation.None:
                             return facts;
                     }
                 }
@@ -95,18 +95,18 @@ namespace ExpertSystem.Models
         }
         
         public bool Negation { get; set; }
-        public Operations RightOperation { get; set; }
+        public Operation RightOperation { get; set; }
         public LogicFactLevel Level { get; set; }
 
-        public LogicFact(string domain, string value) : base(domain, value)
+        public LogicFact(string domain, object value, Type type) : base(domain, value, type)
         {    
             Negation = false;
-            RightOperation = LogicOperation.Operations.None;
+            RightOperation = LogicOperation.Operation.None;
             Level = new LogicFactLevel { Depth = 0, Negation = false };
         }
 
-        public LogicFact(string domain, string value, Operations operation, bool negation = false) 
-            : base(domain, value)
+        public LogicFact(string domain, object value, Type type, Operation operation, bool negation = false)
+            : base(domain, value, type)
         {
             Negation = negation;
             RightOperation = operation;
@@ -120,8 +120,7 @@ namespace ExpertSystem.Models
             var fact = obj as LogicFact;
             if (fact == null)
                 return false;
-            return Domain == fact.Domain &&
-                   Value == fact.Value &&
+            return base.Equals(obj) &&
                    Negation == fact.Negation &&
                    RightOperation == fact.RightOperation;
         }
@@ -132,6 +131,12 @@ namespace ExpertSystem.Models
             hashCode += 27 * Negation.GetHashCode();
             hashCode += 27 * RightOperation.GetHashCode();
             return hashCode;
+        }
+
+        public override string ToString()
+        {
+            string output = Negation ? "~" : "";
+            return output + $"({Domain}: {Value}) {GetOutput(RightOperation)}";
         }
     }
 }

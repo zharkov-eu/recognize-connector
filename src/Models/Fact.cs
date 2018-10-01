@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -6,12 +7,19 @@ namespace ExpertSystem.Models
     public class Fact : IEqualityComparer<Fact>
     {
         public string Domain { get; set; }
-        public string Value { get; set; }
+        public object Value { get; set; }
+        public Type Type { get; set; }
 
-        public Fact(string domain, string value)
+        public Fact(string domain, object value, Type type)
         {
             Domain = domain;
             Value = value;
+            Type = type;
+        }
+
+        public bool IsDefaultValue()
+        {
+            return Value.Equals(CustomSocket.DefaultValue[Type]);
         }
 
         public override bool Equals(object obj)
@@ -21,7 +29,7 @@ namespace ExpertSystem.Models
             var fact = obj as Fact;
             if (fact == null)
                 return false;
-            return Domain == fact.Domain && Value == fact.Value;
+            return Type.Equals(fact.Type) && Domain.Equals(fact.Domain) && Value.Equals(fact.Value);
         }
 
         public bool Equals(Fact a, Fact b)
@@ -34,6 +42,7 @@ namespace ExpertSystem.Models
             var hash = 19;
             hash = hash * 37 + Domain.GetHashCode();
             hash = hash * 37 + Value.GetHashCode();
+            hash = hash * 37 + Type.GetHashCode();
             return hash;
         }
 

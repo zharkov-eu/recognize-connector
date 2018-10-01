@@ -100,11 +100,11 @@ namespace ExpertSystem.Processor.ProductionProcessor
         private static bool CompareDomains(FactSet current, FactSet expected)
         {
             var compared = true;
-            var facts = new Dictionary<string, string>();
+            var facts = new Dictionary<string, object>();
             foreach (var fact in expected.Facts)
                 facts.Add(fact.Domain, fact.Value);
             foreach (var fact in current.Facts)
-                if (facts.ContainsKey(fact.Domain) && facts[fact.Domain] != fact.Value)
+                if (facts.ContainsKey(fact.Domain) && facts[fact.Domain].Equals(fact.Value))
                     compared = false;
             return compared;
         }

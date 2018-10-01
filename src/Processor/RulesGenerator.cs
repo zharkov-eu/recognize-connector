@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ExpertSystem.Models;
 using ExpertSystem.Models.Graph;
@@ -27,8 +28,9 @@ namespace ExpertSystem.Processor
                     GraphNode node = null;
 
                     // Конструируем факт
-                    var facts = new FactSet(
-                        new Fact(domain, customSocketType.GetField(domain).GetValue(socket).ToString())
+                    Type type = CustomSocket.Domains[domain];
+                    FactSet facts = new FactSet(
+                        new Fact(domain, customSocketType.GetField(domain).GetValue(socket), type)
                     );
 
                     // Проверяем текущий список фактов, возможно, там уже есть этот факт

@@ -32,7 +32,7 @@ namespace ExpertSystem.Models.Graph
             List<string> rules = new List<string>();
             if (ParentNode != null) rules.Add(ParentNode.GetHashCode().ToString());
             foreach (var Fact in FactSet.Facts)
-                if (Fact.Value != "") rules.Add($"({Fact.Domain}: {Fact.Value})");
+                if (!Fact.IsDefaultValue()) rules.Add($"({Fact.Domain}: {Fact.Value})");
             string result = string.IsNullOrEmpty(SocketName) ? this.GetHashCode().ToString() : SocketName;
             return $"{string.Join(" & ", rules.ToArray())} -> {result}";
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Models;
@@ -15,13 +16,15 @@ namespace ExpertSystem.Processor
             foreach (var socket in sockets)
             {
                 LinkedList<LogicFact> currentSocketFacts = new LinkedList<LogicFact>();
-                foreach (var domain in CustomSocket.DOMAINS)
-                    currentSocketFacts.AddLast(new LogicFact(
-                        domain,
-                        customSocketType.GetField(domain).GetValue(socket).ToString(),
-                        CustomSocket.DOMAINS.Last().Equals(domain) ? Operations.Implication : Operations.Conjunction)
-                    );
-                currentSocketFacts.AddLast(new LogicFact("SocketName", socket.SocketName, Operations.None));
+                foreach (var domain in CustomSocket.Domains.Keys)
+                {
+                    Type type = CustomSocket.Domains[domain];
+                    Operation operation = CustomSocket.Domains.Last().Equals(domain) ? Operation.Implication : Operation.Conjunction;
+                    LogicFact fact = new LogicFact(domain, customSocketType.GetField(domain).GetValue(socket), type, operation);
+                    if (!fact.IsDefaultValue())
+                        currentSocketFacts.AddLast(fact);
+                }
+                currentSocketFacts.AddLast(new LogicFact("SocketName", socket.SocketName, typeof(string), Operation.None));
                 socketsFacts.Add(currentSocketFacts);
             }
 

@@ -7,12 +7,12 @@ namespace ExpertSystem
 {
     public enum Command
     {
-        Exit = 0, ForwardProcessing = 1, BackProcessing = 2, LogicProcessing = 3, FuzzyProcessing = 4
+        Exit = 0, ForwardProcessing = 1, BackProcessing = 2, LogicProcessing = 3, FuzzyProcessingMamdani = 4, FuzzyProcessingSugeno = 5
     }
 
     public enum SocketDomain
     {
-        Exit,
+        Execute,
         Gender,
         ContactMaterial,
         ContactPlating,
@@ -40,14 +40,6 @@ namespace ExpertSystem
         {
             string choice;
             PrintCommands();
-            ///
-            FactSet facts = new FactSet(
-                new Fact("NumberOfPositions", "60"),
-				new Fact("NumberOfContacts", "120"),
-				new Fact("MountingStyle", "Through Hole")
-            );
-            _logicProcessor.Processing(facts, "5145167-4");
-            ///
 
             while ((choice = Console.ReadLine()) != ((int)Command.Exit).ToString())
             {
@@ -110,7 +102,8 @@ namespace ExpertSystem
             Console.WriteLine($"{(int)Command.ForwardProcessing} - прямой продукционный вывод");
             Console.WriteLine($"{(int)Command.BackProcessing} - обратный продукционный вывод");
             Console.WriteLine($"{(int)Command.LogicProcessing} - логический вывод");
-            Console.WriteLine($"{(int)Command.FuzzyProcessing} - нечеткий вывод");
+            Console.WriteLine($"{(int)Command.FuzzyProcessingMamdani} - нечеткий вывод (Мамдани)");
+            Console.WriteLine($"{(int)Command.FuzzyProcessingSugeno} - нечеткий вывод (Сугэно)");
             WritePaddedBottom($"{(int)Command.Exit} - выход");
         }
 
@@ -129,24 +122,24 @@ namespace ExpertSystem
             Console.WriteLine($"{(int)SocketDomain.NumberOfPositions} - число позиций");
             Console.WriteLine($"{(int)SocketDomain.NumberOfRows} - число строк");
             Console.WriteLine($"{(int)SocketDomain.Orientation} - положение разъема");
-            Console.WriteLine($"{(int)SocketDomain.PinPitch} - Шаг между контактами");
+            Console.WriteLine($"{(int)SocketDomain.PinPitch} - шаг между контактами");
             Console.WriteLine($"{(int)SocketDomain.Material} - материал разъема");
             Console.WriteLine($"{(int)SocketDomain.SizeDiameter} - диаметр разъема");
             Console.WriteLine($"{(int)SocketDomain.SizeLength} - длина разъема");
             Console.WriteLine($"{(int)SocketDomain.SizeHeight} - высота разъема");
             Console.WriteLine($"{(int)SocketDomain.SizeWidth} - ширина разъема");
-            WritePaddedBottom($"{(int)SocketDomain.Exit} - выход");
+            WritePaddedBottom($"{(int)SocketDomain.Execute} - применить");
         }
 
         private static List<Fact> GetSocketFactsFromConsole()
         {
             WritePaddedTop("Добавьте следующее свойство: ");
-            string domenChoice;
+            string domainChoice;
             PrintDomains();
             var factsList = new List<Fact>();
-            while ((domenChoice = Console.ReadLine()) != ((int)SocketDomain.Exit).ToString())
+            while ((domainChoice = Console.ReadLine()) != ((int)SocketDomain.Execute).ToString())
             {
-                var choiceNum = (SocketDomain)int.Parse(domenChoice);
+                var choiceNum = (SocketDomain)int.Parse(domainChoice);
                 if (Enum.IsDefined(typeof(SocketDomain), choiceNum))
                 {
                     if (factsList.Any(p => p.Domain.Equals(choiceNum.ToString())))
@@ -155,7 +148,7 @@ namespace ExpertSystem
                     {
                         WritePaddedTop("Введите значение");
                         var value = Console.ReadLine();
-                        factsList.Add(new Fact(choiceNum.ToString(), value));
+                        factsList.Add(new Fact(choiceNum.ToString(), value, CustomSocket.Domains[domainChoice]));
                     }
                 }
                 else

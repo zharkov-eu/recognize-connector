@@ -7,7 +7,9 @@
 
         public RulesGraph()
         {
-            Root = new GraphNode(new Fact(ROOT_DOMAIN, ""));
+            Root = new GraphNode(new Fact(
+                ROOT_DOMAIN, CustomSocket.DefaultValue[typeof(string)], typeof(string)
+            ));
         }
     }
 }

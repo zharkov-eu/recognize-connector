@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Models;
+using static ExpertSystem.Models.LogicOperation;
 
 namespace ExpertSystem.Processor.LogicProcessor
 {
@@ -20,14 +21,10 @@ namespace ExpertSystem.Processor.LogicProcessor
 
             // Добавляем входные параметры, объединенные союзом "или"
             LinkedList<LogicFact> logicInputFacts;
-            foreach (var inputFact in inputFacts.Facts)
+            foreach (var inputFact in inputFacts.Facts.Where(p => !p.IsDefaultValue()))
             {
                 logicInputFacts = new LinkedList<LogicFact>();
-                logicInputFacts.AddLast(new LogicFact(
-                    inputFact.Domain,
-                    inputFact.Value,
-                    inputFacts.Facts.Last() == inputFact ? LogicOperation.Operations.None : LogicOperation.Operations.Conjunction)
-                );
+                logicInputFacts.AddLast(new LogicFact(inputFact.Domain, inputFact.Value, inputFact.Type, Operation.None));
                 statements.Add(logicInputFacts);
             }
             
@@ -37,9 +34,10 @@ namespace ExpertSystem.Processor.LogicProcessor
 
             // Добавляем отрицание утверждения
             LinkedList<LogicFact> socketNegation = new LinkedList<LogicFact>();
-            socketNegation.AddLast(new LogicFact("SocketName", socketName, LogicOperation.Operations.None, true));
+            socketNegation.AddLast(new LogicFact("SocketName", socketName, typeof(string), Operation.None, true));
             statements.Add(socketNegation);
 
+            // Получаем конъюнктивно нормальную форму
             HashSet<LinkedList<LogicFact>> cnfStatements = new HashSet<LinkedList<LogicFact>>();
             foreach (var statement in statements)
                 cnfStatements.Add(LogicFact.ConjuctionNormalFrom(statement));
