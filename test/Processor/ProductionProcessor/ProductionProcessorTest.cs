@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using ExpertSystem.Models;
 using Xunit;
 
@@ -13,27 +11,29 @@ namespace ExpertSystem.Processor.ProductionProcessor
 
 		public ProductionProcessorTest()
 		{
-			_socket = new CustomSocket();
-			_socket.Color = "Natural";
-			_socket.SocketName = "5145167-4";
-			_socket.ContactMaterial = "Phosphor Bronze";
-			_socket.ContactPlating = "Gold";
-			_socket.Gender = "Female";
-			_socket.HousingColor = "Natural";
-			_socket.HousingMaterial = "Thermoplastic";
-			_socket.MountingStyle = "Through Hole";
-			_socket.NumberOfContacts = 120;
-			_socket.NumberOfPositions = 60;
-			_socket.NumberOfRows = 2;
-			_socket.Orientation = "Vertical";
-			_socket.PinPitch = 0.00127f;
-			_socket.Material = "Plastic";
-			_socket.SizeDiameter = 11.5f;
-			_socket.SizeLength = 5.3f;
-			_socket.SizeHeight = 3.2f;
-			_socket.SizeWidth = 10.0f;
-			
-			var socketFieldsProcessor = new SocketFieldsProcessorTest();
+            _socket = new CustomSocket
+            {
+                Color = "Natural",
+                SocketName = "5145167-4",
+                ContactMaterial = "Phosphor Bronze",
+                ContactPlating = "Gold",
+                Gender = "Female",
+                HousingColor = "Natural",
+                HousingMaterial = "Thermoplastic",
+                MountingStyle = "Through Hole",
+                NumberOfContacts = 120,
+                NumberOfPositions = 60,
+                NumberOfRows = 2,
+                Orientation = "Vertical",
+                PinPitch = 0.00127f,
+                Material = "Plastic",
+                SizeDiameter = 11.5f,
+                SizeLength = 5.3f,
+                SizeHeight = 3.2f,
+                SizeWidth = 10.0f
+            };
+
+            var socketFieldsProcessor = new SocketFieldsProcessorTest();
 			var sockets = socketFieldsProcessor.GetSockets();
 			var fieldValues = socketFieldsProcessor.GetFieldsWithPossibleValues(sockets);
 			
@@ -47,7 +47,7 @@ namespace ExpertSystem.Processor.ProductionProcessor
 		public void BackwardProcessing_isCorrect()
 		{
 			// Arrange
-			HashSet<Fact> expectedFactSet = new HashSet<Fact>()
+			var expectedFactSet = new HashSet<Fact>
 			{
 				new Fact("NumberOfPositions", 60, typeof(int)),
 				new Fact("NumberOfContacts", 120, typeof(int)),
@@ -77,24 +77,23 @@ namespace ExpertSystem.Processor.ProductionProcessor
 			Assert.Equal(expectedFactSet, factSet.Facts);
 		}
 
-		[Fact]
-		public void ForwardProcessing_isCorrect()
-		{
-			// Arrange
-			FactSet initialFacts = new FactSet(
-				new Fact("NumberOfPositions", 60, typeof(int)),
-				new Fact("NumberOfContacts", 120, typeof(int)),
-				new Fact("MountingStyle", "Through Hole", typeof(string))
-			);
-			
-			const string expectedSocketName = "5145167-4";
-			
-			// Act
-			var socketNameList = _productionProcessor.ForwardProcessing(initialFacts);
-			
-			// Assert
-			Assert.Contains(expectedSocketName, socketNameList);
-		}
-		
+	    [Fact]
+	    public void ForwardProcessing_isCorrect()
+	    {
+	        // Arrange
+	        var initialFacts = new FactSet(
+	            new Fact("NumberOfPositions", 60, typeof(int)),
+	            new Fact("NumberOfContacts", 120, typeof(int)),
+	            new Fact("MountingStyle", "Through Hole", typeof(string))
+	        );
+
+	        const string expectedSocketName = "5145167-4";
+
+	        // Act
+	        var socketNameList = _productionProcessor.ForwardProcessing(initialFacts);
+
+	        // Assert
+	        Assert.Contains(expectedSocketName, socketNameList);
+	    }
 	}
 }

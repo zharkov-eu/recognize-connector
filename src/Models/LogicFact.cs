@@ -10,12 +10,12 @@ namespace ExpertSystem.Models
         public int Depth;
         public bool Negation;
 
-        public override bool Equals(object obj) 
+        public override bool Equals(object obj)
         {
             if (!(obj is LogicFactLevel))
                 return false;
 
-            LogicFactLevel fact = (LogicFactLevel) obj;
+            LogicFactLevel fact = (LogicFactLevel)obj;
             return Depth == fact.Depth && Negation == fact.Negation;
         }
 
@@ -25,7 +25,7 @@ namespace ExpertSystem.Models
             hashCode += Depth.GetHashCode();
             hashCode += Negation.GetHashCode();
             return hashCode;
-        } 
+        }
     }
 
     public class LogicFact : Fact
@@ -33,7 +33,8 @@ namespace ExpertSystem.Models
         /// <summary>
         /// Возвращает конъюктивную нормальную форму
         /// <summary>
-        public static LinkedList<LogicFact> ConjuctionNormalFrom(LinkedList<LogicFact> facts, int priority = 100) {
+        public static LinkedList<LogicFact> ConjuctionNormalFrom(LinkedList<LogicFact> facts, int priority = 100)
+        {
             // Если список пуст или содержит один факт - вернуть его
             if (facts.Count <= 1) return facts;
 
@@ -93,13 +94,13 @@ namespace ExpertSystem.Models
 
             return ConjuctionNormalFrom(facts, maxPriority - 1);
         }
-        
+
         public bool Negation { get; set; }
         public Operation RightOperation { get; set; }
         public LogicFactLevel Level { get; set; }
 
         public LogicFact(string domain, object value, Type type) : base(domain, value, type)
-        {    
+        {
             Negation = false;
             RightOperation = LogicOperation.Operation.None;
             Level = new LogicFactLevel { Depth = 0, Negation = false };
@@ -124,7 +125,7 @@ namespace ExpertSystem.Models
                    Negation == fact.Negation &&
                    RightOperation == fact.RightOperation;
         }
-        
+
         public override int GetHashCode()
         {
             int hashCode = base.GetHashCode();
@@ -135,7 +136,7 @@ namespace ExpertSystem.Models
 
         public override string ToString()
         {
-            string output = Negation ? "~" : "";
+            var output = Negation ? "~" : "";
             output += $"({Domain}: {Value})";
             return string.IsNullOrEmpty(GetOutput(RightOperation)) ? output : output + $" {GetOutput(RightOperation)}";
         }
