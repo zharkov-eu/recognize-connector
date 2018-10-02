@@ -1,5 +1,6 @@
-using ExpertSystem.Models;
 using Xunit;
+using ExpertSystem.Models;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor.LogicProcessor
 {
@@ -22,9 +23,9 @@ namespace ExpertSystem.Processor.LogicProcessor
         public void Processing_IsCorrect()
         {
             var facts = new FactSet(
-                new Fact("NumberOfPositions", 60, typeof(int)),
-                new Fact("NumberOfContacts", 120, typeof(int)),
-                new Fact("MountingStyle", "Through Hole", typeof(string))
+                new Fact(SocketDomain.NumberOfPositions, 60, typeof(int)),
+                new Fact(SocketDomain.NumberOfContacts, 120, typeof(int)),
+                new Fact(SocketDomain.MountingStyle, "Through Hole", typeof(string))
             );
 
             Assert.True(_logicProcessor.Processing(facts, "5145167-4"));

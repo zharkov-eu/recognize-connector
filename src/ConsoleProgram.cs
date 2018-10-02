@@ -2,34 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExpertSystem.Models;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem
 {
     public enum Command
     {
         Exit = 0, ForwardProcessing = 1, BackProcessing = 2, LogicProcessing = 3, FuzzyProcessingMamdani = 4, FuzzyProcessingSugeno = 5
-    }
-
-    public enum SocketDomain
-    {
-        Execute,
-        Gender,
-        ContactMaterial,
-        ContactPlating,
-        Color,
-        HousingColor,
-        HousingMaterial,
-        MountingStyle,
-        NumberOfContacts,
-        NumberOfPositions,
-        NumberOfRows,
-        Orientation,
-        PinPitch,
-        Material,
-        SizeDiameter,
-        SizeLength,
-        SizeHeight,
-        SizeWidth
     }
 
     public class ConsoleProgram : Program
@@ -43,18 +22,28 @@ namespace ExpertSystem
 
             while ((choice = Console.ReadLine()) != ((int)Command.Exit).ToString())
             {
+                string socketName;
+                List<Fact> socketFacts;
+
                 var choiceNum = (Command)int.Parse(choice);
                 switch (choiceNum)
                 {
                     case Command.BackProcessing:
                         Console.WriteLine("Обратный продукционный вывод, введите название разъема: ");
-                        var socketName = Console.ReadLine();
+                        socketName = Console.ReadLine();
                         BackProcessing(socketName);
                         break;
                     case Command.ForwardProcessing:
                         Console.WriteLine("Прямой продукционный вывод, введите факты для поиска разъема: ");
-                        var socketConsoleFacts = GetSocketFactsFromConsole();
-                        ForwardProcessing(new FactSet(socketConsoleFacts.ToArray()));
+                        socketFacts = GetSocketFactsFromConsole();
+                        ForwardProcessing(new FactSet(socketFacts.ToArray()));
+                        break;
+                    case Command.LogicProcessing:
+                        Console.WriteLine("Логический вывод, введите посылки: ");
+                        socketFacts = GetSocketFactsFromConsole();
+                        Console.WriteLine("Логический вывод, введите утверждение (НазваниеРазъема): ");
+                        socketName = Console.ReadLine();
+                        LogicProcessing(new FactSet(socketFacts.ToArray()), socketName);
                         break;
                     default:
                         Console.WriteLine("Команда не распознана");
@@ -90,9 +79,9 @@ namespace ExpertSystem
 
         private bool LogicProcessing(FactSet factSet, string socketName)
         {
-            WritePaddedBottom($"Логический вывод {factSet}");
+            WritePaddedBottom($"Логический вывод утверждения {socketName} при посылках {factSet}");
             var isCorrect = _logicProcessor.Processing(factSet, socketName);
-            WritePaddedTop(isCorrect ? $"Предположение для {socketName} верно" : "Предположение неверно");
+            WritePaddedTop(isCorrect ? $"Утверждение для {socketName} верно" : "Утверждение неверно");
             return isCorrect;
         }
 
@@ -110,25 +99,12 @@ namespace ExpertSystem
         private static void PrintDomains()
         {
             WritePaddedTop("Выберите домен: ");
-            Console.WriteLine($"{(int)SocketDomain.Gender} - пол разъема");
-            Console.WriteLine($"{(int)SocketDomain.ContactMaterial} - контактный материал");
-            Console.WriteLine($"{(int)SocketDomain.ContactPlating} - контактная плата");
-            Console.WriteLine($"{(int)SocketDomain.ContactMaterial} - контактный материал");
-            Console.WriteLine($"{(int)SocketDomain.Color} - цвет");
-            Console.WriteLine($"{(int)SocketDomain.HousingColor} - цвет корпуса)))");
-            Console.WriteLine($"{(int)SocketDomain.HousingMaterial} - материал корпуса)))");
-            Console.WriteLine($"{(int)SocketDomain.MountingStyle} - тип установки");
-            Console.WriteLine($"{(int)SocketDomain.NumberOfContacts} - число контактов");
-            Console.WriteLine($"{(int)SocketDomain.NumberOfPositions} - число позиций");
-            Console.WriteLine($"{(int)SocketDomain.NumberOfRows} - число строк");
-            Console.WriteLine($"{(int)SocketDomain.Orientation} - положение разъема");
-            Console.WriteLine($"{(int)SocketDomain.PinPitch} - шаг между контактами");
-            Console.WriteLine($"{(int)SocketDomain.Material} - материал разъема");
-            Console.WriteLine($"{(int)SocketDomain.SizeDiameter} - диаметр разъема");
-            Console.WriteLine($"{(int)SocketDomain.SizeLength} - длина разъема");
-            Console.WriteLine($"{(int)SocketDomain.SizeHeight} - высота разъема");
-            Console.WriteLine($"{(int)SocketDomain.SizeWidth} - ширина разъема");
-            WritePaddedBottom($"{(int)SocketDomain.Execute} - применить");
+            foreach (SocketDomain domain in GetSocketDomains())
+            {
+                var domainChoice = ((int)domain).ToString().PadRight(3);
+                Console.WriteLine($"{domainChoice} - {GetSocketDomainName(domain)}");
+            }
+            Console.WriteLine($"{0.ToString().PadRight(3)} - завершить ввод и продолжить");
         }
 
         private static List<Fact> GetSocketFactsFromConsole()
@@ -137,18 +113,18 @@ namespace ExpertSystem
             string domainChoice;
             PrintDomains();
             var factsList = new List<Fact>();
-            while ((domainChoice = Console.ReadLine()) != ((int)SocketDomain.Execute).ToString())
+            while ((domainChoice = Console.ReadLine()) != (0).ToString())
             {
-                var choiceNum = (SocketDomain)int.Parse(domainChoice);
-                if (Enum.IsDefined(typeof(SocketDomain), choiceNum))
+                var domain = (SocketDomain)int.Parse(domainChoice);
+                if (Enum.IsDefined(typeof(SocketDomain), domain))
                 {
-                    if (factsList.Any(p => p.Domain.Equals(choiceNum.ToString())))
-                        Console.WriteLine($"Поле со свойством {choiceNum.ToString()} уже существует");
+                    if (factsList.Any(p => p.Domain.Equals(domain.ToString())))
+                        Console.WriteLine($"Поле со свойством {domain.ToString()} уже существует");
                     else
                     {
                         WritePaddedTop("Введите значение");
                         var value = Console.ReadLine();
-                        factsList.Add(new Fact(choiceNum.ToString(), value, CustomSocket.Domains[domainChoice]));
+                        factsList.Add(new Fact(domain, value, SocketDomainType[domain]));
                     }
                 }
                 else

@@ -1,6 +1,7 @@
+using Xunit;
 using System.Collections.Generic;
 using ExpertSystem.Models;
-using Xunit;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor.ProductionProcessor
 {
@@ -49,23 +50,23 @@ namespace ExpertSystem.Processor.ProductionProcessor
 			// Arrange
 			var expectedFactSet = new HashSet<Fact>
 			{
-				new Fact("NumberOfPositions", 60, typeof(int)),
-				new Fact("NumberOfContacts", 120, typeof(int)),
-				new Fact("SizeLength", 5.3f, typeof(float)),
-				new Fact("MountingStyle", "Through Hole", typeof(string)),
-				new Fact("Color", "Natural", typeof(string)),
-				new Fact("SizeWidth", 10.0f, typeof(float)),
-				new Fact("SizeHeight", 3.2f, typeof(float)),
-				new Fact("SizeDiameter", 11.5f, typeof(float)),
-				new Fact("HousingMaterial", "Thermoplastic", typeof(string)),
-				new Fact("HousingColor", "Natural", typeof(string)),
-				new Fact("Material", "Plastic", typeof(string)),
-				new Fact("ContactMaterial", "Phosphor Bronze", typeof(string)),
-				new Fact("ContactPlating", "Gold", typeof(string)),
-				new Fact("PinPitch", 0.00127f, typeof(float)),
-				new Fact("Orientation", "Vertical", typeof(string)),
-				new Fact("NumberOfRows", 2, typeof(int)),
-				new Fact("Gender", "Female", typeof(string)),
+				new Fact(SocketDomain.NumberOfPositions, 60, typeof(int)),
+				new Fact(SocketDomain.NumberOfContacts, 120, typeof(int)),
+				new Fact(SocketDomain.SizeLength, 5.3f, typeof(float)),
+				new Fact(SocketDomain.MountingStyle, "Through Hole", typeof(string)),
+				new Fact(SocketDomain.Color, "Natural", typeof(string)),
+				new Fact(SocketDomain.SizeWidth, 10.0f, typeof(float)),
+				new Fact(SocketDomain.SizeHeight, 3.2f, typeof(float)),
+				new Fact(SocketDomain.SizeDiameter, 11.5f, typeof(float)),
+				new Fact(SocketDomain.HousingMaterial, "Thermoplastic", typeof(string)),
+				new Fact(SocketDomain.HousingColor, "Natural", typeof(string)),
+				new Fact(SocketDomain.Material, "Plastic", typeof(string)),
+				new Fact(SocketDomain.ContactMaterial, "Phosphor Bronze", typeof(string)),
+				new Fact(SocketDomain.ContactPlating, "Gold", typeof(string)),
+				new Fact(SocketDomain.PinPitch, 0.00127f, typeof(float)),
+				new Fact(SocketDomain.Orientation, "Vertical", typeof(string)),
+				new Fact(SocketDomain.NumberOfRows, 2, typeof(int)),
+				new Fact(SocketDomain.Gender, "Female", typeof(string)),
 			};
 			
 			const string socketName = "5145167-4";
@@ -82,9 +83,9 @@ namespace ExpertSystem.Processor.ProductionProcessor
 	    {
 	        // Arrange
 	        var initialFacts = new FactSet(
-	            new Fact("NumberOfPositions", 60, typeof(int)),
-	            new Fact("NumberOfContacts", 120, typeof(int)),
-	            new Fact("MountingStyle", "Through Hole", typeof(string))
+	            new Fact(SocketDomain.NumberOfPositions, 60, typeof(int)),
+	            new Fact(SocketDomain.NumberOfContacts, 120, typeof(int)),
+	            new Fact(SocketDomain.MountingStyle, "Through Hole", typeof(string))
 	        );
 
 	        const string expectedSocketName = "5145167-4";

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Xunit;
 using static ExpertSystem.Models.LogicOperation;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Models
 {
@@ -10,7 +11,7 @@ namespace ExpertSystem.Models
         public void CojunctionNormalForm_IsCorrectWithSingleFact()
         {
             // Arrange
-            LogicFact singleFact = new LogicFact("domain", "value", typeof(string), Operation.None, true);
+            LogicFact singleFact = new LogicFact(SocketDomain.Color, "value", typeof(string), Operation.None, true);
             LinkedList<LogicFact> singleFacts = new LinkedList<LogicFact>();
             singleFacts.AddLast(singleFact);
 
@@ -25,8 +26,8 @@ namespace ExpertSystem.Models
         public void CojunctionNormalForm_IsCorrectWithDisjunction()
         {
             // Arrange
-            LogicFact disjunctionFactA = new LogicFact("domainA", "valueA", typeof(string), Operation.Disjunction);
-            LogicFact disjunctionFactB = new LogicFact("domainB", "valueB", typeof(string), Operation.None);
+            LogicFact disjunctionFactA = new LogicFact(SocketDomain.Color, "valueA", typeof(string), Operation.Disjunction);
+            LogicFact disjunctionFactB = new LogicFact(SocketDomain.HousingColor, "valueB", typeof(string), Operation.None);
             LinkedList<LogicFact> disjunctionFacts = new LinkedList<LogicFact>();
             disjunctionFacts.AddLast(disjunctionFactA);
             disjunctionFacts.AddLast(disjunctionFactB);
@@ -41,17 +42,17 @@ namespace ExpertSystem.Models
         [Fact]
         public void CojunctionNormalForm_IsCorrectWithImplication()
         {
-            var implicationFactA = new LogicFact("domainA", "valueA", typeof(string), Operation.Conjunction);
-            var implicationFactB = new LogicFact("domainB", "valueB", typeof(string), Operation.Implication);
-            var implicationResult = new LogicFact("domainC", "valueC", typeof(string), Operation.None);
+            var implicationFactA = new LogicFact(SocketDomain.Material, "valueA", typeof(string), Operation.Conjunction);
+            var implicationFactB = new LogicFact(SocketDomain.HousingMaterial, "valueB", typeof(string), Operation.Implication);
+            var implicationResult = new LogicFact(SocketDomain.SocketName, "valueC", typeof(string), Operation.None);
             var implicationFacts = new LinkedList<LogicFact>();
             implicationFacts.AddLast(implicationFactA);
             implicationFacts.AddLast(implicationFactB);
             implicationFacts.AddLast(implicationResult);
             implicationFacts = LogicFact.ConjuctionNormalFrom(implicationFacts);
 
-            var cnfImplicationFactA = new LogicFact("domainA", "valueA", typeof(string), Operation.Disjunction, true);
-            var cnfImplicationFactB = new LogicFact("domainB", "valueB", typeof(string), Operation.Disjunction, true);
+            var cnfImplicationFactA = new LogicFact(SocketDomain.Material, "valueA", typeof(string), Operation.Disjunction, true);
+            var cnfImplicationFactB = new LogicFact(SocketDomain.HousingMaterial, "valueB", typeof(string), Operation.Disjunction, true);
 
             Assert.True(cnfImplicationFactA.Equals(implicationFacts.First.Value));
             Assert.True(cnfImplicationFactB.Equals(implicationFacts.First?.Next?.Value));

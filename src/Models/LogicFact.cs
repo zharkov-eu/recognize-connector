@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using static ExpertSystem.Models.LogicOperation;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Models
 {
@@ -99,14 +100,14 @@ namespace ExpertSystem.Models
         public Operation RightOperation { get; set; }
         public LogicFactLevel Level { get; set; }
 
-        public LogicFact(string domain, object value, Type type) : base(domain, value, type)
+        public LogicFact(SocketDomain domain, object value, Type type) : base(domain, value, type)
         {
             Negation = false;
             RightOperation = LogicOperation.Operation.None;
             Level = new LogicFactLevel { Depth = 0, Negation = false };
         }
 
-        public LogicFact(string domain, object value, Type type, Operation operation, bool negation = false)
+        public LogicFact(SocketDomain domain, object value, Type type, Operation operation, bool negation = false)
             : base(domain, value, type)
         {
             Negation = negation;

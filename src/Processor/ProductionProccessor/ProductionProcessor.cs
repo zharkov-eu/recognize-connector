@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ExpertSystem.Models;
 using ExpertSystem.Models.Graph;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor.ProductionProcessor
 {
@@ -100,7 +101,7 @@ namespace ExpertSystem.Processor.ProductionProcessor
         private static bool CompareDomains(FactSet current, FactSet expected)
         {
             var compared = true;
-            var facts = new Dictionary<string, object>();
+            var facts = new Dictionary<SocketDomain, object>();
             foreach (var fact in expected.Facts)
                 facts.Add(fact.Domain, fact.Value);
             foreach (var fact in current.Facts)

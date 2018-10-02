@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Models
 {
@@ -47,9 +48,9 @@ namespace ExpertSystem.Models
                 return sockets = _processor.GetSockets(stream);
         }
 
-        public Dictionary<string, List<string>> GetFieldsWithPossibleValues(List<CustomSocket> sockets)
+        public Dictionary<SocketDomain, List<string>> GetFieldsWithPossibleValues(List<CustomSocket> sockets)
         {
-           return _processor.GetFieldsWithPossibleValues(sockets);
+           return _processor.GetDomainsWithPossibleValues(sockets);
         }
 
         [Fact]

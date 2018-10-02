@@ -4,39 +4,12 @@ using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
 using ExpertSystem.Parse;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Models
 {
     public class CustomSocket
     {
-        public static readonly Dictionary<string, Type> Domains = new Dictionary<string, Type>
-        {
-            { "Gender", typeof(string) },
-            { "ContactMaterial", typeof(string) },
-            { "ContactPlating", typeof(string) },
-            { "Color", typeof(string) },
-            { "HousingColor", typeof(string) },
-            { "HousingMaterial", typeof(string) },
-            { "MountingStyle", typeof(string) },
-            { "NumberOfContacts", typeof(int) },
-            { "NumberOfPositions", typeof(int) },
-            { "NumberOfRows", typeof(int) },
-            { "Orientation", typeof(string) },
-            { "PinPitch", typeof(float) },
-            { "Material", typeof(string) },
-            { "SizeDiameter", typeof(float) },
-            { "SizeLength", typeof(float) },
-            { "SizeHeight", typeof(float) },
-            { "SizeWidth", typeof(float) }
-        };
-
-        public static readonly Dictionary<Type, object> DefaultValue = new Dictionary<Type, object>
-        {
-            { typeof(string), "" },
-            { typeof(int), -1 },
-            { typeof(float), -1.0f }
-        };
-
         public string SocketName;
         public string Gender;
         public string ContactMaterial;
@@ -146,24 +119,24 @@ namespace ExpertSystem.Models
             return entries;
         }
 
-        public Dictionary<string, List<string>> GetFieldsWithPossibleValues(List<CustomSocket> sockets)
+        public Dictionary<SocketDomain, List<string>> GetDomainsWithPossibleValues(List<CustomSocket> sockets)
         {
-            var fieldsValues = new Dictionary<string, List<string>>();
+            var domainsValues = new Dictionary<SocketDomain, List<string>>();
             var customSocketType = typeof(CustomSocket);
-            foreach (var property in CustomSocket.Domains.Keys)
+            foreach (SocketDomain domain in GetSocketDomains().Where(p => p != SocketDomain.SocketName))
             {
-                var type = CustomSocket.Domains[property];
-                var field = customSocketType.GetField(property);
+                var type = SocketDomainType[domain];
+                var field = customSocketType.GetField(domain.ToString());
 
                 var propertyValues = sockets.GroupBy(p => field.GetValue(p).ToString()).ToList();
                 var currentPropValues = new List<string>();
                 foreach (var value in propertyValues)
                     currentPropValues.Add(value.Key);
 
-                fieldsValues.Add(property, currentPropValues);
+                domainsValues.Add(domain, currentPropValues);
             }
 
-            return fieldsValues;
+            return domainsValues;
         }
     }
 }

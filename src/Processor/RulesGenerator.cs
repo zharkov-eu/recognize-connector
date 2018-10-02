@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using ExpertSystem.Models;
 using ExpertSystem.Models.Graph;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor
 {
     public class RulesGenerator
     {
-        public RulesGraph GenerateRules(List<CustomSocket> sockets, Dictionary<string, List<string>> fieldsValues)
+        public RulesGraph GenerateRules(List<CustomSocket> sockets, Dictionary<SocketDomain, List<string>> domainValues)
         {
             var rulesGraph = new RulesGraph();
 
             //Сортировка полей по числу принимаемых ими значений
-            fieldsValues = fieldsValues.OrderBy(p => p.Value.Count).ToDictionary(x => x.Key, x => x.Value);
-            var domains = fieldsValues.Keys.ToArray();
+            domainValues = domainValues.OrderBy(p => p.Value.Count).ToDictionary(x => x.Key, x => x.Value);
+            var domains = domainValues.Keys.ToArray();
             var customSocketType = typeof(CustomSocket);
 
             foreach (var socket in sockets)
@@ -28,9 +29,9 @@ namespace ExpertSystem.Processor
                     GraphNode node = null;
 
                     // Конструируем факт
-                    Type type = CustomSocket.Domains[domain];
+                    Type type = SocketDomainType[domain];
                     FactSet facts = new FactSet(
-                        new Fact(domain, customSocketType.GetField(domain).GetValue(socket), type)
+                        new Fact(domain, customSocketType.GetField(domain.ToString()).GetValue(socket), type)
                     );
 
                     // Проверяем текущий список фактов, возможно, там уже есть этот факт

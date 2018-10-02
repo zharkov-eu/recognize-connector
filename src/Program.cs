@@ -27,7 +27,7 @@ namespace ExpertSystem
             var fileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "data", "1.csv");
             using (var stream = File.OpenRead(fileName))
                 sockets = socketFieldsProcessor.GetSockets(stream);
-            var fieldValues = socketFieldsProcessor.GetFieldsWithPossibleValues(sockets);
+            var fieldValues = socketFieldsProcessor.GetDomainsWithPossibleValues(sockets);
 
             var rulesGenerator = new RulesGenerator();
             var logicRulesGenerator = new LogicRulesGenerator();

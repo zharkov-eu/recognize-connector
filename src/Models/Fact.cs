@@ -1,16 +1,17 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Models
 {
     public class Fact : IEqualityComparer<Fact>
     {
-        public string Domain { get; set; }
+        public SocketDomain Domain { get; set; }
         public object Value { get; set; }
         public Type Type { get; set; }
 
-        public Fact(string domain, object value, Type type)
+        public Fact(SocketDomain domain, object value, Type type)
         {
             Domain = domain;
             Value = value;
@@ -19,7 +20,7 @@ namespace ExpertSystem.Models
 
         public bool IsDefaultValue()
         {
-            return Value.Equals(CustomSocket.DefaultValue[Type]);
+            return Value.Equals(SocketDefaultValue[Type]);
         }
 
         public override bool Equals(object obj)

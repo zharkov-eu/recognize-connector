@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Models;
 using static ExpertSystem.Models.LogicOperation;
+using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor
 {
@@ -16,15 +17,15 @@ namespace ExpertSystem.Processor
             foreach (var socket in sockets)
             {
                 LinkedList<LogicFact> currentSocketFacts = new LinkedList<LogicFact>();
-                foreach (var domain in CustomSocket.Domains.Keys)
+                foreach (SocketDomain domain in GetSocketDomains())
                 {
-                    Type type = CustomSocket.Domains[domain];
-                    Operation operation = CustomSocket.Domains.Last().Equals(domain) ? Operation.Implication : Operation.Conjunction;
-                    LogicFact fact = new LogicFact(domain, customSocketType.GetField(domain).GetValue(socket), type, operation);
+                    Type type = SocketDomainType[domain];
+                    Operation operation = domain.Equals(SocketDomain.SocketName) ? Operation.Implication : Operation.Conjunction;
+                    LogicFact fact = new LogicFact(domain, customSocketType.GetField(domain.ToString()).GetValue(socket), type, operation);
                     if (!fact.IsDefaultValue())
                         currentSocketFacts.AddLast(fact);
                 }
-                currentSocketFacts.AddLast(new LogicFact("SocketName", socket.SocketName, typeof(string), Operation.None));
+                currentSocketFacts.AddLast(new LogicFact(SocketDomain.SocketName, socket.SocketName, typeof(string), Operation.None));
                 socketsFacts.Add(currentSocketFacts);
             }
 
