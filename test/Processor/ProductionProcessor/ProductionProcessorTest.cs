@@ -50,23 +50,23 @@ namespace ExpertSystem.Processor.ProductionProcessor
 			// Arrange
 			var expectedFactSet = new HashSet<Fact>
 			{
-				new Fact(SocketDomain.NumberOfPositions, 60, typeof(int)),
-				new Fact(SocketDomain.NumberOfContacts, 120, typeof(int)),
-				new Fact(SocketDomain.SizeLength, 5.3f, typeof(float)),
-				new Fact(SocketDomain.MountingStyle, "Through Hole", typeof(string)),
-				new Fact(SocketDomain.Color, "Natural", typeof(string)),
-				new Fact(SocketDomain.SizeWidth, 10.0f, typeof(float)),
-				new Fact(SocketDomain.SizeHeight, 3.2f, typeof(float)),
-				new Fact(SocketDomain.SizeDiameter, 11.5f, typeof(float)),
-				new Fact(SocketDomain.HousingMaterial, "Thermoplastic", typeof(string)),
-				new Fact(SocketDomain.HousingColor, "Natural", typeof(string)),
-				new Fact(SocketDomain.Material, "Plastic", typeof(string)),
-				new Fact(SocketDomain.ContactMaterial, "Phosphor Bronze", typeof(string)),
-				new Fact(SocketDomain.ContactPlating, "Gold", typeof(string)),
-				new Fact(SocketDomain.PinPitch, 0.00127f, typeof(float)),
-				new Fact(SocketDomain.Orientation, "Vertical", typeof(string)),
-				new Fact(SocketDomain.NumberOfRows, 2, typeof(int)),
-				new Fact(SocketDomain.Gender, "Female", typeof(string)),
+				new Fact(SocketDomain.NumberOfPositions, 60),
+				new Fact(SocketDomain.NumberOfContacts, 120),
+				new Fact(SocketDomain.SizeLength, 5.3f),
+				new Fact(SocketDomain.MountingStyle, "Through Hole"),
+				new Fact(SocketDomain.Color, "Natural"),
+				new Fact(SocketDomain.SizeWidth, 10.0f),
+				new Fact(SocketDomain.SizeHeight, 3.2f),
+				new Fact(SocketDomain.SizeDiameter, 11.5f),
+				new Fact(SocketDomain.HousingMaterial, "Thermoplastic"),
+				new Fact(SocketDomain.HousingColor, "Natural"),
+				new Fact(SocketDomain.Material, "Plastic"),
+				new Fact(SocketDomain.ContactMaterial, "Phosphor Bronze"),
+				new Fact(SocketDomain.ContactPlating, "Gold"),
+				new Fact(SocketDomain.PinPitch, 0.00127f),
+				new Fact(SocketDomain.Orientation, "Vertical"),
+				new Fact(SocketDomain.NumberOfRows, 2),
+				new Fact(SocketDomain.Gender, "Female"),
 			};
 			
 			const string socketName = "5145167-4";
@@ -83,9 +83,9 @@ namespace ExpertSystem.Processor.ProductionProcessor
 	    {
 	        // Arrange
 	        var initialFacts = new FactSet(
-	            new Fact(SocketDomain.NumberOfPositions, 60, typeof(int)),
-	            new Fact(SocketDomain.NumberOfContacts, 120, typeof(int)),
-	            new Fact(SocketDomain.MountingStyle, "Through Hole", typeof(string))
+	            new Fact(SocketDomain.NumberOfPositions, 60),
+	            new Fact(SocketDomain.NumberOfContacts, 120),
+	            new Fact(SocketDomain.MountingStyle, "Through Hole")
 	        );
 
 	        const string expectedSocketName = "5145167-4";

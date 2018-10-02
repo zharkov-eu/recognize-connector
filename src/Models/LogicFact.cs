@@ -100,15 +100,15 @@ namespace ExpertSystem.Models
         public Operation RightOperation { get; set; }
         public LogicFactLevel Level { get; set; }
 
-        public LogicFact(SocketDomain domain, object value, Type type) : base(domain, value, type)
+        public LogicFact(SocketDomain domain, object value) : base(domain, value)
         {
             Negation = false;
             RightOperation = LogicOperation.Operation.None;
             Level = new LogicFactLevel { Depth = 0, Negation = false };
         }
 
-        public LogicFact(SocketDomain domain, object value, Type type, Operation operation, bool negation = false)
-            : base(domain, value, type)
+        public LogicFact(SocketDomain domain, object value, Operation operation, bool negation = false)
+            : base(domain, value)
         {
             Negation = negation;
             RightOperation = operation;

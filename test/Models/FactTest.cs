@@ -9,15 +9,15 @@ namespace ExpertSystem.Models
 
         public Fact_IsCorrect()
         {
-            _fact = new Fact(SocketDomain.Color, "value", typeof(string));
+            _fact = new Fact(SocketDomain.Color, "value");
         }
 
         [Fact]
         public void Fact_IsDefaultValue()
         {
-            var intDefault = new Fact(SocketDomain.NumberOfContacts, -1, typeof(int));
-            var floatDefault = new Fact(SocketDomain.PinPitch, -1.0f, typeof(float));
-            var stringDefault = new Fact(SocketDomain.Color, "", typeof(string));
+            var intDefault = new Fact(SocketDomain.NumberOfContacts, -1);
+            var floatDefault = new Fact(SocketDomain.PinPitch, -1.0f);
+            var stringDefault = new Fact(SocketDomain.Color, "");
 
             Assert.True(intDefault.IsDefaultValue(), "Факт типа int должен являться фактом по умолчанию");
             Assert.True(floatDefault.IsDefaultValue(), "Факт типа float должен являться фактом по умолчанию");
@@ -27,8 +27,8 @@ namespace ExpertSystem.Models
         [Fact]
         public void Fact_IsEqual()
         {
-            var factEqual = new Fact(SocketDomain.Color, "value", typeof(string));
-            var factNotEqual = new Fact(SocketDomain.Color, "notequal", typeof(string));
+            var factEqual = new Fact(SocketDomain.Color, "value");
+            var factNotEqual = new Fact(SocketDomain.Color, "notequal");
 
             Assert.True(_fact.Equals(_fact), "Факт должен быть равен самому себе");
             Assert.True(_fact.Equals(factEqual), "Факт должен быть равен аналогичному по содержанию факту");
@@ -39,8 +39,8 @@ namespace ExpertSystem.Models
         [Fact]
         public void Fact_IsEqualityEqual()
         {
-            var factEqual = new Fact(SocketDomain.Color, "value", typeof(string));
-            var factNotEqual = new Fact(SocketDomain.Color, "notequal", typeof(string));
+            var factEqual = new Fact(SocketDomain.Color, "value");
+            var factNotEqual = new Fact(SocketDomain.Color, "notequal");
 
             Assert.True(_fact.Equals(_fact, _fact), "Факт должен быть равен самому себе");
             Assert.True(_fact.Equals(_fact, factEqual), "Факт должен быть равен аналогичному по содержанию факту");
@@ -54,8 +54,8 @@ namespace ExpertSystem.Models
             public FactSet_IsCorrect()
             {
                 _factSet = new FactSet(
-                    new Fact(SocketDomain.Color, "value_a", typeof(string)),
-                    new Fact(SocketDomain.HousingColor, "value_b", typeof(string))
+                    new Fact(SocketDomain.Color, "value_a"),
+                    new Fact(SocketDomain.HousingColor, "value_b")
                 );
             }
 
@@ -63,12 +63,12 @@ namespace ExpertSystem.Models
             public void FactSet_IsEqual()
             {
                 var factSetEqual = new FactSet(
-                    new Fact(SocketDomain.Color, "value_a", typeof(string)),
-                    new Fact(SocketDomain.HousingColor, "value_b", typeof(string))
+                    new Fact(SocketDomain.Color, "value_a"),
+                    new Fact(SocketDomain.HousingColor, "value_b")
                 );
                 var factSetNotEqual = new FactSet(
-                    new Fact(SocketDomain.Color, "value_a", typeof(string)),
-                    new Fact(SocketDomain.HousingColor, "value_notequal", typeof(string))
+                    new Fact(SocketDomain.Color, "value_a"),
+                    new Fact(SocketDomain.HousingColor, "value_notequal")
                 );
 
                 Assert.True(_factSet.Equals(_factSet), "Множество фактов должно быть равено самому себе");

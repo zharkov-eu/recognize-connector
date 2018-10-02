@@ -8,9 +8,7 @@ namespace ExpertSystem.Models.Graph
 
         public RulesGraph()
         {
-            Root = new GraphNode(new Fact(
-                SocketDomain.Empty, SocketDefaultValue[typeof(string)], typeof(string)
-            ));
+            Root = new GraphNode(new Fact(SocketDomain.Empty, SocketDefaultValue[typeof(string)]));
         }
     }
 }

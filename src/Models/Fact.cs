@@ -11,11 +11,15 @@ namespace ExpertSystem.Models
         public object Value { get; set; }
         public Type Type { get; set; }
 
-        public Fact(SocketDomain domain, object value, Type type)
+        public Fact(SocketDomain domain, object value)
         {
             Domain = domain;
+            Type = SocketDomainType[Domain];
+            if (value.GetType() != Type)
+                throw new Exception(
+                    $"Expected type: {Type} for {Domain}: get {value.GetType()} with value {value.ToString()}"
+                );
             Value = value;
-            Type = type;
         }
 
         public bool IsDefaultValue()

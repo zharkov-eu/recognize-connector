@@ -44,7 +44,7 @@ namespace ExpertSystem.Processor.LogicProcessor
                 inputDomains.Add(inputFact.Domain);
                 logicInputFacts = new LinkedList<LogicFact>();
                 logicInputFacts.AddLast(
-                    new LogicFact(inputFact.Domain, inputFact.Value, inputFact.Type, Operation.None));
+                    new LogicFact(inputFact.Domain, inputFact.Value, Operation.None));
                 statements.Add(logicInputFacts);
             }
 
@@ -63,7 +63,7 @@ namespace ExpertSystem.Processor.LogicProcessor
 
             // Добавляем отрицание утверждения
             var socketNegation = new LinkedList<LogicFact>();
-            socketNegation.AddLast(new LogicFact(SocketDomain.SocketName, socketName, typeof(string), Operation.None, true));
+            socketNegation.AddLast(new LogicFact(SocketDomain.SocketName, socketName, Operation.None, true));
             statements.Add(socketNegation);
 
             // Выводим отладочную информацию первого шага
@@ -78,7 +78,7 @@ namespace ExpertSystem.Processor.LogicProcessor
             // Выводим отладочную информацию КНФ
             debug("".PadLeft(40, '-'));
             debug("Конъюнктивная нормальная форма: " + cnfStatements);
-            return Resolve(cnfStatements, new LogicFact(SocketDomain.SocketName, socketName, typeof(string), Operation.None));
+            return Resolve(cnfStatements, new LogicFact(SocketDomain.SocketName, socketName, Operation.None));
         }
 
         public bool Resolve(LogicFactSet statements, LogicFact result)

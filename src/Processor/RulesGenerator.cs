@@ -31,7 +31,7 @@ namespace ExpertSystem.Processor
                     // Конструируем факт
                     Type type = SocketDomainType[domain];
                     FactSet facts = new FactSet(
-                        new Fact(domain, customSocketType.GetField(domain.ToString()).GetValue(socket), type)
+                        new Fact(domain, customSocketType.GetField(domain.ToString()).GetValue(socket))
                     );
 
                     // Проверяем текущий список фактов, возможно, там уже есть этот факт

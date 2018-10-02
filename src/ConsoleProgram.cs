@@ -124,7 +124,7 @@ namespace ExpertSystem
                     {
                         WritePaddedTop("Введите значение");
                         var value = Console.ReadLine();
-                        factsList.Add(new Fact(domain, value, SocketDomainType[domain]));
+                        factsList.Add(new Fact(domain, value));
                     }
                 }
                 else

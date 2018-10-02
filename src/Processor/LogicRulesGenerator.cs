@@ -21,11 +21,11 @@ namespace ExpertSystem.Processor
                 {
                     Type type = SocketDomainType[domain];
                     Operation operation = domain.Equals(SocketDomain.SocketName) ? Operation.Implication : Operation.Conjunction;
-                    LogicFact fact = new LogicFact(domain, customSocketType.GetField(domain.ToString()).GetValue(socket), type, operation);
+                    LogicFact fact = new LogicFact(domain, customSocketType.GetField(domain.ToString()).GetValue(socket), operation);
                     if (!fact.IsDefaultValue())
                         currentSocketFacts.AddLast(fact);
                 }
-                currentSocketFacts.AddLast(new LogicFact(SocketDomain.SocketName, socket.SocketName, typeof(string), Operation.None));
+                currentSocketFacts.AddLast(new LogicFact(SocketDomain.SocketName, socket.SocketName, Operation.None));
                 socketsFacts.Add(currentSocketFacts);
             }
 

@@ -23,9 +23,9 @@ namespace ExpertSystem.Processor.LogicProcessor
         public void Processing_IsCorrect()
         {
             var facts = new FactSet(
-                new Fact(SocketDomain.NumberOfPositions, 60, typeof(int)),
-                new Fact(SocketDomain.NumberOfContacts, 120, typeof(int)),
-                new Fact(SocketDomain.MountingStyle, "Through Hole", typeof(string))
+                new Fact(SocketDomain.NumberOfPositions, 60),
+                new Fact(SocketDomain.NumberOfContacts, 120),
+                new Fact(SocketDomain.MountingStyle, "Through Hole")
             );
 
             Assert.True(_logicProcessor.Processing(facts, "5145167-4"));
