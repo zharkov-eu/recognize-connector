@@ -54,6 +54,19 @@ namespace ExpertSystem.Models
             return Enum.GetValues(typeof(SocketDomain)).Cast<SocketDomain>().Where(p => p != SocketDomain.Empty);
         }
 
+        public static IEnumerable<SocketDomain> GetFuzzySocketDomains()
+        {
+            return new List<SocketDomain>() {
+                SocketDomain.NumberOfContacts,
+                SocketDomain.NumberOfPositions,
+                SocketDomain.PinPitch,
+                SocketDomain.SizeDiameter,
+                SocketDomain.SizeHeight,
+                SocketDomain.SizeLength,
+                SocketDomain.SizeWidth,
+            };
+        }
+
         public enum SocketDomain
         {
             [Output("не определен")]
