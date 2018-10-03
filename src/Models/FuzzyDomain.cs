@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Models
@@ -14,6 +15,7 @@ namespace ExpertSystem.Models
         public Type Type;
         public object Min;
         public object Max;
+        public HashSet<int> Clusters;
 
         public FuzzyDomain(SocketDomain domain, FuzzyDomainOption options)
         {
@@ -21,6 +23,7 @@ namespace ExpertSystem.Models
             Type = SocketDomainType[Domain];
             Min = options.Min;
             Max = options.Max;
+            Clusters = new HashSet<int>();
         }
     }
 }
