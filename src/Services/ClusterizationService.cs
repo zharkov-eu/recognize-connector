@@ -5,8 +5,8 @@ namespace ExpertSystem.Services
 {
     public class FuzzyValue<T> where T : IConvertible
     {
-        Dictionary<int, T> ClusterDegree;
-        T Value;
+        public Dictionary<int, T> ClusterDegree { get; set; }
+        public T Value { get; set; }
     }
     public static class ClusterizationService
     {
