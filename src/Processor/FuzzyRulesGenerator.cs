@@ -8,6 +8,23 @@ namespace ExpertSystem.Processor
 {
     public class FuzzyRulesGenerator
     {
+        public FuzzyFact FactFuzzification(Fact fact, SortedList<double, FuzzyFact> currentFacts)
+        {
+            (fact.Type) fact.Value
+            if (currentFacts.Values.Count == 0)
+                throw new Exception("FactFuzzification: base SortedList<FuzzyFact> is empty");
+            FuzzyFact left = currentFacts.Values[0];
+            FuzzyFact right = currentFacts.Values[0];
+            foreach (var currentFact in currentFacts.Values)
+            {
+                if (currentFact.Value.Equals(fact.Value))
+                    return currentFact;
+                double difference = (double) fact.Value - (double) currentFact.Value;
+            }
+            var fuzzyFact = new FuzzyFact();
+            return fuzzyFactSet;
+        }
+
         public List<FuzzyDomain> GetFuzzyDomains(List<CustomSocket> sockets)
         {
             var fuzzyDomains = new List<FuzzyDomain>();

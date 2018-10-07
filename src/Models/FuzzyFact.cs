@@ -14,4 +14,9 @@ namespace ExpertSystem.Models
             ClusterDegree = new Dictionary<int, float>();
         }
     }
+
+    public class FuzzyFactSet
+    {
+        public HashSet<FuzzyFact> Facts;
+    }
 }
