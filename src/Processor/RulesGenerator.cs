@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ExpertSystem.Models;
 using ExpertSystem.Models.Graph;
@@ -29,8 +28,8 @@ namespace ExpertSystem.Processor
                     GraphNode node = null;
 
                     // Конструируем факт
-                    Type type = SocketDomainType[domain];
-                    FactSet facts = new FactSet(
+                    var type = SocketDomainType[domain];
+                    var facts = new FactSet(
                         new Fact(domain, customSocketType.GetField(domain.ToString()).GetValue(socket))
                     );
 
@@ -56,7 +55,7 @@ namespace ExpertSystem.Processor
             return rulesGraph;
         }
 
-        private void Compress(GraphNode currentNode)
+        private static void Compress(GraphNode currentNode)
         {
             if (currentNode.ChildNodes.Count == 1)
             {

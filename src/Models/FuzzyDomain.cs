@@ -4,7 +4,8 @@ using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Models
 {
-    public struct FuzzyDomainOption {
+    public struct FuzzyDomainOption
+    {
         public object Min;
         public object Max;
     }

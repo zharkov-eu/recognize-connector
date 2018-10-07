@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "expert-system", "src\expert-system.csproj", "{275CF926-C368-4F65-B872-B0EB35AD2A2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "expert-system", "src\expert-system.csproj", "{275CF926-C368-4F65-B872-B0EB35AD2A2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "expert-system-test", "test\expert-system-test.csproj", "{4660ADBB-1C0D-4366-81B2-5594A6C13CCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "expert-system-test", "test\expert-system-test.csproj", "{4660ADBB-1C0D-4366-81B2-5594A6C13CCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{275CF926-C368-4F65-B872-B0EB35AD2A2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -44,5 +41,11 @@ Global
 		{4660ADBB-1C0D-4366-81B2-5594A6C13CCD}.Release|x64.Build.0 = Release|Any CPU
 		{4660ADBB-1C0D-4366-81B2-5594A6C13CCD}.Release|x86.ActiveCfg = Release|Any CPU
 		{4660ADBB-1C0D-4366-81B2-5594A6C13CCD}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54601846-0700-4F41-B1D5-D96D75EE80F0}
 	EndGlobalSection
 EndGlobal
