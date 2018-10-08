@@ -15,8 +15,14 @@ namespace ExpertSystem.Models
         }
     }
 
-    public class FuzzyFactSet
+    public class FuzzyFactClustered : FuzzyFact
     {
-        public HashSet<FuzzyFact> Facts;
+        public KeyValuePair<int, double> Cluster;
+        
+        public FuzzyFactClustered(FuzzyDomain domain, object value, Dictionary<int, double> clusterDegree, int cluster)
+            : base(domain, value, clusterDegree)
+        {
+            Cluster = new KeyValuePair<int, double>(cluster, ClusterDegree[cluster]);
+        }
     }
 }

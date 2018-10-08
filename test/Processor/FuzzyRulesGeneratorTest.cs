@@ -43,7 +43,7 @@ namespace ExpertSystem.Processor
             FuzzyDomain domain = domains.Where(p => p.Domain.Equals(SocketDomain.NumberOfContacts)).First();
             SortedList<double, FuzzyFact> domainFacts = new SortedList<double, FuzzyFact>(facts[domain].ToDictionary(s => (double) s.Value));
 
-            FuzzyFact fuzzificatedFact = _generator.FactFuzzification(domain, fact, domainFacts);
+            FuzzyFact fuzzificatedFact = _generator.FactFuzzification(fact, domainFacts);
         }
     }
 }
