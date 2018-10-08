@@ -15,6 +15,14 @@ namespace ExpertSystem.Processor
         }
 
         [Fact]
+		public void FactFuzzification_isCorrect()
+        {
+            SortedList<double, FuzzyFact> facts = new SortedList<double, FuzzyFact>();
+            Fact fact = new Fact(SocketDomain.NumberOfContacts, 81);
+            FuzzyFact fuzzificatedFact = _generator.FactFuzzification(fact, facts);
+        }
+
+        [Fact]
 		public void GetFuzzyDomains_isCorrect()
         {
             var socketFieldsProcessor = new SocketFieldsProcessorTest();

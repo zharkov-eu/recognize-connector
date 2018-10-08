@@ -2,16 +2,22 @@ using System.Collections.Generic;
 
 namespace ExpertSystem.Models
 {
+    public struct ClusterDegree
+	{
+		public int Cluster;
+		public double Degree;
+	}
+
     public class FuzzyFact : Fact
     {
         public new FuzzyDomain Domain;
-        public Dictionary<int, float> ClusterDegree;
+        public List<ClusterDegree> ClusterDegree;
         
         public FuzzyFact(FuzzyDomain domain, object value) 
             : base(domain.Domain, value)
         {
             Domain = domain;
-            ClusterDegree = new Dictionary<int, float>();
+            ClusterDegree = new List<ClusterDegree>();
         }
     }
 

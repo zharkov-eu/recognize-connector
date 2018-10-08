@@ -4,5 +4,10 @@ namespace ExpertSystem.Processor.FuzzyProcessor
     {
         public FuzzyProcessor(ProcessorOptions options)
             : base(options) { }
+        
+        public void Procesing()
+        {
+            
+        }
     }
 }

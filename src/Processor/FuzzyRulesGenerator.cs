@@ -8,21 +8,53 @@ namespace ExpertSystem.Processor
 {
     public class FuzzyRulesGenerator
     {
-        public FuzzyFact FactFuzzification(Fact fact, SortedList<double, FuzzyFact> currentFacts)
+        private struct FuzzificationFact
         {
-            (fact.Type) fact.Value
+            public FuzzyFact Fact;
+            public double Difference;
+        }
+
+        public FuzzyFact FactFuzzification(FuzzyDomain domain, Fact fact, SortedList<double, FuzzyFact> currentFacts)
+        {
+            // Проверяем текущий лист правил
             if (currentFacts.Values.Count == 0)
-                throw new Exception("FactFuzzification: base SortedList<FuzzyFact> is empty");
-            FuzzyFact left = currentFacts.Values[0];
-            FuzzyFact right = currentFacts.Values[0];
+                throw new Exception("FactFuzzification: base List<FuzzyFact> is empty");
+            // Проверяем 10% отклонение от минимального и максимального значений
+            double factValue = (double) fact.Value;
+            double currentMinValue = currentFacts.Min().Key;
+            double currentMaxValue = currentFacts.Max().Key;
+            double currentDifference = currentMaxValue - currentMinValue;
+            if (factValue < currentMinValue && Math.Abs(factValue - currentMinValue) > 0.1 * currentDifference)
+                throw new Exception("FactFuzzification: fact value less than Min(CurrentFacts) more than 10%");
+            if (factValue > currentMaxValue && Math.Abs(factValue - currentMaxValue) > 0.1 * currentDifference)
+                throw new Exception("FactFuzzification: fact value less than Max(CurrentFacts) more than 10%");
+
+            // Проверяем на выход за область определения имеющихся фактов
+            if (factValue < currentMinValue)
+                return currentFacts.First().Value;
+            if (factValue > currentMaxValue)
+                return currentFacts.Last().Value;
+
+            // Находим ближайшее левое и правое значение
+            FuzzificationFact left = default(FuzzificationFact);
+            FuzzificationFact right = default(FuzzificationFact);
             foreach (var currentFact in currentFacts.Values)
             {
                 if (currentFact.Value.Equals(fact.Value))
                     return currentFact;
-                double difference = (double) fact.Value - (double) currentFact.Value;
+                double difference = factValue - (double) currentFact.Value;
+                if (difference > 0 && (left.Equals(default(FuzzificationFact)) || difference < left.Difference))
+                {
+                    left = new FuzzificationFact { Fact = currentFact, Difference = difference };
+                }
+                else if (difference < 0 && (right.Equals(default(FuzzificationFact)) || Math.Abs(difference) < Math.Abs(right.Difference)))
+                {
+                    right = new FuzzificationFact { Fact = currentFact, Difference = difference };
+                }
             }
-            var fuzzyFact = new FuzzyFact();
-            return fuzzyFactSet;
+
+            var fuzzyFact = new FuzzyFact(domain, fact.Value);
+            return fuzzyFact;
         }
 
         public List<FuzzyDomain> GetFuzzyDomains(List<CustomSocket> sockets)
@@ -30,7 +62,7 @@ namespace ExpertSystem.Processor
             var fuzzyDomains = new List<FuzzyDomain>();
             var customSocketType = typeof(CustomSocket);
 
-            foreach (var domain in GetFuzzySocketDomains())
+            foreach (var domain in GetFuzzySocketDomains().Keys)
             {
                 Type type = SocketDomainType[domain];
                 var domainValues = sockets.Select(p => customSocketType.GetField(domain.ToString()).GetValue(p))
