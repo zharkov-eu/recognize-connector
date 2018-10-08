@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Models;
+using ExpertSystem.Services;
 using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor
@@ -53,8 +54,42 @@ namespace ExpertSystem.Processor
                 }
             }
 
-            var fuzzyFact = new FuzzyFact(domain, fact.Value);
-            return fuzzyFact;
+            // Вычисляем итоговую принадлежность к кластерам
+            Dictionary<int, double> clusterDegree = new Dictionary<int, double>();
+            double offset = Math.Abs(left.Difference) / Math.Abs(left.Difference + right.Difference);
+            foreach (var key in left.Fact.ClusterDegree.Keys)
+            {
+                var leftDegree = left.Fact.ClusterDegree[key];
+                var rightDegree = right.Fact.ClusterDegree[key];
+                var degreeOffset = Math.Abs(leftDegree - rightDegree) * offset;
+                var resultDegree = leftDegree + (leftDegree < rightDegree ? degreeOffset : -degreeOffset);
+                clusterDegree.Add(key, resultDegree);
+            }
+            
+            return new FuzzyFact(domain, fact.Value, clusterDegree);
+        }
+
+        public Dictionary<FuzzyDomain, List<FuzzyFact>> GetFuzzyFacts(List<FuzzyDomain> domains, List<CustomSocket> sockets)
+        {
+            var fuzzyFacts = new Dictionary<FuzzyDomain, List<FuzzyFact>>();
+            var customSocketType = typeof(CustomSocket);
+
+            foreach (var domain in domains)
+            {
+                Type type = SocketDomainType[domain.Domain];
+                List<double> domainValues = sockets
+                    .Select(p => (double) customSocketType.GetField(domain.ToString()).GetValue(p))
+                    .Where(p => !SocketDefaultValue[type].Equals(p))
+                    .ToList();
+                
+                List<FuzzyFact> factList = new List<FuzzyFact>();
+                foreach(var value in ClusteringService.CMeans(domain.Clusters.Count(), domainValues))
+                    factList.Add(new FuzzyFact(domain, value.Value, value.ClusterDegree));
+
+                fuzzyFacts.Add(domain, factList);
+            }
+            
+            return fuzzyFacts;
         }
 
         public List<FuzzyDomain> GetFuzzyDomains(List<CustomSocket> sockets)
@@ -72,6 +107,7 @@ namespace ExpertSystem.Processor
                     domain, new FuzzyDomainOption { Min = domainValues.Min(), Max = domainValues.Max() }
                 ));
             }
+
             return fuzzyDomains;
         }
     }

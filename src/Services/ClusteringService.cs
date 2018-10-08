@@ -9,17 +9,17 @@ namespace ExpertSystem.Services
     public class FuzzyValue
     {
         public double Value { get; set; }
-        public List<ClusterDegree> ClusterDegrees { get; set; }
+        public Dictionary<int, double> ClusterDegree { get; set; }
 
-        public FuzzyValue(double value, List<ClusterDegree> clusterDegrees)
+        public FuzzyValue(double value, Dictionary<int, double> clusterDegree)
         {
             Value = value;
-            ClusterDegrees = clusterDegrees;
+            ClusterDegree = clusterDegree;
         }
 
-		public ClusterDegree GetMostProbableCluster()
+		public KeyValuePair<int, double> GetMostProbableCluster()
 		{
-			return ClusterDegrees.FirstOrDefault(it => it.Degree.Equals(ClusterDegrees.Max(p => p.Degree)));
+			return ClusterDegree.GroupBy(kv => kv.Value).OrderByDescending(g => g.Key).First().First();
 		}
     }
     
@@ -81,9 +81,9 @@ namespace ExpertSystem.Services
             var fuzzyValues = new List<FuzzyValue>();
             for (int j = 0; j < values.Count; j++)
             {
-                var clusterDegree = new List<ClusterDegree>();
+                var clusterDegree = new Dictionary<int, double>();
                 for (int k = 0; k < u[j].Count(); k++)
-                    clusterDegree.Add(new ClusterDegree { Cluster = k, Degree = u[j][k] });
+                    clusterDegree.Add(k, u[j][k]);
                 fuzzyValues.Add(new FuzzyValue(values[j], clusterDegree));
             }
 
