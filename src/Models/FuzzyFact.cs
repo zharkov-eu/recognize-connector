@@ -14,15 +14,4 @@ namespace ExpertSystem.Models
             ClusterDegree = clusterDegree;
         }
     }
-
-    public class FuzzyFactClustered : FuzzyFact
-    {
-        public KeyValuePair<int, double> Cluster;
-        
-        public FuzzyFactClustered(FuzzyDomain domain, object value, Dictionary<int, double> clusterDegree, int cluster)
-            : base(domain, value, clusterDegree)
-        {
-            Cluster = new KeyValuePair<int, double>(cluster, ClusterDegree[cluster]);
-        }
-    }
 }

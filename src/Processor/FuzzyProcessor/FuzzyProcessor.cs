@@ -9,21 +9,30 @@ namespace ExpertSystem.Processor.FuzzyProcessor
     public class FuzzyProcessor : AbstractProcessor
     {
         private readonly Dictionary<SocketDomain, List<FuzzyFact>> _domainFacts;
+        private readonly List<FuzzyStatement> _statements;
 
-        public FuzzyProcessor(Dictionary<SocketDomain, List<FuzzyFact>> domainFacts, ProcessorOptions options)
+        public FuzzyProcessor(Dictionary<SocketDomain, List<FuzzyFact>> domainFacts,
+                              List<FuzzyStatement> statements,
+                              ProcessorOptions options)
             : base(options)
         {
             _domainFacts = domainFacts;
+            _statements = statements;
         }
         
         public void Procesing(FactSet factSet)
         {
             List<FuzzyFact> fuzzyFacts = new List<FuzzyFact>();
             foreach (var fact in factSet.Facts)
-            {
-                var currentFacts = new SortedList<double, FuzzyFact>(_domainFacts[fact.Domain].ToDictionary(p => (double) p.Value));
-                fuzzyFacts.Add(FactFuzzification(fact, currentFacts));
-            }
+                fuzzyFacts.Add(FactFuzzification(fact));
+        }
+
+        public FuzzyFact FactFuzzification(Fact fact)
+        {
+            var currentFacts = new SortedList<double, FuzzyFact>(
+                _domainFacts[fact.Domain].ToDictionary(p => (double) p.Value)
+            );
+            return FactFuzzification(fact, currentFacts);
         }
 
         public FuzzyFact FactFuzzification(Fact fact, SortedList<double, FuzzyFact> currentFacts)

@@ -33,15 +33,18 @@ namespace ExpertSystem
             var logicRulesGenerator = new LogicRulesGenerator();
             var fuzzyRulesGenerator = new FuzzyRulesGenerator();
 
+            // Продукционный вывод
             var rulesGraph = rulesGenerator.GenerateRules(sockets, fieldValues);
+            // Логический вывод
             var logicRules = logicRulesGenerator.GenerateRules(sockets);
-            var domainFacts = fuzzyRulesGenerator.GetFuzzyFacts(
-                fuzzyRulesGenerator.GetFuzzyDomains(sockets), sockets
-            );
+            // Нечеткий вывод
+            var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(sockets);
+            var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, sockets);
+            var fuzzyStatements = fuzzyRulesGenerator.GetFuzzyStatements(fuzzyDomains);
 
             _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = options.Debug });
             _logicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = options.Debug });
-            _fuzzyProcessor = new FuzzyProcessor(domainFacts, new ProcessorOptions { Debug = options.Debug });
+            _fuzzyProcessor = new FuzzyProcessor(fuzzyFacts, fuzzyStatements, new ProcessorOptions { Debug = options.Debug });
         }
 
         private static void Main(string[] args)

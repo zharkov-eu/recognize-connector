@@ -3,31 +3,32 @@ using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Models;
 using ExpertSystem.Services;
+using ExpertSystem.Utils;
 using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor
 {
     public class FuzzyRulesGenerator
     {
-        public List<FuzzyStatement> GetFuzzyStatements(List<CustomSocket> sockets)
+        public List<FuzzyStatement> GetFuzzyStatements(List<FuzzyDomain> domains)
         {
-            List<FuzzyStatement> statements = new List<FuzzyStatement>();
-            foreach (var domain in _domainFacts.Keys)
-            {
-                if (!domains.Contains(domain.Domain))
-                    continue;
-                
-                foreach (var fact in _domainFacts[domain])
-                {
+            var statements = new List<FuzzyStatement>();
 
-                }
-            }
+            var rulesSets = new List<IEnumerable<FuzzyRule>>();
+            foreach (var domain in domains)
+                rulesSets.Add(domain.Clusters.Select(cluster => new FuzzyRule(domain, cluster)));
+
+            foreach (var rules in SetOperation.CartesianProduct<FuzzyRule>(rulesSets))
+                statements.Add(
+                    new FuzzyStatement(rules.ToHashSet(), GetPinPitchFormula(rules.ToDictionary(p => p.Domain.Domain)))
+                );
+            
             return statements;
         }
 
-        public Dictionary<FuzzyDomain, List<FuzzyFact>> GetFuzzyFacts(List<FuzzyDomain> domains, List<CustomSocket> sockets)
+        public Dictionary<SocketDomain, List<FuzzyFact>> GetFuzzyFacts(List<FuzzyDomain> domains, List<CustomSocket> sockets)
         {
-            var fuzzyFacts = new Dictionary<FuzzyDomain, List<FuzzyFact>>();
+            var fuzzyFacts = new Dictionary<SocketDomain, List<FuzzyFact>>();
             var customSocketType = typeof(CustomSocket);
 
             foreach (var domain in domains)
@@ -42,7 +43,7 @@ namespace ExpertSystem.Processor
                 foreach(var value in ClusteringService.CMeans(domain.Clusters.Count(), domainValues))
                     factList.Add(new FuzzyFact(domain, value.Value, value.ClusterDegree));
 
-                fuzzyFacts.Add(domain, factList);
+                fuzzyFacts.Add(domain.Domain, factList);
             }
             
             return fuzzyFacts;

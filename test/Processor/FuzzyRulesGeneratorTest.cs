@@ -29,21 +29,7 @@ namespace ExpertSystem.Processor
         {
 			var sockets = _socketFieldsProcessor.GetSockets();
             List<FuzzyDomain> domains = _generator.GetFuzzyDomains(sockets);
-            Dictionary<FuzzyDomain, List<FuzzyFact>> facts = _generator.GetFuzzyFacts(domains, sockets);
-        }
-
-        [Fact]
-		public void FactFuzzification_isCorrect()
-        {
-            var sockets = _socketFieldsProcessor.GetSockets();
-            List<FuzzyDomain> domains = _generator.GetFuzzyDomains(sockets);
-            Dictionary<FuzzyDomain, List<FuzzyFact>> facts = _generator.GetFuzzyFacts(domains, sockets);
-
-            Fact fact = new Fact(SocketDomain.NumberOfContacts, 81);
-            FuzzyDomain domain = domains.Where(p => p.Domain.Equals(SocketDomain.NumberOfContacts)).First();
-            SortedList<double, FuzzyFact> domainFacts = new SortedList<double, FuzzyFact>(facts[domain].ToDictionary(s => (double) s.Value));
-
-            FuzzyFact fuzzificatedFact = _generator.FactFuzzification(fact, domainFacts);
+            Dictionary<SocketDomain, List<FuzzyFact>> facts = _generator.GetFuzzyFacts(domains, sockets);
         }
     }
 }

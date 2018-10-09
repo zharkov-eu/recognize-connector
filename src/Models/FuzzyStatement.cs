@@ -1,16 +1,28 @@
+using System;
 using System.Collections.Generic;
 
 namespace ExpertSystem.Models
 {
-    public struct FuzzyStatementResult
-    {
-        public double Degree;
-        public string SocketName;        
-    }
-
     public class FuzzyStatement
     {
-        public HashSet<FuzzyFactClustered> Facts;
-        public FuzzyStatementResult Result;
+        public HashSet<FuzzyRule> Rules;
+        public Func<CustomSocket, double> Result;
+
+        public FuzzyStatement(HashSet<FuzzyRule> rules, Func<CustomSocket, double> result)
+        {
+            Rules = rules;
+            Result = result;
+        }
+    }
+
+    public class FuzzyRule {
+        public FuzzyDomain Domain;
+        public int Cluster;
+
+        public FuzzyRule(FuzzyDomain domain, int cluster)
+        {
+            Domain = domain;
+            Cluster = cluster;
+        }
     }
 }

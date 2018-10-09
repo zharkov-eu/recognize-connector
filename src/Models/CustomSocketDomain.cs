@@ -57,14 +57,21 @@ namespace ExpertSystem.Models
         public static Dictionary<SocketDomain, int> GetFuzzySocketDomains()
         {
             return new Dictionary<SocketDomain, int>() {
-                { SocketDomain.NumberOfContacts, 0 },
-                { SocketDomain.NumberOfPositions, 0 },
-                { SocketDomain.PinPitch, 0 },
-                { SocketDomain.SizeDiameter, 0 },
-                { SocketDomain.SizeHeight, 0 },
-                { SocketDomain.SizeLength, 0 },
-                { SocketDomain.SizeWidth, 0 },
+                { SocketDomain.NumberOfContacts, 5 },
+                { SocketDomain.SizeLength, 4 },
+                { SocketDomain.SizeWidth, 3 },
             };
+        }
+
+        public static Func<CustomSocket, double> GetPinPitchFormula(Dictionary<SocketDomain, FuzzyRule> rules)
+        {
+            int nocCluster = rules[SocketDomain.NumberOfContacts].Cluster;
+            int slCluster = rules[SocketDomain.SizeLength].Cluster;
+            int swCluster = rules[SocketDomain.SizeWidth].Cluster;
+
+            return socket => socket.NumberOfContacts * Math.Log(nocCluster, 2) + (
+                (socket.SizeLength * Math.Exp(slCluster) * 100) * (socket.SizeWidth * Math.Pow(2, swCluster) * 100)
+            );
         }
 
         public enum SocketDomain
