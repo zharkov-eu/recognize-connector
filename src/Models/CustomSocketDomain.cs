@@ -63,7 +63,7 @@ namespace ExpertSystem.Models
             };
         }
 
-        public static Func<CustomSocket, double> GetPinPitchFormula(Dictionary<SocketDomain, FuzzyRule> rules)
+        public static Func<CustomSocket, double> GetAmperageCircuitFormula(Dictionary<SocketDomain, FuzzyRule> rules)
         {
             int nocCluster = rules[SocketDomain.NumberOfContacts].Cluster;
             int slCluster = rules[SocketDomain.SizeLength].Cluster;

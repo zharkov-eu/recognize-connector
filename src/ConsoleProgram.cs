@@ -20,6 +20,13 @@ namespace ExpertSystem
             string choice;
             PrintCommands();
 
+            _fuzzyProcessor.MamdaniProcesing(new FactSet(
+                new Fact(SocketDomain.NumberOfContacts, 50),
+                new Fact(SocketDomain.SizeWidth, 0.03),
+                new Fact(SocketDomain.SizeLength, 0.0075)
+            ));
+            return;
+
             while ((choice = Console.ReadLine()) != ((int)Command.Exit).ToString())
             {
                 string socketName;

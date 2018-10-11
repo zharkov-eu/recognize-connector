@@ -10,9 +10,9 @@ namespace ExpertSystem.Processor
 {
     public class FuzzyRulesGenerator
     {
-        public List<FuzzyStatement> GetFuzzyStatements(List<FuzzyDomain> domains)
+        public List<FuzzyFuncStatement> GetFuzzyFuncStatements(List<FuzzyDomain> domains)
         {
-            var statements = new List<FuzzyStatement>();
+            var statements = new List<FuzzyFuncStatement>();
 
             var rulesSets = new List<IEnumerable<FuzzyRule>>();
             foreach (var domain in domains)
@@ -20,22 +20,27 @@ namespace ExpertSystem.Processor
 
             foreach (var rules in SetOperation.CartesianProduct<FuzzyRule>(rulesSets))
                 statements.Add(
-                    new FuzzyStatement(rules.ToHashSet(), GetPinPitchFormula(rules.ToDictionary(p => p.Domain.Domain)))
+                    new FuzzyFuncStatement(rules.ToHashSet(), GetAmperageCircuitFormula(rules.ToDictionary(p => p.Domain.Domain)))
                 );
             
+            return statements;
+        }
+
+        public List<FuzzyRuleStatement> GetFuzzyRuleStatements(List<FuzzyDomain> domains)
+        {
+            var statements = new List<FuzzyRuleStatement>();
             return statements;
         }
 
         public Dictionary<SocketDomain, List<FuzzyFact>> GetFuzzyFacts(List<FuzzyDomain> domains, List<CustomSocket> sockets)
         {
             var fuzzyFacts = new Dictionary<SocketDomain, List<FuzzyFact>>();
-            var customSocketType = typeof(CustomSocket);
 
             foreach (var domain in domains)
             {
                 Type type = SocketDomainType[domain.Domain];
                 List<double> domainValues = sockets
-                    .Select(p => (double) customSocketType.GetField(domain.ToString()).GetValue(p))
+                    .Select(p => Convert.ToDouble(CustomSocket.Type.GetField(domain.Domain.ToString()).GetValue(p)))
                     .Where(p => !SocketDefaultValue[type].Equals(p))
                     .ToList();
                 
@@ -52,16 +57,20 @@ namespace ExpertSystem.Processor
         public List<FuzzyDomain> GetFuzzyDomains(List<CustomSocket> sockets)
         {
             var fuzzyDomains = new List<FuzzyDomain>();
-            var customSocketType = typeof(CustomSocket);
+            var fuzzySocketDomain = GetFuzzySocketDomains();
 
-            foreach (var domain in GetFuzzySocketDomains().Keys)
+            foreach (var domain in fuzzySocketDomain.Keys)
             {
                 Type type = SocketDomainType[domain];
-                var domainValues = sockets.Select(p => customSocketType.GetField(domain.ToString()).GetValue(p))
+                var domainValues = sockets.Select(p => CustomSocket.Type.GetField(domain.ToString()).GetValue(p))
                     .Where(p => !SocketDefaultValue[type].Equals(p));
 
                 fuzzyDomains.Add(new FuzzyDomain(
-                    domain, new FuzzyDomainOption { Min = domainValues.Min(), Max = domainValues.Max() }
+                    domain, new FuzzyDomainOption {
+                        ClusterCount = fuzzySocketDomain[domain],
+                        Min = domainValues.Min(),
+                        Max = domainValues.Max()
+                    }
                 ));
             }
 

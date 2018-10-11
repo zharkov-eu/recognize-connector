@@ -15,7 +15,6 @@ namespace ExpertSystem.Processor
             //Сортировка полей по числу принимаемых ими значений
             domainValues = domainValues.OrderBy(p => p.Value.Count).ToDictionary(x => x.Key, x => x.Value);
             var domains = domainValues.Keys.ToArray();
-            var customSocketType = typeof(CustomSocket);
 
             foreach (var socket in sockets)
             {
@@ -30,7 +29,7 @@ namespace ExpertSystem.Processor
                     // Конструируем факт
                     var type = SocketDomainType[domain];
                     var facts = new FactSet(
-                        new Fact(domain, customSocketType.GetField(domain.ToString()).GetValue(socket))
+                        new Fact(domain, CustomSocket.Type.GetField(domain.ToString()).GetValue(socket))
                     );
 
                     // Проверяем текущий список фактов, возможно, там уже есть этот факт

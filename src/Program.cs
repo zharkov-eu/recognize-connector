@@ -40,11 +40,10 @@ namespace ExpertSystem
             // Нечеткий вывод
             var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(sockets);
             var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, sockets);
-            var fuzzyStatements = fuzzyRulesGenerator.GetFuzzyStatements(fuzzyDomains);
 
             _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = options.Debug });
             _logicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = options.Debug });
-            _fuzzyProcessor = new FuzzyProcessor(fuzzyFacts, fuzzyStatements, new ProcessorOptions { Debug = options.Debug });
+            _fuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = options.Debug });
         }
 
         private static void Main(string[] args)

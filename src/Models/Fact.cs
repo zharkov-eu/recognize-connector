@@ -14,7 +14,8 @@ namespace ExpertSystem.Models
         public Fact(SocketDomain domain, object value)
         {
             Domain = domain;
-            Type = SocketDomainType[Domain];
+            Type = value.GetType(); // TODO: Костыль
+            // Type = SocketDomainType[Domain];
             if (value.GetType() != Type)
                 throw new Exception(
                     $"Expected type: {Type} for {Domain}: get {value.GetType()} with value {value.ToString()}"

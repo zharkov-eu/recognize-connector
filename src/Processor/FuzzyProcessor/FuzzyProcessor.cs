@@ -8,23 +8,57 @@ namespace ExpertSystem.Processor.FuzzyProcessor
 {
     public class FuzzyProcessor : AbstractProcessor
     {
+        private readonly FuzzyRulesGenerator _generator;
+        private readonly List<FuzzyDomain> _domains;
         private readonly Dictionary<SocketDomain, List<FuzzyFact>> _domainFacts;
-        private readonly List<FuzzyStatement> _statements;
 
-        public FuzzyProcessor(Dictionary<SocketDomain, List<FuzzyFact>> domainFacts,
-                              List<FuzzyStatement> statements,
+        public FuzzyProcessor(List<FuzzyDomain> domains,
+                              Dictionary<SocketDomain, List<FuzzyFact>> domainFacts,
                               ProcessorOptions options)
             : base(options)
         {
+            _generator = new FuzzyRulesGenerator();
+            _domains = domains;
             _domainFacts = domainFacts;
-            _statements = statements;
         }
         
-        public void Procesing(FactSet factSet)
+        public void MamdaniProcesing(FactSet factSet)
         {
             List<FuzzyFact> fuzzyFacts = new List<FuzzyFact>();
             foreach (var fact in factSet.Facts)
                 fuzzyFacts.Add(FactFuzzification(fact));
+            List<FuzzyRuleStatement> statements = _generator.GetFuzzyRuleStatements(_domains);
+            foreach (var statement in statements)
+            {
+                statement.SetRulesFacts(fuzzyFacts);
+                statement.SetResultFact(null);
+            }
+        }
+
+        public double SugenoProcesing(FactSet factSet)
+        {
+            var socket = new CustomSocket();
+            var fuzzyFacts = new List<FuzzyFact>();
+            foreach (var fact in factSet.Facts)
+            {
+                CustomSocket.Type.GetField(fact.Domain.ToString()).SetValue(socket, fact.Value);
+                fuzzyFacts.Add(FactFuzzification(fact));
+            }
+
+            var statements = _generator.GetFuzzyFuncStatements(_domains);
+
+            var degreeResults = new List<FuzzyFuncProcessed>();
+            foreach (var statement in statements)
+            {   
+                var degree = statement.SetRulesFacts(fuzzyFacts).GetRulesDegree();
+                var result = statement.Result(socket);
+                degreeResults.Add(new FuzzyFuncProcessed {Degree = degree, Result = result});
+            }
+
+            var numerator = degreeResults.Aggregate(0d, (acc, p) => acc + p.Degree * p.Result);
+            var denumerator = degreeResults.Aggregate(0d, (acc, p) => acc + p.Degree);
+
+            return numerator / denumerator;
         }
 
         public FuzzyFact FactFuzzification(Fact fact)

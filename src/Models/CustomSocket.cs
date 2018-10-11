@@ -10,6 +10,7 @@ namespace ExpertSystem.Models
 {
     public class CustomSocket
     {
+        public static readonly Type Type = typeof(CustomSocket);
         public string SocketName;
         public string Gender;
         public string ContactMaterial;
@@ -122,11 +123,10 @@ namespace ExpertSystem.Models
         public Dictionary<SocketDomain, List<string>> GetDomainsWithPossibleValues(List<CustomSocket> sockets)
         {
             var domainsValues = new Dictionary<SocketDomain, List<string>>();
-            var customSocketType = typeof(CustomSocket);
             foreach (SocketDomain domain in GetSocketDomains().Where(p => p != SocketDomain.SocketName))
             {
                 var type = SocketDomainType[domain];
-                var field = customSocketType.GetField(domain.ToString());
+                var field = CustomSocket.Type.GetField(domain.ToString());
 
                 var propertyValues = sockets.GroupBy(p => field.GetValue(p).ToString()).ToList();
                 var currentPropValues = new List<string>();

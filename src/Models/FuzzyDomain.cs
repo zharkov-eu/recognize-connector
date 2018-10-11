@@ -6,6 +6,7 @@ namespace ExpertSystem.Models
 {
     public struct FuzzyDomainOption
     {
+        public int ClusterCount;
         public object Min;
         public object Max;
     }
@@ -25,6 +26,9 @@ namespace ExpertSystem.Models
             Min = options.Min;
             Max = options.Max;
             Clusters = new HashSet<int>();
+
+            for (var i = 1; i <= options.ClusterCount; i++)
+                Clusters.Add(i);
         }
     }
 }

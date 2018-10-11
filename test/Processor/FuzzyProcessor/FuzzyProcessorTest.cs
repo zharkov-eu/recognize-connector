@@ -18,9 +18,8 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             var sockets = socketFieldsProcessor.GetSockets();
             var fuzzyDomains = generator.GetFuzzyDomains(sockets);
             var fuzzyFacts = generator.GetFuzzyFacts(fuzzyDomains, sockets);
-            var fuzzyStatements = generator.GetFuzzyStatements(fuzzyDomains);
 
-            _processor = new FuzzyProcessor(fuzzyFacts, fuzzyStatements, new ProcessorOptions { Debug = false });
+            _processor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = false });
         }
 
         [Fact]
