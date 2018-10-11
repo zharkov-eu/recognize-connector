@@ -22,17 +22,20 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             _domainFacts = domainFacts;
         }
         
-        public void MamdaniProcesing(FactSet factSet)
+        public double MamdaniProcesing(FactSet factSet)
         {
-            List<FuzzyFact> fuzzyFacts = new List<FuzzyFact>();
+            var fuzzyFacts = new List<FuzzyFact>();
             foreach (var fact in factSet.Facts)
                 fuzzyFacts.Add(FactFuzzification(fact));
+
             List<FuzzyRuleStatement> statements = _generator.GetFuzzyRuleStatements(_domains);
             foreach (var statement in statements)
             {
                 statement.SetRulesFacts(fuzzyFacts);
                 statement.SetResultFact(null);
             }
+
+            return 0d;
         }
 
         public double SugenoProcesing(FactSet factSet)
@@ -52,7 +55,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             {   
                 var degree = statement.SetRulesFacts(fuzzyFacts).GetRulesDegree();
                 var result = statement.Result(socket);
-                degreeResults.Add(new FuzzyFuncProcessed {Degree = degree, Result = result});
+                degreeResults.Add(new FuzzyFuncProcessed { Degree = degree, Result = result });
             }
 
             var numerator = degreeResults.Aggregate(0d, (acc, p) => acc + p.Degree * p.Result);
@@ -81,9 +84,9 @@ namespace ExpertSystem.Processor.FuzzyProcessor
                 throw new Exception("FactFuzzification: domains not equal");
 
             // Проверяем 10% отклонение от минимального и максимального значений
-            double factValue = (double) fact.Value;
-            double currentMinValue = currentFacts.Min().Key;
-            double currentMaxValue = currentFacts.Max().Key;
+            double factValue = Convert.ToDouble(fact.Value);
+            double currentMinValue = currentFacts.Keys.Min();
+            double currentMaxValue = currentFacts.Keys.Max();
             double currentDifference = currentMaxValue - currentMinValue;
             if (factValue < currentMinValue && Math.Abs(factValue - currentMinValue) > 0.1 * currentDifference)
                 throw new Exception("FactFuzzification: fact value less than Min(CurrentFacts) more than 10%");
@@ -103,7 +106,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             {
                 if (currentFact.Value.Equals(fact.Value))
                     return currentFact;
-                double difference = factValue - (double) currentFact.Value;
+                double difference = factValue - Convert.ToDouble(currentFact.Value);
                 if (difference > 0 && (left.Equals(default(FuzzificationFact)) || difference < left.Difference))
                 {
                     left = new FuzzificationFact { Fact = currentFact, Difference = difference };

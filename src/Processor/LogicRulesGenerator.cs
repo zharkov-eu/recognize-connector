@@ -12,7 +12,6 @@ namespace ExpertSystem.Processor
         public List<LinkedList<LogicFact>> GenerateRules(List<CustomSocket> sockets)
         {
             var socketsFacts = new List<LinkedList<LogicFact>>();
-            var customSocketType = typeof(CustomSocket);
 
             foreach (var socket in sockets)
             {
@@ -21,7 +20,7 @@ namespace ExpertSystem.Processor
                 {
                     Type type = SocketDomainType[domain];
                     Operation operation = domain.Equals(SocketDomain.SocketName) ? Operation.Implication : Operation.Conjunction;
-                    LogicFact fact = new LogicFact(domain, customSocketType.GetField(domain.ToString()).GetValue(socket), operation);
+                    LogicFact fact = new LogicFact(domain, CustomSocket.Type.GetField(domain.ToString()).GetValue(socket), operation);
                     if (!fact.IsDefaultValue())
                         currentSocketFacts.AddLast(fact);
                 }

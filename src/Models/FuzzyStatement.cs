@@ -73,8 +73,8 @@ namespace ExpertSystem.Models
         {
             if (fact == null)
                 throw new Exception($"FuzzyRule: fact is empty for domain {Domain}");
-            Degree = fact.ClusterDegree[Cluster];
-            Value = (double) fact.Value;
+            Degree = fact.ClusterDegree[Cluster - 1];
+            Value = Convert.ToDouble(fact.Value);
             return this;
         }
     }

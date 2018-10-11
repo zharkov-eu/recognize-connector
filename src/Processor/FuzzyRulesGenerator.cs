@@ -40,8 +40,10 @@ namespace ExpertSystem.Processor
             {
                 Type type = SocketDomainType[domain.Domain];
                 List<double> domainValues = sockets
-                    .Select(p => Convert.ToDouble(CustomSocket.Type.GetField(domain.Domain.ToString()).GetValue(p)))
+                    .Select(p => CustomSocket.Type.GetField(domain.Domain.ToString()).GetValue(p))
                     .Where(p => !SocketDefaultValue[type].Equals(p))
+                    .Distinct()
+                    .Select(p => Convert.ToDouble(p))
                     .ToList();
                 
                 List<FuzzyFact> factList = new List<FuzzyFact>();
