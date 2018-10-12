@@ -27,7 +27,7 @@ namespace ExpertSystem.Models
             Max = options.Max;
             Clusters = new HashSet<int>();
 
-            for (var i = 1; i <= options.ClusterCount; i++)
+            for (var i = 0; i < options.ClusterCount; i++)
                 Clusters.Add(i);
         }
     }

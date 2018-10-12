@@ -67,9 +67,9 @@ namespace ExpertSystem.Models
 
         public static Func<CustomSocket, double> GetAmperageCircuitFormula(Dictionary<SocketDomain, FuzzyRule> rules)
         {
-            int nocCluster = rules[SocketDomain.NumberOfContacts].Cluster;
-            int slCluster = rules[SocketDomain.SizeLength].Cluster;
-            int swCluster = rules[SocketDomain.SizeWidth].Cluster;
+            int nocCluster = rules[SocketDomain.NumberOfContacts].Cluster + 1;
+            int slCluster = rules[SocketDomain.SizeLength].Cluster + 1;
+            int swCluster = rules[SocketDomain.SizeWidth].Cluster + 1;
 
             return socket => socket.NumberOfContacts * Math.Log(nocCluster, 2) + (
                 (socket.SizeLength * Math.Exp(slCluster) * 100) * (socket.SizeWidth * Math.Pow(2, swCluster) * 100)

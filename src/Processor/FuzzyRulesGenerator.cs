@@ -13,17 +13,25 @@ namespace ExpertSystem.Processor
         public List<FuzzyRuleStatement> GetFuzzyRuleStatements(List<FuzzyDomain> domains)
         {
             var statements = new List<FuzzyRuleStatement>();
-            var resultFacts = GetAmperageCircuitFact(GetFuzzyFuncStatements(domains));
+            var funcStatements = GetFuzzyFuncStatements(domains);
+            var resultFacts = GetAmperageCircuitFact(funcStatements).ToDictionary(p => p.Value);
+
+            var defaultSocket = GetDefaultSocket();
+            foreach (var statement in funcStatements)
+            {
+                var fact = resultFacts[statement.Result(defaultSocket)];
+                var factCluster = fact.ClusterDegree.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+                statements.Add(new FuzzyRuleStatement(
+                    statement.Rules, new FuzzyRule(fact.Domain, factCluster).SetFact(fact))
+                );
+            }
 
             return statements;
         }
 
         public List<FuzzyFact> GetAmperageCircuitFact(List<FuzzyFuncStatement> statements)
         {
-            CustomSocket defaultSocket = new CustomSocket();
-            defaultSocket.NumberOfContacts = 50;
-            defaultSocket.SizeLength = 0.03f;
-            defaultSocket.SizeWidth = 0.0075f;
+            var defaultSocket = GetDefaultSocket();
 
             var values = new List<double>();
             foreach(var statement in statements)
@@ -102,6 +110,15 @@ namespace ExpertSystem.Processor
             }
 
             return fuzzyDomains;
+        }
+
+        private CustomSocket GetDefaultSocket()
+        {
+            CustomSocket socket = new CustomSocket();
+            socket.NumberOfContacts = 50;
+            socket.SizeLength = 0.03f;
+            socket.SizeWidth = 0.0075f;
+            return socket;
         }
     }
 }

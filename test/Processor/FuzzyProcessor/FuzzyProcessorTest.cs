@@ -32,7 +32,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
         [Fact]
         public void MamdaniProcesing_IsCorrect()
         {
-            var result = _processor.SugenoProcesing(new FactSet(
+            var result = _processor.MamdaniProcesing(new FactSet(
                 new Fact(SocketDomain.NumberOfContacts, 50),
                 new Fact(SocketDomain.SizeLength, 0.03f),
                 new Fact(SocketDomain.SizeWidth, 0.0075f)
