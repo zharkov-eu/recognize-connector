@@ -119,7 +119,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
 
             // Вычисляем итоговую принадлежность к кластерам
             Dictionary<int, double> clusterDegree = new Dictionary<int, double>();
-            double offset = Math.Abs(left.Difference) / Math.Abs(left.Difference + right.Difference);
+            double offset = Math.Abs(left.Difference) / (Math.Abs(left.Difference) + Math.Abs(right.Difference));
             foreach (var key in left.Fact.ClusterDegree.Keys)
             {
                 var leftDegree = left.Fact.ClusterDegree[key];

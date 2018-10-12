@@ -10,6 +10,37 @@ namespace ExpertSystem.Processor
 {
     public class FuzzyRulesGenerator
     {
+        public List<FuzzyRuleStatement> GetFuzzyRuleStatements(List<FuzzyDomain> domains)
+        {
+            var statements = new List<FuzzyRuleStatement>();
+            var resultFacts = GetAmperageCircuitFact(GetFuzzyFuncStatements(domains));
+
+            return statements;
+        }
+
+        public List<FuzzyFact> GetAmperageCircuitFact(List<FuzzyFuncStatement> statements)
+        {
+            CustomSocket defaultSocket = new CustomSocket();
+            defaultSocket.NumberOfContacts = 50;
+            defaultSocket.SizeLength = 0.03f;
+            defaultSocket.SizeWidth = 0.0075f;
+
+            var values = new List<double>();
+            foreach(var statement in statements)
+                values.Add(statement.Result(defaultSocket));
+            FuzzyDomain domain = new FuzzyDomain(SocketDomain.AmperageCircuit, new FuzzyDomainOption {
+                ClusterCount = GetFuzzySocketDomains()[SocketDomain.AmperageCircuit],
+                Min = values.Min(),
+                Max = values.Max()
+            }); 
+
+            var facts = new List<FuzzyFact>();
+            foreach(var value in ClusteringService.CMeans(domain.Clusters.Count, values))
+                facts.Add(new FuzzyFact(domain, value.Value, value.ClusterDegree));
+
+            return facts;
+        }
+
         public List<FuzzyFuncStatement> GetFuzzyFuncStatements(List<FuzzyDomain> domains)
         {
             var statements = new List<FuzzyFuncStatement>();
@@ -23,12 +54,6 @@ namespace ExpertSystem.Processor
                     new FuzzyFuncStatement(rules.ToHashSet(), GetAmperageCircuitFormula(rules.ToDictionary(p => p.Domain.Domain)))
                 );
             
-            return statements;
-        }
-
-        public List<FuzzyRuleStatement> GetFuzzyRuleStatements(List<FuzzyDomain> domains)
-        {
-            var statements = new List<FuzzyRuleStatement>();
             return statements;
         }
 

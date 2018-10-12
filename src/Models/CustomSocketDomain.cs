@@ -9,6 +9,7 @@ namespace ExpertSystem.Models
         public static readonly Dictionary<SocketDomain, Type> SocketDomainType = new Dictionary<SocketDomain, Type>
         {
             { SocketDomain.Empty, typeof(string) },
+            { SocketDomain.AmperageCircuit, typeof(float) },
             { SocketDomain.Gender, typeof(string) },
             { SocketDomain.ContactMaterial, typeof(string) },
             { SocketDomain.ContactPlating, typeof(string) },
@@ -51,12 +52,13 @@ namespace ExpertSystem.Models
 
         public static IEnumerable<SocketDomain> GetSocketDomains()
         {
-            return Enum.GetValues(typeof(SocketDomain)).Cast<SocketDomain>().Where(p => p != SocketDomain.Empty);
+            return Enum.GetValues(typeof(SocketDomain)).Cast<SocketDomain>().Where(p => !DomainIgnore.Contains(p));
         }
 
         public static Dictionary<SocketDomain, int> GetFuzzySocketDomains()
         {
             return new Dictionary<SocketDomain, int>() {
+                { SocketDomain.AmperageCircuit, 5 },
                 { SocketDomain.NumberOfContacts, 5 },
                 { SocketDomain.SizeLength, 4 },
                 { SocketDomain.SizeWidth, 3 },
@@ -78,6 +80,8 @@ namespace ExpertSystem.Models
         {
             [Output("не определен")]
             Empty,
+            [Output("макимальная сила тока при разрыве цепи")]
+            AmperageCircuit,
             [Output("пол разъема")]
             Gender,
             [Output("контактный материал")]
@@ -115,6 +119,11 @@ namespace ExpertSystem.Models
             [Output("разъем")]
             SocketName
         }
+
+        public static List<SocketDomain> DomainIgnore = new List<SocketDomain> {
+            SocketDomain.Empty,
+            SocketDomain.AmperageCircuit,
+        };
 
         private class Output : Attribute
         {

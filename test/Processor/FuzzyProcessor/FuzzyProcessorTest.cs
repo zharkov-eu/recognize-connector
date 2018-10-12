@@ -28,5 +28,25 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             Fact fact = new Fact(SocketDomain.NumberOfContacts, 81);
             FuzzyFact fuzzyFact = _processor.FactFuzzification(fact);
         }
+
+        [Fact]
+        public void MamdaniProcesing_IsCorrect()
+        {
+            var result = _processor.SugenoProcesing(new FactSet(
+                new Fact(SocketDomain.NumberOfContacts, 50),
+                new Fact(SocketDomain.SizeLength, 0.03f),
+                new Fact(SocketDomain.SizeWidth, 0.0075f)
+            ));
+        }
+
+        [Fact]
+        public void SugenoProcesing_IsCorrect()
+        {
+            var result = _processor.SugenoProcesing(new FactSet(
+                new Fact(SocketDomain.NumberOfContacts, 50),
+                new Fact(SocketDomain.SizeLength, 0.03f),
+                new Fact(SocketDomain.SizeWidth, 0.0075f)
+            ));
+        }
     }
 }
