@@ -86,7 +86,7 @@ namespace ExpertSystem.Processor
             var fuzzyDomains = new List<FuzzyDomain>();
             var fuzzySocketDomain = GetFuzzySocketDomains();
 
-            foreach (var domain in fuzzySocketDomain.Keys)
+            foreach (var domain in fuzzySocketDomain.Keys.Where(p => !DomainIgnore.Contains(p)))
             {
                 Type type = SocketDomainType[domain];
                 var domainValues = sockets.Select(p => CustomSocket.Type.GetField(domain.ToString()).GetValue(p))
