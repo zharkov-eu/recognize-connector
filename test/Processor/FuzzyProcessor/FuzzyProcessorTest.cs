@@ -37,6 +37,8 @@ namespace ExpertSystem.Processor.FuzzyProcessor
                 new Fact(SocketDomain.SizeLength, 0.03f),
                 new Fact(SocketDomain.SizeWidth, 0.0075f)
             ));
+
+            Assert.Equal(174.66707437137552d, result);
         }
 
         [Fact]

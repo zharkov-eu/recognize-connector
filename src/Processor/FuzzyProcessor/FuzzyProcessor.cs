@@ -28,14 +28,32 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             foreach (var fact in factSet.Facts)
                 fuzzyFacts.Add(FactFuzzification(fact));
 
+            List<FuzzyFact> resultFacts = _generator.GetAmperageCircuitFact(_generator.GetFuzzyFuncStatements(_domains));
+            Dictionary<object, double> resultDegrees = new Dictionary<object, double>();
+            foreach (var result in resultFacts)
+                resultDegrees.Add(result.Value, 0);
+
             List<FuzzyRuleStatement> statements = _generator.GetFuzzyRuleStatements(_domains);
+
+
             foreach (var statement in statements)
             {
-                statement.SetRulesFacts(fuzzyFacts);
-                statement.SetResultFact(null);
+                var degree = statement.SetRulesFacts(fuzzyFacts).GetRulesDegree();
+                foreach (var result in resultFacts)
+                {
+                    var resultDegree = result.ClusterDegree[statement.Result.Cluster];
+                    if (resultDegree > degree)
+                        resultDegree = degree;
+                    
+                    if (resultDegrees[result.Value] < resultDegree)
+                        resultDegrees[result.Value] = resultDegree;
+                }
             }
 
-            return 0d;
+            var numerator = resultDegrees.Aggregate(0d, (acc, p) => acc + Convert.ToDouble(p.Key) * p.Value);
+            var denumerator = resultDegrees.Aggregate(0d, (acc, p) => acc + p.Value);
+
+            return numerator / denumerator;
         }
 
         public double SugenoProcesing(FactSet factSet)
