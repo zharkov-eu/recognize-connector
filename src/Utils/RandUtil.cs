@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 
 namespace ExpertSystem.Utils
 {
@@ -11,4 +12,18 @@ namespace ExpertSystem.Utils
 			return Rand.NextDouble() * (to - from) + from;
 		}
 	}
+
+    public class CryptoRandom
+    {
+        public double RandomValue { get; set; }
+
+        public CryptoRandom()
+        {
+            using (var p = new RNGCryptoServiceProvider())
+            {
+                var r = new Random(p.GetHashCode());
+                RandomValue = r.NextDouble();
+            }
+        }
+    }
 }
