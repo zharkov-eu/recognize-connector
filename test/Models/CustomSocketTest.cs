@@ -20,7 +20,7 @@ namespace ExpertSystem.Models
             var csvSnapshot =
                 "mpn;color;contact_material;contact_plating;gender;housing_color;housing_material;mounting_style;number_of_contacts;number_of_positions;number_of_rows;orientation;pin_pitch;material;size_diameter;size_length;size_height;size_width\n";
             csvSnapshot +=
-                "5145167-4;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Through Hole;120;60;2;Vertical;0.00127;Plastic;11.5;5.3;3.2;10.0\n";
+                "5145167-4;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Through Hole;120;60;2;Vertical;0.00127;Plastic;11.5;0.007;0.0005;0.02\n";
             csvSnapshot += "1-329631-2;Silver;;;;;;;;;;;;;;;;\n";
             csvSnapshot +=
                 "1-5145154-2;White;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Solder;120;60;2;Vertical;0.00127;Thermoplastic;;;;\n";

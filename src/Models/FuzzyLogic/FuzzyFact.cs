@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 namespace ExpertSystem.Models.FuzzyLogic
@@ -12,6 +13,11 @@ namespace ExpertSystem.Models.FuzzyLogic
         {
             Domain = domain;
             ClusterDegree = clusterDegree;
+        }
+
+        public int GetMostProbableCluster()
+        {
+            return ClusterDegree.OrderByDescending(p => p.Value).FirstOrDefault().Key;
         }
     }
 }

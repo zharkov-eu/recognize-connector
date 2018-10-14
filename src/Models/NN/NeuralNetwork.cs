@@ -11,7 +11,8 @@ namespace ExpertSystem.Models.NN
 
         public NeuralNetwork(double learningRate, int[] layers)
         {
-            if (layers.Length < 2) return;
+            if (layers.Length < 2)
+                throw new Exception("Neural Network must contains at least two layers");
 
             LearningRate = learningRate;
             Layers = new List<NnLayer>();

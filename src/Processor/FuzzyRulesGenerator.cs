@@ -33,10 +33,14 @@ namespace ExpertSystem.Processor
         public List<FuzzyFact> GetAmperageCircuitFact(List<FuzzyFuncStatement> statements)
         {
             var defaultSocket = GetDefaultSocket();
+            return GetAmperageCircuitFact(statements, defaultSocket);
+        }
 
+        public List<FuzzyFact> GetAmperageCircuitFact(List<FuzzyFuncStatement> statements, CustomSocket socket)
+        {
             var values = new List<double>();
             foreach (var statement in statements)
-                values.Add(statement.Result(defaultSocket));
+                values.Add(statement.Result(socket));
             var domain = new FuzzyDomain(CustomSocketDomain.SocketDomain.AmperageCircuit, new FuzzyDomainOption
             {
                 ClusterCount = GetFuzzySocketDomains()[CustomSocketDomain.SocketDomain.AmperageCircuit],
@@ -84,10 +88,11 @@ namespace ExpertSystem.Processor
                     .ToList();
 
                 var factList = new List<FuzzyFact>();
+
                 foreach (var value in ClusteringService.CMeans(domain.Clusters.Count(), domainValues))
                     factList.Add(new FuzzyFact(domain, value.Value, value.ClusterDegree));
 
-                fuzzyFacts.Add(domain.Domain, factList);
+                fuzzyFacts.Add(domain.Domain, SortClusters(factList));
             }
 
             return fuzzyFacts;
@@ -115,6 +120,33 @@ namespace ExpertSystem.Processor
             }
 
             return fuzzyDomains;
+        }
+
+        private List<FuzzyFact> SortClusters(List<FuzzyFact> facts)
+        {
+            FuzzyDomain domain = facts.FirstOrDefault().Domain;
+            
+            var factClusters = new Dictionary<int, List<double>>();
+            var sortedClusters = new int[domain.Clusters.Count];
+            for (int i = 0; i < domain.Clusters.Count; i++)
+            {
+                factClusters.Add(i, new List<double>());
+                sortedClusters[i] = i;
+            }
+
+            foreach (var fact in facts)
+                factClusters[fact.GetMostProbableCluster()].Add(Convert.ToDouble(fact.Value));
+            sortedClusters = sortedClusters.OrderBy(id => factClusters[id].Average()).ToArray();
+
+            foreach (var fact in facts)
+            {
+                var clusterDegree = new Dictionary<int, double>();
+                for (int i = 0; i < sortedClusters.Count(); i++)
+                    clusterDegree[i] = fact.ClusterDegree[sortedClusters[i]];
+                fact.ClusterDegree = clusterDegree;
+            }
+
+            return facts;
         }
 
         private static CustomSocket GetDefaultSocket()

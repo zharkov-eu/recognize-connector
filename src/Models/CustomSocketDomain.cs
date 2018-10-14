@@ -66,14 +66,24 @@ namespace ExpertSystem.Models
             };
         }
 
+        /// <summary>
+        /// NumberOfContacts: 2 - 184 контактов
+        /// SizeLength: 0.0078 - 0.07 м
+        /// SizeWidth: 0.005 - 0.02 м
+        /// Return: 10 - 10000 мА
+        /// </summary>
+        /// <param name="clusterCount">Число кластеров</param>
+        /// <param name="values">Значения кластеров</param>
+        /// <param name="m">Чёткость алгоритма</param>
+        /// <param name="eps">Точность алгоритма</param>
         public static Func<CustomSocket, double> GetAmperageCircuitFormula(Dictionary<SocketDomain, FuzzyRule> rules)
         {
-            int nocCluster = rules[SocketDomain.NumberOfContacts].Cluster + 1;
-            int slCluster = rules[SocketDomain.SizeLength].Cluster + 1;
-            int swCluster = rules[SocketDomain.SizeWidth].Cluster + 1;
+            int nocCluster = rules[SocketDomain.NumberOfContacts].Cluster + 1; // 1..6
+            int slCluster = rules[SocketDomain.SizeLength].Cluster + 1; // 1..5
+            int swCluster = rules[SocketDomain.SizeWidth].Cluster + 1; // 1..4
 
-            return socket => socket.NumberOfContacts * Math.Log(nocCluster, 2) + (
-                (socket.SizeLength * Math.Exp(slCluster) * 100) * (socket.SizeWidth * Math.Pow(2, swCluster) * 100)
+            return socket => socket.NumberOfContacts * Math.Log(nocCluster, 10) + (
+                (socket.SizeLength * Math.Log(slCluster, 2) * 10) * (socket.SizeWidth * Math.Log(swCluster, 2) * 10)
             );
         }
 

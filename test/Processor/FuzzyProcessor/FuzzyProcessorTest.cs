@@ -23,8 +23,8 @@ namespace ExpertSystem.Processor.FuzzyProcessor
         [Fact]
         public void FactFuzzification_isCorrect()
         {
-            //var fact = new Fact(SocketDomain.NumberOfContacts, 81);
-            //var fuzzyFact = _processor.FactFuzzification(fact);
+            var fact = new Fact(SocketDomain.NumberOfContacts, 81);
+            var fuzzyFact = _processor.FactFuzzification(fact);
         }
 
         [Fact]
