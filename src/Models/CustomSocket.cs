@@ -123,9 +123,9 @@ namespace ExpertSystem.Models
         public Dictionary<SocketDomain, List<string>> GetDomainsWithPossibleValues(List<CustomSocket> sockets)
         {
             var domainsValues = new Dictionary<SocketDomain, List<string>>();
-            foreach (SocketDomain domain in GetSocketDomains().Where(p => p != SocketDomain.SocketName))
+            foreach (var domain in GetSocketDomains().Where(p => p != SocketDomain.SocketName))
             {
-                var type = SocketDomainType[domain];
+                //var type = SocketDomainType[domain];
                 var field = CustomSocket.Type.GetField(domain.ToString());
 
                 var propertyValues = sockets.GroupBy(p => field.GetValue(p).ToString()).ToList();

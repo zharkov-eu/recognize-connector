@@ -58,7 +58,7 @@ namespace ExpertSystem
             WritePaddedBottom($"Обратный продукционный вывод для {socketName}");
             try
             {
-                var socketFacts = _productionProcessor.BackProcessing(socketName);
+                var socketFacts = ProductionProcessor.BackProcessing(socketName);
                 WritePaddedTop($"Результат для {socketName}: {socketFacts}");
                 return socketFacts;
             }
@@ -72,7 +72,7 @@ namespace ExpertSystem
         private List<string> ForwardProcessing(FactSet factSet)
         {
             WritePaddedBottom($"Прямой продукционный вывод для {factSet}");
-            var socketList = _productionProcessor.ForwardProcessing(factSet);
+            var socketList = ProductionProcessor.ForwardProcessing(factSet);
             WritePaddedTop("Возможные разъемы: " + string.Join(", ", socketList));
             return socketList;
         }
@@ -80,7 +80,7 @@ namespace ExpertSystem
         private bool LogicProcessing(FactSet factSet, string socketName)
         {
             WritePaddedBottom($"Логический вывод утверждения {socketName} при посылках {factSet}");
-            var isCorrect = _logicProcessor.Processing(factSet, socketName);
+            var isCorrect = LogicProcessor.Processing(factSet, socketName);
             WritePaddedTop(isCorrect ? $"Утверждение для {socketName} верно" : "Утверждение неверно");
             return isCorrect;
         }

@@ -1,7 +1,8 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using ExpertSystem.Models;
+using ExpertSystem.Models.FuzzyLogic;
 using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor.FuzzyProcessor
@@ -13,27 +14,27 @@ namespace ExpertSystem.Processor.FuzzyProcessor
         private readonly Dictionary<SocketDomain, List<FuzzyFact>> _domainFacts;
 
         public FuzzyProcessor(List<FuzzyDomain> domains,
-                              Dictionary<SocketDomain, List<FuzzyFact>> domainFacts,
-                              ProcessorOptions options)
+            Dictionary<SocketDomain, List<FuzzyFact>> domainFacts,
+            ProcessorOptions options)
             : base(options)
         {
             _generator = new FuzzyRulesGenerator();
             _domains = domains;
             _domainFacts = domainFacts;
         }
-        
+
         public double MamdaniProcesing(FactSet factSet)
         {
             var fuzzyFacts = new List<FuzzyFact>();
             foreach (var fact in factSet.Facts)
                 fuzzyFacts.Add(FactFuzzification(fact));
 
-            List<FuzzyFact> resultFacts = _generator.GetAmperageCircuitFact(_generator.GetFuzzyFuncStatements(_domains));
-            Dictionary<object, double> resultDegrees = new Dictionary<object, double>();
+            var resultFacts = _generator.GetAmperageCircuitFact(_generator.GetFuzzyFuncStatements(_domains));
+            var resultDegrees = new Dictionary<object, double>();
             foreach (var result in resultFacts)
                 resultDegrees.Add(result.Value, 0);
 
-            List<FuzzyRuleStatement> statements = _generator.GetFuzzyRuleStatements(_domains);
+            var statements = _generator.GetFuzzyRuleStatements(_domains);
 
 
             foreach (var statement in statements)
@@ -44,7 +45,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
                     var resultDegree = result.ClusterDegree[statement.Result.Cluster];
                     if (resultDegree > degree)
                         resultDegree = degree;
-                    
+
                     if (resultDegrees[result.Value] < resultDegree)
                         resultDegrees[result.Value] = resultDegree;
                 }
@@ -70,10 +71,10 @@ namespace ExpertSystem.Processor.FuzzyProcessor
 
             var degreeResults = new List<FuzzyFuncProcessed>();
             foreach (var statement in statements)
-            {   
+            {
                 var degree = statement.SetRulesFacts(fuzzyFacts).GetRulesDegree();
                 var result = statement.Result(socket);
-                degreeResults.Add(new FuzzyFuncProcessed { Degree = degree, Result = result });
+                degreeResults.Add(new FuzzyFuncProcessed {Degree = degree, Result = result});
             }
 
             var numerator = degreeResults.Aggregate(0d, (acc, p) => acc + p.Degree * p.Result);
@@ -97,15 +98,15 @@ namespace ExpertSystem.Processor.FuzzyProcessor
                 throw new Exception("FactFuzzification: base List<FuzzyFact> is empty");
 
             // Проверяем эквивалентность доменов
-            FuzzyDomain domain = currentFacts.First().Value.Domain;
+            var domain = currentFacts.First().Value.Domain;
             if (!fact.Domain.Equals(domain.Domain))
                 throw new Exception("FactFuzzification: domains not equal");
 
             // Проверяем 10% отклонение от минимального и максимального значений
-            double factValue = Convert.ToDouble(fact.Value);
-            double currentMinValue = currentFacts.Keys.Min();
-            double currentMaxValue = currentFacts.Keys.Max();
-            double currentDifference = currentMaxValue - currentMinValue;
+            var factValue = Convert.ToDouble(fact.Value);
+            var currentMinValue = currentFacts.Keys.Min();
+            var currentMaxValue = currentFacts.Keys.Max();
+            var currentDifference = currentMaxValue - currentMinValue;
             if (factValue < currentMinValue && Math.Abs(factValue - currentMinValue) > 0.1 * currentDifference)
                 throw new Exception("FactFuzzification: fact value less than Min(CurrentFacts) more than 10%");
             if (factValue > currentMaxValue && Math.Abs(factValue - currentMaxValue) > 0.1 * currentDifference)
@@ -118,26 +119,23 @@ namespace ExpertSystem.Processor.FuzzyProcessor
                 return currentFacts.Last().Value;
 
             // Находим ближайшее левое и правое значение
-            FuzzificationFact left = default(FuzzificationFact);
-            FuzzificationFact right = default(FuzzificationFact);
+            var left = default(FuzzificationFact);
+            var right = default(FuzzificationFact);
             foreach (var currentFact in currentFacts.Values)
             {
                 if (currentFact.Value.Equals(fact.Value))
                     return currentFact;
-                double difference = factValue - Convert.ToDouble(currentFact.Value);
+                var difference = factValue - Convert.ToDouble(currentFact.Value);
                 if (difference > 0 && (left.Equals(default(FuzzificationFact)) || difference < left.Difference))
-                {
-                    left = new FuzzificationFact { Fact = currentFact, Difference = difference };
-                }
-                else if (difference < 0 && (right.Equals(default(FuzzificationFact)) || Math.Abs(difference) < Math.Abs(right.Difference)))
-                {
-                    right = new FuzzificationFact { Fact = currentFact, Difference = difference };
-                }
+                    left = new FuzzificationFact {Fact = currentFact, Difference = difference};
+                else if (difference < 0 && (right.Equals(default(FuzzificationFact)) ||
+                                            Math.Abs(difference) < Math.Abs(right.Difference)))
+                    right = new FuzzificationFact {Fact = currentFact, Difference = difference};
             }
 
             // Вычисляем итоговую принадлежность к кластерам
-            Dictionary<int, double> clusterDegree = new Dictionary<int, double>();
-            double offset = Math.Abs(left.Difference) / (Math.Abs(left.Difference) + Math.Abs(right.Difference));
+            var clusterDegree = new Dictionary<int, double>();
+            var offset = Math.Abs(left.Difference) / (Math.Abs(left.Difference) + Math.Abs(right.Difference));
             foreach (var key in left.Fact.ClusterDegree.Keys)
             {
                 var leftDegree = left.Fact.ClusterDegree[key];

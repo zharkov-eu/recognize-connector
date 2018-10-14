@@ -1,10 +1,10 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using static ExpertSystem.Models.LogicOperation;
+using System.Linq;
 using static ExpertSystem.Models.CustomSocketDomain;
+using static ExpertSystem.Models.CommonLogic.LogicOperation;
 
-namespace ExpertSystem.Models
+namespace ExpertSystem.Models.CommonLogic
 {
     public struct LogicFactLevel
     {
@@ -16,13 +16,13 @@ namespace ExpertSystem.Models
             if (!(obj is LogicFactLevel))
                 return false;
 
-            LogicFactLevel fact = (LogicFactLevel)obj;
+            var fact = (LogicFactLevel) obj;
             return Depth == fact.Depth && Negation == fact.Negation;
         }
 
         public override int GetHashCode()
         {
-            int hashCode = 17;
+            var hashCode = 17;
             hashCode += Depth.GetHashCode();
             hashCode += Negation.GetHashCode();
             return hashCode;
@@ -32,15 +32,16 @@ namespace ExpertSystem.Models
     public class LogicFact : Fact
     {
         /// <summary>
-        /// Возвращает конъюктивную нормальную форму
-        /// <summary>
+        ///     Возвращает конъюктивную нормальную форму
+        /// </summary>
         public static LinkedList<LogicFact> ConjuctionNormalFrom(LinkedList<LogicFact> facts, int priority = 100)
         {
             // Если список пуст или содержит один факт - вернуть его
-            if (facts.Count <= 1) return facts;
+            if (facts.Count <= 1)
+                return facts;
 
             // Получить максимальный приоритет операции
-            int maxPriority = Math.Min(facts.Select(fact => Priority[fact.RightOperation]).Max(), priority);
+            var maxPriority = Math.Min(facts.Select(fact => Priority[fact.RightOperation]).Max(), priority);
 
             // Получить первый элемент списка
             var node = facts.First;
@@ -49,7 +50,6 @@ namespace ExpertSystem.Models
             while (node != null)
             {
                 if (Priority[node.Value.RightOperation] == maxPriority)
-                {
                     switch (node.Value.RightOperation)
                     {
                         case Operation.Implication:
@@ -57,7 +57,7 @@ namespace ExpertSystem.Models
                             node.Value.RightOperation = Operation.Disjunction;
 
                             // Создаем уровень ниже
-                            var level = new LogicFactLevel { Depth = node.Value.Level.Depth + 1, Negation = true };
+                            var level = new LogicFactLevel {Depth = node.Value.Level.Depth + 1, Negation = true};
                             // Помещаем всю левую часть на уровень ниже
                             var currentNode = node;
                             while (currentNode != null)
@@ -73,22 +73,25 @@ namespace ExpertSystem.Models
                             {
                                 node.Value.Negation = !node.Value.Negation;
                                 node.Value.RightOperation = Operation.Disjunction;
-                                node.Value.Level = new LogicFactLevel { Depth = node.Value.Level.Depth - 1, Negation = false };
+                                node.Value.Level =
+                                    new LogicFactLevel {Depth = node.Value.Level.Depth - 1, Negation = false};
                             }
+
                             break;
 
                         case Operation.Disjunction:
                             if (node.Value.Level.Depth != 0 && node.Value.Level.Negation)
                             {
                                 node.Value.Negation = !node.Value.Negation;
-                                node.Value.Level = new LogicFactLevel { Depth = node.Value.Level.Depth - 1, Negation = false };
+                                node.Value.Level =
+                                    new LogicFactLevel {Depth = node.Value.Level.Depth - 1, Negation = false};
                             }
+
                             break;
 
                         case Operation.None:
                             return facts;
                     }
-                }
 
                 node = node.Next;
             }
@@ -103,8 +106,8 @@ namespace ExpertSystem.Models
         public LogicFact(SocketDomain domain, object value) : base(domain, value)
         {
             Negation = false;
-            RightOperation = LogicOperation.Operation.None;
-            Level = new LogicFactLevel { Depth = 0, Negation = false };
+            RightOperation = Operation.None;
+            Level = new LogicFactLevel {Depth = 0, Negation = false};
         }
 
         public LogicFact(SocketDomain domain, object value, Operation operation, bool negation = false)
@@ -112,7 +115,7 @@ namespace ExpertSystem.Models
         {
             Negation = negation;
             RightOperation = operation;
-            Level = new LogicFactLevel { Depth = 0, Negation = false };
+            Level = new LogicFactLevel {Depth = 0, Negation = false};
         }
 
         public override bool Equals(object obj)
@@ -129,7 +132,7 @@ namespace ExpertSystem.Models
 
         public override int GetHashCode()
         {
-            int hashCode = base.GetHashCode();
+            var hashCode = base.GetHashCode();
             hashCode += 27 * Negation.GetHashCode();
             hashCode += 27 * RightOperation.GetHashCode();
             return hashCode;

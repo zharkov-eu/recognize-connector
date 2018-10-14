@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ExpertSystem.Models
+namespace ExpertSystem.Models.CommonLogic
 {
     public class LogicOperation
     {

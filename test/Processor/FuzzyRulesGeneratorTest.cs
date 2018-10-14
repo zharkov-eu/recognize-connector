@@ -1,15 +1,12 @@
-using Xunit;
-using System.Linq;
-using System.Collections.Generic;
 using ExpertSystem.Models;
-using static ExpertSystem.Models.CustomSocketDomain;
+using Xunit;
 
 namespace ExpertSystem.Processor
 {
-	public class FuzzyRulesGeneratorTest
-	{
-        private FuzzyRulesGenerator _generator;
-        private SocketFieldsProcessorTest _socketFieldsProcessor;
+    public class FuzzyRulesGeneratorTest
+    {
+        private readonly FuzzyRulesGenerator _generator;
+        private readonly SocketFieldsProcessorTest _socketFieldsProcessor;
 
         public FuzzyRulesGeneratorTest()
         {
@@ -18,18 +15,18 @@ namespace ExpertSystem.Processor
         }
 
         [Fact]
-		public void GetFuzzyDomains_isCorrect()
+        public void GetFuzzyDomains_isCorrect()
         {
-			var sockets = _socketFieldsProcessor.GetSockets();
-            List<FuzzyDomain> domains = _generator.GetFuzzyDomains(sockets);
+            var sockets = _socketFieldsProcessor.GetSockets();
+            var domains = _generator.GetFuzzyDomains(sockets);
         }
 
         [Fact]
-		public void GetFuzzyFacts_isCorrect()
+        public void GetFuzzyFacts_isCorrect()
         {
-			var sockets = _socketFieldsProcessor.GetSockets();
-            List<FuzzyDomain> domains = _generator.GetFuzzyDomains(sockets);
-            Dictionary<SocketDomain, List<FuzzyFact>> facts = _generator.GetFuzzyFacts(domains, sockets);
+            var sockets = _socketFieldsProcessor.GetSockets();
+            var domains = _generator.GetFuzzyDomains(sockets);
+            var facts = _generator.GetFuzzyFacts(domains, sockets);
         }
     }
 }

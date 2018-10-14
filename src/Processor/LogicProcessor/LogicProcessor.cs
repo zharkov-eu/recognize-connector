@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ExpertSystem.Models;
-using static ExpertSystem.Models.LogicOperation;
+using ExpertSystem.Models.CommonLogic;
 using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor.LogicProcessor
@@ -44,7 +44,7 @@ namespace ExpertSystem.Processor.LogicProcessor
                 inputDomains.Add(inputFact.Domain);
                 logicInputFacts = new LinkedList<LogicFact>();
                 logicInputFacts.AddLast(
-                    new LogicFact(inputFact.Domain, inputFact.Value, Operation.None));
+                    new LogicFact(inputFact.Domain, inputFact.Value, LogicOperation.Operation.None));
                 statements.Add(logicInputFacts);
             }
 
@@ -56,14 +56,15 @@ namespace ExpertSystem.Processor.LogicProcessor
                 if (statementFiltered.Count == 0)
                     continue;
 
-                statementFiltered.Last.Value.RightOperation = Operation.Implication;
+                statementFiltered.Last.Value.RightOperation = LogicOperation.Operation.Implication;
                 statementFiltered.AddLast(factStatement.Last.Value);
                 statements.Add(statementFiltered);
             }
 
             // Добавляем отрицание утверждения
             var socketNegation = new LinkedList<LogicFact>();
-            socketNegation.AddLast(new LogicFact(SocketDomain.SocketName, socketName, Operation.None, true));
+            socketNegation.AddLast(new LogicFact(SocketDomain.SocketName, socketName, LogicOperation.Operation.None,
+                true));
             statements.Add(socketNegation);
 
             // Выводим отладочную информацию первого шага
@@ -78,7 +79,8 @@ namespace ExpertSystem.Processor.LogicProcessor
             // Выводим отладочную информацию КНФ
             debug("".PadLeft(40, '-'));
             debug("Конъюнктивная нормальная форма: " + cnfStatements);
-            return Resolve(cnfStatements, new LogicFact(SocketDomain.SocketName, socketName, Operation.None));
+            return Resolve(cnfStatements,
+                new LogicFact(SocketDomain.SocketName, socketName, LogicOperation.Operation.None));
         }
 
         public bool Resolve(LogicFactSet statements, LogicFact result)

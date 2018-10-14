@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using static ExpertSystem.Models.CustomSocketDomain;
 
-namespace ExpertSystem.Models
+namespace ExpertSystem.Models.FuzzyLogic
 {
     public struct FuzzyDomainOption
     {

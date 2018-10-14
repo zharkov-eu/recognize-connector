@@ -2,9 +2,10 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace ExpertSystem.Models
+namespace ExpertSystem.Models.FuzzyLogic
 {
-    public abstract class FuzzyStatement {
+    public abstract class FuzzyStatement
+    {
         public HashSet<FuzzyRule> Rules;
 
         public FuzzyStatement(HashSet<FuzzyRule> rules)
@@ -36,7 +37,8 @@ namespace ExpertSystem.Models
         }
     }
 
-    public struct FuzzyFuncProcessed {
+    public struct FuzzyFuncProcessed
+    {
         public double Degree;
         public double Result;
     }
@@ -57,7 +59,8 @@ namespace ExpertSystem.Models
         }
     }
 
-    public class FuzzyRule {
+    public class FuzzyRule
+    {
         public FuzzyDomain Domain;
         public int Cluster;
         public double Degree;

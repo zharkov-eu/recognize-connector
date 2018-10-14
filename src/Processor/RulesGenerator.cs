@@ -27,7 +27,7 @@ namespace ExpertSystem.Processor
                     GraphNode node = null;
 
                     // Конструируем факт
-                    var type = SocketDomainType[domain];
+                    //var type = SocketDomainType[domain];
                     var facts = new FactSet(
                         new Fact(domain, CustomSocket.Type.GetField(domain.ToString()).GetValue(socket))
                     );

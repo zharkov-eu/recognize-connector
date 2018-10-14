@@ -10,9 +10,9 @@ namespace ExpertSystem
 {
     public class Program
     {
-        protected readonly ProductionProcessor _productionProcessor;
-        protected readonly LogicProcessor _logicProcessor;
-        protected readonly FuzzyProcessor _fuzzyProcessor;
+        protected readonly ProductionProcessor ProductionProcessor;
+        protected readonly LogicProcessor LogicProcessor;
+        protected readonly FuzzyProcessor FuzzyProcessor;
 
         public struct ProgramOptions
         {
@@ -41,12 +41,12 @@ namespace ExpertSystem
             var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(sockets);
             var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, sockets);
 
-            _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = options.Debug });
-            _logicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = options.Debug });
-            _fuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = options.Debug });
+            ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = options.Debug });
+            LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = options.Debug });
+            FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = options.Debug });
         }
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             var program = new ConsoleProgram(new ProgramOptions { Debug = true });
             program.Run();

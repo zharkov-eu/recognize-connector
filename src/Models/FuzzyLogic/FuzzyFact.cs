@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ExpertSystem.Models
+namespace ExpertSystem.Models.FuzzyLogic
 {
     public class FuzzyFact : Fact
     {

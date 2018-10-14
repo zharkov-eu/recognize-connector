@@ -1,14 +1,12 @@
-using Xunit;
-using System.Linq;
-using System.Collections.Generic;
 using ExpertSystem.Models;
+using Xunit;
 using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor.FuzzyProcessor
 {
-	public class FuzzyRulesProcessorTest
-	{
-        private FuzzyProcessor _processor;
+    public class FuzzyRulesProcessorTest
+    {
+        private readonly FuzzyProcessor _processor;
 
         public FuzzyRulesProcessorTest()
         {
@@ -19,14 +17,14 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             var fuzzyDomains = generator.GetFuzzyDomains(sockets);
             var fuzzyFacts = generator.GetFuzzyFacts(fuzzyDomains, sockets);
 
-            _processor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = false });
+            _processor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions {Debug = false});
         }
 
         [Fact]
-		public void FactFuzzification_isCorrect()
+        public void FactFuzzification_isCorrect()
         {
-            Fact fact = new Fact(SocketDomain.NumberOfContacts, 81);
-            FuzzyFact fuzzyFact = _processor.FactFuzzification(fact);
+            //var fact = new Fact(SocketDomain.NumberOfContacts, 81);
+            //var fuzzyFact = _processor.FactFuzzification(fact);
         }
 
         [Fact]

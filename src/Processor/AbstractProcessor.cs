@@ -1,5 +1,4 @@
 using System;
-using ExpertSystem.Models.Graph;
 
 namespace ExpertSystem.Processor
 {
@@ -10,16 +9,16 @@ namespace ExpertSystem.Processor
 
     public abstract class AbstractProcessor
     {
-        protected readonly bool _debug;
+        protected readonly bool Debug;
 
         protected AbstractProcessor(ProcessorOptions options)
         {
-            _debug = options.Debug;
+            Debug = options.Debug;
         }
 
         protected void debug(string message)
         {
-            if (_debug) Console.WriteLine(message);
+            if (Debug) Console.WriteLine(message);
         }
     }
 }
