@@ -1,7 +1,6 @@
-using System;
-using ExpertSystem.Models;
 using Xunit;
 using Xunit.Abstractions;
+using ExpertSystem.Models;
 using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor.FuzzyProcessor

@@ -82,8 +82,8 @@ namespace ExpertSystem.Models
             int slCluster = rules[SocketDomain.SizeLength].Cluster + 1; // 1..4
             int swCluster = rules[SocketDomain.SizeWidth].Cluster + 1; // 1..4
 
-            return socket => socket.NumberOfContacts * Math.Log(nocCluster, 10) + (
-                (socket.SizeLength * Math.Log(slCluster, 2) * 10) * (socket.SizeWidth * Math.Log(swCluster, 2) * 10)
+            return socket => socket.NumberOfContacts * (Math.Log(nocCluster, 10) + 1) + (
+                (socket.SizeLength * (Math.Log(slCluster, 2) + 1) * 10) * (socket.SizeWidth * (Math.Log(swCluster, 2) + 1) * 10)
             );
         }
 
@@ -91,7 +91,7 @@ namespace ExpertSystem.Models
         {
             [Output("не определен")]
             Empty,
-            [Output("макимальная сила тока при разрыве цепи")]
+            [Output("максимальная сила тока при разрыве цепи")]
             AmperageCircuit,
             [Output("пол разъема")]
             Gender,
