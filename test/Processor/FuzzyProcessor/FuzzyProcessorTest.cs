@@ -1,14 +1,17 @@
+using System;
 using ExpertSystem.Models;
 using Xunit;
+using Xunit.Abstractions;
 using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Processor.FuzzyProcessor
 {
     public class FuzzyRulesProcessorTest
     {
+        private readonly ITestOutputHelper _output;
         private readonly FuzzyProcessor _processor;
 
-        public FuzzyRulesProcessorTest()
+        public FuzzyRulesProcessorTest(ITestOutputHelper outputHelper)
         {
             var generator = new FuzzyRulesGenerator();
             var socketFieldsProcessor = new SocketFieldsProcessorTest();
@@ -17,6 +20,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             var fuzzyDomains = generator.GetFuzzyDomains(sockets);
             var fuzzyFacts = generator.GetFuzzyFacts(fuzzyDomains, sockets);
 
+            _output = outputHelper;
             _processor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions {Debug = false});
         }
 
@@ -30,25 +34,29 @@ namespace ExpertSystem.Processor.FuzzyProcessor
         [Fact]
         public void MamdaniProcesing_IsCorrect()
         {
-            var result = _processor.MamdaniProcesing(new FactSet(
+            var factSet = new FactSet(
                 new Fact(SocketDomain.NumberOfContacts, 50),
                 new Fact(SocketDomain.SizeLength, 0.03f),
                 new Fact(SocketDomain.SizeWidth, 0.0075f)
-            ));
+            );
+            var result = _processor.MamdaniProcesing(factSet);
 
-            Assert.Equal(174.66707437137552d, result);
+            _output.WriteLine($"MamdaniProcessing for {factSet}: {result}");
+            Assert.True(result > 25 && result < 30);
         }
 
         [Fact]
         public void SugenoProcesing_IsCorrect()
         {
-            var result = _processor.SugenoProcesing(new FactSet(
+            var factSet = new FactSet(
                 new Fact(SocketDomain.NumberOfContacts, 50),
                 new Fact(SocketDomain.SizeLength, 0.03f),
                 new Fact(SocketDomain.SizeWidth, 0.0075f)
-            ));
+            );
+            var result = _processor.SugenoProcesing(factSet);
 
-            Assert.True(result > 30 && result < 35);
+            _output.WriteLine($"SugenoProcessing for {factSet}: {result}");
+            Assert.True(result > 25 && result < 30);
         }
     }
 }

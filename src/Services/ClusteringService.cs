@@ -31,8 +31,8 @@ namespace ExpertSystem.Services
         /// <param name="values">Значения кластеров</param>
         /// <param name="m">Чёткость алгоритма</param>
         /// <param name="eps">Точность алгоритма</param>
-        public static IEnumerable<FuzzyValue> CMeans(int clusterCount, List<double> values, double m = 2,
-            double eps = 0.001)
+        public static IEnumerable<FuzzyValue> CMeans(int clusterCount, List<double> values, double m = 3,
+            double eps = 0.00001)
         {
             if (!values.Any())
                 throw new Exception("Values is empty");
