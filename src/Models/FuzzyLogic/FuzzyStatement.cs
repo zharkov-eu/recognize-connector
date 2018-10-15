@@ -6,9 +6,9 @@ namespace ExpertSystem.Models.FuzzyLogic
 {
     public abstract class FuzzyStatement
     {
-        public HashSet<FuzzyRule> Rules;
+        public FuzzyRuleSet Rules;
 
-        public FuzzyStatement(HashSet<FuzzyRule> rules)
+        public FuzzyStatement(FuzzyRuleSet rules)
         {
             Rules = rules;
         }
@@ -31,9 +31,14 @@ namespace ExpertSystem.Models.FuzzyLogic
     {
         public Func<CustomSocket, double> Result;
 
-        public FuzzyFuncStatement(HashSet<FuzzyRule> rules, Func<CustomSocket, double> result) : base(rules)
+        public FuzzyFuncStatement(FuzzyRuleSet rules, Func<CustomSocket, double> result) : base(rules)
         {
             Result = result;
+        }
+
+        public override string ToString()
+        {
+            return $"{Rules.ToString()} -> fun()";
         }
     }
 
@@ -47,7 +52,7 @@ namespace ExpertSystem.Models.FuzzyLogic
     {
         public FuzzyRule Result;
 
-        public FuzzyRuleStatement(HashSet<FuzzyRule> rules, FuzzyRule result) : base(rules)
+        public FuzzyRuleStatement(FuzzyRuleSet rules, FuzzyRule result) : base(rules)
         {
             Result = result;
         }
@@ -55,29 +60,6 @@ namespace ExpertSystem.Models.FuzzyLogic
         public FuzzyRuleStatement SetResultFact(FuzzyFact fact)
         {
             Result.Degree = Math.Min(GetRulesDegree(), Result.SetFact(fact).Degree);
-            return this;
-        }
-    }
-
-    public class FuzzyRule
-    {
-        public FuzzyDomain Domain;
-        public int Cluster;
-        public double Degree;
-        public double Value;
-
-        public FuzzyRule(FuzzyDomain domain, int cluster)
-        {
-            Domain = domain;
-            Cluster = cluster;
-        }
-
-        public FuzzyRule SetFact(FuzzyFact fact)
-        {
-            if (fact == null)
-                throw new Exception($"FuzzyRule: fact is empty for domain {Domain}");
-            Degree = fact.ClusterDegree[Cluster];
-            Value = Convert.ToDouble(fact.Value);
             return this;
         }
     }

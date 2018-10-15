@@ -65,8 +65,10 @@ namespace ExpertSystem.Processor
 
             foreach (var rules in SetOperation.CartesianProduct(rulesSets))
                 statements.Add(
-                    new FuzzyFuncStatement(rules.ToHashSet(),
-                        GetAmperageCircuitFormula(rules.ToDictionary(p => p.Domain.Domain)))
+                    new FuzzyFuncStatement(
+                        new FuzzyRuleSet(rules.ToArray()),
+                        GetAmperageCircuitFormula(rules.ToDictionary(p => p.Domain.Domain))
+                    )
                 );
 
             return statements;
@@ -135,7 +137,7 @@ namespace ExpertSystem.Processor
             }
 
             foreach (var fact in facts)
-                factClusters[fact.GetMostProbableCluster()].Add(Convert.ToDouble(fact.Value));
+                factClusters[fact.GetMostProbableCluster()].Add(fact.Value);
             sortedClusters = sortedClusters.OrderBy(id => factClusters[id].Average()).ToArray();
 
             foreach (var fact in facts)
