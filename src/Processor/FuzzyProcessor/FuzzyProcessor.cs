@@ -28,6 +28,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             var fuzzyFacts = new List<FuzzyFact>();
             foreach (var fact in factSet.Facts)
                 fuzzyFacts.Add(FactFuzzification(fact));
+            debug($"Приведение к нечеткости входных фактов:\n" + string.Join("\n", fuzzyFacts));
 
             var resultFacts = _generator.GetAmperageCircuitFact(_generator.GetFuzzyFuncStatements(_domains));
             var resultDegrees = new Dictionary<double, double>();
@@ -39,6 +40,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             }
 
             var statements = _generator.GetFuzzyRuleStatements(_domains);
+
             foreach (var statement in statements)
             {
                 var degree = statement.SetRulesFacts(fuzzyFacts).GetRulesDegree();
@@ -52,6 +54,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
                         resultDegrees[result.Value] = resultDegree;
                 }
             }
+            debug($"Нечеткие правила:\n" + string.Join("\n", statements));
 
             var numerator = resultDegrees.Aggregate(0d, (acc, p) => acc + p.Key * p.Value);
             var denumerator = resultDegrees.Aggregate(0d, (acc, p) => acc + p.Value);
@@ -71,15 +74,15 @@ namespace ExpertSystem.Processor.FuzzyProcessor
             debug($"Приведение к нечеткости входных фактов:\n" + string.Join("\n", fuzzyFacts));
 
             var statements = _generator.GetFuzzyFuncStatements(_domains);
-            debug($"Нечеткие правила:\n" + string.Join("\n", statements));
 
             var degreeResults = new List<FuzzyFuncProcessed>();
             foreach (var statement in statements)
             {
                 var degree = statement.SetRulesFacts(fuzzyFacts).GetRulesDegree();
                 var result = statement.Result(socket);
-                degreeResults.Add(new FuzzyFuncProcessed {Degree = degree, Result = result});
+                degreeResults.Add(new FuzzyFuncProcessed { Degree = degree, Result = result });
             }
+            debug($"Нечеткие правила:\n" + string.Join("\n", statements));
 
             var numerator = degreeResults.Aggregate(0d, (acc, p) => acc + p.Degree * p.Result);
             var denumerator = degreeResults.Aggregate(0d, (acc, p) => acc + p.Degree);

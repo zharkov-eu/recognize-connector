@@ -15,7 +15,7 @@ namespace ExpertSystem.Processor
         {
             var statements = new List<FuzzyRuleStatement>();
             var funcStatements = GetFuzzyFuncStatements(domains);
-            var resultFacts = GetAmperageCircuitFact(funcStatements).ToDictionary(p => p.Value);
+            var resultFacts = GetAmperageCircuitFact(funcStatements).Distinct().ToDictionary(p => p.Value);
 
             var defaultSocket = GetDefaultSocket();
             foreach (var statement in funcStatements)

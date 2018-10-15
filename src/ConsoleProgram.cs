@@ -35,40 +35,43 @@ namespace ExpertSystem
                 switch (choiceNum)
                 {
                     case Command.BackProcessing:
-                        Console.WriteLine("Обратный продукционный вывод, введите название разъема: ");
+                        WritePaddedTop("Обратный продукционный вывод, введите название разъема:");
+                        Console.Write("Название разъема: ");
                         socketName = Console.ReadLine();
                         BackProcessing(socketName);
                         break;
                     case Command.ForwardProcessing:
-                        Console.WriteLine("Прямой продукционный вывод, введите факты для поиска разъема: ");
+                        WritePaddedTop("Прямой продукционный вывод, введите факты:");
                         socketFacts = GetSocketFactsFromConsole();
                         ForwardProcessing(new FactSet(socketFacts.ToArray()));
                         break;
                     case Command.LogicProcessing:
-                        Console.WriteLine("Логический вывод, введите посылки: ");
+                        WritePaddedTop("Логический вывод, введите посылки:");
                         socketFacts = GetSocketFactsFromConsole();
-                        Console.WriteLine("Логический вывод, введите утверждение (НазваниеРазъема): ");
+                        WritePaddedTop("Логический вывод, введите утверждение:");
+                        Console.Write("Название разъема: ");
                         socketName = Console.ReadLine();
                         LogicProcessing(new FactSet(socketFacts.ToArray()), socketName);
                         break;
                     case Command.FuzzyProcessingMamdani:
-                        Console.WriteLine("Нечеткий вывод Мамдани, введите факты: ");
+                        WritePaddedTop("Нечеткий вывод Мамдани, введите факты:");
                         socketFacts = GetSocketFactsFromConsole(new SocketDomain[] {
                             SocketDomain.NumberOfContacts, SocketDomain.SizeLength, SocketDomain.SizeWidth
                         });
                         FuzzyProcessingMamdani(new FactSet(socketFacts.ToArray()));
                         break;
                     case Command.FuzzyProcessingSugeno:
-                        Console.WriteLine("Нечеткий вывод Сугэно, введите факты: ");
+                        WritePaddedTop("Нечеткий вывод Сугэно, введите факты:");
                         socketFacts = GetSocketFactsFromConsole(new SocketDomain[] {
                             SocketDomain.NumberOfContacts, SocketDomain.SizeLength, SocketDomain.SizeWidth
                         });
                         FuzzyProcessingSugeno(new FactSet(socketFacts.ToArray()));
                         break;
                     default:
-                        Console.WriteLine("Команда не распознана");
+                        WritePaddedTop("Команда не распознана");
                         break;
                 }
+
                 PrintCommands();
             }
         }

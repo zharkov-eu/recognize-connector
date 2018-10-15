@@ -54,7 +54,7 @@ namespace ExpertSystem.Models.FuzzyLogic
         {
             if (Degree == default(double) && Value == default(double))
                 return $"{Domain.Domain}({Cluster})";
-            return $"{Domain.Domain}({Cluster} : {Degree}, {Value})";
+            return $"{Domain.Domain}({Cluster}: {Degree.ToString("0.#####")}, {Value.ToString("0.#####")})";
         }
     }
 
@@ -102,7 +102,7 @@ namespace ExpertSystem.Models.FuzzyLogic
 
         public override string ToString()
         {
-            return "{ " + string.Join(" ^ ", Rules.Select(it => it.ToString())) + " }";
+            return string.Join(" ^ ", Rules.Select(it => it.ToString()));
         }
     }
 }

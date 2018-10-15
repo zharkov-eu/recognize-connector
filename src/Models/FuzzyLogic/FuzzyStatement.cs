@@ -62,5 +62,10 @@ namespace ExpertSystem.Models.FuzzyLogic
             Result.Degree = Math.Min(GetRulesDegree(), Result.SetFact(fact).Degree);
             return this;
         }
+
+        public override string ToString()
+        {
+            return $"{Rules.ToString()} -> {Result.ToString()}";
+        }
     }
 }
