@@ -31,9 +31,13 @@ namespace ExpertSystem.Services
         /// <param name="values">Значения кластеров</param>
         /// <param name="m">Чёткость алгоритма</param>
         /// <param name="eps">Точность алгоритма</param>
+        /// <param name="randSeed">Случайное исходное значение</param>
         public static IEnumerable<FuzzyValue> CMeans(int clusterCount, List<double> values, double m = 2,
-            double eps = 0.001)
+            double eps = 0.001, int randSeed = 0)
         {
+            if (randSeed != 0)
+                RandUtil.SetSeed(randSeed);
+            
             if (!values.Any())
                 throw new Exception("Values is empty");
 

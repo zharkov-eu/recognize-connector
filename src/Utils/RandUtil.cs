@@ -5,11 +5,16 @@ namespace ExpertSystem.Utils
 {
 	public static class RandUtil
 	{
-		private static readonly Random Rand = new Random(DateTime.Now.Millisecond);
+		private static Random _rand = new Random(DateTime.Now.Millisecond);
+
+		public static void SetSeed(int seed)
+		{
+			_rand = new Random(seed);
+		}
 
 		public static double RandDoubleRange(double from, double to)
 		{
-			return Rand.NextDouble() * (to - from) + from;
+			return _rand.NextDouble() * (to - from) + from;
 		}
 	}
 

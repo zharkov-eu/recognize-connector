@@ -125,5 +125,23 @@ namespace ExpertSystem.Services
             const int complexClustersExpectedCount = 3;
             var result = ClusteringService.CMeans(complexClustersExpectedCount, complexClusters).ToList();
         }
+
+        [Fact]
+        public void CMeans_isSeedCapable()
+        {
+            var values = new List<double>
+            {
+                1,
+                1,
+                2,
+                3,
+                3,
+                4,
+                5,
+                5
+            };
+
+            var fuzzyValues = ClusteringService.CMeans(3, values, randSeed: 0).ToList();
+        }
     }
 }
