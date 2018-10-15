@@ -127,10 +127,10 @@ namespace ExpertSystem.Processor.FuzzyProcessor
                     return currentFact;
                 var difference = factValue - Convert.ToDouble(currentFact.Value);
                 if (difference > 0 && (left.Equals(default(FuzzificationFact)) || difference < left.Difference))
-                    left = new FuzzificationFact {Fact = currentFact, Difference = difference};
+                    left = new FuzzificationFact { Fact = currentFact, Difference = difference };
                 else if (difference < 0 && (right.Equals(default(FuzzificationFact)) ||
                                             Math.Abs(difference) < Math.Abs(right.Difference)))
-                    right = new FuzzificationFact {Fact = currentFact, Difference = difference};
+                    right = new FuzzificationFact { Fact = currentFact, Difference = difference };
             }
 
             // Вычисляем итоговую принадлежность к кластерам
@@ -145,7 +145,7 @@ namespace ExpertSystem.Processor.FuzzyProcessor
                 clusterDegree.Add(key, resultDegree);
             }
 
-            return new FuzzyFact(domain, fact.Value, clusterDegree);
+            return new FuzzyFact(domain, Convert.ToDouble(fact.Value), clusterDegree);
         }
 
         private struct FuzzificationFact

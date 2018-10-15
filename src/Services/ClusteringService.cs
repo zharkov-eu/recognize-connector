@@ -18,7 +18,7 @@ namespace ExpertSystem.Services
 
         public KeyValuePair<int, double> GetMostProbableCluster()
         {
-            return ClusterDegree.GroupBy(kv => kv.Value).OrderByDescending(g => g.Key).First().First();
+            return ClusterDegree.OrderByDescending(kv => kv.Value).FirstOrDefault();
         }
     }
 

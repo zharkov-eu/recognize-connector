@@ -1,101 +1,1001 @@
-mpn;color;contact_material;contact_plating;gender;housing_color;housing_material;mounting_style;number_of_contacts;number_of_positions;number_of_rows;orientation;pin_pitch;material;size_diameter;size_length;size_height;size_width
-5145167-4;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Through Hole;120;60;2;Vertical;0.00127;;;;;
-1-329631-2;Silver;;;;;;;;;;;;;;;;
-1-5145154-2;White;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Solder;120;60;2;Vertical;0.00127;Thermoplastic;;;;
-R3MZ;;;Nickel;Male;;;Solder;3;3;;;;;0.024384;0.06985;;
-A3MB;Black;;Silver;Male;Black;;Solder;3;3;;;;;0.018796;0.070612;;
-211882-1;;;;Male;Gray;Thermoplastic;;4;4;;;;Thermoplastic;;;;
-5145154-4;White;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Solder;120;60;2;Straight;0.00127;Thermoplastic;;;;
-1-208657-1;Black;Phosphor Bronze;Gold;Female;Black;Nylon;Flange;8;8;;;;;;;;
-CR2-M;Natural;;;;;;;;;;;;Nylon;;0.0084;0.005;0.0051
-2106710-1;Natural;Phosphor Bronze;Tin;Female;Natural;;Screw;;;;;;;;;;
-MS3476W14-19P;;;Gold;Male;;;;19;;;;;;;;;
-C3M;Silver;;Nickel;Male;;;Panel;3;3;;;;;0.0206502;0.0256032;;
-8-215570-0;Red;Phosphor Bronze;Tin;Male;Red;Polyester;Through Hole;10;10;;Vertical;0.00127;Polyester;;;;
-D5M;Silver;Gold;Gold;Male;;;Panel;5;5;;;;;0.018923;0.0206502;;
-8-215570-2;Red;Phosphor Bronze;Tin;Male;Red;Polyester;Through Hole;12;12;;Vertical;0.00127;Polyester;;;;
-MS3476L22-55P;;;Gold;Male;;;;55;;;;;;;;;
-EE-1003A;;;;;;;Bracket;;;;;;;;;;
-5145154-1;Natural;Phosphor Bronze;Gold Flash;Female;Natural;Thermoplastic;Through Hole;120;;;Vertical;;;;;;
-84952-8;Natural;Phosphor Bronze;Tin;Female;White;;Surface Mount;8;;;Right Angle;0.001;Thermoplastic;;;;
-1-206455-2;Black;;Gold;Male;Black;Thermoplastic;Flange;63;63;;;;;;;;
-20ESRM-3;;;;Male;;;Panel;;;;;;;;;;
-CR4H-M0;Natural;;;;;;;;;;;;Nylon;;0.0146;0.0076;0.0091
-TA5FLX;;Copper Alloy;Tin;Male;;;Solder;5;;;;;;;;;
-6331G1;Red;Copper;Silver;Male;Red;;Solder;2;;;;;;;;;
-2106739-1;Natural;Phosphor Bronze;Tin;;Natural;;Panel;;;;;;;;;;
-MS3126F16-8P;Olive;Copper Alloy;Gold;Male;;;;8;16;;;;;;;;
-K3FS;;;Nickel;Female;;;Panel;3;;;;;;0.0238;;;
-CR4H-M;Natural;;;;;;;;;;;;Nylon;;0.0145;0.0076;0.0091
-97-3106A20-4S-639;;Copper Alloy;Silver;Male;;;Solder;4;;;;;;;;;
-JT02RE-12-98P-014;;Copper Alloy;Gold;Female;;;Panel;10;;;;;;;;;
-1445957-4;Green;;Tin;;Green;Polycarbonate;;8;1;;;;;;0.007899;0.024587;0.007899
-5145165-8;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Through Hole;184;92;2;Vertical;0.00127;;;;;
-97-3106A-16S-1P(946);Black;;Silver;Male;;;Solder;7;7;;;;;;;;
-A6M;Green;Copper Alloy;Silver;Male;;;Solder;6;6;;;;;0.018796;0.070612;;
-MS3476W14-5S;;;Gold;Male;;;;5;;;;;;;;;
-1-1102271-1;;;;;;Aluminum Alloy;;;;;;;Aluminum;;;;
-MS3476W14-4S;;;Gold;Male;;;;4;;;;;;;;;
-4-640443-0;Green;Copper Alloy;Tin;Female;Green;Nylon;;10;10;1;;0.00254;;;0.0254;0.013208;0.006985
-5145098-1;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Surface Mount;120;60;2;Vertical;0.00127;;;;;
-XS5CD4S1;;Brass;Gold;Female;;;Screw;4;;;;;;;;;
-KPSE02E14-15PZ;;Copper Alloy;Gold;Female;;;Box;15;;;;;;;;;
-MBG30P-1;Black;;;Male;;;;30;30;;;;;;;;
-LJT06RE-21-41S;;Copper Alloy;Gold;Male;;;;41;;;;;;;;;
-05GM3MX;Gray;;Tin;Male;;;Solder;3;;;;;;;;;
-208485-1;;;;Female;Black;Thermoplastic;Flange;7;7;;;;;;;;
-KPSE00A16-26P;;Copper Alloy;Gold;Female;;;Flange;26;;;;;;;;;
-1-329632-2;Nickel;;;;;;;;;;;;;;;;
-5749230-1;Black;Copper Alloy;Tin;Male;Black;Thermoplastic;Through Hole;4;;;Right Angle;;;;;;
-LJT06RT-25-19S-014;;Copper Alloy;Gold;Male;;;;19;;;;;;;;;
-LJT06RT-13-98S-014;Olive;Copper Alloy;Gold;Male;;Aluminum;;10;;;;;;;;;
-213650-1;Black;Brass;;Female;Black;Nylon;Panel;14;;;;;;;;;
-185636-1;Black;;;;;;;;;;;;;;;;
-LJTPQ00RT-13-8S-014;;Copper Alloy;Gold;Female;;;Flange;8;;;;;;;;;
-LJT06RT-17-8S-014;;Copper Alloy;Gold;Male;;;;8;;;;;;;;;
-LJT06RT-17-8P-023;;Copper Alloy;Gold;Male;;;;8;;;;;;;;;
-XF2U-0815-3A;;Copper Alloy;Gold;Female;;;Surface Mount;8;;;;;;;;;
-202114;Silver;Brass;Gold;Male;;;;;;;;;;;;;
-XN2A-1470;Black;Phosphor Bronze;Gold;Male;;;;4;;;;;;;;;
-PT06E-14-19S;;Copper Alloy;Gold;Male;;;Solder;19;;;;;;;;;
-1761468-1;Black;Copper Alloy;Tin;Female;Black;Polyester;Through Hole;64;;;Right Angle;;;;;;
-KPSE01F12-10PWA206;;Copper;Gold;Male;;;;10;;;;;;;;;
-54489-3;Natural;;;Male;Natural;Nylon;Panel;3;3;1;;0.00792;;;0.023774;0.024511;0.007925
-206127-1;Black;Copper Alloy;Gold;Female;Black;Thermoplastic;Flange;28;28;;;;;;;;
-84952-4;Natural;Phosphor Bronze;Tin;Female;White;;Surface Mount;4;4;;Right Angle;0.001;Thermoplastic;;;;
-554944-1;Black;;;;;Plastic;;;24;;;;Plastic;;;;
-LJT06RE-25-37S-014;;Copper Alloy;Gold;Male;;;;37;;;;;;;;;
-LJT00RT-17-6S-014;Olive;Copper Alloy;Gold;Female;;Aluminum;Flange;6;;;;;;;;;
-1367337-1;Black;Phosphor Bronze;Gold;Female;Black;;Surface Mount;70;70;;;;;;;;
-JTG06RT-14-35S-014;;Copper Alloy;Gold;Male;;;;37;;;;;;;;;
-12BL5MX;;;Tin;Male;;;;5;5;;;;;;;;
-C5M;;;Nickel;Male;;;Panel;5;5;;;;;0.0206502;0.0256032;;
-208478-1;;;;Male;Black;Thermoplastic;Panel;16;16;;;;;;;;
-1551920-2;;Copper;Tin;Female;Black;;Surface Mount;38;;;;;;;;;
-PT06E-8-4S(SR);Olive;Copper Alloy;Gold;Male;;;Solder;4;;;;;;;;;
-LJT06RT-13-35P-014;Olive;Copper Alloy;Gold;Male;;Aluminum;;22;;;;;;;;;
-XS2GD5S7;;;;Male;;;;;;;;;;;;;
-206126-1;Black;;;Female;Black;Thermoplastic;;28;28;;;;;;;;
-97-3106A16-11P-559;;Copper Alloy;Silver;Male;;;Solder;2;;;;;;;;;
-C4F;;Copper Alloy;Nickel;Female;;;Panel;4;4;;;;;0.036322;0.0281686;;
-4-643814-2;White;Copper Alloy;Tin;Female;White;Nylon;Through Hole;12;12;1;;0.00254;;;0.03048;0.006985;0.013208
-KPSE00E20-16P;;Copper Alloy;Gold;Female;;;Flange;16;;;;;;;;;
-KPT02A14-15SA71;;Copper Alloy;Gold;Female;;;Solder;15;;;;;;;;;
-1658525-9;;Beryllium Copper;Tin;Male;Blue;;PC Board;20;;;Vertical;0.00254;Thermoplastic;;;;
-;;;;;;;;;;;;;;;;;
-LJT06RE-17-35S-014;;Copper Alloy;Gold;Male;;;;55;;;;;;;;;
-JTPQ00RT-12-35S-023;;Copper Alloy;Gold;Female;;;Flange;22;;;;;;;;;
-R3FZ;;;Nickel;Male;;;Solder;3;3;;;;;0.024384;0.06985;;
-LJT00RT-17-8S-014;;Copper Alloy;Gold;Female;;;Flange;8;;;;;;;;;
-XS5CD4S2;;Brass;Gold;Female;;;Screw;4;;;;;;;;;
-1747981-1;Black;Copper Alloy;Gold Flash;Female;Black;Plastic;Surface Mount;19;19;;;;;;0.01155;0.00608;0.015
-LJTPQ00RT-11-99P-014;;Copper Alloy;Gold;Female;;;Flange;7;;;;;;;;;
-LJT06RE-15-5S-014;;Copper Alloy;Gold;Male;;;;5;;;;;;;;;
-LJT00RE17-35P-014;;Copper Alloy;Gold;Male;;;Flange;55;;;;;;;;;
-JTPQ00RE-16-35P-014;;Copper Alloy;Gold;Female;;;Flange;55;;;;;;;;;
-62GB-12E14-12PN(416);;Copper Alloy;Gold;Male;;;Panel;12;;;;;;;;;
-1-84953-0;;Phosphor Bronze;Tin;Female;White;;Surface Mount;10;;;Right Angle;;;;;;
-LJT06RE-25-29S-014;;Copper Alloy;Gold;Male;;;;29;;;;;;;;;
-5145154-8;Natural;Phosphor Bronze;Gold;Female;Natural;Thermoplastic;Solder;120;60;2;Vertical;0.00127;;;;;
-2057631-1;;;;;;;;;;;;;;;;;
-1445420-1;Black;;;;;;Solder Lug;;19;;;;Neoprene;0.0153;;;
+mpn;gender;contact_material;contact_plating;color;housing_color;housing_material;mounting_style;number_of_contacts;number_of_positions;number_of_rows;orientation;pin_pitch;material;size_diameter;size_length;size_height;size_width
+XF2J-2024-11A;Female;Copper Alloy;Gold;;;Nylon 4/6;Surface Mount;20;20;1;;0.0005;;;0.0145;0.00415;0.0034
+3-644540-7;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;7;7;1;;0.00254;;;0.01778;0.013208;0.007747
+3-640428-7;Female;Copper Alloy;Tin;Red;Red;Nylon;;7;7;1;;0.00396;;;0.027737;0.018415;0.009017
+487526-1;Male;;;Black;Black;Thermoplastic;;2;2;;;0.00254;;;0.00492;0.01371;0.00248
+1445957-4;;;Tin;Green;Green;Polycarbonate;;8;1;;;;;;0.007899;0.024587;0.007899
+54489-3;Male;;;Natural;Natural;Nylon;Panel;3;3;1;;0.00792;;;0.023774;0.024511;0.007925
+4-640443-0;Female;Copper Alloy;Tin;Green;Green;Nylon;;10;10;1;;0.00254;;;0.0254;0.013208;0.006985
+XF2L-0425-1A;Female;Copper Alloy;Gold;;;;Surface Mount;4;4;;;0.0005;;;0.0069;0.0012;0.00345
+640441-4;Female;Copper Alloy;Tin Lead;White;White;Nylon;;4;4;1;;0.00254;;;0.01016;0.013208;0.006985
+3-640599-6;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;6;6;1;;0.00396;;;0.023774;0.018415;0.009779
+XF2J-2624-11A;Female;;Gold;;;;Surface Mount;26;26;;;0.0005;;;0.0175;0.00415;0.0034
+74441-0017;Female;Copper Alloy;Tin;Black;Black;Plastic;Surface Mount;30;30;2;Right Angle;8,00E-05;Thermoplastic;;0.015;0.00537;0.00795
+3-643817-3;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;3;3;1;;0.00396;;;0.011887;0.018415;0.009017
+3-643819-5;Female;Copper Alloy;Tin;Red;Red;Nylon;;5;5;1;;0.00396;;;0.019812;0.018415;0.009017
+3-640426-7;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;7;7;1;;0.00396;;;0.027737;0.018415;0.009017
+640442-3;;Copper Alloy;Tin Lead;Blue;White;Nylon;;3;3;1;;0.00254;;;0.00762;0.013208;0.006985
+1-111626-9;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;;20;20;2;;0.002;;;0.02517;0.010236;0.005156
+640442-2;Female;Copper Alloy;Tin Lead;Blue;Blue;Nylon;PCB;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+640441-6;Female;Copper Alloy;Tin Lead;;White;Nylon;;6;6;1;;0.00254;;;0.01524;0.013208;0.006985
+3-641535-2;Female;Copper Alloy;Tin;White;White;Nylon;PC Board;2;2;1;;0.00254;;;0.00508;0.013462;0.006985
+640426-5;;Copper Alloy;Tin;Orange;Orange;Nylon;PCB;5;5;1;;0.0039624;;;0.019812;0.009017;0.018415
+84953-4;Female;Phosphor Bronze;Tin;Natural;White;Plastic;Surface Mount;4;4;;Right Angle;0.001;Thermoplastic;;0.01192;0.00256;0.0054
+1-640440-2;Female;Copper Alloy;Tin Lead;;Red;Nylon;;12;12;1;;0.00254;;;0.03048;0.013208;0.006985
+3-643816-5;Female;Copper Alloy;Tin;Green;Green;Nylon;Through Hole;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+4-643817-0;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;10;10;1;;0.00396;;;0.039624;0.009017;0.018415
+2-767004-2;Female;Copper Alloy;Tin Lead;Black;Black;Plastic;Surface Mount;38;38;2;Vertical;0.000635;;;0.0254;0.005994;0.006909
+3-640433-6;Female;Copper Alloy;Tin;Red;Red;Nylon;;6;6;1;;0.00396;;;0.023774;0.018415;0.009017
+640441-3;;Copper Alloy;Tin Lead;White;White;Nylon;PCB;3;3;1;;0.00254;;;0.00762;0.013208;0.006985
+3-640620-2;Female;Copper Alloy;Tin;Red;Red;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.007747
+200277-2;Female;;;Black;Black;Plastic;Panel;50;50;4;;0.00381;;;0.06586;0.01905;0.02324
+3-643819-2;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+3-643817-5;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;5;5;1;;0.00396;;;0.019812;0.018415;0.009017
+XF2J-1024-11A;Female;Copper Alloy;Gold;;;;Surface Mount;10;10;1;;0.0005;;;0.0095;0.00415;0.0034
+74441-0001;Female;Copper Alloy;Tin;Black;;Thermoplastic;Surface Mount;20;20;2;Right Angle;0.0007874;Thermoplastic;;0.011;0.00537;0.00823
+640426-2;Female;Copper Alloy;Tin;Orange;Orange;Nylon;PCB;2;2;1;;0.0039624;;;0.007925;0.009017;0.018415
+640426-3;Female;Copper Alloy;Tin;Orange;Orange;Nylon;PCB;3;3;1;;0.0039624;;;0.011887;0.009017;0.018415
+3-640620-3;Female;Copper Alloy;Tin;Red;Red;Nylon;;3;3;1;;0.00254;;;0.00762;0.013208;0.007747
+487526-2;Male;;;Black;Black;Thermoplastic;;3;3;;;0.00254;;;0.00746;0.01371;0.00248
+3-640426-9;Female;Copper Alloy;Tin;Orange;Orange;Nylon;PCB;9;9;1;;0.00396;;;0.035662;0.018415;0.009017
+1747981-1;Female;Copper Alloy;Gold Flash;Black;Black;Plastic;Surface Mount;19;19;;;;;;0.01155;0.00608;0.015
+1-5747299-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.00274;;;0.03912;0.00808;0.01255
+643813-5;;Copper Alloy;Tin Lead;Red;White;Nylon;Through Hole;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+4-640441-4;Female;Copper Alloy;Tin;White;White;Nylon;;14;14;1;;0.00254;;;0.03556;0.006985;0.013208
+643817-2;;Copper Alloy;Tin Lead;Orange;Orange;Nylon;Through Hole;2;2;1;;0.0039624;;;0.007925;0.018415;0.009017
+485893-2;Female;;;Black;Black;Thermoplastic;;4;4;;;0.00254;;;0.01651;0.005436;0.023622
+3-643813-7;Female;Copper Alloy;Tin;Red;Red;Nylon;;7;7;1;;0.00254;Nylon;;0.01778;0.013208;0.006985
+640428-2;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;PCB;2;2;1;;0.0039624;;;0.007925;0.009017;0.018415
+1-5750913-9;Male;Phosphor Bronze;Gold Flash;Gray;Gray;Thermoplastic;;100;50;2;;0.00127;;;0.07186;;0.00744
+4-640427-0;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;10;10;1;;0.00396;;;0.039624;0.009017;0.018415
+1-84953-4;Female;Phosphor Bronze;Tin;Natural;White;Plastic;Surface Mount;14;14;;Right Angle;0.001;Thermoplastic;;0.02192;0.00256;0.0054
+770343-1;Female;;;Natural;Natural;Nylon;Panel;2;2;;;0.00368;;;0.008636;0.005055;0.020828
+767054-1;Female;Copper Alloy;Tin Lead;Black;Black;Plastic;Surface Mount;38;38;2;Vertical;0.00064;;;0.0254;0.0061;0.00691
+5-5530843-0;Female;Phosphor Bronze;Tin;Black;Black;Polyester;Through Hole;20;10;2;Vertical;0.00254;;;0.032;0.01549;0.009347
+4-640440-5;Female;Copper Alloy;Tin;Red;Red;Nylon;;15;15;1;;0.00254;;;0.0381;0.006985;0.013208
+4-640428-2;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;12;12;1;;0.00396;;;0.047549;0.009017;0.018415
+3-640620-4;Female;Copper Alloy;Tin;Red;Red;Nylon;;4;4;1;;0.00254;;;0.01016;0.013208;0.007747
+3-643815-8;Female;Copper Alloy;Tin;Blue;Blue;Nylon;Through Hole;8;8;1;;0.00254;;;0.02032;0.013208;0.006985
+640441-2;;Copper Alloy;Tin Lead;White;White;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+640440-2;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+640426-8;Female;Copper Alloy;Tin;Orange;Orange;Nylon;PCB;8;8;1;;0.0039624;;;0.031699;0.009017;0.018415
+487378-8;Male;;;Black;Black;Thermoplastic;;9;9;;;0.00254;;;0.0227;0.01371;0.00248
+3-643818-5;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;5;5;1;;0.00396;;;0.019812;0.018415;0.009017
+2-111623-6;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;;50;50;2;;0.002;;;0.05517;0.01024;0.00516
+3-643819-4;Female;Copper Alloy;Tin;Red;Red;Nylon;;4;4;1;;0.00396;;;0.01585;0.018415;0.009017
+640426-6;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;6;6;1;;0.0039624;;;0.023774;0.009017;0.018415
+1-770602-6;Female;;;Natural;White;Nylon;;16;16;1;;0.00254;;;0.041148;0.006604;0.012954
+3-640433-3;Female;Copper Alloy;Tin;Red;Red;Nylon;;3;3;1;;0.00396;;;0.011887;0.018415;0.009017
+487526-7;Male;;;Black;Black;Thermoplastic;;8;8;;;0.00254;;;0.02016;0.01371;0.00248
+4-643813-2;Female;Copper Alloy;Tin;Red;Red;Nylon;;12;12;1;;0.00254;;;0.03048;0.006985;0.013208
+4-640426-2;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;12;12;1;;0.00396;;;0.047549;0.009017;0.018415
+1-746610-9;Male;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;40;40;2;Vertical;0.00254;;;0.055372;0.010058;0.007061
+1-111446-7;Male;Phosphor Bronze;Gold Flash;;Black;Plastic;;50;50;2;Vertical;0.00254;;;0.078029;0.019152;0.008382
+640440-6;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;;6;6;1;;0.00254;;;0.01524;0.013208;0.006985
+XF2J-0624-11A;Female;Copper Alloy;Gold;;;;Surface Mount;6;6;;;0.0005;;;0.0075;0.00415;0.0034
+XF2L-1835-1A;Female;Copper Alloy;Gold;;;;Surface Mount;18;18;;;0.0005;;;0.0139;0.0012;0.00345
+3-643816-3;Female;Copper Alloy;Tin;Green;Green;Nylon;;3;3;1;;0.00254;;;0.00762;0.013208;0.006985
+5179031-5;Male;Brass;Tin;Natural;Natural;Plastic;Surface Mount;120;120;2;Vertical;0.0008;;;0.0538;0.0076;0.005
+3-640427-4;Female;Copper Alloy;Tin;Orange;Yellow;Nylon;PCB;4;4;1;;0.00396;;;0.01585;0.018415;0.009017
+487378-1;Male;;;Black;Black;Thermoplastic;;2;2;;;0.00254;;;0.00492;0.01371;0.00248
+1-88859-0;Male;;;Black;Black;Thermoplastic;;4;4;;;0.00254;;;0.013564;0.00472;0.013716
+3-644083-3;Female;Copper Alloy;Tin;Black;Black;Nylon;;3;3;1;;0.00254;;;0.00762;0.013208;0.006985
+3-640599-2;Female;Copper Alloy;Tin;Orange;Orange;Nylon;PCB;2;2;1;;0.00396;;;0.007925;0.018415;0.009779
+1-5747150-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.00808;0.01255
+4-640428-0;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;10;10;1;;0.00396;;;0.039624;0.009017;0.018415
+5207826-3;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;Metal;;0.03089;0.01217;0.01041
+640440-9;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;PCB;9;9;1;;0.00254;;;0.02286;0.013208;0.006985
+3-640621-2;Female;Copper Alloy;Tin;White;White;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.007747
+1-1658620-0;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;50;50;2;Vertical;0.00254;;;0.068072;0.006096;0.006096
+1658623-3;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;16;16;2;Vertical;0.00254;;;0.024892;0.011786;0.006096
+3-643817-2;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+G17S1500110EU;Female;Brass;Gold;Black;Black;Plastic;Solder;15;15;2;;0.00277;;;0.03924;0.0125;0.01255
+3-641653-8;Female;Copper Alloy;Tin;Red;White;Nylon;;8;8;1;;0.00254;;;0.02032;0.013208;0.007747
+3-644563-3;Female;Copper Alloy;Tin;White;White;Nylon;Through Hole;3;3;1;;0.00254;;;0.00762;0.013208;0.007747
+640426-4;Female;Copper Alloy;Tin;Orange;Orange;Nylon;PCB;4;4;1;;0.0039624;;;0.01585;0.009017;0.018415
+3-640443-4;Female;Copper Alloy;Tin;Green;Green;Nylon;;4;4;1;;0.00254;;;0.01016;0.013208;0.006985
+1-1658622-2;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;64;64;2;Vertical;0.00254;;;0.085852;0.01178;0.006096
+1658620-1;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;10;10;2;Vertical;0.00254;;;0.017272;0.011786;0.006096
+4-643814-2;Female;Copper Alloy;Tin;White;White;Nylon;Through Hole;12;12;1;;0.00254;;;0.03048;0.006985;0.013208
+5554217-4;Female;Copper Alloy;Gold Flash over Nickel;Black;Black;Thermoplastic;Vertical;50;50;;Vertical;;;;0.083947;0.018288;0.015748
+3-644465-8;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;8;8;1;;0.00396;;;0.031699;0.01842;0.00902
+1-487378-3;Male;;;;Black;Thermoplastic;;14;14;;;0.00254;;;0.0354;0.01371;0.00248
+3-643816-8;Female;Copper Alloy;Tin;Green;Green;Nylon;;8;8;1;;0.00254;;;0.02032;0.013208;0.006985
+53884-3;Male;Copper;Silver;Black;Black;Polycarbonate;Flange;1;1;;;;Copper;;0.048082;0.016078;0.016078
+1658620-5;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;24;24;2;Vertical;0.00254;;;0.035052;0.011786;0.006096
+5390377-7;Male;Phosphor Bronze;Tin;Black;Black;Polyester;;68;68;2;;0.00127;;;0.0515;;0.0083
+3-640599-8;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;8;8;1;;0.00396;;;0.031699;0.018415;0.009779
+487526-3;Male;;;Black;Black;Thermoplastic;;4;4;;;0.00254;;;0.01;0.01371;0.00248
+1-487526-9;Male;;;Black;Black;Thermoplastic;;20;20;;;0.00254;;;0.05064;0.01371;0.00248
+3-640427-3;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;PCB;3;3;1;;0.00396;;;0.011887;0.018415;0.009017
+2-111623-1;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;;20;20;2;;0.002;;;0.02517;0.01024;0.00516
+1-1658620-2;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;64;64;2;Vertical;0.00254;;;0.08585;0.01178;0.00609
+3-643819-9;Female;Copper Alloy;Tin;Red;Red;Nylon;;9;9;1;;0.00396;;;0.035662;0.018415;0.009017
+4-640620-2;Female;Copper Alloy;Tin;Red;Red;Nylon;;12;12;1;;0.00254;;;0.03048;0.007747;0.013208
+3-643817-4;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;4;4;1;;0.00396;;;0.01585;0.018415;0.009017
+3-644083-2;Female;Copper Alloy;Tin;Black;Black;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+3-640431-4;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;4;4;1;;0.00396;;;0.01585;0.018415;0.009017
+5745080-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;50;50;3;Vertical;0.00277;;;0.06701;0.01217;0.01313
+640440-8;;Copper Alloy;Tin Lead;Red;Red;Nylon;;8;8;1;;0.00254;;;0.02032;0.013208;0.006985
+5747150-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01216;0.01255
+4-640440-4;Female;Copper Alloy;Tin;Red;Red;Nylon;;14;14;1;;0.00254;;;0.03556;0.006985;0.013208
+3-640599-3;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;3;3;1;;0.00396;;;0.011887;0.018415;0.009779
+1-746610-7;Male;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;30;30;2;Vertical;0.00254;;;0.042672;0.010058;0.007061
+3-640599-5;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;5;5;1;;0.00396;;;0.019812;0.018415;0.009779
+3-640433-4;Female;Copper Alloy;Tin;Red;Red;Nylon;;4;4;1;;0.00396;;;0.01585;0.018415;0.009017
+3-640443-8;Female;Copper Alloy;Tin;Green;Green;Nylon;PCB;8;8;1;;0.00254;;;0.02032;0.013208;0.006985
+3-643815-7;Female;Copper Alloy;Tin;Blue;Blue;Nylon;Through Hole;7;7;1;;0.00254;;;0.01778;0.013208;0.006985
+1-640426-0;Female;Copper Alloy;Tin Lead;;White;Nylon;;10;10;1;;0.0039624;;;0.039624;0.018415;0.00902
+4-643819-0;Female;Copper Alloy;Tin;Red;Red;Nylon;;10;10;1;;0.00396;;;0.039624;0.009017;0.018415
+3-643820-2;Female;Copper Alloy;Tin;White;White;Nylon;;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+643814-2;;Copper Alloy;Tin Lead;White;White;Nylon;Through Hole;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+1658620-9;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;40;40;2;Vertical;0.00254;;;0.055372;0.011786;0.006096
+2-111626-4;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;;8;8;2;;0.002;;;0.01318;0.01024;0.00516
+487526-5;Male;;;Black;Black;Thermoplastic;;6;6;;;0.00254;;;0.01508;0.01371;0.00248
+7-215460-6;Female;Phosphor Bronze;Tin;Red;Red;Polyester;Through Hole;6;6;2;Right Angle;0.00127;Polyester;;0.0097;0.0058;0.0053
+5747144-2;Female;Copper Alloy;Gold over Nickel;Black;Black;Thermoplastic;Through Hole;50;50;3;Vertical;0.002769;;;0.067361;0.012167;0.015748
+640443-2;Female;Copper Alloy;Tin Lead;Green;Green;Nylon;PCB;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+1658620-4;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;20;20;2;Vertical;0.00254;;;0.029972;0.011786;0.006096
+53894-3;Male;;;Green;Green;Polycarbonate;;1;1;;;;;;0.008052;;0.008052
+1-480340-0;Female;;;Natural;Natural;Nylon;;6;6;2;;0.00495;Nylon;;0.017907;0.023622;0.023622
+3-640431-8;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;8;8;1;;0.00396;;;0.031699;0.018415;0.009017
+4-643816-2;Female;Copper Alloy;Tin;Green;Green;Nylon;;12;12;1;;0.00254;;;0.03048;0.006985;0.013208
+207541-7;Male;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;3;3;1;Right Angle;0.005;;;0.03686;0.0127;0.0175
+1658622-4;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;20;20;2;Vertical;0.00254;;;0.029972;0.011786;0.006096
+1658620-3;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;16;16;2;Vertical;0.00254;;;0.024892;0.011786;0.006096
+88859-7;Male;;;Black;Black;Thermoplastic;;14;14;;;0.00254;;;0.038964;0.00472;0.013716
+5188399-1;Male;Phosphor Bronze;Tin;;Gray;Polyester;PCB;154;154;7;Vertical;0.002;;;0.0499;0.01345;0.0154
+1-111446-8;Male;Phosphor Bronze;Gold Flash;;Black;Plastic;;20;20;2;Vertical;0.00254;;;0.039929;0.019152;0.008382
+1658621-5;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;24;24;2;Vertical;0.00254;;;0.035052;0.011786;0.006096
+3-640431-5;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;5;5;1;;0.00396;;;0.019812;0.018415;0.009017
+2-746610-5;Male;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;64;64;2;Vertical;0.00254;;;0.085852;0.010058;0.007061
+3-640433-5;Female;Copper Alloy;Tin;Red;Red;Nylon;;5;5;1;;0.00396;;;0.019812;0.018415;0.009017
+5-520315-8;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;8;8;;Vertical;0.00254;;;0.02522;0.00693;0.00482
+G17S1510110EU;Male;Brass;Gold;Black;Black;Plastic;Solder;15;15;2;;0.00277;;;0.03924;0.0123;0.01255
+650945-5;Male;Brass;Tin Lead;Gray;Gray;Polyester;PC Board;64;96;3;Right Angle;0.00254;;;0.09398;0.0111;0.01262
+1445957-1;;;Tin;Blue;Blue;Polycarbonate;;8;1;;;;;;0.007899;0.024587;0.007899
+1-5745967-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05309;0.00808;0.01255
+1658622-2;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;14;14;2;Vertical;0.00254;;;0.022352;0.011786;0.006096
+1445957-3;;;;White;White;Polycarbonate;;8;1;;;;;;0.007899;0.024587;0.007899
+1-5747150-3;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.00808;0.01255
+2-111626-2;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;PCB;44;44;2;;0.002;;;0.04917;0.01024;0.00516
+1658622-9;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;40;40;2;Vertical;0.00254;;;0.055372;0.011786;0.006096
+5173279-3;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Solder;50;50;4;Vertical;0.00127;Plastic;;0.04445;0.0077;0.0073
+5788801-1;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002761;;;0.05303;0.01255;0.0188
+640441-5;;Copper Alloy;Tin Lead;White;White;Nylon;;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+3-640427-6;Female;Copper Alloy;Tin;Orange;Yellow;Nylon;PCB;6;6;1;;0.00396;;;0.023774;0.018415;0.009017
+4-643817-2;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;12;12;1;;0.00396;;;0.047549;0.009017;0.018415
+10051922-1210ELF;Female;Copper Alloy;Gold;;;;Surface Mount;12;12;;;0.0005;;;0.0085;0.0012;0.0034
+5745112-2;Female;Phosphor Bronze;Tin;Black;Black;Nylon;Through Hole;9;9;2;Right Angle;0.002769;;;0.03081;0.012548;0.026238
+5745116-2;Female;Phosphor Bronze;Tin;Black;Black;Nylon;Through Hole;50;50;3;Right Angle;0.002769;;;0.066929;0.015367;0.029286
+5650461-4;Female;Copper Alloy;Tin;Gray;Gray;Plastic;PC Board;96;96;3;Right Angle;0.00254;;;0.093878;0.01049;0.01758
+3-643816-2;Female;Copper Alloy;Tin;Green;Green;Nylon;Through Hole;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+1658620-8;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;34;34;2;Vertical;0.00254;;;0.047752;0.011786;0.006096
+487545-7;Female;;;Black;Black;Polyester;;10;10;;;0.00127;;;0.013792;0.014859;0.006985
+173977-4;Female;Phosphor Bronze;Tin;Natural;Natural;Plastic;;4;4;1;Straight;0.002;;;0.01;0.004;0.0051
+1-111626-7;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;;10;10;2;;0.002;;;0.01516;0.010236;0.005156
+G17S2510110EU;Male;Brass;Gold;Black;Black;Plastic;Solder;25;25;2;;0.00277;;;0.05304;0.0123;0.01255
+1658620-2;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Surface Mount;14;14;2;Vertical;0.00254;;;0.022352;0.011786;0.006096
+3-640426-6;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;6;6;1;;0.00396;;;0.023774;0.018415;0.009017
+3-640429-2;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+1658609-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;25;25;2;;0.002769;;;0.053086;0.018618;0.012598
+3-640443-7;Female;Copper Alloy;Tin;Green;Green;Nylon;;7;7;1;;0.00254;;;0.01778;0.013208;0.006985
+535090-5;Female;Phosphor Bronze;Tin Lead;Gray;Gray;Polyester;PC Board;96;96;3;Vertical;0.00254;;;0.09398;0.01151;0.01049
+5786554-7;Female;Phosphor Bronze;Gold;Black;Black;Thermoplastic;Solder;68;68;4;Vertical;0.00127;;;0.06388;0.00892;0.01031
+5749111-1;Male;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;;20;20;2;;0.00127;;;0.02106;0.01494;0.00744
+213522-1;Female;;;;Black;;Panel;34;34;4;;;;;0.05207;0.041148;0.021031
+1658620-6;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;26;26;2;Vertical;0.00254;;;0.037592;0.011786;0.006096
+5-5179010-1;Female;Beryllium Copper;Tin;;Natural;Plastic;Surface Mount;40;40;2;Vertical;0.0008;;;0.0218;0.01175;0.0068
+4-643813-5;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;15;15;1;;0.00254;;;0.0381;0.006985;0.013208
+1-5745967-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05309;0.00808;0.01255
+3-644563-2;Female;Copper Alloy;Tin;White;White;Nylon;Through Hole;2;2;1;;0.00254;;;0.00508;0.013208;0.007747
+487526-4;Male;;;Black;Black;Thermoplastic;;5;5;;;0.00254;;;0.01254;0.01371;0.00248
+1-770602-0;Female;;;White;White;Nylon;PCB;10;10;1;;0.00254;;;0.025908;0.006604;0.012954
+770028-1;Female;;;White;White;Nylon;Panel;9;9;;;0.00635;;;0.02032;0.027432;0.021463
+3-644465-4;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;4;4;1;;0.00396;;;0.01585;0.01842;0.00902
+3-643817-6;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;6;6;1;;0.00396;;;0.023774;0.018415;0.009017
+3-640431-2;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+3-644466-2;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;2;2;1;;0.00396;;;0.007925;0.01842;0.00902
+3-644465-2;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;2;2;1;;0.00396;;;0.007925;0.01842;0.00902
+3-641238-5;Male;Copper Alloy;Tin;White;White;Nylon;;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+5749069-5;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Solder;50;50;4;Vertical;0.00127;;;0.05245;0.00892;0.01031
+4-643813-0;Female;Copper Alloy;Tin;Red;Red;Nylon;;10;10;1;;0.00254;;;0.0254;0.006985;0.013208
+3-640427-8;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;PCB;8;8;1;;0.00396;;;0.031699;0.018415;0.009017
+746610-1;Male;Phosphor Bronze;Tin Lead;;Black;Plastic;Through Hole;10;10;2;Vertical;0.00254;;;0.017272;0.010058;0.007061
+5229913-1;Female;Copper Alloy;Gold Flash;Black;Black;Plastic;;50;50;;;;;;0.083312;0.017526;0.015367
+3-640443-6;Female;Copper Alloy;Tin;Green;Green;Nylon;;6;6;1;;0.00254;;;0.01524;0.013208;0.006985
+3-640433-8;Female;Copper Alloy;Tin;Red;Red;Nylon;;8;8;1;;0.00396;;;0.031699;0.018415;0.009017
+1734350-2;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Solder;25;25;2;Right Angle;0.00277;;;0.0531;0.0125;0.0185
+3-640441-7;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;7;7;1;;0.00254;;;0.01778;0.013208;0.006985
+1-5745968-6;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05304;0.00802;0.01255
+3-643819-3;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;3;3;1;;0.00396;;;0.011887;0.018415;0.009017
+3-643816-4;Female;Copper Alloy;Tin;Green;Green;Nylon;Through Hole;4;4;1;;0.00254;Nylon;;0.01016;0.013208;0.006985
+1-747946-5;Male;Phosphor Bronze;Tin;Black;Black;Plastic;;15;15;2;;0.002769;;;0.042799;0.041656;0.016002
+XF2J-1224-11A;Female;Copper Alloy;Gold;;;;Surface Mount;12;12;;;0.0005;;;0.0105;0.00415;0.0034
+3-640427-5;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;PCB;5;5;1;;0.00396;;;0.019812;0.018415;0.009017
+770278-1;Male;;;Natural;Natural;Nylon;;1;1;1;;0.00368;;;0.00762;;0.01905
+5748394-6;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Solder;62;62;3;Right Angle;0.00241;;;0.0694;0.0125;0.02096
+3-640599-9;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;9;9;1;;0.00396;;;0.035662;0.018415;0.009779
+4-643815-0;Female;Copper Alloy;Tin;Blue;Blue;Nylon;Through Hole;10;10;1;;0.00254;;;0.0254;0.006985;0.013208
+5207827-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.00274;;;0.03914;0.01217;0.01041
+5747299-8;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.00274;;;0.03912;0.01216;0.01255
+3-640430-2;Female;Copper Alloy;Tin;Blue;Blue;Nylon;;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+5750913-7;Male;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;68;68;2;;0.00127;;;0.05154;0.01494;0.00744
+7-215079-6;Female;Phosphor Bronze;Tin;Red;Red;Polyester;Through Hole;6;6;2;Straight;0.00127;Polyester;;0.0097;0.0041;0.0051
+3-640620-5;Female;Copper Alloy;Tin;Red;Red;Nylon;;5;5;1;;0.00254;;;0.0127;0.013208;0.007747
+6-520315-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;16;16;;Vertical;0.00254;;;0.04554;0.00693;0.00482
+1-487378-5;Male;;;;Black;Thermoplastic;;16;16;;;0.00254;;;0.04048;0.01371;0.00248
+5745113-2;Female;Phosphor Bronze;Tin;Black;Black;Nylon;Through Hole;15;15;2;Right Angle;0.002769;;;0.039141;0.012548;0.026238
+1-640250-4;Female;;;Natural;White;Nylon;;14;14;1;;0.00396;;;0.055448;0.00635;0.016764
+1218441-1;Male;Brass;Nickel;;Black;Plastic;Solder;9;9;2;Right Angle;;;;0.03081;0.01255;0.01072
+865625PLTXLF;Male;;;;;;Panel;25;25;;;;;;0.05265;0.01744;0.01217
+3-641537-3;Female;Copper Alloy;Tin;Green;Green;Nylon;PC Board;3;3;1;;0.00254;;;0.00762;0.013462;0.006985
+178289-3;Male;;;Black;Black;Polyester;;6;6;2;;0.00381;;;0.02116;0.0228;0.01223
+1-640440-4;;Copper Alloy;Tin Lead;Red;Red;Nylon;;14;14;1;;0.00254;;;0.03556;0.013208;0.006985
+3-640621-8;Female;Copper Alloy;Tin;White;White;Nylon;;8;8;1;;0.00254;;;0.02032;0.013208;0.007747
+SFW12R-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;12;12;;;0.001;;;0.0178;0.0027;0.0055
+5748146-6;Male;Copper Alloy;Gold over Nickel;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05347;0.01183;0.01255
+2-746610-4;Male;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;60;60;2;Vertical;0.00254;;;0.080772;0.010058;0.007061
+640440-5;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;PCB;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+173977-2;Female;Phosphor Bronze;Tin;Natural;Natural;Plastic;PCB;2;2;1;;0.002;;;0.006;0.004;0.0051
+17EHD026SAA000;Female;Copper;Gold;Black;Black;Nylon;Solder;26;26;3;;;;;0.03914;;0.01255
+106081-1;Male;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;77;77;7;Vertical;0.002;;;0.0249;0.01345;0.0154
+1-746610-4;Male;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;16;16;2;Vertical;0.00254;;;0.024892;0.010058;0.007061
+5745074-4;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01209;0.01041
+L77DB25SU;Female;Phosphor Bronze;Gold;Black;Black;Plastic;Solder;25;25;2;;;;;0.05342;;0.01293
+640599-3;Female;Copper Alloy;Tin Lead;Orange;Orange;Nylon;PCB;3;3;1;;0.0039624;;;0.011887;0.009779;0.018415
+643813-2;;Copper Alloy;Tin Lead;Red;Red;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+3-643814-5;Female;Copper Alloy;Tin;Natural;White;Nylon;Solder;5;5;1;;0.00254;Nylon;;0.0127;0.013208;0.006985
+640440-3;;Copper Alloy;Tin Lead;Red;Red;Nylon;;3;3;1;;0.00254;;;0.00762;0.013208;0.006985
+749877-9;Female;Phosphor Bronze;Tin Lead;Black;Black;Thermoplastic;Panel;100;100;2;;0.00127;;;0.0842;0.01504;0.01031
+2-111626-1;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;;40;40;2;;0.002;;;0.04519;0.01024;0.00516
+487545-1;Female;Phosphor Bronze;Gold over Nickel;Black;Black;Polyester;PCB;4;4;;Vertical;0.00127;;;0.006172;0.014859;0.006985
+3-644465-3;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;3;3;1;;0.00396;;;0.011887;0.01842;0.00902
+3-640426-2;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+3-644042-3;Female;Copper Alloy;Gold;Red;Red;Nylon;;3;3;1;;0.00254;;;0.00762;0.01321;0.00699
+3-640601-4;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;4;4;1;;0.00396;;;0.01585;0.018415;0.009779
+3-640431-6;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;6;6;1;;0.00396;;;0.023774;0.018415;0.009017
+4-640443-4;Female;Copper Alloy;Tin;Green;Green;Nylon;;14;14;1;;0.00254;;;0.03556;0.013208;0.006985
+88859-1;Male;;;Black;Black;Thermoplastic;;6;6;;;0.00254;;;0.018644;0.00472;0.013716
+1-5750913-7;Male;Phosphor Bronze;Gold Flash;Gray;Gray;Thermoplastic;;68;68;2;;0.00127;;;0.05154;;0.00744
+747548-9;Female;Phosphor Bronze;Gold Flash;Black;Black;Plastic;;25;25;2;;0.002769;;;0.053416;0.045999;0.012929
+5787169-9;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Solder;100;100;2;Right Angle;0.00254;Steel;;0.0842;0.01031;0.01676
+3-643817-9;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;9;9;1;;0.00396;;;0.035662;0.018415;0.009017
+106015-1;Male;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;110;110;5;Right Angle;0.002;;;0.0499;0.0268;0.0172
+487378-4;Male;;;;Black;Thermoplastic;;5;5;;;0.00254;;;0.01254;0.01371;0.00248
+770602-8;Female;;;Natural;White;Nylon;PCB;8;8;1;;0.00254;;;0.020828;0.006604;0.012954
+3-644540-5;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;5;5;1;;0.00254;;;0.0127;0.013208;0.007747
+1375795-1;Female;Phosphor Bronze;Gold;Black;Black;Nylon;Through Hole;102;104;4;;0.00254;;;0.081534;0.011049;0.009906
+5530843-3;Female;Phosphor Bronze;Tin;Black;Black;Polyester;Solder;36;18;2;Vertical;0.00254;;;0.05232;0.01549;0.009347
+2-5747708-0;Female;Phosphor Bronze;Tin over Copper;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.002769;;;0.053035;0.008077;0.012548
+640428-3;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;PCB;3;3;1;;0.0039624;;;0.011887;0.009017;0.018415
+3-643813-9;;Copper Alloy;Tin;Red;Red;Nylon;;9;9;1;;0.00254;;;0.02286;0.013208;0.006985
+487544-3;Female;;;Black;Black;Polyester;;6;6;;;0.00127;;;0.008712;0.014859;0.002489
+3-643813-6;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;6;6;1;;0.00254;Nylon;;0.01524;0.013208;0.006985
+1-207158-0;Male;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;6;6;2;Vertical;0.005;;;0.01765;0.01179;0.0127
+3-640620-7;Female;Copper Alloy;Tin;Red;Red;Nylon;;7;7;1;;0.00254;;;0.01778;0.013208;0.007747
+3-643820-8;Female;Copper Alloy;Tin;White;White;Nylon;;8;8;1;;0.00396;;;0.031699;0.018415;0.009017
+3-643816-6;Female;Copper Alloy;Tin;Green;Green;Nylon;;6;6;1;;0.00254;;;0.01524;0.013208;0.006985
+5-640440-0;Female;Copper Alloy;Tin;Red;Red;Nylon;;20;20;1;;0.00254;;;0.0508;0.006985;0.013208
+3-640432-5;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;5;5;1;;0.00396;;;0.019812;0.018415;0.009017
+2-5747707-0;Female;Phosphor Bronze;Tin over Copper;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.002743;;;0.039141;0.008966;0.012548
+3-640601-3;Female;Copper Alloy;Tin;Red;Red;Nylon;;3;3;1;;0.00396;;;0.011887;0.018415;0.009779
+1-5749111-0;Male;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;26;26;2;;0.00127;;;0.02487;0.01494;0.00744
+5535090-4;Female;Phosphor Bronze;Gold;;Gray;Plastic;PC Board;96;96;3;Vertical;0.00254;;;0.09398;0.01151;0.01049
+770026-1;Female;;;White;White;Nylon;Panel;4;4;;;0.00635;;;0.02667;0.014732;0.021463
+3-641534-2;Female;Copper Alloy;Tin;Red;Red;Nylon;;2;2;1;;0.00254;;;0.00508;0.013462;0.006985
+643813-4;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;Through Hole;4;4;1;;0.00254;;;0.01016;0.013208;0.006985
+45560-0160;Male;Phosphor Bronze;Gold;Black;;;Surface Mount;16;16;2;Vertical;0.0008;;;0.021;0.00576;0.00903
+5747301-8;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01216;0.01255
+53894-1;Male;;;White;White;Polycarbonate;;1;1;;;;;;0.008052;;0.008052
+4-643814-6;Female;Copper Alloy;Tin;White;White;Nylon;;16;16;1;;0.00254;;;0.04064;0.006985;0.013208
+204503-1;Male;;;;;;;26;26;;;;;;0.039141;;0.012548
+5747470-2;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Right Angle;0.002743;;;0.069317;0.011481;0.024587
+XF2L-3035-1A;Female;Copper Alloy;Gold;;;;Surface Mount;30;30;;;0.0005;;;0.0199;0.0012;0.00345
+5749111-8;Male;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;;100;50;2;Straight;0.00127;Steel;;0.07186;0.01494;0.00947
+643813-6;;Copper Alloy;Tin Lead;Red;Red;Nylon;;6;6;1;;0.00254;;;0.01524;0.013208;0.006985
+3-643813-3;Female;Copper Alloy;Tin;Red;Red;Nylon;;3;3;1;;0.00254;Nylon;;0.00762;0.013208;0.006985
+5205857-1;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002769;;;0.053035;0.012548;0.026137
+3-640443-5;Female;Copper Alloy;Tin;Green;Green;Nylon;;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+749014-1;Male;Brass;Gold Flash;;Black;Polyester;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.003099;0.012548
+4-640442-2;Female;Copper Alloy;Tin;Blue;Blue;Nylon;;12;12;1;;0.00254;;;0.03048;0.006985;0.013208
+6-102398-1;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;;26;26;2;;0.00254;;;0.03302;0.01524;0.006096
+4-640599-0;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;10;10;1;;0.00396;;;0.039624;0.009779;0.018415
+487378-6;Male;;;Black;Black;Thermoplastic;;7;7;;;0.00254;;;0.01762;0.01371;0.00248
+1658623-9;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;40;40;2;Vertical;0.00254;;;0.055372;0.011786;0.006096
+3-640426-3;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;3;3;1;;0.00396;Nylon;;0.011887;0.018415;0.009017
+5-520314-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;4;4;;Right Angle;0.00254;;;0.01506;0.004826;0.008966
+5747838-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002769;;;0.053035;0.012548;0.024765
+3-640443-9;Female;Copper Alloy;Tin;Green;Green;Nylon;;9;9;1;;0.00254;;;0.02286;0.013208;0.006985
+1-5745967-0;Female;Phosphor Bronze;Tin;;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05309;0.00808;0.01255
+1-487378-1;Male;;Gold;;Black;Thermoplastic;;12;12;1;;0.00254;;;0.03032;0.01371;0.00248
+535043-4;Female;Phosphor Bronze;Gold;;Gray;Polyester;PC Board;96;96;3;Vertical;0.00254;;;0.09398;;0.01049
+207584-8;Male;Brass;Tin;Red;Red;Nylon;PCB;10;10;1;Vertical;0.005;;;0.07186;0.0175;0.0127
+1658622-6;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;26;26;2;Vertical;0.00254;;;0.037592;0.011786;0.006096
+207305-1;Female;Copper;;Red;Red;Thermoplastic;Panel;24;24;4;;0.005;;;0.02784;0.04044;0.03302
+5745781-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.002743;Metal;;0.03081;0.012548;0.018796
+5745968-7;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05304;0.01183;0.01255
+10018182-001LF;Female;Copper Alloy;Gold;;;;Through Hole;29;29;1;;;;;0.04575;0.00815;0.0055
+103957-2;Female;Phosphor Bronze;Tin Lead;Black;Black;Thermoplastic;;3;3;1;;0.00254;;;0.007569;0.01524;0.00249
+1658611-2;Male;Phosphor Bronze;Gold over Nickel;Black;Black;Thermoplastic;;25;25;2;;0.002769;;;0.053086;0.018567;0.012598
+1658623-4;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;20;20;2;Vertical;0.00254;;;0.029972;0.011786;0.006096
+5745078-3;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05309;0.01217;0.01041
+5747467-1;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.002743;;;0.03081;0.011481;0.024587
+5530843-6;Female;Phosphor Bronze;Tin;Black;Black;Polyester;Through Hole;56;28;2;Vertical;0.00254;;;0.077724;0.01549;0.009347
+178289-8;Male;;;Black;Black;Polyester;;20;20;2;;0.00381;;;0.04783;0.0228;0.01223
+XF2J-3024-11A;Female;Copper Alloy;Gold;;;;Surface Mount;30;30;1;;0.0005;;;0.0195;0.00415;0.0034
+5747150-8;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01216;0.01255
+3-640428-8;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;8;8;1;;0.00396;;;0.031699;0.018415;0.009017
+3-643818-4;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;4;4;1;;0.00396;;;0.01585;0.018415;0.009017
+5-102398-8;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;Through Hole;20;20;2;;0.00254;;;0.0254;0.01524;0.006096
+865615PLTXLF;Male;;Gold;;;;Panel;15;15;;;;;;0.03876;0.01744;0.01217
+5787394-7;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Solder;68;68;4;Right Angle;0.00127;;;0.06388;0.01031;0.01687
+4-640431-0;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;10;10;1;;0.00396;;;0.039624;0.009017;0.018415
+5207828-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05309;0.01217;0.01041
+485893-8;;;;Black;Black;Thermoplastic;;10;10;;;0.00254;;;0.03175;0.005436;0.023622
+3-643819-8;Female;Copper Alloy;Tin;Red;Red;Nylon;;8;8;1;;0.00396;;;0.031699;0.018415;0.009017
+5787686-1;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06932;0.01242;0.01255
+4-640426-0;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;10;10;1;;0.00396;;;0.039624;0.009017;0.018415
+5749111-6;Male;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Solder;68;68;2;Straight;0.00127;;;0.05154;0.01494;0.00744
+XF2J-0824-11A;Female;;Gold;;;;Surface Mount;8;8;;;0.0005;;;0.0085;0.00415;0.0034
+1658609-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;9;9;2;;0.002769;;;0.030886;0.018618;0.012598
+1658623-6;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;26;26;2;Vertical;0.00254;;;0.037592;0.011786;0.006096
+1-1747981-1;Female;Copper Alloy;Gold Flash;;Black;Plastic;Surface Mount;19;19;;;;;;0.01155;;0.015
+5745114-2;Female;Phosphor Bronze;Tin;;Black;Nylon;Through Hole;25;25;2;Right Angle;0.002769;;;0.053035;0.012548;0.026238
+3-640440-9;Female;Copper Alloy;Tin;Red;Red;Nylon;;9;9;1;;0.00254;;;0.02286;0.013208;0.006985
+100668-1;Male;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;154;154;7;Vertical;0.002;;;0.0499;0.01345;0.0154
+1-480345-0;Male;;;Transparent;Natural;Nylon;;8;8;2;;0.00495;Nylon;;0.02286;0.023622;0.023622
+4-640440-1;Female;Copper Alloy;Tin;Red;Red;Nylon;;11;11;1;;0.00254;;;0.02794;0.006985;0.013208
+1-480439-0;Female;;;Natural;Natural;Nylon;Panel;16;16;2;;0.00508;;;0.042672;0.019939;0.023622
+640440-7;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;Through Hole;7;7;1;;0.00254;;;0.01778;0.013208;0.006985
+5749030-1;Female;Phosphor Bronze;Tin;;Black;Thermoplastic;Through Hole;26;26;3;Vertical;0.00229;Metal;;0.0392;0.0118;0.0125
+87133-2;Female;Phosphor Bronze;;Black;Black;Polyester;;10;10;2;;0.00254;;;0.013106;0.00762;0.01778
+3-640621-4;Female;Copper Alloy;Tin;White;White;Nylon;;4;4;1;;0.00254;;;0.01016;0.013208;0.007747
+5750678-1;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03081;0.01217;0.01255
+1-5747871-3;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.008128;0.012548
+3-643814-4;Female;Copper Alloy;Tin;White;White;Nylon;;4;4;1;;0.00254;Nylon;;0.01016;0.013208;0.006985
+4-643814-0;Female;Copper Alloy;Tin;Natural;White;Nylon;Solder;10;10;1;;0.00254;;;0.0254;0.006985;0.013208
+3-643814-6;Female;Copper Alloy;Tin;White;White;Nylon;;6;6;1;;0.00254;Nylon;;0.01524;0.013208;0.006985
+352152-1;Female;Phosphor Bronze;Gold;;Gray;Polyester;Solder;110;110;5;Right Angle;0.002;;;0.0439;0.0114;0.021
+2-746610-3;Male;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;24;24;2;Vertical;0.00254;;;0.035052;0.010058;0.007061
+3-640429-9;Female;Copper Alloy;Tin;White;White;Nylon;;9;9;1;;0.00396;;;0.035662;0.018415;0.009017
+1-480285-0;Female;;;Natural;Natural;Nylon;Panel;10;10;2;;0.00495;;;0.0254;0.02159;0.02159
+3-643815-5;Female;Copper Alloy;Tin;Blue;Blue;Nylon;;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+207365-7;Male;Brass;Tin;Red;Red;Nylon;Through Hole;3;3;1;Vertical;0.005;;;0.03686;0.0175;0.0127
+1367073-2;Female;Phosphor Bronze;Gold;Black;Black;;Surface Mount;20;20;;;0.0008;;;0.0112;0.0054;0.0074
+1-111626-8;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;Through Hole;14;14;2;;0.002;;;0.01918;0.010236;0.005156
+PX0748/S;Female;Brass;Nickel;Black;;;Screw;4;;;;;;;0.069;;0.0381
+4-640440-6;;Copper Alloy;Tin;Red;Red;Nylon;;16;16;1;;0.00254;;;0.04064;0.006985;0.013208
+3-640429-3;Female;Copper Alloy;Tin;Natural;White;Nylon;Through Hole;3;3;1;;0.00396;;;0.011887;0.018415;0.009017
+770442-1;Female;;;Natural;Natural;Nylon;;4;4;;;0.00368;;;0.008763;0.008763;0.022301
+5552118-1;Female;Copper Alloy;Gold Flash over Nickel;Black;Black;Thermoplastic;Vertical;50;50;;Vertical;;;;0.083312;0.015367;0.018644
+3-641190-3;Female;Copper Alloy;Tin;Red;Red;Nylon;;3;3;1;;0.00254;;;0.00762;0.013208;0.006985
+3-643815-3;Female;Copper Alloy;Tin;Blue;Blue;Nylon;Through Hole;3;3;1;;0.00254;;;0.00762;0.013208;0.006985
+640426-7;Female;Copper Alloy;Tin;Orange;Orange;Nylon;PCB;7;7;1;;0.0039624;;;0.027737;0.009017;0.018415
+1658623-2;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;14;14;2;Vertical;0.00254;;;0.022352;0.011786;0.006096
+3-643817-8;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;8;8;1;;0.00396;;;0.031699;0.018415;0.009017
+5646489-1;Female;Phosphor Bronze;Gold over Nickel;;Gray;Polyester;Through Hole;110;110;5;Right Angle;0.002;;;0.0439;;0.021
+2-745496-0;Male;Phosphor Bronze;Gold over Nickel;Black;Black;Plastic;;25;25;2;;0.002769;;;0.053416;0.022631;0.012929
+5747841-3;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.00274;;;0.03914;0.01255;0.01862
+3-644540-3;Female;Copper Alloy;Tin;Red;Red;Nylon;;3;3;1;;0.00254;;;0.00762;0.013208;0.007747
+7334L2622F01LF;Female;Copper Alloy;Gold;;;;Through Hole;8;8;1;;0.00254;;;0.062;;0.04
+1-173977-2;Female;Phosphor Bronze;Tin;Natural;Natural;Plastic;;12;12;1;;0.002;;;0.026;0.004;0.0051
+485893-4;Female;;;Black;Black;Thermoplastic;;6;6;;;0.00254;;;0.02159;0.005436;0.023622
+1-111446-4;Male;Phosphor Bronze;Gold Flash;;Black;Plastic;;10;10;2;Vertical;0.00254;;;0.027229;0.019152;0.008382
+865625SLTLF;Female;;;;;;;25;25;;;;;;0.05265;0.01735;0.01217
+1-643813-0;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;;10;10;1;;0.00254;;;0.0254;0.01321;0.006985
+487526-9;Male;;;Black;Black;Thermoplastic;;10;10;;;0.00254;;;0.02524;0.01371;0.00248
+4-640427-2;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;12;12;1;;0.00396;;;0.047549;0.009017;0.018415
+3-640428-3;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;3;3;1;;0.00396;;;0.011887;0.018415;0.009017
+5747958-1;Male;;;Black;Black;Nylon;;37;37;;;;;;0.072771;0.018542;0.037262
+5747871-8;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.008128;0.012548
+3-640428-4;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;4;4;1;;0.00396;;;0.01585;0.018415;0.009017
+487545-2;Female;;;Black;Black;Polyester;;5;5;;;0.00127;;;0.007442;0.014859;0.006985
+6-5530843-5;Female;Phosphor Bronze;Tin;Black;Black;Polyester;Through Hole;62;31;2;Vertical;0.00254;;;0.085344;0.01549;0.009347
+5745968-2;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05304;0.01183;0.01255
+3-644540-2;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;2;2;1;;0.00254;;;0.00508;0.013208;0.007747
+749805-8;Male;Brass;Gold Flash;;Black;Nylon;;15;15;2;;;;;0.03922;0.05248;0.01575
+5788797-1;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;;;0.03081;0.01255;0.0188
+XF2L-2235-1A;Male;Copper Alloy;Gold;;;;Surface Mount;22;22;;;0.0005;;;0.0159;0.0012;0.00345
+640442-4;;Copper Alloy;Tin Lead;Blue;Blue;Nylon;;4;4;1;;0.00254;;;0.01016;0.013208;0.006985
+5229912-1;Male;Copper Alloy;Gold Flash;Black;Black;Plastic;;50;50;;;;;;0.083312;0.017526;0.015367
+PX0736/S;Female;Brass;Nickel;Black;;Nylon;Screw;2;2;;;;;;0.069;;0.0381
+101A0-6000EC;Male;Beryllium Copper;Nickel;;Black;Plastic;PC Board;100;100;2;;0.00127;;;0.0728;0.0127;0.0091
+3-640428-5;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;5;5;1;;0.00254;;;0.019812;0.018415;0.009017
+7334L2622F13LF;Female;Copper Alloy;Gold;;Black;;Through Hole;8;8;1;;0.00254;;;0.062;0.01583;0.04
+3-643813-4;Female;Copper Alloy;Tin;Red;Red;Nylon;;4;4;1;;0.00254;Nylon;;0.01016;0.013208;0.006985
+352068-1;Female;Phosphor Bronze;Gold;;Gray;Polyester;Solder;110;110;5;Right Angle;0.002;;;0.0499;0.01225;0.021
+5747840-4;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;Steel;;0.03081;0.01255;0.01862
+3-640599-4;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;4;4;1;;0.00396;;;0.01585;0.018415;0.009779
+5-520315-7;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;7;7;;Vertical;0.00254;;;0.02268;0.00693;0.00482
+5553811-1;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;Through Hole;24;24;;Right Angle;;;;0.05588;0.015748;0.01745
+745032-1;Male;;;Black;;Thermoplastic;;9;9;;;;;;0.019228;;0.017526
+3-640441-4;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;4;4;1;;0.00254;;;0.01016;0.013208;0.006985
+5536501-3;Male;Phosphor Bronze;Tin;;;Plastic;Solder;96;96;4;Vertical;0.002;;;0.047879;0.0136;0.0158
+5748026-1;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.002743;;;0.039141;0.011963;0.012548
+1-5747871-6;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.008128;0.012548
+2-111623-0;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;;16;16;2;;0.002;;;0.02118;0.01024;0.00516
+5745984-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.002743;;;0.039141;0.012548;0.024765
+1-747945-5;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;15;15;2;;0.002769;;;0.042799;0.041656;0.016002
+5745967-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05309;0.01217;0.01255
+3-640443-2;Female;Copper Alloy;Tin;Green;Green;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+SFW5S-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;5;5;;;0.001;;;0.0114;0.0053;0.0036
+640251-6;Female;;;Natural;White;Nylon;;6;6;1;;0.0039624;;;0.023698;0.00635;0.016764
+3-640442-3;Female;Copper Alloy;Tin;Blue;Blue;Nylon;PC Board;3;3;1;;0.00254;;;0.00762;0.013208;0.006985
+1-5747299-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.00274;;;0.03912;0.00808;0.01255
+SFW4R-3STE1LF;Female;Phosphor Bronze;Tin;;Black;;Surface Mount;4;4;;;0.001;;;0.0098;0.0027;0.0055
+88859-9;Male;;;Black;Black;Thermoplastic;;3;3;;;0.00254;;;0.011024;0.00472;0.013716
+1604210-1;Female;;;Natural;Natural;Nylon;Panel;6;6;2;;0.00635;;;0.0203;;0.014
+640250-1;Female;;;Natural;White;Nylon;Through Hole;1;1;1;;0.0039624;;;0.003861;0.00635;0.016764
+5747845-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.002743;;;0.039141;0.012548;0.018796
+3-643819-6;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;6;6;1;;0.00396;;;0.023774;0.018415;0.009017
+3-640442-5;Female;Copper Alloy;Tin;Blue;Blue;Nylon;PC Board;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+5535071-4;Female;Copper Alloy;Tin;;Gray;Plastic;Through Hole;48;48;3;;0.00254;;;0.05334;0.01151;0.01049
+1-480271-0;Female;;;Natural;Natural;Nylon;Panel;6;6;2;;0.00508;;;0.017907;0.023622;0.023622
+487545-5;Female;;;Black;Black;Polyester;;8;8;;;0.00127;;;0.011252;0.014859;0.006985
+3-640621-3;Male;Copper Alloy;Tin;White;White;Nylon;;3;3;1;;0.00254;;;0.00762;0.013208;0.007747
+1-173977-1;Female;Phosphor Bronze;Tin;Natural;Natural;Plastic;;11;11;1;;0.002;;;0.024;0.004;0.0051
+1-747944-6;Male;Phosphor Bronze;Gold Flash;Black;Black;Plastic;;9;9;2;;0.002769;;;0.034417;0.041656;0.016002
+3-640426-8;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;8;8;1;;0.00396;;;0.031699;0.018415;0.009017
+5-102398-1;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;;6;6;2;;0.00254;;;0.00762;0.01524;0.006096
+3-640442-7;Female;Copper Alloy;Tin;Blue;Blue;Nylon;;7;7;1;;0.00254;;;0.01778;0.013208;0.006985
+66900-214LF;Female;Phosphor Bronze;Gold;;Blue;Plastic;;14;14;2;;0.00254;;;0.01829;0.0137;0.00597
+640441-8;Female;Copper Alloy;Tin Lead;White;White;Nylon;PCB;8;8;1;;0.00254;;;0.02032;0.013208;0.006985
+71600-106LF;Female;Phosphor Bronze;Gold;;Gray;Plastic;Solder;6;6;2;;0.00254;;;0.01209;0.013;0.0061
+5552116-1;Male;Copper Alloy;Gold Flash over Nickel;Black;Black;Thermoplastic;Vertical;50;50;;Vertical;;;;0.083312;0.017932;0.01524
+5747840-2;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;;;0.03081;0.01255;0.01862
+3-643818-2;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+5747150-7;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01216;0.01255
+3-644563-5;Female;Copper Alloy;Tin;White;White;Nylon;Through Hole;5;5;1;;0.00254;;;0.0127;0.013208;0.007747
+1-480270-0;Male;;;Natural;Natural;Nylon;Panel;6;6;;;0.00495;Nylon;;0.015494;0.02159;0.02159
+5747872-4;Male;Brass;Tin;;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.002769;;;0.039141;0.008128;0.012548
+487223-1;Male;;;Black;Black;Thermoplastic;Surface Mount;10;10;;;0.00254;;;0.01905;0.01524;0.00749
+SFW30S-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;30;30;;;0.001;;;0.0364;0.0053;0.0036
+5745072-4;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.00274;;;0.03914;0.01209;0.01041
+1734100-4;Male;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;40;40;;Vertical;;;;0.007112;0.010008;0.036754
+4-644563-2;Female;Copper Alloy;Tin;White;White;Nylon;;12;12;1;;0.00254;;;0.03048;0.007747;0.013208
+643817-4;;Copper Alloy;Tin Lead;Orange;Orange;Nylon;Through Hole;4;4;1;;0.0039624;;;0.01585;0.018415;0.009017
+5208006-1;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01209;0.01041
+ID09P33E4GX00LF;Male;Copper Alloy;Gold;Black;Black;Plastic;Screw;9;9;2;;0.00284;;;0.03081;0.01258;0.0185
+106014-1;Male;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;125;125;5;Right Angle;0.002;;;0.0499;0.0268;0.0172
+1-5229913-1;Female;Copper Alloy;Gold Flash;Black;Black;Plastic;;50;50;;;;;;0.083312;0.017526;0.015367
+640427-2;Female;Copper Alloy;Tin Lead;Yellow;Yellow;Nylon;PCB;2;2;1;;0.0039624;;;0.007925;0.009017;0.018415
+2-5174225-5;Male;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Solder;68;68;4;Right Angle;0.00127;;;0.04628;0.0103;0.0173
+SFW10R-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;10;10;;;0.001;;;0.0158;0.0027;0.0055
+5100669-1;Male;Phosphor Bronze;Gold over Nickel;;Gray;Polyester;Through Hole;175;175;7;Vertical;0.002;;;0.0499;0.01345;0.0154
+3-640427-2;Female;Copper Alloy;Tin;Orange;Yellow;Nylon;Through Hole;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+5747190-1;Female;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03081;0.01755;0.01255
+1-104482-5;Female;;;Black;Black;Thermoplastic;;34;34;2;;0.00254;;;0.043129;0.005029;0.01524
+1-480349-0;Male;;;Natural;Natural;Nylon;;1;1;;;0.00508;Nylon;;0.006604;0.022098;0.022098
+5747844-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.002743;Steel;;0.03081;0.012548;0.018796
+3-640426-4;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;4;4;1;;0.00396;;;0.01585;0.018415;0.009017
+5745928-2;Female;Copper Alloy;Gold over Nickel;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.002769;;;0.053035;0.012167;0.012548
+1-745493-6;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;15;15;2;;0.002743;;;0.039522;0.021717;0.012929
+1658623-8;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;34;34;2;Vertical;0.00254;;;0.047752;0.011786;0.006096
+1-487545-2;Female;;;Black;Black;Polyester;;15;15;;;0.00127;;;0.020142;0.014859;0.006985
+553443-4;Female;Copper Alloy;Gold;Natural;Black;Thermoplastic;Vertical;50;50;;Vertical;;;;0.083312;0.015164;0.015113
+640428-4;;Copper Alloy;Tin Lead;Red;Red;Nylon;;4;4;1;;0.0039624;;;0.01585;0.009017;0.018415
+HFW4S-2STE1LF;Female;Phosphor Bronze;Tin;;Black;Plastic;Surface Mount;4;4;;;0.001;;;0.007;0.0053;0.0036
+3-640620-6;Female;Copper Alloy;Tin;Red;Red;Nylon;;6;6;1;;0.00254;;;0.01524;0.013208;0.007747
+5747150-9;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01216;0.01255
+1658622-3;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;16;16;2;Vertical;0.00254;;;0.024892;0.011786;0.006096
+5749721-5;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;50;50;2;Vertical;0.00254;;;0.05245;0.00892;0.01031
+DB5W5SA00LF;Female;;;;;;Solder;5;5;;;;;;0.05265;0.0116;0.01255
+L717DC37PU;Male;Brass;Gold;Black;Black;Plastic;Solder;37;37;2;;;;;0.0697;;0.01293
+1-745203-1;Male;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;9;9;2;;0.002743;;;0.03081;0.021844;0.012929
+5745059-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01217;0.01041
+SLW5R-1C7LF;Female;Phosphor Bronze;Tin;;Black;Nylon;Through Hole;5;5;;;0.001;;;0.0112;0.004;0.0055
+1658623-1;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;10;10;2;Vertical;0.00254;;;0.017272;0.011786;0.006096
+5747841-4;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.00274;;;0.03914;0.01255;0.01862
+3-641537-2;Female;Copper Alloy;Tin;Green;Green;Nylon;PC Board;2;2;1;;0.00254;;;0.00508;0.013462;0.006985
+3-641656-2;Female;Copper Alloy;Tin;Green;Green;Nylon;Through Hole;2;2;1;;0.00254;;;0.00508;0.013208;0.007747
+5747844-3;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.002743;Metal;;0.03081;0.012548;0.018796
+173977-6;Female;Phosphor Bronze;Tin;Natural;Natural;Plastic;;6;6;1;Straight;0.002;;;0.014;0.004;0.0051
+SFW14R-1STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;14;14;;Horizontal;0.001;;;0.0198;0.0027;0.0055
+EAC309;Male;;;;;;Panel;3;;;;;;;0.020472;0.016256;0.024257
+5745967-7;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05309;0.01217;0.01255
+643813-7;Female;Copper Alloy;Tin Lead;Red;White;Nylon;Through Hole;7;7;1;;0.00254;;;0.01778;0.013208;0.006985
+1658621-7;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;30;30;2;Vertical;0.00254;;;0.042672;0.011786;0.006096
+L77DC37SU;Female;Phosphor Bronze;Gold;Black;Black;Plastic;Solder;37;37;2;;;;;0.0697;;0.01293
+1-5747871-4;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.008128;0.012548
+2-5747704-0;Male;Brass;Tin over Copper;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.002769;;;0.053035;0.008026;0.012548
+747840-6;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;;;0.03081;0.01255;0.01862
+2-111623-5;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;Through Hole;44;44;2;;0.002;;;0.04917;0.01024;0.00516
+487378-7;Male;;;;Black;Thermoplastic;;8;8;;;0.00254;;;0.02016;0.01371;0.00248
+1658609-3;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;15;15;2;;0.002769;;;0.039141;0.018618;0.012598
+SFW20R-1STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;20;20;;;0.001;;;0.0258;0.0027;0.0055
+640601-5;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;;5;5;1;;0.0039624;;;0.019812;0.009779;0.018415
+1-745495-7;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;25;25;2;;0.002743;;;0.053416;0.021717;0.012929
+5787683-1;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.00274;;;0.03914;0.01242;0.01255
+5745967-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05309;0.01217;0.01255
+SFW5R-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;5;5;;;0.001;;;0.0108;0.0027;0.0055
+4-644565-0;Female;Copper Alloy;Tin;Green;Green;Nylon;;10;10;1;;0.00254;;;0.0254;0.007747;0.013208
+5535070-4;Female;Copper Alloy;Gold;;Gray;Plastic;Through Hole;48;48;3;Vertical;0.00254;;;0.05334;0.01151;0.01049
+3-640442-2;Female;Copper Alloy;Tin;Blue;Blue;Nylon;PC Board;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+1658622-8;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;34;34;2;Vertical;0.00254;;;0.047752;0.011786;0.006096
+4-640440-3;Female;Copper Alloy;Tin;Red;Red;Nylon;;13;13;1;;0.00254;;;0.03302;0.006985;0.013208
+770355-1;Male;;;Natural;Natural;Nylon;;6;6;1;;0.00368;;;0.01524;0.011303;0.01905
+3-640621-5;Female;Copper Alloy;Tin;White;White;Nylon;;5;5;1;;0.00254;;;0.0127;0.013208;0.007747
+3-640601-6;Female;Copper Alloy;Tin;Red;Red;Nylon;;6;6;1;;0.00396;;;0.023774;0.018415;0.009779
+HFW6R-1STE1LF;Female;Phosphor Bronze;Tin;;Black;Plastic;Surface Mount;6;6;;;0.001;;;0.0086;0.0019;0.0055
+205734-7;Female;Phosphor Bronze;Gold Flash;;Black;Nylon;Through Hole;9;9;2;Vertical;0.00274;;;0.03119;0.0179;0.01293
+10034814-001LF;Female;Copper Alloy;Gold;;;;Surface Mount;22;22;1;;;;;0.0424;0.0055;0.0107
+1-480305-0;Male;;;Natural;Natural;Nylon;Panel;3;3;1;;0.00508;Nylon;;0.020574;0.023622;0.023622
+5650461-5;Female;Copper Alloy;Gold;Gray;Gray;Plastic;Through Hole;96;96;3;Right Angle;0.00254;Polyester;;0.093878;0.01049;0.01758
+5747190-2;Female;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03081;0.01755;0.01255
+G17S2500110EU;Female;Brass;Gold;Black;Black;Plastic;Solder;25;25;2;;0.00277;;;0.05304;0.0125;0.01255
+1-745496-9;Male;Phosphor Bronze;Gold over Nickel;Black;Black;Plastic;;25;25;2;;0.002769;;;0.053416;0.022631;0.012929
+1-480698-0;Male;;;Transparent;Natural;Nylon;;2;2;1;Straight;0.00635;Nylon;;0.01473;0.01397;0.02743
+5787170-5;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;PC Board;50;50;2;Right Angle;0.00127;Thermoplastic;;0.05245;0.01031;0.01676
+3-643813-5;Female;Copper Alloy;Tin;Red;Red;Nylon;;5;5;1;;0.00254;Nylon;;0.0127;0.013208;0.006985
+3-644467-4;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;4;4;1;;0.00396;;;0.01585;0.01842;0.00978
+1658611-4;Male;Phosphor Bronze;Gold over Nickel;Black;Black;Thermoplastic;;9;9;2;;0.002769;;;0.030886;0.018567;0.012598
+5747844-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.002743;Steel;;0.03081;0.012548;0.018796
+207543-1;Female;;;Red;Red;Thermoplastic;Solder;16;16;1;;0.005;;;0.01165;0.0867;0.0337
+2-111623-2;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;;26;26;2;;0.002;;;0.03117;0.01024;0.00516
+62684-452100ALF;Female;Phosphor Bronze;Gold;;Beige;Plastic;Surface Mount;45;45;;;0.0005;;;0.028;0.002;0.005
+204511-1;Male;;;;;;;104;104;;;;;;0.069317;;0.016967
+3-640433-2;Female;Copper Alloy;Tin;Red;Red;Nylon;;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+643818-9;Female;Copper Alloy;Tin Lead;Yellow;Yellow;Nylon;Through Hole;9;9;1;;0.0039624;;;0.035662;0.018415;0.009017
+3-644563-6;Female;Copper Alloy;Tin;White;White;Nylon;Through Hole;6;6;1;;0.00254;;;0.01524;0.013208;0.007747
+71600-008LF;Female;Phosphor Bronze;Gold over Nickel;Gray;Gray;Plastic;;8;8;2;;0.00254;;;0.01463;0.013;0.0061
+10051922-1510ELF;Female;Copper Alloy;Gold;;;;Surface Mount;15;15;;;0.0005;;;0.01;0.0012;0.0034
+87175-2;Female;Phosphor Bronze;;Black;Black;Polyester;;1;1;1;;0.00254;;;0.002743;0.00444;0.01778
+5745410-7;Male;Brass;Tin;Black;Black;Plastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.010719;0.012548
+1658610-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;9;9;2;;0.002769;;;0.030886;0.018618;0.012598
+747375-2;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01183;0.01255
+643816-4;Female;Copper Alloy;Tin Lead;Green;White;Nylon;Through Hole;4;4;1;;0.00254;;;0.01016;0.013208;0.006985
+2-111626-3;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;PCB;50;50;2;;0.002;;;0.05517;0.01024;0.00516
+173977-3;Female;Phosphor Bronze;Tin;Natural;Natural;Plastic;;3;3;1;;0.002;;;0.008;0.004;0.0051
+3-640620-8;Female;Copper Alloy;Tin;Red;Red;Nylon;;8;8;1;;0.00254;;;0.02032;0.013208;0.007747
+3-641216-5;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;5;5;1;Right Angle;0.00254;;;0.0127;0.007493;0.005715
+3-643814-8;Female;Copper Alloy;Tin;Natural;White;Nylon;Solder;8;8;1;;0.00254;Nylon;;0.02032;0.013208;0.006985
+5229913-4;Female;Copper Alloy;Gold Flash;Gray;Gray;Plastic;;50;50;;;;;;0.083312;0.017526;0.015367
+5747845-5;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.002743;;;0.039141;0.012548;0.018796
+5747844-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.002743;;;0.03081;0.012548;0.018796
+5747846-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002769;;;0.053035;0.012548;0.018796
+1-640441-2;Female;Copper Alloy;Tin Lead;White;White;Nylon;;12;12;1;;0.00254;;;0.03048;0.013208;0.006985
+L77DA15SU;Female;Bronze;Gold;Black;Black;Plastic;Solder;15;15;2;;;;;0.03952;;0.01293
+865609PLTXLF;Male;;Gold;;;;;9;9;;;;;;0.03043;0.01744;0.01217
+3-640441-9;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;9;9;1;;0.00254;;;0.02286;0.013208;0.006985
+3-644540-8;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;8;8;1;;0.00254;;;0.02032;0.013208;0.007747
+1-1658622-0;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;50;50;2;Vertical;0.00254;;;0.068072;0.01178;0.006096
+5749111-7;Male;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;;80;80;2;;0.00127;;;0.05916;0.01494;0.00947
+4-640441-3;Female;Copper Alloy;Tin;White;White;Nylon;;13;13;1;;0.00254;;;0.03302;0.006985;0.013208
+640251-3;Female;;;Natural;White;Nylon;;3;3;1;;0.0039624;;;0.011811;0.00635;0.016764
+SFW12R-1STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;12;12;;;0.001;;;0.0178;0.0027;0.0055
+5747236-4;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.00274;;;0.03914;0.01255;0.01862
+100143-1;Male;Phosphor Bronze;Gold;;Gray;Plastic;Through Hole;110;110;5;Vertical;0.002;;;0.0499;0.01345;0.0154
+770029-1;Female;;;White;White;Nylon;Panel;12;12;;;0.00635;;;0.02667;0.027432;0.021463
+5747872-8;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.002769;;;0.039141;0.008128;0.012548
+FH28-40S-0.5SH(05);Female;Phosphor Bronze;Gold;;;;Surface Mount;40;40;;;0.0005;;;0.0249;0.00255;0.0065
+770277-1;Female;;;Natural;Natural;Nylon;;1;1;;;0.00368;;;0.00762;;0.019939
+5749070-7;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;PC Board;68;68;2;Vertical;0.00254;Thermoplastic;;0.06388;0.00871;0.01031
+5747840-3;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;;;0.03081;0.01255;0.01862
+5748612-1;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.002769;;;0.053035;0.012217;0.012548
+5745784-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Right Angle;0.002769;;;0.069317;0.012548;0.018796
+3-643818-6;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;6;6;1;;0.00396;;;0.023774;0.018415;0.009017
+5-520315-9;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;;Vertical;0.00254;;;0.02776;0.00693;0.00482
+HM2R10PA5108N9LF;Female;;Gold;;;;Through Hole;110;110;5;;0.002;;;0.05;0.01225;0.02095
+4-643814-4;;Copper Alloy;Tin;White;White;Nylon;;14;14;1;;0.00254;;;0.03556;0.006985;0.013208
+5745967-8;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05309;0.01217;0.01255
+207018-1;Female;Copper;;Red;Red;Thermoplastic;Panel;12;12;3;;0.005;;;0.0238;0.02979;0.03302
+3-644540-4;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;4;4;1;;0.00254;;;0.01016;0.013208;0.007747
+1-746610-6;Male;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;26;26;2;Vertical;0.00254;;;0.037592;0.010058;0.007061
+88859-3;;;;Black;Black;Thermoplastic;;10;10;;;0.00254;;;0.028804;0.00472;0.013716
+207153-1;Female;Copper;;Red;Red;Thermoplastic;Panel;6;6;2;;0.005;;;0.01786;0.02601;0.03302
+1-207441-0;Male;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;9;9;3;Vertical;0.005;;;0.01778;0.01179;0.01872
+640427-3;Female;Copper Alloy;Tin Lead;Yellow;Yellow;Nylon;PCB;3;3;1;;0.0039624;;;0.011887;0.009017;0.018415
+487545-3;Female;;;Black;Black;Polyester;;6;6;;;0.00127;;;0.008712;0.014859;0.006985
+188834-1;Male;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;154;154;7;Vertical;0.002;;;0.0499;0.01345;0.0154
+172167-1;Male;;;Natural;Natural;Nylon;Panel;4;4;2;;0.0042;Nylon;;0.009804;0.009804;0.023698
+229975-1;Female;Copper Alloy;Gold Flash;Black;Black;Plastic;;50;50;;;;;;0.083312;0.017526;0.015367
+207397-1;Female;;;Red;Red;Thermoplastic;Solder;10;10;1;;0.005;;;0.01232;0.0613;0.0337
+5745077-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.00274;;;0.03914;0.01217;0.01041
+4610-6351;Male;Copper Alloy;Gold;Gray;Gray;Plastic;;10;10;2;;0.00254;;;0.0229;0.01334;0.0084
+552313-1;Female;Copper Alloy;Gold Flash;Blue;Black;Thermoplastic;;24;24;;;;;;0.055245;0.017526;0.015367
+6-102398-5;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;;34;34;2;;0.00254;;;0.04318;0.01524;0.006096
+1-487223-0;Male;;;Black;Black;Thermoplastic;;40;40;;;0.00254;;;0.05715;0.01524;0.00749
+2-747706-0;Female;Phosphor Bronze;Tin over Copper;;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.008077;0.012548
+3-640428-2;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+3-643813-8;Female;Copper Alloy;Tin;Red;Red;Nylon;;8;8;1;;0.00254;;;0.02032;0.013208;0.006985
+1218434-2;Female;Brass;Nickel;;Black;Plastic;Solder;15;15;2;Right Angle;;;;0.03914;0.01255;0.01072
+4-643813-4;Female;Copper Alloy;Tin;Red;Red;Nylon;;14;14;1;;0.00254;;;0.03556;0.006985;0.013208
+1-640428-2;;Copper Alloy;Tin Lead;Red;Red;Nylon;;12;12;1;;0.0039624;;;0.047549;0.018415;0.00902
+5745352-4;Male;Brass;Tin;Black;Black;Nylon;Through Hole;15;15;2;Right Angle;0.002743;;;0.039141;0.012548;0.026035
+1-5229912-1;Male;Copper Alloy;Gold Flash;Black;Black;Plastic;;50;50;;;;;;0.083312;0.017526;0.015367
+552285-1;Male;Copper Alloy;Gold Flash;Blue;Black;Thermoplastic;;64;64;;;;;;0.098425;0.017526;0.015367
+4-640620-0;Female;Copper Alloy;Tin;Red;Red;Nylon;;10;10;1;;0.00254;;;0.0254;0.007747;0.013208
+4795.0000;Female;;;Black;;Thermoplastic;Quick Connect;2;;;Straight;;;;0.057;0.023;0.03
+5747375-2;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01183;0.01255
+1761028-5;Female;Phosphor Bronze;Gold Flash;;Black;Thermoplastic;Solder;100;100;2;Right Angle;0.00127;;;0.0842;0.01031;0.01687
+3-643815-4;Female;Copper Alloy;Tin;Black;Blue;Nylon;;4;4;1;;0.00254;;;0.01016;0.013208;0.006985
+89124-0101;Female;Phosphor Bronze;Gold;;Gray;Plastic;;24;24;2;;0.00254;;;0.0351;0.0106;0.0061
+487378-5;Male;;;Black;Black;Thermoplastic;;6;6;;;0.00254;;;0.01508;0.01371;0.00248
+644465-2;Female;Copper Alloy;Tin Lead;Orange;Orange;Nylon;Through Hole;2;2;1;;0.0039624;;;0.007925;0.018415;0.009779
+3-643814-2;Female;Copper Alloy;Tin;White;White;Nylon;;2;2;1;;0.00254;Nylon;;0.00508;0.013208;0.006985
+5745182-2;Male;Brass;Gold Flash;Black;Black;Plastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.010719;0.012548
+17EHD044PAA000;Male;Copper;Gold;Black;Black;Nylon;Solder;44;44;3;;;;;0.05304;;0.01255
+641653-8;Female;Copper Alloy;Tin Lead;Red;White;Nylon;PCB;8;8;1;;0.00254;;;0.02032;0.013208;0.007747
+5747091-2;Female;Copper Alloy;Gold over Nickel;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03081;0.01216;0.01255
+1-111623-8;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;Through Hole;10;10;2;;0.002;;;0.01516;0.010236;0.005156
+5749069-7;Female;Phosphor Bronze;Gold Flash;;Black;Thermoplastic;PC Board;68;68;2;Vertical;0.00254;Thermoplastic;;0.06388;0.00892;0.01031
+745071-2;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01209;0.01041
+1-5747150-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.00808;0.01255
+5745438-1;Female;Phosphor Bronze;Gold Flash;Black;Black;Nylon;Through Hole;9;9;2;Right Angle;0.002743;;;0.03081;0.012548;0.023444
+3-641237-2;;Copper Alloy;Tin;Red;Red;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+FWFTV21N;Female;;Nickel;Black;Natural;;Panel;6;6;;;;;;0.03096;0.03383;0.03096
+5749069-2;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Solder;26;26;4;Vertical;0.00127;;;0.03721;0.00892;0.01031
+1-746610-5;Male;Phosphor Bronze;Tin;Black;Black;Plastic;Board;20;20;2;Vertical;0.00254;;;0.029972;0.010058;0.007061
+3-338309-2;Male;Phosphor Bronze;Tin;Black;Black;Polyester;Through Hole;9;9;2;Vertical;0.00274;Steel;;0.0309;0.0117;0.0126
+6-102398-8;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;Through Hole;40;40;2;;0.00254;;;0.0508;0.01524;0.006096
+5205858-1;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002769;;;0.053035;0.012548;0.026238
+5-102398-2;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;Through Hole;8;8;2;;0.00254;;;0.01016;0.01524;0.006096
+1-640512-0;Male;;;Red;Red;Nylon;Panel;12;12;;;0.004191;Nylon;;0.019939;;0.026924
+4-644540-2;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;12;12;1;;0.00254;;;0.03048;0.007747;0.013208
+746610-3;Male;Phosphor Bronze;Tin Lead;Black;Black;Thermoplastic;Through Hole;16;16;2;Vertical;0.00254;;;0.024892;0.010058;0.007061
+3-643814-7;Female;Copper Alloy;Tin;White;White;Nylon;Through Hole;7;7;1;;0.00254;;;0.01778;0.013208;0.006985
+5745781-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.002743;;;0.03081;0.012548;0.018796
+5747846-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002769;;;0.053035;0.012548;0.018796
+1658620-7;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;30;30;2;Vertical;0.00254;;;0.042672;0.011786;0.006096
+1-640251-0;Female;;;Natural;White;Nylon;Through Hole;10;10;1;;0.0039624;;;0.039573;0.00635;0.016764
+4-643818-0;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;10;10;1;;0.00396;;;0.039624;0.009017;0.018415
+5747250-6;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;;;0.03081;0.01255;0.01862
+87977-2;Female;Beryllium Copper;;Black;Black;Nylon;Through Hole;8;8;2;;0.00254;;;0.01016;0.006096;0.01524
+207304-1;Male;Copper;;Red;Red;Thermoplastic;Panel;24;24;4;;0.005;;;0.02784;0.04044;0.02715
+5747842-4;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.00277;Steel;;0.05304;0.01255;0.01875
+172166-1;Male;;;Transparent;Natural;Nylon;;3;3;1;;0.0042;Nylon;;0.013995;0.005588;0.023698
+749877-7;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Panel;68;68;2;;0.00127;;;0.06388;0.01504;0.01031
+2-5178238-8;Female;Copper Alloy;Tin;Black;Black;Nylon;Through Hole;68;68;;Vertical;;;;0.06383;0.0094;0.011645
+770019-1;Male;;;White;White;Nylon;;4;4;;;0.00635;;;0.02667;0.014732;0.021463
+5536053-5;Male;Brass;Tin;;Gray;Plastic;Solder;32;32;2;Right Angle;0.00254;;;0.05334;0.00856;0.01262
+1-1318300-4;Male;Brass;Tin;Natural;Natural;Plastic;Through Hole;4;4;1;Vertical;0.00396;Brass;;0.01578;0.003;0.0085
+5622-4100-ML;Male;Copper Alloy;Gold;;Black;Plastic;Through Hole;22;22;1;;0.00127;;;0.04276;0.0056;0.011
+1-747948-6;Male;Phosphor Bronze;Tin;Black;Black;Plastic;;25;25;2;;0.002769;;;0.056134;0.041656;0.016002
+SFW6R-1STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;6;6;;;0.001;;;0.0118;0.0027;0.0055
+HLW16R-2C7LF;Female;Phosphor Bronze;Tin;;Black;Plastic;Through Hole;16;16;;;0.001;;;0.0186;0.0039;0.0059
+1-1658622-1;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;60;60;2;Vertical;0.00254;;;0.080772;0.01178;0.006096
+5179029-2;Male;Brass;Tin;Natural;Natural;;Surface Mount;60;60;2;Vertical;0.0008;;;0.0298;0.006;0.006
+3-644540-6;Female;Copper Alloy;Tin;Red;Red;Nylon;;6;6;1;;0.00254;;;0.01524;0.013208;0.007747
+89947-710LF;Female;Phosphor Bronze;Gold over Nickel;;Black;Plastic;Surface Mount;10;10;2;;0.002;;;0.0146;0.0075;0.0041
+640621-5;;Copper Alloy;Tin Lead;White;White;Nylon;;5;5;1;;0.00254;;;0.0127;0.013208;0.007747
+3-640622-2;Female;Copper Alloy;Tin;Blue;Blue;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.007747
+5747375-8;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01183;0.01255
+5530843-5;Female;Phosphor Bronze;Tin;Black;Black;Polyester;Through Hole;50;25;2;Vertical;0.00254;;;0.070104;0.01549;0.009347
+1658622-5;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;24;24;2;Vertical;0.00254;;;0.035052;0.011786;0.006096
+443975-1;Female;Brass;Gold;;;Plastic;Solder;9;9;2;Vertical;;;;0.03081;0.01486;0.01255
+746610-2;Male;Phosphor Bronze;Tin Lead;Black;Black;Plastic;Through Hole;14;14;2;Vertical;0.00254;;;0.022352;0.010058;0.007061
+1658614-1;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;37;37;2;;0.00276;Thermoplastic;;0.069393;0.018618;0.012598
+3-640441-3;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;3;3;1;;0.00254;;;0.00762;0.013208;0.006985
+4-643814-5;Female;Copper Alloy;Tin;White;White;Nylon;;15;15;1;;0.00254;;;0.0381;0.006985;0.013208
+L77DD50S;Female;Brass;Gold;Black;Black;Plastic;Solder;50;50;2;;;;;0.06731;0.01115;0.01575
+5745183-2;Female;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;9;9;2;Vertical;0.00277;;;0.03081;0.01768;0.01255
+3-640595-3;Female;Copper Alloy;Tin;Blue;Blue;Nylon;;3;3;1;;0.00396;;;0.011887;0.018415;0.009779
+SFW16S-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;16;16;;;0.001;;;0.0224;0.0053;0.0036
+2-5178238-1;Female;Copper Alloy;Tin;Black;Black;Nylon;Through Hole;14;14;;Vertical;;;;0.02954;0.0094;0.011645
+106773-1;Female;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;110;110;5;Vertical;0.002;;;0.0499;0.012;0.01225
+5788792-1;Male;Copper Alloy;Tin;Black;Black;Nylon;Through Hole;9;9;2;Right Angle;0.00274;;;0.03081;0.01255;0.01862
+1658622-7;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;30;30;2;Vertical;0.00254;;;0.042672;0.011786;0.006096
+1-640511-0;Male;;;Red;Red;Nylon;Panel;9;9;;;0.004191;Nylon;;0.015748;;0.026924
+3-643821-2;Female;Copper Alloy;Tin;Blue;Blue;Nylon;;2;2;1;;0.00396;;;0.007925;0.018415;0.009017
+7810-0000PR;Male;Beryllium Copper;Gold;Gray;Gray;Plastic;Solder;10;10;2;;0.00254;Polyester;;0.0178;0.0073;0.007
+D25P33E4GV00LF;Male;Copper Alloy;Gold;Black;Black;Plastic;Solder;25;25;2;;0.00276;;;0.05303;0.01258;0.0183
+1-5745968-3;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05304;0.00802;0.01255
+1-1734099-0;Male;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;100;100;;Right Angle;0.00127;;;0.07343;0.0075;0.01746
+643819-5;;Copper Alloy;Tin Lead;Red;Red;Nylon;Through Hole;5;5;1;;0.0039624;;;0.019812;0.018415;0.009017
+640250-9;Female;;;Natural;White;Nylon;;9;9;1;;0.00396;;;0.035611;0.00635;0.016764
+487378-3;Male;;;Black;Black;Thermoplastic;;4;4;;;0.00254;;;0.01;0.01371;0.00248
+2-111196-8;Female;Copper Alloy;Tin;Black;Black;Thermoplastic;;24;24;2;;0.00127;;;0.021844;0.01473;0.00645
+5745783-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002769;;;0.053035;0.012548;0.018796
+1658621-8;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;34;34;2;Vertical;0.00254;;;0.047752;0.011786;0.006096
+5749070-9;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;100;100;4;Vertical;0.00127;;;0.0642;0.00871;0.01031
+1658610-3;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;15;15;2;;0.002769;;;0.039141;0.018618;0.012598
+4-640428-3;Female;Copper Alloy;Tin;Red;Red;Nylon;;13;13;1;;0.00396;;;0.051511;0.009017;0.018415
+DE09P064TXLF;Male;Copper Alloy;Gold;Natural;;Plastic;Solder;9;9;2;;0.00274;;;0.03043;0.01099;0.01217
+1-5745968-4;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05304;0.00802;0.01255
+1-745493-5;Female;Phosphor Bronze;Gold Flash;Black;Black;Plastic;;15;15;2;;0.002743;;;0.039522;0.021717;0.012929
+1-5747872-6;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.002743;;;0.039141;0.008128;0.012548
+188835-1;Male;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;154;154;7;Vertical;0.002;;;0.0439;0.01345;0.0154
+644752-2;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;2;2;1;Vertical;0.0039624;;;0.007925;0.010795;0.007747
+5788796-3;Female;Copper Alloy;Tin;;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;;;0.03081;0.01255;0.0188
+62684-401100ALF;Female;Phosphor Bronze;Gold;;Beige;Plastic;Surface Mount;40;40;;Horizontal;0.0005;;;0.0255;0.002;0.005
+XF2J-1624-11A;Female;;Gold;;;;Surface Mount;16;16;;;0.0005;;;0.0125;0.00415;0.0034
+204504-1;Female;;;;;;;44;44;;;;;;0.053035;;0.012548
+2-5767004-4;Female;Copper Alloy;Tin;Black;Black;Plastic;Surface Mount;114;114;2;Vertical;0.000635;;;0.0508;0.00599;0.00691
+5177983-1;Female;Beryllium Copper;Tin;;Natural;Plastic;Surface Mount;40;40;2;Vertical;0.0008;;;0.0218;0.005;0.0038
+1658610-1;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;37;37;2;;0.002769;;;0.069393;0.018618;0.012598
+5787685-1;Female;Phosphor Bronze;Tin;;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06932;0.01242;0.01255
+770274-1;Female;Phosphor Bronze;Tin;Natural;Natural;Nylon;;4;4;1;;0.00368;;;0.016129;0.005055;0.019939
+8-487937-0;;;;Black;Black;Thermoplastic;;80;80;;;0.00127;;;0.051994;0.014859;0.009525
+1-640440-5;;Copper Alloy;Tin Lead;Red;Red;Nylon;;15;15;1;;0.00254;;;0.0381;0.013208;0.006985
+3-640443-3;Female;Copper Alloy;Tin;Green;Green;Nylon;;3;3;1;;0.00254;Nylon;;0.00762;0.013208;0.006985
+5650861-5;Female;Copper Alloy;Tin;Gray;Gray;Plastic;Solder;64;64;2;Vertical;0.00254;;;0.09398;0.01151;0.00795
+207017-1;Male;Copper;;Red;Red;Nylon;Panel;12;12;3;;0.005;;;0.0238;0.02979;0.02715
+929504-4;Female;;;Black;Black;;;10;10;;;;;;0.02;0.004;0.026
+5207841-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01217;0.01041
+1658623-5;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;24;24;2;Vertical;0.00254;;;0.035052;0.011786;0.006096
+5787082-7;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Solder;68;68;2;Right Angle;0.00254;;;0.06388;0.01031;0.01687
+2-644861-4;Male;Copper Alloy;Tin;Black;White;Polyester;Through Hole;4;4;1;Vertical;0.00254;;;0.012294;0.010414;0.000484
+SLW4S-1C7LF;Female;Phosphor Bronze;Tin;;Black;Nylon;Through Hole;4;4;;;0.001;;;0.0102;0.0055;0.004
+FH28-60S-0.5SH(05);Female;Phosphor Bronze;Gold;;;;Surface Mount;60;60;;;0.0005;;;0.0349;0.00255;0.0065
+106774-1;Female;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;125;125;5;Vertical;0.002;;;0.0499;0.012;0.013
+535032-4;Female;Phosphor Bronze;Gold Flash;Gray;Gray;Polyester;PC Board;96;96;3;Vertical;0.00254;;;0.09398;0.01151;0.010592
+5747462-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Right Angle;0.002743;;;0.069317;0.011481;0.024689
+556879-3;Male;Copper;Tin;Black;Black;Polycarbonate;;3;3;1;;;;;0.032588;0.036652;0.009423
+205733-1;Male;Brass;Tin over Nickel;Black;Black;Nylon;Through Hole;9;9;2;Vertical;0.002743;;;0.031191;;0.012929
+3-644465-6;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;6;6;1;;0.00396;;;0.023774;0.01842;0.00902
+5747842-6;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.00277;;;0.05304;0.01255;0.01875
+5745071-2;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01209;0.01041
+5786555-7;Female;Phosphor Bronze;Gold;Black;Black;Thermoplastic;Solder;68;68;4;Vertical;0.00127;;;0.06388;0.00871;0.01031
+1-1658622-3;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;44;44;2;Vertical;0.00254;;;0.060452;0.01178;0.006096
+MUSBA31130;Female;Phosphor Bronze;Gold;Black;Black;;Screw;4;4;;Right Angle;;;;0.04721;0.018;0.03
+5-5530843-4;Female;Phosphor Bronze;Tin;Black;Black;Polyester;Through Hole;40;20;2;Vertical;0.00254;;;0.0574;0.01549;0.009347
+204509-1;Male;;;;;;Panel;78;78;;;;;;0.066929;;0.015367
+172169-1;Male;;;Natural;Natural;Nylon;;9;9;;;0.0041402;Nylon;;0.013995;0.013995;0.023698
+5745396-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.002743;;;0.039141;0.011481;0.018796
+1-745497-5;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;37;37;2;;0.002769;;;0.069698;0.021717;0.012929
+5747834-4;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.00277;;;0.05304;0.01255;0.02464
+5745414-1;Male;Brass;Tin;Black;Black;Plastic;Through Hole;50;50;3;Vertical;0.002769;;;0.066929;0.01082;0.015367
+5535043-5;Female;Phosphor Bronze;Gold;;Gray;Plastic;PC Board;96;96;3;Vertical;0.00254;;;0.09398;0.01151;0.01049
+3-643820-7;Female;Copper Alloy;Tin;White;White;Nylon;Through Hole;7;7;1;;0.00396;;;0.027737;0.018415;0.009017
+1734100-7;Male;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;68;68;;Vertical;;;;0.007112;0.010008;0.054534
+5749721-7;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Solder;68;68;2;Vertical;0.00254;;;0.06388;0.00892;0.01031
+5745079-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01217;0.01041
+5-747913-2;Female;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Solder;25;25;2;;0.00277;Steel;;0.0531;0.0119;0.0125
+211150-1;Male;;;Black;Black;Polyester;Panel;25;25;5;;0.00508;Polyester;;0.06253;0.0381;0.03078
+1-1658621-1;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;60;60;2;Vertical;0.00254;;;0.080772;0.01178;0.006096
+102387-4;Female;Beryllium Copper;;Black;Black;Thermoplastic;Through Hole;20;20;2;;0.00254;;;0.029972;0.01524;0.005766
+1658615-4;Male;Phosphor Bronze;Tin over Nickel;Black;Black;Thermoplastic;;9;9;2;;0.00276;Thermoplastic;;0.030886;0.018567;0.012598
+5536603-1;Male;Phosphor Bronze;Tin;;Natural;;Through Hole;8;8;4;Vertical;0.002;;;0.011836;0.017;0.015799
+71600-610LF;Female;Phosphor Bronze;Gold;Gray;Gray;Plastic;;10;10;2;;0.00254;;;0.01717;0.013;0.0061
+5530843-7;Female;Phosphor Bronze;Tin;Black;Black;Polyester;Through Hole;60;30;2;Vertical;0.00254;;;0.082804;0.01549;0.009347
+L717DA15PU;Male;Brass;Gold;Black;Black;Plastic;Solder;15;15;2;;;;;0.03952;;0.01293
+640443-8;Female;Copper Alloy;Tin Lead;Green;Green;Nylon;PCB;8;8;1;;0.00254;;;0.02032;0.013208;0.006985
+5747301-7;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01216;0.01255
+1527510000;;Copper Alloy;Tin;Black;Black;Plastic;Screw;13;13;1;;0.00508;;;0.06604;0.0152;0.02
+3-643814-9;;Copper Alloy;Tin;White;White;Nylon;;9;9;1;;0.00254;;;0.02286;0.013208;0.006985
+5207841-3;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01217;0.01041
+3-643818-8;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;8;8;1;;0.00396;;;0.031699;0.018415;0.009017
+172170-1;Male;;;Natural;Natural;Nylon;;12;12;;;0.0042;Nylon;;0.018186;0.013995;0.023698
+XF2J-1824-11A;Female;;Gold;;;;Surface Mount;18;18;;;0.0005;;;0.0135;0.00415;0.0034
+5207829-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01217;0.01041
+5747842-5;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.00277;;;0.05304;0.01255;0.01875
+100161-1;Female;Phosphor Bronze;Gold;;Gray;Plastic;Through Hole;55;55;5;Right Angle;0.002;;;0.02495;0.0114;0.0202
+5749111-4;Male;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;;50;50;2;Straight;0.00127;;;0.04011;0.01494;0.00744
+SFW10R-1STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;10;10;;;0.001;;;0.0158;0.0027;0.0055
+1-640526-0;Male;;;Red;Red;Nylon;Panel;36;36;;;0.004191;Nylon;;0.040894;0.019939;0.021336
+745207-7;Male;Phosphor Bronze;Tin over Nickel;Black;Black;Thermoplastic;;15;15;2;;0.002769;;;0.039141;0.021844;0.012929
+5747842-3;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.00277;;;0.05304;0.01255;0.01875
+89947-714LF;Female;Phosphor Bronze;Gold;Black;Black;Plastic;;14;14;2;;0.002;;;0.0186;0.0075;0.0041
+104503-2;Male;Phosphor Bronze;;Black;Black;Thermoplastic;;3;3;1;;0.00254;;;0.007569;0.00248;0.01524
+5747250-4;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;Metal;;0.03081;0.01255;0.01862
+5745080-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;50;50;3;Vertical;0.00277;;;0.06701;0.01217;0.01313
+5747299-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.00274;;;0.03912;0.01216;0.01255
+1-1658623-0;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;50;50;2;Vertical;0.00254;;;0.068072;0.011786;0.006096
+552284-1;Male;Copper Alloy;Gold Flash;;Black;Thermoplastic;;36;36;;;0.00216;;;0.068199;0.017526;0.015367
+5536416-5;Male;Copper Alloy;Gold;;Gray;Plastic;Through Hole;96;96;3;;0.00254;;;0.09398;0.0111;0.01262
+4-644563-0;Female;Copper Alloy;Tin;White;White;Nylon;;10;10;1;;0.00254;;;0.0254;0.007747;0.013208
+282189-1;Male;;;Black;Black;Nylon 6/6;;2;2;1;;;;;0.0235;0.0375;0.022
+SFW6R-4STE1LF;Female;Phosphor Bronze;Tin;;Black;;Surface Mount;6;6;;;0.001;;;0.0118;0.0027;0.0055
+640383-3;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;3;3;1;Vertical;0.00396;;;0.011887;0.003175;0.00635
+1-487378-9;Male;;;;Black;Thermoplastic;;20;20;;;0.00254;;;0.04556;0.01371;0.00248
+3-640440-2;Female;Copper Alloy;Tin;Red;Red;Nylon;PC Board;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+770602-4;Female;;;Natural;White;Nylon;PCB;4;4;1;;0.00254;;;0.010668;0.006604;0.012954
+3-641216-4;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;4;4;1;Right Angle;0.00254;;;0.01016;0.007493;0.005715
+3-640595-4;Female;Copper Alloy;Tin;Blue;Blue;Nylon;;4;4;1;;0.00396;;;0.01585;0.018415;0.009779
+5746861-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;9;9;2;;0.002769;;;0.030886;;0.012598
+5747461-3;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002743;;;0.053035;0.011481;0.024689
+10029449-001RLF;Female;Copper Alloy;Gold;;Black;Plastic;Surface Mount;19;19;;;;;;0.00985;0.0061;0.015
+100145-1;Female;Phosphor Bronze;Gold;;Gray;Plastic;Through Hole;125;125;5;Right Angle;0.002;;;0.0499;0.0114;0.0202
+10051922-2410ELF;Female;Phosphor Bronze;Gold;;;;Surface Mount;24;24;;;0.0005;;;0.0145;0.0012;0.0034
+RJ45-8N3-B;Male;Phosphor Bronze;Gold;Black;Black;Polyester;Through Hole;8;;;;;;;0.016;0.01308;0.0188
+3-641210-5;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;5;5;1;Right Angle;0.00396;;;0.019812;0.007747;0.010795
+5554381-2;Female;Copper Alloy;Gold Flash;Black;Black;Plastic;;64;64;;;;;;0.098425;0.017526;0.015367
+1707780000;;Copper Alloy;Tin;Black;Black;Plastic;;11;11;1;;0.00508;;;0.05588;0.0153;0.0251
+1707800000;;Copper Alloy;Tin;Black;Black;Plastic;;13;13;1;;0.00508;;;0.06604;0.0153;0.0251
+5747843-4;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;37;37;2;Right Angle;0.00277;;;0.06932;0.01255;0.0188
+1-487526-0;;;;Black;Black;Thermoplastic;;11;11;;;0.00254;;;0.02778;0.01371;0.00248
+5650859-5;Female;Copper Alloy;Tin;Gray;Gray;Plastic;Through Hole;64;64;2;Vertical;0.00254;;;0.09398;0.0115;0.00795
+644563-6;Female;Copper Alloy;Tin Lead;White;White;Nylon;Through Hole;6;6;1;;0.00254;;;0.01524;0.013208;0.007747
+10051922-1010ELF;Female;Copper Alloy;Gold;;;;Surface Mount;10;10;;;0.0005;;;0.0075;0.0012;0.0034
+5747315-1;Female;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06932;0.0179;0.01255
+4-640431-2;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;12;12;1;;0.00396;;;0.047549;0.009017;0.018415
+52057-302LF;Female;Copper Alloy;Gold;;;;Through Hole;36;30;6;;0.002;;;0.01198;0.0108;0.02385
+103956-3;Female;Phosphor Bronze;Tin Lead;Black;Black;Thermoplastic;;4;4;1;;0.00254;;;0.010109;0.01524;0.00249
+1716560000;;Copper Alloy;Tin;Black;Black;Nylon;Screw;11;11;1;;0.00508;;;0.05588;0.0125;0.0174
+770156-5;Male;Phosphor Bronze;Tin;Blue;Blue;Nylon;;4;4;1;;0.00508;;;0.021082;0.009906;0.016332
+HLW16S-2C7LF;Female;Phosphor Bronze;Tin;;Black;Plastic;Through Hole;16;16;;;0.001;;;0.0186;0.0059;0.0039
+640440-4;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;PCB;4;4;1;;0.00254;;;0.01016;0.013208;0.006985
+SFW18R-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;18;18;;;0.001;;;0.0238;0.0027;0.0055
+5352152-1;Female;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;110;110;5;Right Angle;0.002;Polyester;;0.0439;0.0114;0.021
+3-640429-5;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;5;5;1;;0.00396;;;0.019812;0.018415;0.009017
+1-745496-7;Male;Phosphor Bronze;Gold over Nickel;Black;Black;Plastic;;25;25;2;;0.00276;Thermoplastic;;0.053416;0.022631;0.012929
+5553921-1;Female;Phosphor Bronze;Gold Flash;Black;Black;Plastic;;50;50;;;;;;0.083312;0.017526;0.015367
+770030-1;Female;;;White;White;Nylon;Panel;15;15;;;0.00635;;;0.03302;0.027432;0.021463
+HFW6S-2STE1LF;Female;Phosphor Bronze;Tin;;Black;Plastic;Surface Mount;6;6;;Vertical;0.001;;;0.009;0.0053;0.0036
+205720-1;Female;Brass;Gold;Black;Black;;Panel;104;104;8;;0.00381;;;0.07493;0.02324;0.03175
+PX0745/P;Male;Brass;Nickel;Black;;Nylon;Screw;7;7;;;;;;0.069;;0.0381
+SFW20R-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;20;20;;;0.001;;;0.0258;0.0027;0.0055
+1-1658621-2;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;64;64;2;Vertical;0.00254;;;0.085852;0.01178;0.006096
+443976-4;Female;Brass;Gold;;Black;Plastic;Solder;37;37;2;Vertical;;;;0.06894;0.01225;0.01217
+1-745491-7;Female;Phosphor Bronze;Tin;Black;Black;Plastic;;9;9;2;;0.00254;Thermoplastic;;0.031191;0.021717;0.012929
+66226-002LF;Male;Copper Alloy;Tin;;;;;2;2;1;;0.00254;;;0.00991;0.01549;0.00254
+SFW4R-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;4;4;;;0.001;;;0.0098;0.0027;0.0055
+5177983-5;Female;Beryllium Copper;Tin;;Natural;Plastic;Surface Mount;120;120;2;Vertical;0.0008;;;0.0538;0.00375;0.0038
+5535090-5;Female;Phosphor Bronze;Tin;;Gray;Polyester;PC Board;96;96;3;Vertical;0.00254;;;0.09398;0.01151;0.01049
+5747089-2;Female;Copper Alloy;Gold over Nickel;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03081;0.01216;0.01255
+1746679-1;Female;Copper Alloy;Gold;;Black;Plastic;Through Hole;19;19;;;;;;0.0129;;0.015
+3-640600-4;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;4;4;1;;0.00396;;;0.01585;0.018415;0.009779
+1-640519-0;Male;;;Red;Red;Nylon;Panel;4;4;;;0.004191;Nylon;;0.011557;0.011557;0.021336
+53748-0408;Male;Brass;Gold;White;White;Plastic;Surface Mount;40;40;2;Vertical;0.0005;Brass;;0.0138;0.0024;0.0043
+5-5179009-1;Female;Beryllium Copper;Tin;;Natural;;Surface Mount;40;40;2;Vertical;0.0008;;;0.0218;0.00775;0.0068
+1-640441-0;Female;Copper Alloy;Tin Lead;White;White;Nylon;;10;10;1;;0.00254;;;0.0254;0.013208;0.006985
+172168-1;Male;;;Natural;Natural;Nylon;Panel;6;6;2;;0.0042;Nylon;;0.013995;0.009804;0.023698
+5745783-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002769;Metal;;0.053035;0.012548;0.018796
+3-640427-7;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;7;7;1;;0.00396;;;0.027737;0.018415;0.009017
+DEP09S365TLF;Female;Copper Alloy;Gold;;;Plastic;Through Hole;9;9;2;;;;;0.03043;0.01121;0.01217
+3-640441-8;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;8;8;1;;0.00254;;;0.02032;0.013208;0.006985
+2-5747706-0;Female;Phosphor Bronze;Tin over Copper;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.002769;;;0.03081;0.008077;0.012548
+1-480284-0;Male;;;Natural;Natural;Nylon;Panel;8;8;2;;0.00508;;;0.02286;0.023622;0.023622
+211149-1;Female;;;Black;Black;Polyester;Panel;25;25;5;;0.00508;Thermoplastic;;0.06253;0.04077;0.03078
+4630-6001;Male;Copper;Gold;;Gray;Plastic;;30;30;2;;0.00254;;;0.0483;0.01334;0.0084
+D09P13A4GV00LF;Male;Copper Alloy;Gold;Black;Black;Plastic;Solder;9;9;2;;0.00274;;;0.03081;0.01348;0.02055
+3-640426-5;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;5;5;1;;0.00396;;;0.019812;0.018415;0.009017
+3-643815-2;Female;Copper Alloy;Tin;Blue;Blue;Nylon;Through Hole;2;2;1;;0.00254;;;0.00508;0.013208;0.006985
+52207-0485;Female;Phosphor Bronze;Tin;;;Nylon;Surface Mount;4;4;1;Horizontal;0.001;;;0.01028;0.0027;0.0069
+5747841-6;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.00274;;;0.03914;0.01255;0.01862
+L77DE09SU;Female;Phosphor Bronze;Gold;Black;Black;Plastic;Solder;9;9;2;;;;;0.03119;;0.01293
+UE75-A20-3000T;Female;Phosphor Bronze;Gold;Black;;;Surface Mount;20;20;;Horizontal;0.0008;;;0.011;0.00525;0.00894
+770027-1;Female;Copper;;White;White;Nylon;Panel;6;6;;;0.00635;;;0.027432;0.01397;0.021463
+207020-1;Female;Copper;;Red;Red;Thermoplastic;Panel;36;36;4;;0.005;;;0.02784;0.05545;0.03302
+640250-8;Female;Phosphor Bronze;Tin;Natural;White;Nylon;PCB;8;8;1;;0.0039624;;;0.031648;0.00635;0.016764
+3-640441-5;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+5747461-6;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002743;;;0.053035;0.011481;0.024689
+1-640456-7;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;17;17;1;Vertical;0.00254;;;0.04318;0.007874;0.005715
+5747461-5;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002743;;;0.053035;0.011481;0.024689
+500998-0900;Female;Copper;Gold;Black;Black;Thermoplastic;Surface Mount;9;9;1;;0.0025;;;0.0298;0.0031;0.0279
+5747193-2;Female;Phosphor Bronze;Gold Flash;;Black;Nylon;Through Hole;50;50;3;Right Angle;0.002769;;;0.066929;0.015367;0.029286
+552307-1;Female;Copper Alloy;Gold Flash;Green;Black;Thermoplastic;;64;64;;;;;;0.098425;0.017526;0.015367
+2-746610-6;Male;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;44;44;2;Vertical;0.00254;;;0.060452;0.010058;0.007061
+5747844-5;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.002743;Metal;;0.03081;0.012548;0.018796
+5747847-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Right Angle;0.002769;Steel;;0.069317;0.012548;0.018796
+100147-1;Female;Phosphor Bronze;Gold;;Gray;Plastic;Board;110;110;5;Right Angle;0.002;;;0.0499;0.0114;0.0202
+71226-0625;Female;Phosphor Bronze;Tin;;Natural;Nylon;Through Hole;6;6;1;Vertical;0.001;;;0.0113;0.0076;0.0036
+HLW6S-2C7LF;Female;Phosphor Bronze;Tin;;Black;Plastic;Through Hole;6;6;;;0.001;;;0.0086;0.0059;0.0039
+DA3W3PA00LF;Male;Copper Alloy;;;;;Solder;3;3;;;;Steel;;0.03876;0.0113;0.01255
+5173280-3;Male;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Solder;50;50;4;Vertical;0.00127;Phosphor Bronze;;0.04445;0.0093;0.0073
+106775-1;Female;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;55;55;5;Vertical;0.002;;;0.0219;0.012;0.013
+2-5178238-4;Female;Phosphor Bronze;Tin;Black;Black;Nylon;Panel;26;26;1;Vertical;0.00127;;;0.03716;0.0094;0.011645
+68685-320LF;Female;Phosphor Bronze;Gold;;Black;Plastic;Through Hole;20;20;1;;0.00254;;;0.05123;0.007;0.00254
+SLW4R-1C7LF;Female;Phosphor Bronze;Tin;;Black;Nylon;Through Hole;4;4;;;0.001;;;0.0102;0.004;0.0055
+100141-1;Male;Phosphor Bronze;Gold;;Gray;Plastic;Through Hole;125;125;5;Vertical;0.002;;;0.0499;0.01345;0.0154
+1-1123722-9;Male;;;Natural;Natural;Nylon;PCB;9;9;1;;0.00396;Nylon;;0.03558;0.0133;0.0057
+2-5767004-2;Female;Copper Alloy;Tin;Black;Black;Plastic;Surface Mount;38;38;2;Vertical;0.000635;;;0.0254;0.00599;0.00691
+62684-402100ALF;Female;Phosphor Bronze;Gold;;Beige;Plastic;Surface Mount;40;40;;Horizontal;0.0005;;;0.0255;0.002;0.005
+1658688-1;Female;;;Black;Black;;;15;15;;;;;;0.041656;0.016002;0.034417
+5748873-1;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Right Angle;0.002761;;;0.05309;0.01148;0.02491
+10005639-12207LF;;Copper Alloy;Gold;;Black;;Through Hole;240;240;;;0.001;;;0.1475;0.0256;0.0076
+1658608-3;Male;Phosphor Bronze;Gold over Nickel;Black;Black;Thermoplastic;;15;15;2;;0.002769;Steel;;0.039141;0.018567;0.012598
+770156-3;Male;Phosphor Bronze;Tin;Orange;Orange;Nylon;;4;4;1;;0.00508;;;0.021082;0.009906;0.016332
+3-644465-7;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;7;7;1;;0.00396;;;0.027737;0.01842;0.00902
+767044-1;Female;Copper Alloy;Tin Lead;Black;Black;Plastic;Surface Mount;38;38;2;;0.000635;;;0.0254;0.00691;0.00599
+5352171-1;Female;Phosphor Bronze;Gold;Gray;Gray;Polyester;Through Hole;95;95;5;Right Angle;0.002;Polyester;;0.0379;0.0114;0.021
+3-640429-4;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;4;4;1;;0.00396;;;0.01585;0.018415;0.009017
+HLW12S-2C7LF;;Phosphor Bronze;Tin Alloy;;Black;Plastic;Through Hole;12;12;;Straight;0.001;;;0.0146;0.0059;0.0039
+770025-1;Female;;;White;White;Nylon;Panel;3;3;;;0.00635;;;0.02032;0.014732;0.021463
+640428-6;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;PCB;6;6;1;;0.0039624;;;0.023774;0.009017;0.018415
+1658612-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;;25;25;2;;0.00276;Thermoplastic;;0.053086;0.018618;0.012598
+202758-1;Male;;;Black;Black;Plastic;Panel;6;6;2;;0.00381;;;0.0254;0.00965;0.02324
+D09S33E4GX00LF;Female;Phosphor Bronze;Gold;Black;Black;Plastic;Solder;9;9;2;;0.00274;;;0.03081;0.01258;0.01877
+SFW4S-2STME1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;4;4;;;0.001;;;0.0104;0.0053;0.0036
+3-640621-6;Female;Copper Alloy;Tin;White;White;Nylon;;6;6;1;;0.00254;;;0.01524;0.013208;0.007747
+XF2J-2824-11A;Female;;Gold;;;;Surface Mount;28;28;;;0.0005;;;0.0185;0.00415;0.0034
+5747301-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06939;0.01216;0.01255
+L717DB25PU;Male;Brass;Gold;Black;Black;Plastic;Solder;25;25;2;;;;;0.05342;;0.01293
+640442-6;Female;Copper Alloy;Tin Lead;Blue;Blue;Nylon;;6;6;1;;0.00254;;;0.01524;0.013208;0.006985
+5188834-1;Male;Phosphor Bronze;Gold;Gray;Gray;Polyester;Through Hole;154;154;5;Vertical;0.002;Polyester;;0.0499;0.01345;0.0154
+3-643818-3;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;3;3;1;;0.00396;;;0.011887;0.018415;0.009017
+09-48-3104;Female;Brass;Gold;;White;Plastic;Through Hole;10;10;1;Vertical;0.00396;;;0.03952;0.0114;0.00635
+3-640600-2;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;;2;2;1;;0.00396;;;0.007925;0.018415;0.009779
+1-207119-0;Male;Copper;Tin;Red;Red;Nylon;Through Hole;4;4;2;Vertical;0.005;;;0.0127;0.01179;0.0127
+PX0736/P;Male;Brass;Nickel;Black;;Nylon;Screw;2;2;;;;Nylon;;0.069;;0.0381
+5745990-4;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;;;0.03081;0.01255;0.02451
+5745077-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Vertical;0.00274;;;0.03914;0.01217;0.01041
+3-640440-5;Female;Copper Alloy;Tin;Red;Red;Nylon;PC Board;5;5;1;;0.00254;;;0.0127;0.013208;0.006985
+1-745492-8;Male;Phosphor Bronze;Tin over Nickel;Black;Black;Plastic;;9;9;2;;0.00274;Thermoplastic;;0.031191;0.022581;0.012929
+1445957-2;;;;Black;Black;Polycarbonate;;8;1;;;;;;0.007899;0.024587;0.007899
+5188835-1;Male;Phosphor Bronze;Nickel;Gray;Gray;Polyester;Through Hole;154;154;5;Vertical;0.002;;;0.0439;0.01345;0.0154
+1-1123722-5;Male;;;Natural;Natural;Nylon;PCB;5;5;1;;0.0039624;Nylon;;0.01974;0.0133;0.0057
+71600-006LF;Female;Phosphor Bronze;Gold over Nickel;Gray;Gray;Plastic;;6;6;2;;0.00254;;;0.01341;0.013;0.0061
+1658608-4;Male;Phosphor Bronze;Gold over Nickel;Black;Black;Thermoplastic;Board;9;9;2;;0.002769;;;0.030886;0.018567;0.012598
+1-1658526-6;Female;Beryllium Copper;Gold;;Blue;Plastic;PC Board;26;26;2;;0.00254;Thermoplastic;;0.03048;0.01054;0.00605
+1-84952-4;Female;Phosphor Bronze;Tin;Natural;White;Plastic;Surface Mount;14;14;;Right Angle;0.001;Thermoplastic;;0.02192;0.00256;0.0054
+204510-1;Female;;;;;;Panel;104;104;;;;;;0.069317;;0.016967
+3-641213-8;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;8;8;1;Vertical;0.00254;;;0.02032;0.007493;0.005715
+3-640427-9;Female;Copper Alloy;Tin;Yellow;Yellow;Nylon;Through Hole;9;9;1;;0.00396;;;0.035662;0.018415;0.009017
+5745968-8;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05304;0.01183;0.01255
+DC8W8PA00LF;Male;Copper Alloy;Tin;;;;Solder;8;8;;;;Steel;;0.06894;0.0113;0.01255
+346-056-520-802;Female;;Gold;Green;Green;Plastic;Through Hole;56;56;2;;0.003175;;;0.09614;0.01524;0.0094
+5745071-1;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03089;0.01209;0.01041
+62674-261121ALF;Female;Phosphor Bronze;Gold;;Black;;Surface Mount;26;26;;;0.0005;;;0.0175;0.0041;0.00295
+1-747944-5;Male;Phosphor Bronze;Tin;Black;Black;Plastic;;9;9;2;;0.002769;;;0.034417;0.041656;0.016002
+3-641210-2;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;2;2;1;Right Angle;0.00396;;;0.007925;0.007747;0.010795
+1-480350-0;Male;;;Natural;Natural;Nylon;;1;1;1;;0.00508;Nylon;;0.00762;0.03048;0.03048
+5747835-4;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;37;37;2;Right Angle;0.00277;;;0.06932;0.01255;0.02469
+2-111623-4;Female;Beryllium Copper;Tin Lead;Black;Black;Plastic;;40;40;2;;0.002;;;0.04519;0.01024;0.00516
+5352033-1;Male;Phosphor Bronze;Gold;Gray;Gray;Polyester;Through Hole;133;133;7;Vertical;0.002;;;0.0379;0.01345;0.0154
+1734099-7;Male;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;68;68;;Right Angle;;;;0.05311;0.0075;0.01746
+5749798-1;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;15;15;3;Vertical;0.00229;Metal;;0.0308;0.0121;0.0125
+173977-5;Female;Phosphor Bronze;Tin;Natural;Natural;Plastic;;5;5;1;;0.002;;;0.012;0.004;0.0051
+640251-1;Female;;;Natural;White;Nylon;;1;1;1;;0.0039624;;;0.003861;0.00635;0.016764
+3-643814-3;Female;Copper Alloy;Tin;White;White;Nylon;;3;3;1;;0.00254;Nylon;;0.00762;0.013208;0.006985
+5747252-4;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;37;37;2;Right Angle;0.00277;;;0.06932;0.01255;0.0188
+5747840-6;Male;Brass;Tin over Nickel;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;Steel;;0.03081;0.01255;0.01862
+3-644563-4;Female;Copper Alloy;Tin;White;White;Nylon;;4;4;1;;0.00254;;;0.01016;0.013208;0.007747
+SFW8S-2STME1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;8;8;;;0.001;;;0.0144;0.0053;0.0036
+395-020-520-202;Female;Copper Alloy;Gold;;Black;Plastic;Through Hole;20;20;2;;0.00254;;;0.032;0.01524;0.0094
+1-640440-0;;Copper Alloy;Tin Lead;Red;Red;Nylon;;10;10;1;;0.00254;;;0.0254;0.013208;0.006985
+640251-4;Female;;;Natural;White;Nylon;;4;4;1;;0.0039624;;;0.015748;0.00635;0.016764
+1-1123722-4;Male;;;Natural;Natural;Nylon;PCB;4;4;1;;0.0039624;Nylon;;0.01578;0.0133;0.0057
+1-1734100-0;Male;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;100;100;;Vertical;;;;0.007112;0.010008;0.074854
+1658678-1;Male;;;Black;Black;;;15;15;;;;Metal;;0.041656;0.016002;0.034417
+PX0728/S;Female;Copper;Tin;Black;;Nylon;;9;9;;;;;;0.069;;0.0381
+2-746610-1;Male;Phosphor Bronze;Tin;;Black;Plastic;Board;10;10;2;Vertical;0.00254;;;0.017272;0.010058;0.007061
+100669-1;Male;Phosphor Bronze;Gold;;Gray;Polyester;Through Hole;175;175;7;Vertical;0.002;;;0.0499;0.01345;0.0154
+770849-3;Female;Phosphor Bronze;Tin;Natural;White;Nylon;;3;3;1;;0.0039624;;;0.011811;0.00635;0.016764
+5747090-2;Female;Copper Alloy;Gold over Nickel;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.00274;;;0.03081;0.01216;0.01255
+4-644540-0;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;10;10;1;;0.00254;;;0.0254;0.007747;0.013208
+5352068-1;Female;Phosphor Bronze;Tin;;Gray;Polyester;Through Hole;110;110;5;Right Angle;0.002;Polyester;;0.0499;0.01225;0.021
+PX0748/P;Male;Brass;Nickel;Black;;;Screw;4;4;;;;;;0.069;;0.0381
+53894-5;Male;;;Yellow;Yellow;Polycarbonate;;1;1;;;;;;0.008052;;0.008052
+5747840-5;Male;Brass;Gold Flash;Black;Black;Thermoplastic;Through Hole;9;9;2;Right Angle;0.00274;;;0.03081;0.01255;0.01862
+FWFTV21G;Female;;Cadmium;Olive;Green;;Panel;6;6;;;;;;0.03096;0.03383;0.03096
+5650951-5;Male;Copper Alloy;Tin;Gray;Gray;Polyester;PC Board;64;96;2;Right Angle;0.00254;;;0.09398;0.0111;0.01262
+3-644468-4;Female;Copper Alloy;Tin;White;White;Nylon;;4;4;1;;0.00396;;;0.01585;0.01842;0.00978
+1-745496-8;Male;Phosphor Bronze;Gold Flash;Black;Black;Plastic;;25;25;2;;0.002769;;;0.053416;0.022631;0.012929
+5747845-3;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.002743;;;0.039141;0.012548;0.018796
+5-520314-7;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;7;7;;Right Angle;0.00254;;;0.02268;0.004826;0.008966
+3-644461-6;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;6;6;1;;0.00396;;;0.02377;0.01842;0.00902
+2-552001-1;Female;Copper Alloy;Gold Flash;;Black;Plastic;Panel;50;50;;;;;;0.083312;0.017526;0.015367
+644540-3;Female;Copper Alloy;Tin Lead;Red;White;Nylon;Through Hole;3;3;1;;0.00254;;;0.00762;0.013208;0.007747
+640453-7;Male;Copper Alloy;Tin;White;White;Polyester;Through Hole;7;7;1;Right Angle;0.00254;;;0.01778;0.006477;0.00508
+1734099-4;Male;Phosphor Bronze;Gold Flash;Black;Black;Plastic;Through Hole;40;40;;Right Angle;;;;0.03533;0.0075;0.01746
+4-643819-2;Female;Copper Alloy;Tin;Red;Red;Nylon;;12;12;1;;0.00396;;;0.043586;0.009017;0.018415
+5745189-1;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;37;37;2;Vertical;0.00277;;;0.06932;0.0109;0.01255
+5-520314-9;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;9;9;;Right Angle;0.00254;;;0.02776;0.004826;0.008966
+5745410-1;Male;Brass;Tin;Black;Black;Plastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.010719;0.012548
+640429-8;;Copper Alloy;Tin Lead;White;White;Nylon;;8;8;1;;0.0039624;;;0.031699;0.009017;0.018415
+88945-102LF;Female;;Gold;;;;PCB;24;24;4;;0.002;;;0.01195;0.00935;0.02115
+1-480393-1;Male;;;Black;Black;Nylon;;2;2;1;;0.00508;;;0.013462;0.007493;0.021844
+87520-0010BLF;Female;Copper Alloy;Gold;White;White;Plastic;Through Hole;4;4;;Right Angle;;;;0.0145;0.007;0.0141
+640389-5;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;5;5;1;Right Angle;0.0039624;;;0.019812;0.007747;0.010795
+5100668-1;Male;Phosphor Bronze;Gold over Nickel;;Gray;Polyester;Through Hole;154;154;7;Vertical;0.002;;;0.0499;0.01345;0.0154
+3-644486-0;Male;Copper Alloy;Tin;Black;White;Polyester;Through Hole;10;10;1;Vertical;0.00254;;;0.027534;0.010414;0.00795
+201358-1;Male;;;Black;Black;Plastic;Panel;50;50;4;;0.00381;;;0.06591;0.01905;0.02324
+09-48-4099;Female;Phosphor Bronze;Tin;;White;Plastic;Solder;9;9;1;Vertical;0.00396;;;0.03556;0.0114;0.00635
+640429-6;Female;Copper Alloy;Tin Lead;White;White;Nylon;Through Hole;6;6;1;;0.0039624;;;0.023774;0.009017;0.018415
+522072090;Female;Phosphor Bronze;Tin;;;Nylon;Surface Mount;20;20;1;;0.001;;;0.02628;0.0027;0.0069
+1707830000;;Copper Alloy;Tin;Black;Black;Plastic;;16;16;1;;0.00508;;;0.08128;0.0153;0.0251
+SFW14R-2STE1LF;Female;Phosphor Bronze;Tin;;Brown;;Surface Mount;14;14;;;0.001;;;0.0198;0.0027;0.0055
+5552725-1;Female;Phosphor Bronze;Gold Flash;Black;Black;Thermoplastic;Through Hole;50;50;;Right Angle;;;;0.083312;0.016002;0.025654
+SMS24R1;Female;Copper Alloy;;Black;;Nylon;Panel;24;24;;;;Nylon;;0.0406;0.025;0.0212
+50-84-1090;Male;;;White;;;Surface Mount;9;9;2;;0.0021336;Nylon;;0.02032;0.02032;0.027432
+1658391-1;Female;Copper Alloy;Gold;;Black;;Surface Mount;40;;;;;Copper Alloy;;0.0145;0.0255;0.06325
+SMS24P1;Male;Copper Alloy;;Black;;Nylon;;24;24;;;;Nylon;;0.0432;0.0329;0.0237
+5745782-4;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;15;15;2;Right Angle;0.002743;;;0.039141;0.012548;0.018796
+640389-4;Male;Copper Alloy;Tin;White;White;Polyester;Through Hole;4;4;1;Right Angle;0.0039624;;;0.01585;0.007747;0.010795
+643813-9;;Copper Alloy;Tin Lead;Red;Red;Nylon;;9;9;1;;0.00254;;;0.02286;0.013208;0.006985
+4781.0100;Female;;;Black;;Thermoplastic;Snap-In;3;;;Straight;;;;0.0615;0.021;0.0287
+1367073-1;Female;Phosphor Bronze;Gold;Black;Black;;Surface Mount;20;20;;;0.0008;;;0.0112;0.0054;0.0074
+5745187-7;Female;Phosphor Bronze;Tin;Black;Black;Plastic;Through Hole;25;25;2;Vertical;0.00277;;;0.05304;0.0109;0.01255
+14-56-2052;Female;Phosphor Bronze;Gold;Black;Black;Plastic;;5;5;1;;0.00254;;;0.01267;0.01524;0.00251
+2-644486-7;Male;Copper Alloy;Tin;Black;White;Polyester;Through Hole;7;7;1;Vertical;0.00254;;;0.019914;0.010414;0.00795
+3-641535-3;Female;Copper Alloy;Tin;White;White;Nylon;PC Board;3;3;1;;0.00254;;;0.00762;0.013462;0.006985
+22-55-2042;Female;;;;Black;Polyester;;4;4;2;;0.00254;;;0.00505;0.00505;0.01524
+173977-7;Female;Phosphor Bronze;Tin;Natural;Natural;Plastic;;7;7;1;;0.002;;;0.016;0.004;0.0051
+SLW10S-1C7LF;Female;Phosphor Bronze;Tin;;Black;Nylon;Through Hole;10;10;;;0.001;;;0.0162;0.0055;0.004
+4-643813-1;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;11;11;1;;0.00254;;;0.02794;0.006985;0.013208
+3-641215-6;Male;Copper Alloy;Tin;Natural;White;Polyester;Through Hole;6;6;1;Vertical;0.00254;;;0.01524;0.007493;0.005715
+1658621-2;Female;Phosphor Bronze;Tin;Black;Black;Thermoplastic;Through Hole;14;14;2;Vertical;0.00254;;;0.022352;0.011786;0.006096
+4-640429-2;Female;Copper Alloy;Tin;Natural;White;Nylon;PC Board;12;12;1;;0.00396;;;0.047549;0.009017;0.018415
+5650860-5;Female;Phosphor Bronze;Tin;Gray;Gray;Plastic;PC Board;64;64;2;Vertical;0.00254;Polyester;;0.09398;0.01151;0.00795

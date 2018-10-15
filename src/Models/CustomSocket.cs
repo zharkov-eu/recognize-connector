@@ -97,10 +97,10 @@ namespace ExpertSystem.Models
                         entries.Add(new CustomSocket
                         {
                             SocketName = line[0],
-                            Color = line[1],
+                            Gender = line[1],
                             ContactMaterial = line[2],
                             ContactPlating = line[3],
-                            Gender = line[4],
+                            Color = line[4],
                             HousingColor = line[5],
                             HousingMaterial = line[6],
                             MountingStyle = line[7],

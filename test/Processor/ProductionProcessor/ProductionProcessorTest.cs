@@ -12,28 +12,6 @@ namespace ExpertSystem.Processor.ProductionProcessor
 
         public ProductionProcessorTest()
         {
-            _socket = new CustomSocket
-            {
-                Color = "Natural",
-                SocketName = "5145167-4",
-                ContactMaterial = "Phosphor Bronze",
-                ContactPlating = "Gold",
-                Gender = "Female",
-                HousingColor = "Natural",
-                HousingMaterial = "Thermoplastic",
-                MountingStyle = "Through Hole",
-                NumberOfContacts = 120,
-                NumberOfPositions = 60,
-                NumberOfRows = 2,
-                Orientation = "Vertical",
-                PinPitch = 0.00127f,
-                Material = "Plastic",
-                SizeDiameter = 11.5f,
-                SizeLength = 5.3f,
-                SizeHeight = 3.2f,
-                SizeWidth = 10.0f
-            };
-
             var socketFieldsProcessor = new SocketFieldsProcessorTest();
             var sockets = socketFieldsProcessor.GetSockets();
             var fieldValues = socketFieldsProcessor.GetFieldsWithPossibleValues(sockets);
@@ -41,6 +19,7 @@ namespace ExpertSystem.Processor.ProductionProcessor
             var rulesGenerator = new RulesGenerator();
             var rulesGraph = rulesGenerator.GenerateRules(sockets, fieldValues);
 
+            _socket = socketFieldsProcessor.TestSocket();
             _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions {Debug = false});
         }
 
@@ -52,12 +31,12 @@ namespace ExpertSystem.Processor.ProductionProcessor
             {
                 new Fact(SocketDomain.NumberOfPositions, 60),
                 new Fact(SocketDomain.NumberOfContacts, 120),
-                new Fact(SocketDomain.SizeLength, 5.3f),
+                new Fact(SocketDomain.SizeLength, 0.0145f),
                 new Fact(SocketDomain.MountingStyle, "Through Hole"),
                 new Fact(SocketDomain.Color, "Natural"),
-                new Fact(SocketDomain.SizeWidth, 10.0f),
-                new Fact(SocketDomain.SizeHeight, 3.2f),
-                new Fact(SocketDomain.SizeDiameter, 11.5f),
+                new Fact(SocketDomain.SizeWidth, 0.0034f),
+                new Fact(SocketDomain.SizeHeight, 0.00415f),
+                new Fact(SocketDomain.SizeDiameter, 0.015f),
                 new Fact(SocketDomain.HousingMaterial, "Thermoplastic"),
                 new Fact(SocketDomain.HousingColor, "Natural"),
                 new Fact(SocketDomain.Material, "Plastic"),

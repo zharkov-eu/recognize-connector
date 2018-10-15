@@ -61,7 +61,7 @@ namespace ExpertSystem.Models
             return new Dictionary<SocketDomain, int>() {
                 { SocketDomain.AmperageCircuit, 5 },
                 { SocketDomain.NumberOfContacts, 5 },
-                { SocketDomain.SizeLength, 4 },
+                { SocketDomain.SizeLength, 3 },
                 { SocketDomain.SizeWidth, 3 },
             };
         }
@@ -79,7 +79,7 @@ namespace ExpertSystem.Models
         public static Func<CustomSocket, double> GetAmperageCircuitFormula(Dictionary<SocketDomain, FuzzyRule> rules)
         {
             int nocCluster = rules[SocketDomain.NumberOfContacts].Cluster + 1; // 1..6
-            int slCluster = rules[SocketDomain.SizeLength].Cluster + 1; // 1..5
+            int slCluster = rules[SocketDomain.SizeLength].Cluster + 1; // 1..4
             int swCluster = rules[SocketDomain.SizeWidth].Cluster + 1; // 1..4
 
             return socket => socket.NumberOfContacts * Math.Log(nocCluster, 10) + (

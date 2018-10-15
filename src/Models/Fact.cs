@@ -11,11 +11,13 @@ namespace ExpertSystem.Models
         public object Value { get; set; }
         public Type Type { get; set; }
 
-        public Fact(SocketDomain domain, object value)
+        public Fact(SocketDomain domain, object value) : this(domain, value, SocketDomainType[domain])
+        {}
+
+        public Fact(SocketDomain domain, object value, Type type)
         {
             Domain = domain;
-            Type = value.GetType(); // TODO: Костыль
-            // Type = SocketDomainType[Domain];
+            Type = type;
             if (value.GetType() != Type)
                 throw new Exception(
                     $"Expected type: {Type} for {Domain}: get {value.GetType()} with value {value.ToString()}"

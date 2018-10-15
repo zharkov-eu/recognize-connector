@@ -9,7 +9,7 @@ namespace ExpertSystem.Models.FuzzyLogic
         public Dictionary<int, double> ClusterDegree;
         
         public FuzzyFact(FuzzyDomain domain, object value, Dictionary<int, double> clusterDegree)
-            : base(domain.Domain, value)
+            : base(domain.Domain, value, typeof(double))
         {
             Domain = domain;
             ClusterDegree = clusterDegree;
