@@ -89,7 +89,7 @@ namespace ExpertSystem.Models
             var entries = new List<CustomSocket>();
             using (var reader = new StreamReader(stream))
             {
-                var data = CsvParser.ParseHeadAndTail(reader, ';', '"');
+                var data = CsvParser.ParseHeadAndTail(reader, ',', '"');
                 var lines = data.Item2;
 
                 foreach (var line in lines)
