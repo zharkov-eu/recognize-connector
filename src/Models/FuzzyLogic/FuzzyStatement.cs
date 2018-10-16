@@ -38,7 +38,7 @@ namespace ExpertSystem.Models.FuzzyLogic
 
         public override string ToString()
         {
-            return $"{Rules.ToString()} -> fun()";
+            return $"{Rules.ToString()} -> f(NoC,SL,SW)";
         }
     }
 

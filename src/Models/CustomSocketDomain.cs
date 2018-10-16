@@ -56,6 +56,13 @@ namespace ExpertSystem.Models
             return Enum.GetValues(typeof(SocketDomain)).Cast<SocketDomain>().Where(p => !DomainIgnore.Contains(p));
         }
 
+        public struct FuzzyCustomSocket
+        {
+            public double NumberOfContacts;
+            public double SizeLength;
+            public double SizeWidth;
+        }
+
         public static Dictionary<SocketDomain, int> GetFuzzySocketDomains()
         {
             return new Dictionary<SocketDomain, int>() {
