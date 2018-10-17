@@ -8,6 +8,7 @@ namespace ExpertSystem.Models.ANFIS
     public struct NeuralLayerOptions
     {
         public bool IsFixed;
+        public bool IsSocketLayer;
     }
 
     public struct InputDegreeParam
@@ -46,6 +47,7 @@ namespace ExpertSystem.Models.ANFIS
         public NeuralSocketLayer(List<Neuron> neurons, NeuralLayerOptions options)
             : base(neurons, options)
         {
+            Options.IsSocketLayer = true;
         }
 
         public void SetSocket(FuzzyCustomSocket socket)
@@ -59,14 +61,53 @@ namespace ExpertSystem.Models.ANFIS
         private InputDegreeParam _param;
 
         public InputNeuralLayer(List<Neuron> neurons)
-            : base(neurons, new NeuralLayerOptions {IsFixed = false})
+            : base(neurons, new NeuralLayerOptions { IsFixed = false })
         {
             var r = new CryptoRandom();
-            _param = new InputDegreeParam {a = r.RandomValue, b = r.RandomValue, c = r.RandomValue};
+            _param = new InputDegreeParam { a = r.RandomValue, b = r.RandomValue, c = r.RandomValue };
         }
 
         public override void Process()
         {
+        }
+    }
+
+    public class RuleNeuralLayer : NeuralLayer
+    {
+        public RuleNeuralLayer(List<Neuron> neurons)
+            : base(neurons, new NeuralLayerOptions { IsFixed = true }) {}
+
+        public override void Process()
+        {
+            foreach (var neuron in Neurons)
+            {
+                neuron.Value = neuron.Dendrites
+                    .Select(p => p.Weight * p.Neuron.Value)
+                    .Aggregate((acc, p) => acc * p);
+            }
+        }
+    }
+
+    public class ActivationNeuralLayer : NeuralLayer
+    {
+        public ActivationNeuralLayer(List<Neuron> neurons)
+            : base(neurons, new NeuralLayerOptions { IsFixed = true }) {}
+        
+        public override void Process()
+        {
+            var dendritesSum = 0d;
+            var dendritesValue = new Dictionary<Neuron, double>();
+            foreach (var neuron in Neurons)
+            {
+                var value = neuron.Dendrites
+                    .Select(p => p.Weight * p.Neuron.Value)
+                    .Aggregate((acc, p) => acc + p);
+                dendritesValue.Add(neuron, value);
+                dendritesSum += value;
+            }
+            
+            foreach (var neuron in Neurons)
+                neuron.Value = dendritesValue[neuron] / dendritesSum;
         }
     }
 
