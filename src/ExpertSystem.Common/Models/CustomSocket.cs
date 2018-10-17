@@ -89,7 +89,7 @@ namespace ExpertSystem.Models
             var entries = new List<CustomSocket>();
             using (var reader = new StreamReader(stream))
             {
-                var data = CsvParser.ParseHeadAndTail(reader, ',', '"');
+                var data = CsvParser.ParseHeadAndTail(reader, ';', '"');
                 var lines = data.Item2;
 
                 foreach (var line in lines)
@@ -138,7 +138,6 @@ namespace ExpertSystem.Models
             var domainsValues = new Dictionary<SocketDomain, List<string>>();
             foreach (var domain in GetSocketDomains().Where(p => p != SocketDomain.SocketName))
             {
-                //var type = SocketDomainType[domain];
                 var field = CustomSocket.Type.GetField(domain.ToString());
 
                 var propertyValues = sockets.GroupBy(p => field.GetValue(p).ToString()).ToList();

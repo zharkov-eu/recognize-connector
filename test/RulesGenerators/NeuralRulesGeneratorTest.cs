@@ -19,7 +19,7 @@ namespace ExpertSystem.Tests.RulesGenerators
         public void GetNeuralFuzzyRuleStatements_isCorrect()
         {
             var sockets = _socketFieldsProcessor.GetSockets();
-            var statements = _generator.GetNeuralFuzzyRuleStatements(sockets);
+            var network = _generator.GetNeuralNetwork(sockets);
         }
     }
 }

@@ -56,15 +56,24 @@ namespace ExpertSystem.Models.ANFIS
         }
     }
 
-    public class InputNeuralLayer : NeuralSocketLayer
+    public class RuleNeuralLayer : NeuralSocketLayer
     {
         private InputDegreeParam _param;
+        private Dictionary<SocketDomain, List<Neuron>> _domainNeurons;
 
-        public InputNeuralLayer(List<Neuron> neurons)
-            : base(neurons, new NeuralLayerOptions { IsFixed = false })
+        public RuleNeuralLayer(List<KeyValuePair<SocketDomain, Neuron>> domainNeurons)
+            : base(domainNeurons.Select(p => p.Value).ToList(), new NeuralLayerOptions { IsFixed = false })
         {
             var r = new CryptoRandom();
             _param = new InputDegreeParam { a = r.RandomValue, b = r.RandomValue, c = r.RandomValue };
+            _domainNeurons = new Dictionary<SocketDomain, List<Neuron>>();
+
+            foreach (var domainNeuron in domainNeurons)
+            {
+                if (_domainNeurons.ContainsKey(domainNeuron.Key) == false)
+                    _domainNeurons[domainNeuron.Key] = new List<Neuron>();
+                _domainNeurons[domainNeuron.Key].Add(domainNeuron.Value);
+            }
         }
 
         public override void Process()
@@ -72,9 +81,9 @@ namespace ExpertSystem.Models.ANFIS
         }
     }
 
-    public class RuleNeuralLayer : NeuralLayer
+    public class StatementNeuralLayer : NeuralLayer
     {
-        public RuleNeuralLayer(List<Neuron> neurons)
+        public StatementNeuralLayer(List<Neuron> neurons)
             : base(neurons, new NeuralLayerOptions { IsFixed = true }) {}
 
         public override void Process()
