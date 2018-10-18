@@ -19,7 +19,7 @@ namespace ExpertSystem.Models.ANFIS
             var conclusionNeurons = new List<Neuron>();
             var activationNeurons = new List<Neuron>();
             var statementNeurons = new List<Neuron>();
-            var ruleNeurons = new List<KeyValuePair<SocketDomain, Neuron>>();
+            var ruleNeurons = new List<KeyValuePair<FuzzyRule, Neuron>>();
 
             // Строим 5, 4, 3 уровни нейросети
             foreach (var statement in statements)
@@ -42,6 +42,7 @@ namespace ExpertSystem.Models.ANFIS
             {
                 var statementNeuron = new Neuron();
                 statementNeurons.Add(statementNeuron);
+                resultNeuron.PassthroughDendrites.Add(new Dendrite(statementNeuron, 1d));
                 foreach (var neuron in activationLayer.Neurons)
                     neuron.Dendrites.Add(new Dendrite(statementNeuron, 1d));
 
@@ -52,7 +53,7 @@ namespace ExpertSystem.Models.ANFIS
                     {
                         var neuron = new Neuron();
                         ruleDictionary.Add(rule, neuron);
-                        ruleNeurons.Add(new KeyValuePair<SocketDomain, Neuron>(rule.Domain.Domain, neuron));
+                        ruleNeurons.Add(new KeyValuePair<FuzzyRule, Neuron>(rule, neuron));
                     }
                     statementNeuron.Dendrites.Add(new Dendrite(ruleDictionary[rule], 1d));
                 }
@@ -61,7 +62,16 @@ namespace ExpertSystem.Models.ANFIS
             _layers.AddFirst(new RuleNeuralLayer(ruleNeurons));
         }
 
-        public double Process(FuzzyCustomSocket socket)
+        public void Learn(Dictionary<CustomSocket, double> samples)
+        {
+            foreach (var sample in samples)
+            {
+                var result = Process(sample.Key);
+                var diff = result - sample.Value;
+            }
+        }
+
+        public double Process(CustomSocket socket)
         {
             foreach (var layer in _layers)
             {

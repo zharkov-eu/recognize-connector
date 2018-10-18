@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ExpertSystem.Utils;
+using ExpertSystem.Models.FuzzyLogic;
 using static ExpertSystem.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Models.ANFIS
@@ -42,7 +43,7 @@ namespace ExpertSystem.Models.ANFIS
 
     public abstract class NeuralSocketLayer : NeuralLayer
     {
-        protected FuzzyCustomSocket _socket;
+        protected CustomSocket _socket;
 
         public NeuralSocketLayer(List<Neuron> neurons, NeuralLayerOptions options)
             : base(neurons, options)
@@ -50,7 +51,7 @@ namespace ExpertSystem.Models.ANFIS
             Options.IsSocketLayer = true;
         }
 
-        public void SetSocket(FuzzyCustomSocket socket)
+        public void SetSocket(CustomSocket socket)
         {
             _socket = socket;
         }
@@ -59,14 +60,14 @@ namespace ExpertSystem.Models.ANFIS
     public class RuleNeuralLayer : NeuralSocketLayer
     {
         private InputDegreeParam _param;
-        private Dictionary<SocketDomain, List<Neuron>> _domainNeurons;
+        private Dictionary<FuzzyRule, List<Neuron>> _domainNeurons;
 
-        public RuleNeuralLayer(List<KeyValuePair<SocketDomain, Neuron>> domainNeurons)
+        public RuleNeuralLayer(List<KeyValuePair<FuzzyRule, Neuron>> domainNeurons)
             : base(domainNeurons.Select(p => p.Value).ToList(), new NeuralLayerOptions { IsFixed = false })
         {
             var r = new CryptoRandom();
             _param = new InputDegreeParam { a = r.RandomValue, b = r.RandomValue, c = r.RandomValue };
-            _domainNeurons = new Dictionary<SocketDomain, List<Neuron>>();
+            _domainNeurons = new Dictionary<FuzzyRule, List<Neuron>>();
 
             foreach (var domainNeuron in domainNeurons)
             {
@@ -128,6 +129,7 @@ namespace ExpertSystem.Models.ANFIS
             : base(neurons, new NeuralLayerOptions {IsFixed = false})
         {
             _params = new Dictionary<Neuron, ConclusionDegreeParam>();
+
             var r = new CryptoRandom();
             foreach (var neuron in Neurons)
                 _params.Add(neuron, new ConclusionDegreeParam

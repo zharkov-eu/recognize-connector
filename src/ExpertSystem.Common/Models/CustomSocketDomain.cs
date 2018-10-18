@@ -120,13 +120,6 @@ namespace ExpertSystem.Models
                              (Math.Log(slCluster, 2) + 1) * 10 * (socket.SizeWidth * (Math.Log(swCluster, 2) + 1) * 10);
         }
 
-        public struct FuzzyCustomSocket
-        {
-            public double NumberOfContacts;
-            public double SizeLength;
-            public double SizeWidth;
-        }
-
         private class Output : Attribute
         {
             public readonly string Text;
