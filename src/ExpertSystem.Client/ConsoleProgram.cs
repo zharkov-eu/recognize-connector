@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.ComponentModel;
 using System.Collections.Generic;
-using ExpertSystem.Models;
-using static ExpertSystem.Models.CustomSocketDomain;
+using ExpertSystem.Client.Models;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Client
 {

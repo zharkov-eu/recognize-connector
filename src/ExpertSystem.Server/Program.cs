@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Collections.Generic;
-using ExpertSystem.Common.RulesGenerators;
-using ExpertSystem.Models;
+using ExpertSystem.Common.Models;
+using ExpertSystem.Server.Parsers;
 
 namespace ExpertSystem.Server
 {
@@ -20,24 +20,14 @@ namespace ExpertSystem.Server
             var fileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "data", "1.csv");
             using (var stream = File.OpenRead(fileName))
                 sockets = socketFieldsProcessor.GetSockets(stream);
-            var fieldValues = socketFieldsProcessor.GetDomainsWithPossibleValues(sockets);
-
-            var rulesGenerator = new ProductionRulesGenerator();
-            var logicRulesGenerator = new LogicRulesGenerator();
-            var fuzzyRulesGenerator = new FuzzyRulesGenerator();
-
-            // Продукционный вывод
-            var rulesGraph = rulesGenerator.GenerateRules(sockets, fieldValues);
-            // Логический вывод
-            var logicRules = logicRulesGenerator.GenerateRules(sockets);
-            // Нечеткий вывод
-            var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(sockets);
-            var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, sockets);
         }
+
+        public void Run()
+        {}
 
         private static void Main()
         {
-            var program = new ConsoleProgram(new ProgramOptions { Debug = true });
+            var program = new Program(new ProgramOptions { Debug = true });
             program.Run();
         }
     }

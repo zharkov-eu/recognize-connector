@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
-namespace ExpertSystem.Utils
+namespace ExpertSystem.Common.Utils
 {
     public static class SetOperation
     {
