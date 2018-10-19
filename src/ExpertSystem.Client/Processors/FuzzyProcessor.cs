@@ -5,6 +5,7 @@ using ExpertSystem.Client.Models;
 using ExpertSystem.Client.Models.FuzzyLogic;
 using ExpertSystem.Client.RulesGenerators;
 using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Generated;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Client.Processors
@@ -67,11 +68,12 @@ namespace ExpertSystem.Client.Processors
 
         public double SugenoProcesing(FactSet factSet)
         {
+            var type = typeof(CustomSocket);
             var socket = new CustomSocket();
             var fuzzyFacts = new List<FuzzyFact>();
             foreach (var fact in factSet.Facts)
             {
-                CustomSocket.Type.GetField(fact.Domain.ToString()).SetValue(socket, fact.Value);
+                type.GetField(fact.Domain.ToString()).SetValue(socket, fact.Value);
                 fuzzyFacts.Add(FactFuzzification(fact));
             }
 

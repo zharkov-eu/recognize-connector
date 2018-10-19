@@ -4,7 +4,7 @@ option csharp_namespace = "ExpertSystem.Common.Generated";
 
 package ExpertSystem;
 
-service CustomSocketExchange {
+service SocketExchange {
     rpc GetSockets (Empty) returns (stream CustomSocket) {}
 }
 

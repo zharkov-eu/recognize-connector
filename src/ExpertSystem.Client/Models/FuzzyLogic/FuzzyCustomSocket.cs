@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Generated;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Client.Models.FuzzyLogic

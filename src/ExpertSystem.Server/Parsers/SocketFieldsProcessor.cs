@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
-using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Server.Parsers
 {

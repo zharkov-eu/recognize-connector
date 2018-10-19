@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Generated;
 using ExpertSystem.Client.Models.FuzzyLogic;
 
 namespace ExpertSystem.Client.Models.ANFIS

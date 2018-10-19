@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Client.Models.FuzzyLogic
 {

@@ -2,7 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using ExpertSystem.Client.Models.ANFIS;
 using ExpertSystem.Client.Models.FuzzyLogic;
-using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Client.RulesGenerators
 {

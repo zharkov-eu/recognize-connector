@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ExpertSystem.Common.Models;
 using ExpertSystem.Client.Models.FuzzyLogic;
 using ExpertSystem.Client.Services;
 using ExpertSystem.Common.Utils;
+using ExpertSystem.Common.Generated;
 using static ExpertSystem.Client.Models.FuzzyLogic.FuzzyCustomSocket;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
@@ -78,13 +78,14 @@ namespace ExpertSystem.Client.RulesGenerators
         public Dictionary<SocketDomain, List<FuzzyFact>> GetFuzzyFacts(List<FuzzyDomain> domains,
             List<CustomSocket> sockets)
         {
+            var socketType = typeof(CustomSocket);
             var fuzzyFacts = new Dictionary<SocketDomain, List<FuzzyFact>>();
 
             foreach (var domain in domains)
             {
                 var type = SocketDomainType[domain.Domain];
                 var domainValues = sockets
-                    .Select(p => CustomSocket.Type.GetField(domain.Domain.ToString()).GetValue(p))
+                    .Select(p => socketType.GetField(domain.Domain.ToString()).GetValue(p))
                     .Where(p => !SocketDefaultValue[type].Equals(p))
                     .Distinct()
                     .Select(p => Convert.ToDouble(p))
@@ -103,13 +104,14 @@ namespace ExpertSystem.Client.RulesGenerators
 
         public List<FuzzyDomain> GetFuzzyDomains(List<CustomSocket> sockets)
         {
+            var socketType = typeof(CustomSocket);
             var fuzzyDomains = new List<FuzzyDomain>();
             var fuzzySocketDomain = GetFuzzySocketDomains();
 
             foreach (var domain in fuzzySocketDomain.Keys.Where(p => !DomainIgnore.Contains(p)))
             {
                 var type = SocketDomainType[domain];
-                var domainValues = sockets.Select(p => CustomSocket.Type.GetField(domain.ToString()).GetValue(p))
+                var domainValues = sockets.Select(p => type.GetField(domain.ToString()).GetValue(p))
                     .Where(p => !SocketDefaultValue[type].Equals(p));
 
                 fuzzyDomains.Add(new FuzzyDomain(

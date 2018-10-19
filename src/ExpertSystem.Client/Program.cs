@@ -1,16 +1,20 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using System.Collections.Generic;
+using Grpc.Core;
 using ExpertSystem.Client.Processors;
 using ExpertSystem.Client.RulesGenerators;
-using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Client
 {
     public class Program
     {
-        protected readonly ProductionProcessor ProductionProcessor;
-        protected readonly LogicProcessor LogicProcessor;
-        protected readonly FuzzyProcessor FuzzyProcessor;
+        protected readonly SocketExchange.SocketExchangeClient Client;
+        protected readonly ProgramOptions Options;
+        protected ProductionProcessor ProductionProcessor;
+        protected LogicProcessor LogicProcessor;
+        protected FuzzyProcessor FuzzyProcessor;
 
         public struct ProgramOptions
         {
@@ -19,12 +23,18 @@ namespace ExpertSystem.Client
 
         protected Program(ProgramOptions options)
         {
-            List<CustomSocket> sockets;
-            var socketFieldsProcessor = new SocketFieldsProcessor();
+            Options = options;
 
-            var fileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "data", "1.csv");
-            using (var stream = File.OpenRead(fileName))
-                sockets = socketFieldsProcessor.GetSockets(stream);
+            var channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
+            Client = new SocketExchange.SocketExchangeClient(channel);
+        }
+
+        public async Task<Program> Init()
+        {
+            var sockets = new List<CustomSocket>();
+            var stream = Client.GetSockets(new Empty()).ResponseStream;
+            while (await stream.MoveNext())
+                sockets.Add(stream.Current);
 
             var rulesGenerator = new ProductionRulesGenerator();
             var logicRulesGenerator = new LogicRulesGenerator();
@@ -38,14 +48,16 @@ namespace ExpertSystem.Client
             var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(sockets);
             var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, sockets);
 
-            ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = options.Debug });
-            LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = options.Debug });
-            FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = options.Debug });
+            ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = Options.Debug });
+            LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = Options.Debug });
+            FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = Options.Debug });
+
+            return this;
         }
 
         private static void Main()
         {
-            var program = new ConsoleProgram(new ProgramOptions { Debug = true });
+            var program = (ConsoleProgram) new ConsoleProgram(new ProgramOptions { Debug = true }).Init().Result;
             program.Run();
         }
     }

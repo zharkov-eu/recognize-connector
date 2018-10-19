@@ -2,7 +2,7 @@
 using System.Linq;
 using ExpertSystem.Client.Models;
 using ExpertSystem.Client.Models.Graph;
-using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Generated;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Client.RulesGenerators
@@ -11,6 +11,7 @@ namespace ExpertSystem.Client.RulesGenerators
     {
         public RulesGraph GenerateRules(List<CustomSocket> sockets)
         {
+            var type = typeof(CustomSocket);
             var rulesGraph = new RulesGraph();
 
             //Сортировка полей по числу принимаемых ими значений
@@ -29,9 +30,8 @@ namespace ExpertSystem.Client.RulesGenerators
                     GraphNode node = null;
 
                     // Конструируем факт
-                    //var type = SocketDomainType[domain];
                     var facts = new FactSet(
-                        new Fact(domain, CustomSocket.Type.GetField(domain.ToString()).GetValue(socket))
+                        new Fact(domain, type.GetField(domain.ToString()).GetValue(socket))
                     );
 
                     // Проверяем текущий список фактов, возможно, там уже есть этот факт
@@ -75,10 +75,11 @@ namespace ExpertSystem.Client.RulesGenerators
 
         private static Dictionary<SocketDomain, List<string>> GetDomainsWithPossibleValues(List<CustomSocket> sockets)
         {
+            var type = typeof(CustomSocket);
             var domainsValues = new Dictionary<SocketDomain, List<string>>();
             foreach (var domain in GetSocketDomains().Where(p => p != SocketDomain.SocketName))
             {
-                var field = CustomSocket.Type.GetField(domain.ToString());
+                var field = type.GetField(domain.ToString());
 
                 var propertyValues = sockets.GroupBy(p => field.GetValue(p).ToString()).ToList();
                 var currentPropValues = new List<string>();
