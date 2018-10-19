@@ -1,7 +1,7 @@
 using System;
-using System.Linq;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using ExpertSystem.Client.Models;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
@@ -19,7 +19,10 @@ namespace ExpertSystem.Client
 
     public class ConsoleProgram : Program
     {
-        public ConsoleProgram(ProgramOptions options) : base(options) { }
+        public ConsoleProgram(ProgramOptions options)
+            : base(options)
+        {
+        }
 
         public void Run()
         {
@@ -55,14 +58,16 @@ namespace ExpertSystem.Client
                         break;
                     case Command.FuzzyProcessingMamdani:
                         WritePaddedTop("Нечеткий вывод Мамдани, введите факты:");
-                        socketFacts = GetSocketFactsFromConsole(new SocketDomain[] {
+                        socketFacts = GetSocketFactsFromConsole(new[]
+                        {
                             SocketDomain.NumberOfContacts, SocketDomain.SizeLength, SocketDomain.SizeWidth
                         });
                         FuzzyProcessingMamdani(new FactSet(socketFacts.ToArray()));
                         break;
                     case Command.FuzzyProcessingSugeno:
                         WritePaddedTop("Нечеткий вывод Сугэно, введите факты:");
-                        socketFacts = GetSocketFactsFromConsole(new SocketDomain[] {
+                        socketFacts = GetSocketFactsFromConsole(new[]
+                        {
                             SocketDomain.NumberOfContacts, SocketDomain.SizeLength, SocketDomain.SizeWidth
                         });
                         FuzzyProcessingSugeno(new FactSet(socketFacts.ToArray()));
@@ -110,7 +115,8 @@ namespace ExpertSystem.Client
 
         private double FuzzyProcessingMamdani(FactSet factSet)
         {
-            WritePaddedBottom($"Нечеткий вывод (Мамдани) максимальной силы тока при разрыве цепи при известных {factSet}");
+            WritePaddedBottom(
+                $"Нечеткий вывод (Мамдани) максимальной силы тока при разрыве цепи при известных {factSet}");
             var amperageCircuit = FuzzyProcessor.MamdaniProcesing(factSet);
             WritePaddedTop($"Максимальная сила тока при разрыве цепи: {amperageCircuit} мА");
             return amperageCircuit;
@@ -118,7 +124,8 @@ namespace ExpertSystem.Client
 
         private double FuzzyProcessingSugeno(FactSet factSet)
         {
-            WritePaddedBottom($"Нечеткий вывод (Сугэно) максимальной силы тока при разрыве цепи при известных {factSet}");
+            WritePaddedBottom(
+                $"Нечеткий вывод (Сугэно) максимальной силы тока при разрыве цепи при известных {factSet}");
             var amperageCircuit = FuzzyProcessor.SugenoProcesing(factSet);
             WritePaddedTop($"Максимальная сила тока при разрыве цепи: {amperageCircuit} мА");
             return amperageCircuit;
@@ -141,11 +148,12 @@ namespace ExpertSystem.Client
                 domains = GetSocketDomains();
 
             WritePaddedTop("Выберите домен: ");
-            foreach (SocketDomain domain in GetSocketDomains().Where(p => domains.Contains(p)))
+            foreach (var domain in GetSocketDomains().Where(p => domains.Contains(p)))
             {
                 var domainChoice = ((int)domain).ToString().PadRight(3);
                 Console.WriteLine($"{domainChoice} - {GetSocketDomainName(domain)}");
             }
+
             Console.WriteLine($"{0.ToString().PadRight(3)} - завершить ввод и продолжить");
         }
 
@@ -155,13 +163,14 @@ namespace ExpertSystem.Client
             string domainChoice;
             PrintDomains(domains);
             var factsList = new List<Fact>();
-            while ((domainChoice = Console.ReadLine()) != (0).ToString())
+            while ((domainChoice = Console.ReadLine()) != 0.ToString())
             {
-                var domain = (SocketDomain)int.Parse(domainChoice);            
+                var domain = (SocketDomain)int.Parse(domainChoice);
                 if (Enum.IsDefined(typeof(SocketDomain), domain))
-                {
                     if (factsList.Any(p => p.Domain.Equals(domain.ToString())))
+                    {
                         Console.WriteLine($"Поле со свойством {domain.ToString()} уже существует");
+                    }
                     else
                     {
                         WritePaddedTop("Введите значение");
@@ -173,7 +182,6 @@ namespace ExpertSystem.Client
                         var value = Console.ReadLine();
                         factsList.Add(new Fact(domain, converter.ConvertFrom(value)));
                     }
-                }
                 else
                     Console.WriteLine("Команда не распознана");
 

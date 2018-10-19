@@ -1,10 +1,10 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using Grpc.Core;
 using ExpertSystem.Client.Processors;
 using ExpertSystem.Client.RulesGenerators;
 using ExpertSystem.Common.Generated;
+using Google.Protobuf.WellKnownTypes;
 
 namespace ExpertSystem.Client
 {
@@ -57,8 +57,9 @@ namespace ExpertSystem.Client
 
         private static void Main()
         {
-            var program = (ConsoleProgram) new ConsoleProgram(new ProgramOptions { Debug = true }).Init().Result;
-            program.Run();
+            var consoleProgram = new ConsoleProgram(new ProgramOptions { Debug = true });
+            consoleProgram.Init().GetAwaiter().GetResult();
+            consoleProgram.Run();
         }
     }
 }

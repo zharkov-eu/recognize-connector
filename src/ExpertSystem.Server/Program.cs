@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Grpc.Core;
 using ExpertSystem.Server.Parsers;
 using ExpertSystem.Common.Generated;
@@ -36,7 +37,7 @@ namespace ExpertSystem.Server
             };
         }
 
-        public void Run()
+        public async Task Run()
         {
             Server.Start();
 
@@ -44,13 +45,13 @@ namespace ExpertSystem.Server
             Console.WriteLine("Press any key to stop the server...");
             Console.ReadKey();
 
-            Server.ShutdownAsync().Wait();
+            await Server.ShutdownAsync();
         }
-
+            
         private static void Main()
         {
             var program = new Program(new ProgramOptions { Debug = true, Port = 50051 });
-            program.Run();
+            program.Run().GetAwaiter().GetResult();
         }
     }
 }
