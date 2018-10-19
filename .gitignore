@@ -451,3 +451,7 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder
 .mfractor/
+
+# Generated Sources
+src/ExpertSystem.Common/Generated/*
+!src/ExpertSystem.Common/Generated/readme.txt
