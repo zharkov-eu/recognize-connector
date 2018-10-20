@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
+using ExpertSystem.Client.Services;
 
-namespace ExpertSystem.Services
+namespace ExpertSystem.Tests.Services
 {
     public class ClusteringServiceTest
     {

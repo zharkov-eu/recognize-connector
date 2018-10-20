@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using ExpertSystem.Models.CommonLogic;
 using Xunit;
-using static ExpertSystem.Models.CustomSocketDomain;
+using System.Collections.Generic;
+using ExpertSystem.Client.Models.CommonLogic;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
-namespace ExpertSystem.Models
+namespace ExpertSystem.Tests.Models
 {
     public class LogicFactTest
     {

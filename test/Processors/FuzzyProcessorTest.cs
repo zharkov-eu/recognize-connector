@@ -1,9 +1,10 @@
-using ExpertSystem.Common.Processors;
-using ExpertSystem.Common.RulesGenerators;
 using Xunit;
 using Xunit.Abstractions;
-using ExpertSystem.Models;
-using static ExpertSystem.Models.CustomSocketDomain;
+using ExpertSystem.Client.Models;
+using ExpertSystem.Client.Processors;
+using ExpertSystem.Client.RulesGenerators;
+using ExpertSystem.Tests.Parsers;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Processors
 {

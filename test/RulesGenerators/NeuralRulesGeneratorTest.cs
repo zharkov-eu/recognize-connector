@@ -1,6 +1,7 @@
-using ExpertSystem.Common.RulesGenerators;
-using ExpertSystem.Models;
 using Xunit;
+using ExpertSystem.Client.Models;
+using ExpertSystem.Client.RulesGenerators;
+using ExpertSystem.Tests.Parsers;
 
 namespace ExpertSystem.Tests.RulesGenerators
 {

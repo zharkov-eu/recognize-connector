@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Xunit;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Xunit;
-using static ExpertSystem.Models.CustomSocketDomain;
+using ExpertSystem.Common.Generated;
+using ExpertSystem.Server.Parsers;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
-namespace ExpertSystem.Models
+namespace ExpertSystem.Tests.Parsers
 {
     public class SocketFieldsProcessorTest
     {
@@ -95,11 +97,6 @@ namespace ExpertSystem.Models
             }
         }
 
-        public Dictionary<SocketDomain, List<string>> GetFieldsWithPossibleValues(List<CustomSocket> sockets)
-        {
-            return _processor.GetDomainsWithPossibleValues(sockets);
-        }
-
         [Fact]
         public void SocketFieldsProcessor_GetSockets()
         {
@@ -107,11 +104,6 @@ namespace ExpertSystem.Models
             var socket = TestSocket();
 
             Assert.True(socket.Equals(sockets[0]), "Данные разъема должны парситься правильно");
-        }
-
-        [Fact]
-        public void SocketFieldsProcessor_GetFieldsWithPossibleValues()
-        {
         }
     }
 }
