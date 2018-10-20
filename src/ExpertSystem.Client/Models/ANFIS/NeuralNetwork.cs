@@ -19,6 +19,7 @@ namespace ExpertSystem.Client.Models.ANFIS
             var conclusionNeurons = new List<Neuron>();
             var activationNeurons = new List<Neuron>();
             var statementNeurons = new List<Neuron>();
+            var ruleDictionary = new Dictionary<FuzzyRule, Neuron>();
             var ruleNeurons = new List<KeyValuePair<FuzzyRule, Neuron>>();
 
             // Строим 5, 4, 3 уровни нейросети
@@ -46,7 +47,6 @@ namespace ExpertSystem.Client.Models.ANFIS
                 foreach (var neuron in activationLayer.Neurons)
                     neuron.Dendrites.Add(new Dendrite(statementNeuron, 1d));
 
-                var ruleDictionary = new Dictionary<FuzzyRule, Neuron>();
                 foreach(var rule in statement.Rules)
                 {
                     if (!ruleDictionary.ContainsKey(rule))

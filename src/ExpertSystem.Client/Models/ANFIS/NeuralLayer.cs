@@ -1,5 +1,6 @@
-using System.Collections.Generic;
+using System;
 using System.Linq;
+using System.Collections.Generic;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Client.Models.FuzzyLogic;
 using ExpertSystem.Common.Utils;
@@ -43,6 +44,7 @@ namespace ExpertSystem.Client.Models.ANFIS
 
     public abstract class NeuralSocketLayer : NeuralLayer
     {
+        protected readonly Type _socketType = typeof(CustomSocket);
         protected CustomSocket _socket;
 
         public NeuralSocketLayer(List<Neuron> neurons, NeuralLayerOptions options)
@@ -59,26 +61,37 @@ namespace ExpertSystem.Client.Models.ANFIS
 
     public class RuleNeuralLayer : NeuralSocketLayer
     {
-        private InputDegreeParam _param;
-        private Dictionary<FuzzyRule, List<Neuron>> _domainNeurons;
+        private readonly Dictionary<Neuron, InputDegreeParam> _params;
+        private readonly Dictionary<FuzzyRule, Neuron> _domainNeurons;
 
         public RuleNeuralLayer(List<KeyValuePair<FuzzyRule, Neuron>> domainNeurons)
             : base(domainNeurons.Select(p => p.Value).ToList(), new NeuralLayerOptions { IsFixed = false })
         {
-            var r = new CryptoRandom();
-            _param = new InputDegreeParam { a = r.RandomValue, b = r.RandomValue, c = r.RandomValue };
-            _domainNeurons = new Dictionary<FuzzyRule, List<Neuron>>();
+            _params = new Dictionary<Neuron, InputDegreeParam>();
+            _domainNeurons = new Dictionary<FuzzyRule, Neuron>();
 
             foreach (var domainNeuron in domainNeurons)
             {
-                if (_domainNeurons.ContainsKey(domainNeuron.Key) == false)
-                    _domainNeurons[domainNeuron.Key] = new List<Neuron>();
-                _domainNeurons[domainNeuron.Key].Add(domainNeuron.Value);
+                var neuron = domainNeuron.Value;
+                _domainNeurons[domainNeuron.Key] = neuron;
+                _params[neuron] = new InputDegreeParam {
+                    a = RandUtil.RandDoubleRange(1, 2),
+                    b = RandUtil.RandDoubleRange(1, 2),
+                    c = RandUtil.RandDoubleRange(1, 2)
+                };
             }
         }
 
         public override void Process()
         {
+            foreach (var domainNeuron in _domainNeurons)
+            {
+                var neuron = domainNeuron.Value;
+                var param = _params[neuron];
+                var domain = domainNeuron.Key.Domain.Domain;
+                var inputValue = Convert.ToDouble(_socketType.GetProperty(domain.ToString()).GetValue(_socket));
+                neuron.Value = 1 / (1 + Math.Pow(Math.Abs((inputValue - param.c) / param.a), 2 * param.b));
+            }
         }
     }
 
@@ -130,14 +143,13 @@ namespace ExpertSystem.Client.Models.ANFIS
         {
             _params = new Dictionary<Neuron, ConclusionDegreeParam>();
 
-            var r = new CryptoRandom();
             foreach (var neuron in Neurons)
                 _params.Add(neuron, new ConclusionDegreeParam
                 {
-                    p = r.RandomValue,
-                    q = r.RandomValue,
-                    r = r.RandomValue,
-                    s = r.RandomValue
+                    p = RandUtil.RandDoubleRange(1, 2),
+                    q = RandUtil.RandDoubleRange(1, 2),
+                    r = RandUtil.RandDoubleRange(1, 2),
+                    s = RandUtil.RandDoubleRange(1, 2),
                 });
         }
 
