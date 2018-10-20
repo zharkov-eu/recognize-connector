@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using ExpertSystem.Server.Services;
 using ExpertSystem.Common.Generated;
+using ExpertSystem.Server.DAL.Repositories;
 
 namespace ExpertSystem.Server
 {
@@ -24,8 +25,8 @@ namespace ExpertSystem.Server
 
             var csvFileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data", "1.csv");
             var walFileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data", "wal.txt");
-            var database = new Database(csvFileName, walFileName).Initialize();
-            var sockets = database.GetSockets();
+            var socketsRepository = new CsvRepository(csvFileName, walFileName).Initialize();
+            var sockets = socketsRepository.GetSockets();
 
             Server = new Grpc.Core.Server
             {
@@ -44,7 +45,7 @@ namespace ExpertSystem.Server
 
             await Server.ShutdownAsync();
         }
-            
+
         private static void Main()
         {
             var program = new Program(new ProgramOptions { Debug = true, Port = 50051 });

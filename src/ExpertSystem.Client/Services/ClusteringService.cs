@@ -68,18 +68,18 @@ namespace ExpertSystem.Client.Services
 
                 // Обновление матрицы принадлежности
                 for (var i = 0; i < u.Length; i++)
-                for (var j = 0; j < u[i].Length; j++)
-                {
-                    var denominator = Enumerable.Range(0, clusterCount).Select(x =>
-                        Math.Pow(
-                            Math.Sqrt(Dist(values[i], centers[j])) / Math.Sqrt(Dist(values[i], centers[x])),
-                            2 / (m - 1)
-                        )
-                    ).Sum();
+                    for (var j = 0; j < u[i].Length; j++)
+                    {
+                        var denominator = Enumerable.Range(0, clusterCount).Select(x =>
+                            Math.Pow(
+                                Math.Sqrt(Dist(values[i], centers[j])) / Math.Sqrt(Dist(values[i], centers[x])),
+                                2 / (m - 1)
+                            )
+                        ).Sum();
 
-                    u[i][j] = 1 / denominator;
-                    if (double.IsNaN(u[i][j])) u[i][j] = 1;
-                }
+                        u[i][j] = 1 / denominator;
+                        if (double.IsNaN(u[i][j])) u[i][j] = 1;
+                    }
             }
 
             var fuzzyValues = new List<FuzzyValue>();

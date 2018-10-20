@@ -4,7 +4,6 @@ using System.Linq;
 using ExpertSystem.Client.Models;
 using ExpertSystem.Client.Models.FuzzyLogic;
 using ExpertSystem.Client.RulesGenerators;
-using ExpertSystem.Common.Models;
 using ExpertSystem.Common.Generated;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
@@ -86,7 +85,7 @@ namespace ExpertSystem.Client.Processors
             {
                 var degree = statement.SetRulesFacts(fuzzyFacts).GetRulesDegree();
                 var result = statement.Result(socket);
-                degreeResults.Add(new FuzzyFuncProcessed {Degree = degree, Result = result});
+                degreeResults.Add(new FuzzyFuncProcessed { Degree = degree, Result = result });
             }
 
             debug($"Нечеткие правила:\n" + string.Join("\n", statements));
@@ -141,10 +140,10 @@ namespace ExpertSystem.Client.Processors
                     return currentFact;
                 var difference = factValue - currentFact.Value;
                 if (difference > 0 && (left.Equals(default(FuzzificationFact)) || difference < left.Difference))
-                    left = new FuzzificationFact {Fact = currentFact, Difference = difference};
+                    left = new FuzzificationFact { Fact = currentFact, Difference = difference };
                 else if (difference < 0 && (right.Equals(default(FuzzificationFact)) ||
                                             Math.Abs(difference) < Math.Abs(right.Difference)))
-                    right = new FuzzificationFact {Fact = currentFact, Difference = difference};
+                    right = new FuzzificationFact { Fact = currentFact, Difference = difference };
             }
 
             // Вычисляем итоговую принадлежность к кластерам

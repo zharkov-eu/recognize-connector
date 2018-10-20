@@ -9,9 +9,7 @@ namespace ExpertSystem.Common.Models
         public enum SocketDomain
         {
             [Output("не определен")] Empty,
-
-            [Output("максимальная сила тока при разрыве цепи")]
-            AmperageCircuit,
+            [Output("максимальная сила тока при разрыве цепи")] AmperageCircuit,
             [Output("пол разъема")] Gender,
             [Output("контактный материал")] ContactMaterial,
             [Output("контактная плата")] ContactPlating,
@@ -77,7 +75,7 @@ namespace ExpertSystem.Common.Models
             {
                 var attrs = memInfo[0].GetCustomAttributes(typeof(Output), false);
                 if (attrs != null && attrs.Length > 0)
-                    return ((Output) attrs[0]).Text;
+                    return ((Output)attrs[0]).Text;
             }
 
             return domain.ToString();

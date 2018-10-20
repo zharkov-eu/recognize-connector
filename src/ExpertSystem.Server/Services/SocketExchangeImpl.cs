@@ -5,9 +5,9 @@ using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Server.Services
 {
-    class SocketExchangeImpl : SocketExchange.SocketExchangeBase
+    public class SocketExchangeImpl : SocketExchange.SocketExchangeBase
     {
-        private List<CustomSocket> _sockets;
+        private readonly List<CustomSocket> _sockets;
 
         public SocketExchangeImpl(List<CustomSocket> sockets)
         {

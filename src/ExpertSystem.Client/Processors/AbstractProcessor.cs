@@ -18,7 +18,8 @@ namespace ExpertSystem.Client.Processors
 
         protected void debug(string message)
         {
-            if (Debug) Console.WriteLine(message);
+            if (Debug)
+                Console.WriteLine(message);
         }
     }
 }

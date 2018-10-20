@@ -4,7 +4,6 @@ using Grpc.Core;
 using ExpertSystem.Client.Processors;
 using ExpertSystem.Client.RulesGenerators;
 using ExpertSystem.Common.Generated;
-using Google.Protobuf.WellKnownTypes;
 
 namespace ExpertSystem.Client
 {
@@ -32,7 +31,7 @@ namespace ExpertSystem.Client
         public async Task<Program> Init()
         {
             var sockets = new List<CustomSocket>();
-            var stream = Client.GetSockets(new ExpertSystem.Common.Generated.Empty()).ResponseStream;
+            var stream = Client.GetSockets(new Empty()).ResponseStream;
             while (await stream.MoveNext())
                 sockets.Add(stream.Current);
 

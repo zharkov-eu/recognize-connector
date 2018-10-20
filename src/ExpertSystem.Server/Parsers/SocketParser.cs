@@ -1,7 +1,7 @@
 using System.IO;
 using System.Collections.Generic;
-using ExpertSystem.Server.Models;
 using ExpertSystem.Common.Generated;
+using ExpertSystem.Server.DAL.Entities;
 
 namespace ExpertSystem.Server.Parsers
 {
@@ -15,6 +15,7 @@ namespace ExpertSystem.Server.Parsers
             var data = CsvParser.ParseHeadAndTail(reader, StorageCustomSocket.Delimiter, '"');
             CsvHead = data.Item1;
             var lines = data.Item2;
+
             foreach (var line in lines)
                 sockets.Add(StorageCustomSocket.Deserialize(line));
             return sockets;
