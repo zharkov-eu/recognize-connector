@@ -19,5 +19,15 @@ namespace ExpertSystem.Server.Parsers
             foreach (var socket in _sockets)
                 await responseStream.WriteAsync(socket);
         }
+
+        public override Task<CustomSocket> UpsertSocket(CustomSocket request, ServerCallContext context)
+        {
+            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+        }
+
+        public override Task<Empty> DeleteSocket(CustomSocket request, ServerCallContext context)
+        {
+            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+        }
     }
 }

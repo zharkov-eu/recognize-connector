@@ -6,6 +6,8 @@ package ExpertSystem;
 
 service SocketExchange {
     rpc GetSockets (Empty) returns (stream CustomSocket) {}
+    rpc UpsertSocket (CustomSocket) returns (CustomSocket) {}
+    rpc DeleteSocket (CustomSocket) returns (Empty) {}
 }
 
 message Empty {}
