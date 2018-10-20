@@ -32,7 +32,7 @@ namespace ExpertSystem.Client
         public async Task<Program> Init()
         {
             var sockets = new List<CustomSocket>();
-            var stream = Client.GetSockets(new Empty()).ResponseStream;
+            var stream = Client.GetSockets(new ExpertSystem.Common.Generated.Empty()).ResponseStream;
             while (await stream.MoveNext())
                 sockets.Add(stream.Current);
 

@@ -21,7 +21,7 @@ namespace ExpertSystem.Client.RulesGenerators
                     var operation = domain.Equals(SocketDomain.SocketName)
                         ? LogicOperation.Operation.Implication
                         : LogicOperation.Operation.Conjunction;
-                    var fact = new LogicFact(domain, type.GetField(domain.ToString()).GetValue(socket),
+                    var fact = new LogicFact(domain, type.GetProperty(domain.ToString()).GetValue(socket),
                         operation);
                     if (!fact.IsDefaultValue())
                         currentSocketFacts.AddLast(fact);

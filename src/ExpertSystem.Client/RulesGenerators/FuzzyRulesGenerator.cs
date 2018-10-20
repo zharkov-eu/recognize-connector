@@ -85,7 +85,7 @@ namespace ExpertSystem.Client.RulesGenerators
             {
                 var type = SocketDomainType[domain.Domain];
                 var domainValues = sockets
-                    .Select(p => socketType.GetField(domain.Domain.ToString()).GetValue(p))
+                    .Select(p => socketType.GetProperty(domain.Domain.ToString()).GetValue(p))
                     .Where(p => !SocketDefaultValue[type].Equals(p))
                     .Distinct()
                     .Select(p => Convert.ToDouble(p))
@@ -111,7 +111,7 @@ namespace ExpertSystem.Client.RulesGenerators
             foreach (var domain in fuzzySocketDomain.Keys.Where(p => !DomainIgnore.Contains(p)))
             {
                 var type = SocketDomainType[domain];
-                var domainValues = sockets.Select(p => type.GetField(domain.ToString()).GetValue(p))
+                var domainValues = sockets.Select(p => socketType.GetProperty(domain.ToString()).GetValue(p))
                     .Where(p => !SocketDefaultValue[type].Equals(p));
 
                 fuzzyDomains.Add(new FuzzyDomain(

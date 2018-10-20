@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Grpc.Core;
@@ -15,10 +14,10 @@ namespace ExpertSystem.Server.Parsers
             _sockets = sockets;
         }
 
-        public override Task GetSockets(Empty request, IServerStreamWriter<CustomSocket> responseStream, ServerCallContext context)
+        public override async Task GetSockets(Empty request, IServerStreamWriter<CustomSocket> responseStream, ServerCallContext context)
         {
-            Task.WaitAll(_sockets.Select(it => responseStream.WriteAsync(it)).ToArray());
-            return Task.CompletedTask;
+            foreach (var socket in _sockets)
+                await responseStream.WriteAsync(socket);
         }
     }
 }

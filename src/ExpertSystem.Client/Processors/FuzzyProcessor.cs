@@ -73,7 +73,7 @@ namespace ExpertSystem.Client.Processors
             var fuzzyFacts = new List<FuzzyFact>();
             foreach (var fact in factSet.Facts)
             {
-                type.GetField(fact.Domain.ToString()).SetValue(socket, fact.Value);
+                type.GetProperty(fact.Domain.ToString()).SetValue(socket, fact.Value);
                 fuzzyFacts.Add(FactFuzzification(fact));
             }
 
