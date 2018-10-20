@@ -44,7 +44,7 @@ namespace ExpertSystem.Tests.Processors
             var result = _processor.MamdaniProcesing(factSet);
 
             _output.WriteLine($"MamdaniProcessing for {factSet}: {result}");
-            Assert.True(result > 25 && result < 30);
+            Assert.True(result > 45 && result < 110);
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace ExpertSystem.Tests.Processors
             var result = _processor.SugenoProcesing(factSet);
 
             _output.WriteLine($"SugenoProcessing for {factSet}: {result}");
-            Assert.True(result > 25 && result < 30);
+            Assert.True(result > 45 && result < 110);
         }
     }
 }

@@ -31,25 +31,25 @@ namespace ExpertSystem.Client
         public async Task<Program> Init()
         {
             var sockets = new List<CustomSocket>();
-            var stream = Client.GetSockets(new Empty()).ResponseStream;
-            while (await stream.MoveNext())
-                sockets.Add(stream.Current);
+            //var stream = Client.GetSockets(new Empty()).ResponseStream;
+            //while (await stream.MoveNext())
+            //    sockets.Add(stream.Current);
 
             var rulesGenerator = new ProductionRulesGenerator();
             var logicRulesGenerator = new LogicRulesGenerator();
             var fuzzyRulesGenerator = new FuzzyRulesGenerator();
 
-            // Продукционный вывод
-            var rulesGraph = rulesGenerator.GenerateRules(sockets);
-            // Логический вывод
-            var logicRules = logicRulesGenerator.GenerateRules(sockets);
-            // Нечеткий вывод
-            var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(sockets);
-            var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, sockets);
+            //// Продукционный вывод
+            //var rulesGraph = rulesGenerator.GenerateRules(sockets);
+            //// Логический вывод
+            //var logicRules = logicRulesGenerator.GenerateRules(sockets);
+            //// Нечеткий вывод
+            //var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(sockets);
+            //var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, sockets);
 
-            ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = Options.Debug });
-            LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = Options.Debug });
-            FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = Options.Debug });
+            //ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = Options.Debug });
+            //LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = Options.Debug });
+            //FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = Options.Debug });
 
             return this;
         }

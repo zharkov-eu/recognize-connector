@@ -14,7 +14,9 @@ namespace ExpertSystem.Client
         BackProcessing = 2,
         LogicProcessing = 3,
         FuzzyProcessingMamdani = 4,
-        FuzzyProcessingSugeno = 5
+        FuzzyProcessingSugeno = 5,
+        AddNewSocket = 6,
+        UpdateExistingSocket = 7
     }
 
     public class ConsoleProgram : Program
@@ -71,6 +73,34 @@ namespace ExpertSystem.Client
                             SocketDomain.NumberOfContacts, SocketDomain.SizeLength, SocketDomain.SizeWidth
                         });
                         FuzzyProcessingSugeno(new FactSet(socketFacts.ToArray()));
+                        break;
+
+                    case Command.AddNewSocket:
+                        WritePaddedTop("Добавление нового разъема, введите характеристики:");
+                        socketFacts = GetSocketFactsFromConsole();
+                        //Вызов метода для создания сокета
+                        Console.WriteLine("Разъем с характеристиками");
+                        foreach (var fact in socketFacts)
+                            Console.Write(fact + " ");
+                        Console.WriteLine("был успешно добавлен.");
+                        break;
+
+                    case Command.UpdateExistingSocket:
+                        WritePaddedTop("Обновление существующего разъема, введите имя разъема:");
+                        var updatingSocketName = Console.ReadLine();
+                        //Вызов метода для получения сокета
+                        //If does not exist
+                        // Console.WriteLine("Разъем с введенным названием не найден");
+                        //else
+                        Console.WriteLine("Выбран разъем с характеристиками");
+                        //foreach (var fact in socketFacts)
+                        //    Console.Write(fact + " ");
+                        Console.WriteLine("Введите новые характеристики разъема");
+                        socketFacts = GetSocketFactsFromConsole();
+                        Console.WriteLine("Разъем с характеристиками");
+                        foreach (var fact in socketFacts)
+                            Console.Write(fact + " ");
+                        Console.WriteLine("был успешно добавлен.");
                         break;
                     default:
                         WritePaddedTop("Команда не распознана");
@@ -139,6 +169,8 @@ namespace ExpertSystem.Client
             Console.WriteLine($"{(int)Command.LogicProcessing} - логический вывод");
             Console.WriteLine($"{(int)Command.FuzzyProcessingMamdani} - нечеткий вывод (Мамдани)");
             Console.WriteLine($"{(int)Command.FuzzyProcessingSugeno} - нечеткий вывод (Сугэно)");
+            Console.WriteLine($"{(int)Command.AddNewSocket} - добавление нового разъёма");
+            Console.WriteLine($"{(int)Command.UpdateExistingSocket} - обновление существующего разъёма");
             WritePaddedBottom($"{(int)Command.Exit} - выход");
         }
 
@@ -177,7 +209,7 @@ namespace ExpertSystem.Client
 
                         var type = SocketDomainType[domain];
                         var converter = TypeDescriptor.GetConverter(type);
-                        Console.Write($"{GetSocketDomainName(domain).FirstCharToUpper()} ({type}): ");
+                        Console.Write($"{GetSocketDomainName(domain).FirstCharToUpper()}: ");
 
                         var value = Console.ReadLine();
                         factsList.Add(new Fact(domain, converter.ConvertFrom(value)));
