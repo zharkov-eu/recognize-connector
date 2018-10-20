@@ -16,13 +16,13 @@ namespace ExpertSystem.Tests.Processors
 
         public ProductionProcessorTest()
         {
-            var socketFieldsProcessor = new SocketFieldsProcessorTest();
-            var sockets = socketFieldsProcessor.GetSockets();
+            var socketParser = new SocketParserTest();
+            var sockets = socketParser.GetSockets();
 
             var rulesGenerator = new ProductionRulesGenerator();
             var rulesGraph = rulesGenerator.GenerateRules(sockets);
 
-            _socket = socketFieldsProcessor.TestSocket();
+            _socket = socketParser.TestSocket();
             _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = false });
         }
 

@@ -101,19 +101,12 @@ namespace ExpertSystem.Server.Services
 		/// 
 		/// </summary>
 		public Database Initialize()
-		{
-			IList<string> csvHead;
-			
+		{	
 			using (var reader = new StreamReader(File.OpenRead(_csvFileName)))
 			{
-				var data = CsvParser.ParseHeadAndTail(reader, StorageCustomSocket.Delimiter, '"');
-				csvHead = data.Item1;
-				var lines = data.Item2;
-				foreach (var line in lines)
-				{
-					var socket = StorageCustomSocket.Deserialize(line);
+				var sockets = SocketParser.ParseSockets(reader);
+				foreach (var socket in sockets)
 					_sockets.Add(socket.GetHashCode(), socket);
-				}
 			}
 
 			using (var reader = new StreamReader(File.OpenRead(_walFileName)))
@@ -143,7 +136,7 @@ namespace ExpertSystem.Server.Services
 
 			using (var writer = new StreamWriter(File.OpenWrite(_csvFileName)))
 			{
-				writer.WriteLine(string.Join(StorageCustomSocket.Delimiter, csvHead));
+				writer.WriteLine(string.Join(StorageCustomSocket.Delimiter, SocketParser.CsvHead));
 				foreach (var socket in _sockets.Values)
 					writer.WriteLine(StorageCustomSocket.Serialise(socket));
 			}

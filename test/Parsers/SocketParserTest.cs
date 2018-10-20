@@ -8,15 +8,8 @@ using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Parsers
 {
-    public class SocketFieldsProcessorTest
+    public class SocketParserTest
     {
-        private readonly SocketFieldsProcessor _processor;
-
-        public SocketFieldsProcessorTest()
-        {
-            _processor = new SocketFieldsProcessor();
-        }
-
         public CustomSocket TestSocket()
         {
             return new CustomSocket
@@ -92,9 +85,7 @@ namespace ExpertSystem.Tests.Parsers
 
             List<CustomSocket> sockets;
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(csvSnapshot)))
-            {
-                return sockets = _processor.GetSockets(stream);
-            }
+                return sockets = SocketParser.ParseSockets(new StreamReader(stream));
         }
 
         [Fact]

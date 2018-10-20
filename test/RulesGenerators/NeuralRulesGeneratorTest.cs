@@ -8,18 +8,18 @@ namespace ExpertSystem.Tests.RulesGenerators
     public class NeuralRulesGeneratorTest
     {
         private readonly NeuralRulesGenerator _generator;
-        private readonly SocketFieldsProcessorTest _socketFieldsProcessor;
+        private readonly SocketParserTest _socketParser;
 
         public NeuralRulesGeneratorTest()
         {
             _generator = new NeuralRulesGenerator();
-            _socketFieldsProcessor = new SocketFieldsProcessorTest();
+            _socketParser = new SocketParserTest();
         }
 
         [Fact]
         public void GetNeuralFuzzyRuleStatements_isCorrect()
         {
-            var sockets = _socketFieldsProcessor.GetSockets();
+            var sockets = _socketParser.GetSockets();
             var network = _generator.GetNeuralNetwork(sockets);
         }
     }
