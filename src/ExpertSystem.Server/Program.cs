@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Grpc.Core;
-using ExpertSystem.Server.Parsers;
+using ExpertSystem.Server.Services;
 using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Server
@@ -23,12 +22,10 @@ namespace ExpertSystem.Server
         {
             Options = options;
 
-            List<CustomSocket> sockets;
-            var socketFieldsProcessor = new SocketFieldsProcessor();
-
-            var fileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data", "1.csv");
-            using (var stream = File.OpenRead(fileName))
-                sockets = socketFieldsProcessor.GetSockets(stream);
+            var csvFileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data", "1.csv");
+            var walFileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data", "wal.txt");
+            var database = new Database(csvFileName, walFileName).Initialize();
+            var sockets = database.GetSockets();
 
             Server = new Grpc.Core.Server
             {

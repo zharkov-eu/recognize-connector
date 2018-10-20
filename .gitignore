@@ -455,3 +455,6 @@ ASALocalRun/
 # Generated Sources
 src/ExpertSystem.Common/Generated/*
 !src/ExpertSystem.Common/Generated/readme.txt
+
+# WAL file
+data/wal.txt

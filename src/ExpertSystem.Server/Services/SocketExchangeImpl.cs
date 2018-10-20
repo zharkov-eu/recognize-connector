@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Grpc.Core;
 using ExpertSystem.Common.Generated;
 
-namespace ExpertSystem.Server.Parsers
+namespace ExpertSystem.Server.Services
 {
     class SocketExchangeImpl : SocketExchange.SocketExchangeBase
     {
