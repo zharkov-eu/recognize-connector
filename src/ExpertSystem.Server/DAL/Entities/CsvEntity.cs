@@ -2,16 +2,12 @@
 
 namespace ExpertSystem.Server.DAL.Entities
 {
-    /// <summary>
-    /// Структура записей в WAL
-    /// </summary>
+    /// <summary>Структура записей в WAL</summary>
     public class CsvEntity
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
+        /// <summary>Парсинг строки WAL файла </summary>
+        /// <param name="line">Строка WAL файла</param>
+        /// <returns>Запись </returns>
         public static CsvEntity ParseFromString(string line)
         {
             var parts = line.Split(Delimiter);
@@ -21,6 +17,7 @@ namespace ExpertSystem.Server.DAL.Entities
             return new CsvEntity(action, hashCode, socket);
         }
 
+        // Разделитель строки WAL-лога
         private const string Delimiter = ":::";
 
         internal readonly CsvDbAction Action;
@@ -40,9 +37,7 @@ namespace ExpertSystem.Server.DAL.Entities
         }
     }
 
-    /// <summary>
-    /// Действия WAL
-    /// </summary>
+    /// <summary>Действия WAL</summary>
     public enum CsvDbAction
     {
         Insert,

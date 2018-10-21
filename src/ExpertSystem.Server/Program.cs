@@ -25,12 +25,11 @@ namespace ExpertSystem.Server
 
             var csvFileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data", "1.csv");
             var walFileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data", "wal.txt");
-            var socketsRepository = new CsvRepository(csvFileName, walFileName).Initialize();
-            var sockets = socketsRepository.GetSockets();
+            var socketsRepository = new CsvRepository(csvFileName, walFileName).Sync();
 
             Server = new Grpc.Core.Server
             {
-                Services = { SocketExchange.BindService(new SocketExchangeImpl(sockets)) },
+                Services = { SocketExchange.BindService(new SocketExchangeImpl(socketsRepository)) },
                 Ports = { new ServerPort("localhost", Options.Port, ServerCredentials.Insecure) }
             };
         }
