@@ -25,7 +25,7 @@ namespace ExpertSystem.Client.Processors
             _domainFacts = domainFacts;
         }
 
-        public double MamdaniProcesing(FactSet factSet)
+        public double MamdaniProcessing(FactSet factSet)
         {
             var fuzzyFacts = new List<FuzzyFact>();
             foreach (var fact in factSet.Facts)
@@ -65,7 +65,7 @@ namespace ExpertSystem.Client.Processors
             return numerator / denumerator;
         }
 
-        public double SugenoProcesing(FactSet factSet)
+        public double SugenoProcessing(FactSet factSet)
         {
             var type = typeof(CustomSocket);
             var socket = new CustomSocket();

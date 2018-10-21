@@ -16,6 +16,7 @@ namespace ExpertSystem.Client
         protected ProductionProcessor ProductionProcessor;
         protected LogicProcessor LogicProcessor;
         protected FuzzyProcessor FuzzyProcessor;
+        protected NeuralProcessor NeuralProcessor;
 
         public struct ProgramOptions
         {
@@ -40,6 +41,7 @@ namespace ExpertSystem.Client
             var rulesGenerator = new ProductionRulesGenerator();
             var logicRulesGenerator = new LogicRulesGenerator();
             var fuzzyRulesGenerator = new FuzzyRulesGenerator();
+            var neuralRulesGenerator = new NeuralRulesGenerator();
 
             // Продукционный вывод
             var rulesGraph = rulesGenerator.GenerateRules(SocketCache.GetAll());
@@ -48,10 +50,13 @@ namespace ExpertSystem.Client
             // Нечеткий вывод
             var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(SocketCache.GetAll());
             var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, SocketCache.GetAll());
+            // Нейро-нечеткий вывод
+            var neuralNetwork = neuralRulesGenerator.GetNeuralNetwork(SocketCache.GetAll());
 
             ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions {Debug = Options.Debug});
             LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions {Debug = Options.Debug});
             FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions {Debug = Options.Debug});
+            NeuralProcessor = new NeuralProcessor(neuralNetwork, new ProcessorOptions {Debug = Options.Debug});
 
             return this;
         }

@@ -197,7 +197,7 @@ namespace ExpertSystem.Client
         {
             WritePaddedBottom(
                 $"Нечеткий вывод (Мамдани) максимальной силы тока при разрыве цепи при известных {factSet}");
-            var amperageCircuit = FuzzyProcessor.MamdaniProcesing(factSet);
+            var amperageCircuit = FuzzyProcessor.MamdaniProcessing(factSet);
             WritePaddedTop($"Максимальная сила тока при разрыве цепи: {amperageCircuit} мА");
             return amperageCircuit;
         }
@@ -206,7 +206,7 @@ namespace ExpertSystem.Client
         {
             WritePaddedBottom(
                 $"Нечеткий вывод (Сугэно) максимальной силы тока при разрыве цепи при известных {factSet}");
-            var amperageCircuit = FuzzyProcessor.SugenoProcesing(factSet);
+            var amperageCircuit = FuzzyProcessor.SugenoProcessing(factSet);
             WritePaddedTop($"Максимальная сила тока при разрыве цепи: {amperageCircuit} мА");
             return amperageCircuit;
         }
@@ -215,7 +215,7 @@ namespace ExpertSystem.Client
         {
             WritePaddedBottom(
                 $"Нейро-нечеткий вывод (ANFIS) максимальной силы тока при разрыве цепи при известных {factSet}");
-            var amperageCircuit = 0d;
+            var amperageCircuit = NeuralProcessor.Process(factSet);
             WritePaddedTop($"Максимальная сила тока при разрыве цепи: {amperageCircuit} мА");
             return amperageCircuit;
         }

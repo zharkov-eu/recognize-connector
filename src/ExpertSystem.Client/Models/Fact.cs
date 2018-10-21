@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
@@ -66,9 +67,9 @@ namespace ExpertSystem.Client.Models
         }
     }
 
-    public class FactSet
+    public class FactSet : IEnumerable<Fact>
     {
-        public HashSet<Fact> Facts;
+        public readonly HashSet<Fact> Facts;
 
         public FactSet(params Fact[] facts)
         {
@@ -88,25 +89,30 @@ namespace ExpertSystem.Client.Models
             return Facts.ToArray();
         }
 
+        public IEnumerator<Fact> GetEnumerator()
+        {
+            return Facts.GetEnumerator();
+        }
+
         public override bool Equals(object obj)
         {
-            if (obj == null)
-                return false;
-            var facts = obj as FactSet;
-            if (facts == null)
-                return false;
-            return Facts.SetEquals(facts.Facts);
+            return obj is FactSet facts && Facts.SetEquals(facts.Facts);
         }
 
         public override int GetHashCode()
         {
-            var hash = 19;
+            const int hash = 19;
             return hash * 37 + Facts.GetHashCode();
         }
 
         public override string ToString()
         {
             return "{ " + string.Join(", ", Facts.Select(it => it.ToString())) + " }";
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

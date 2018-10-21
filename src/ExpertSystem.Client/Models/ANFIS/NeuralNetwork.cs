@@ -6,6 +6,7 @@ namespace ExpertSystem.Client.Models.ANFIS
 {
     public class NeuralNetwork
     {
+        public bool IsLearned;
         private readonly LinkedList<NeuralLayer> _layers;
 
         public NeuralNetwork()
@@ -13,7 +14,7 @@ namespace ExpertSystem.Client.Models.ANFIS
             _layers = new LinkedList<NeuralLayer>();
         }
 
-        public void Initialize(List<FuzzyStatement> statements)
+        public NeuralNetwork Initialize(IReadOnlyCollection<FuzzyStatement> statements)
         {
             var resultNeuron = new ResultNeuron();
             var conclusionNeurons = new List<Neuron>();
@@ -60,15 +61,20 @@ namespace ExpertSystem.Client.Models.ANFIS
             }
             _layers.AddFirst(new StatementNeuralLayer(statementNeurons));
             _layers.AddFirst(new RuleNeuralLayer(ruleNeurons));
+
+            return this;
         }
 
-        public void Learn(Dictionary<CustomSocket, double> samples)
+        public NeuralNetwork Learn(Dictionary<CustomSocket, double> samples)
         {
+            IsLearned = true;
             foreach (var sample in samples)
             {
                 var result = Process(sample.Key);
                 var diff = result - sample.Value;
             }
+
+            return this;
         }
 
         public double Process(CustomSocket socket)

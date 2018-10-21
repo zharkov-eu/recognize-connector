@@ -41,7 +41,7 @@ namespace ExpertSystem.Tests.Processors
                 new Fact(SocketDomain.SizeLength, 0.03f),
                 new Fact(SocketDomain.SizeWidth, 0.0075f)
             );
-            var result = _processor.MamdaniProcesing(factSet);
+            var result = _processor.MamdaniProcessing(factSet);
 
             _output.WriteLine($"MamdaniProcessing for {factSet}: {result}");
             Assert.True(result > 45 && result < 110);
@@ -55,7 +55,7 @@ namespace ExpertSystem.Tests.Processors
                 new Fact(SocketDomain.SizeLength, 0.03f),
                 new Fact(SocketDomain.SizeWidth, 0.0075f)
             );
-            var result = _processor.SugenoProcesing(factSet);
+            var result = _processor.SugenoProcessing(factSet);
 
             _output.WriteLine($"SugenoProcessing for {factSet}: {result}");
             Assert.True(result > 45 && result < 110);
