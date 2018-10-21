@@ -11,15 +11,11 @@ dotnet run --project ./src/ExpertSystem.Client/
 ```
 Windows
 ```sh
-./script/generate_proto.bat
+.\script\generate_proto.bat
 # Консоль 1:
 dotnet run --project .\src\ExpertSystem.Server\
 # Консоль 2:
 dotnet run --project .\src\ExpertSystem.Client\
-```
-
-```sh
-dotnet run src/
 ```
 
 ### Контекст
