@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Grpc.Core;
 using ExpertSystem.Client.Processors;
 using ExpertSystem.Client.RulesGenerators;
+using ExpertSystem.Client.Services;
 using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Client
@@ -10,6 +11,7 @@ namespace ExpertSystem.Client
     public class Program
     {
         protected readonly SocketExchange.SocketExchangeClient Client;
+        protected readonly SocketCache SocketCache;
         protected readonly ProgramOptions Options;
         protected ProductionProcessor ProductionProcessor;
         protected LogicProcessor LogicProcessor;
@@ -23,40 +25,40 @@ namespace ExpertSystem.Client
         protected Program(ProgramOptions options)
         {
             Options = options;
+            SocketCache = new SocketCache();
 
             var channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
             Client = new SocketExchange.SocketExchangeClient(channel);
         }
 
-        public async Task<Program> Init()
+        private async Task<Program> Init()
         {
-            var sockets = new List<CustomSocket>();
             var stream = Client.GetSockets(new Empty()).ResponseStream;
             while (await stream.MoveNext())
-               sockets.Add(stream.Current);
+                SocketCache.Add(stream.Current);
 
             var rulesGenerator = new ProductionRulesGenerator();
             var logicRulesGenerator = new LogicRulesGenerator();
             var fuzzyRulesGenerator = new FuzzyRulesGenerator();
 
             // Продукционный вывод
-            var rulesGraph = rulesGenerator.GenerateRules(sockets);
+            var rulesGraph = rulesGenerator.GenerateRules(SocketCache.GetAll());
             // Логический вывод
-            var logicRules = logicRulesGenerator.GenerateRules(sockets);
+            var logicRules = logicRulesGenerator.GenerateRules(SocketCache.GetAll());
             // Нечеткий вывод
-            var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(sockets);
-            var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, sockets);
+            var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(SocketCache.GetAll());
+            var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, SocketCache.GetAll());
 
-            ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = Options.Debug });
-            LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = Options.Debug });
-            FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = Options.Debug });
+            ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions {Debug = Options.Debug});
+            LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions {Debug = Options.Debug});
+            FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions {Debug = Options.Debug});
 
             return this;
         }
 
         private static void Main()
         {
-            var consoleProgram = new ConsoleProgram(new ProgramOptions { Debug = true });
+            var consoleProgram = new ConsoleProgram(new ProgramOptions {Debug = true});
             consoleProgram.Init().GetAwaiter().GetResult();
             consoleProgram.Run();
         }
