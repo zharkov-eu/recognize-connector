@@ -34,21 +34,31 @@ namespace ExpertSystem.Server
             };
         }
 
-        public async Task Run()
+        private void Run()
         {
             Server.Start();
-
             Console.WriteLine("SocketExchange server listening on port " + Options.Port);
-            Console.WriteLine("Press any key to stop the server...");
-            Console.ReadKey();
 
-            await Server.ShutdownAsync();
+            Console.WriteLine("Press key 'q' to stop the server...");
+            CheckShutdown();
+        }
+
+        private void CheckShutdown()
+        {
+            ConsoleKey key;
+            if ((key = Console.ReadKey().Key) == ConsoleKey.Q)
+                Server.ShutdownAsync().GetAwaiter().GetResult();
+            else
+            {
+                Console.WriteLine($"\nCommand '{key.ToString()}' not recognized");
+                CheckShutdown();
+            }
         }
 
         private static void Main()
         {
             var program = new Program(new ProgramOptions { Debug = true, Port = 50051 });
-            program.Run().GetAwaiter().GetResult();
+            program.Run();
         }
     }
 }

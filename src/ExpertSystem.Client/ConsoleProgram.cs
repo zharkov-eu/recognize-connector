@@ -228,8 +228,10 @@ namespace ExpertSystem.Client
             Console.WriteLine($"{(int) Command.LogicProcessing} - логический вывод");
             Console.WriteLine($"{(int) Command.FuzzyProcessingMamdani} - нечеткий вывод (Мамдани)");
             Console.WriteLine($"{(int) Command.FuzzyProcessingSugeno} - нечеткий вывод (Сугэно)");
+            Console.WriteLine($"{(int) Command.FuzzyNeuralProcessing} - нейро-нечеткий вывод (ANFIS)");
             Console.WriteLine($"{(int) Command.AddNewSocket} - добавление нового разъёма");
             Console.WriteLine($"{(int) Command.UpdateExistingSocket} - обновление существующего разъёма");
+            Console.WriteLine($"{(int) Command.DeleteExistingSocket} - удаление существующего разъёма");
             WritePaddedBottom($"{(int) Command.Exit} - выход");
         }
 
