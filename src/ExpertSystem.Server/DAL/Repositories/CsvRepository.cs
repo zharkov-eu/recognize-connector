@@ -45,8 +45,7 @@ namespace ExpertSystem.Server.DAL.Repositories
             // Читаем доступные разъём CSV файла
             using (var reader = new StreamReader(File.OpenRead(_csvFileName)))
             {
-                var sockets = SocketParser.ParseSockets(reader);
-                foreach (var socket in sockets)
+                foreach (var socket in SocketParser.ParseSockets(reader))
                 {
                     var hashCode = socket.GetHashCode();
                     _sockets.Add(hashCode, socket);
