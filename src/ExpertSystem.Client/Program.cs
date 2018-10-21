@@ -49,16 +49,16 @@ namespace ExpertSystem.Client
             var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(SocketCache.GetAll());
             var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, SocketCache.GetAll());
 
-            ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions {Debug = Options.Debug});
-            LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions {Debug = Options.Debug});
-            FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions {Debug = Options.Debug});
+            ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = Options.Debug });
+            LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = Options.Debug });
+            FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = Options.Debug });
 
             return this;
         }
 
         private static void Main()
         {
-            var consoleProgram = new ConsoleProgram(new ProgramOptions {Debug = true});
+            var consoleProgram = new ConsoleProgram(new ProgramOptions { Debug = true });
             consoleProgram.Init().GetAwaiter().GetResult();
             consoleProgram.Run();
         }

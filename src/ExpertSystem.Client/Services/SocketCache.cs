@@ -22,7 +22,7 @@ namespace ExpertSystem.Client.Services
         {
             return _cache.Values.Select(p => p.Clone()).ToList();
         }
-        
+
         public CustomSocket Get(string socketName)
         {
             if (!SocketExists(socketName))

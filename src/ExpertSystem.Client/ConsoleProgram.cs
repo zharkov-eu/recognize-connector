@@ -34,13 +34,13 @@ namespace ExpertSystem.Client
             string choice;
             PrintCommands();
 
-            while ((choice = Console.ReadLine()) != ((int) Command.Exit).ToString())
+            while ((choice = Console.ReadLine()) != ((int)Command.Exit).ToString())
             {
                 string socketName;
                 List<Fact> socketFacts;
                 var socketType = typeof(CustomSocket);
 
-                var choiceNum = (Command) int.Parse(choice);
+                var choiceNum = (Command)int.Parse(choice);
                 switch (choiceNum)
                 {
                     case Command.BackProcessing:
@@ -82,7 +82,7 @@ namespace ExpertSystem.Client
                         });
                         FuzzyProcessingSugeno(new FactSet(socketFacts.ToArray()));
                         break;
-                    
+
                     case Command.FuzzyNeuralProcessing:
                         WritePaddedTop("Нейро-нечеткий вывод с использованием ANFIS, введите факты:");
                         socketFacts = GetSocketFactsFromConsole(new[]
@@ -145,7 +145,6 @@ namespace ExpertSystem.Client
                         }
 
                         var deletingSocket = SocketCache.Get(deletingSocketName);
-
                         Client.DeleteSocket(deletingSocket);
                         SocketCache.Remove(deletingSocketName);
 
@@ -210,7 +209,7 @@ namespace ExpertSystem.Client
             WritePaddedTop($"Максимальная сила тока при разрыве цепи: {amperageCircuit} мА");
             return amperageCircuit;
         }
-        
+
         private double FuzzyNeuralProcessing(FactSet factSet)
         {
             WritePaddedBottom(
@@ -223,16 +222,16 @@ namespace ExpertSystem.Client
         private static void PrintCommands()
         {
             WritePaddedTop("Выберите действие: ");
-            Console.WriteLine($"{(int) Command.ForwardProcessing} - прямой продукционный вывод");
-            Console.WriteLine($"{(int) Command.BackProcessing} - обратный продукционный вывод");
-            Console.WriteLine($"{(int) Command.LogicProcessing} - логический вывод");
-            Console.WriteLine($"{(int) Command.FuzzyProcessingMamdani} - нечеткий вывод (Мамдани)");
-            Console.WriteLine($"{(int) Command.FuzzyProcessingSugeno} - нечеткий вывод (Сугэно)");
-            Console.WriteLine($"{(int) Command.FuzzyNeuralProcessing} - нейро-нечеткий вывод (ANFIS)");
-            Console.WriteLine($"{(int) Command.AddNewSocket} - добавление нового разъёма");
-            Console.WriteLine($"{(int) Command.UpdateExistingSocket} - обновление существующего разъёма");
-            Console.WriteLine($"{(int) Command.DeleteExistingSocket} - удаление существующего разъёма");
-            WritePaddedBottom($"{(int) Command.Exit} - выход");
+            Console.WriteLine($"{(int)Command.ForwardProcessing} - прямой продукционный вывод");
+            Console.WriteLine($"{(int)Command.BackProcessing} - обратный продукционный вывод");
+            Console.WriteLine($"{(int)Command.LogicProcessing} - логический вывод");
+            Console.WriteLine($"{(int)Command.FuzzyProcessingMamdani} - нечеткий вывод (Мамдани)");
+            Console.WriteLine($"{(int)Command.FuzzyProcessingSugeno} - нечеткий вывод (Сугэно)");
+            Console.WriteLine($"{(int)Command.FuzzyNeuralProcessing} - нейро-нечеткий вывод (ANFIS)");
+            Console.WriteLine($"{(int)Command.AddNewSocket} - добавление нового разъёма");
+            Console.WriteLine($"{(int)Command.UpdateExistingSocket} - обновление существующего разъёма");
+            Console.WriteLine($"{(int)Command.DeleteExistingSocket} - удаление существующего разъёма");
+            WritePaddedBottom($"{(int)Command.Exit} - выход");
         }
 
         private static void PrintDomains(IEnumerable<SocketDomain> domains = null)
@@ -243,7 +242,7 @@ namespace ExpertSystem.Client
             WritePaddedTop("Выберите домен: ");
             foreach (var domain in GetSocketDomains().Where(p => domains.Contains(p)))
             {
-                var domainChoice = ((int) domain).ToString().PadRight(3);
+                var domainChoice = ((int)domain).ToString().PadRight(3);
                 Console.WriteLine($"{domainChoice} - {GetSocketDomainName(domain)}");
             }
 
@@ -258,7 +257,7 @@ namespace ExpertSystem.Client
             var factsList = new List<Fact>();
             while ((domainChoice = Console.ReadLine()) != 0.ToString())
             {
-                var domain = (SocketDomain) int.Parse(domainChoice);
+                var domain = (SocketDomain)int.Parse(domainChoice);
                 if (Enum.IsDefined(typeof(SocketDomain), domain))
                     if (factsList.Any(p => p.Domain.Equals(domain)))
                     {
