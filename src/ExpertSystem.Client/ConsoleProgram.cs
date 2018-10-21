@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using ExpertSystem.Common.Generated;
 using ExpertSystem.Client.Models;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
@@ -16,7 +17,8 @@ namespace ExpertSystem.Client
         FuzzyProcessingMamdani = 4,
         FuzzyProcessingSugeno = 5,
         AddNewSocket = 6,
-        UpdateExistingSocket = 7
+        UpdateExistingSocket = 7,
+        DeleteExistingSocket = 8,
     }
 
     public class ConsoleProgram : Program
@@ -35,6 +37,7 @@ namespace ExpertSystem.Client
             {
                 string socketName;
                 List<Fact> socketFacts;
+                var socketType = typeof(CustomSocket);
 
                 var choiceNum = (Command)int.Parse(choice);
                 switch (choiceNum)
@@ -77,8 +80,13 @@ namespace ExpertSystem.Client
 
                     case Command.AddNewSocket:
                         WritePaddedTop("Добавление нового разъема, введите характеристики:");
+                        var socket = new CustomSocket();
+                        
                         socketFacts = GetSocketFactsFromConsole();
-                        //Вызов метода для создания сокета
+                        foreach (var fact in socketFacts)
+                            socketType.GetProperty(fact.Domain.ToString()).SetValue(socket, fact.Value);
+                        
+                        Client.UpsertSocket(socket);
                         Console.WriteLine("Разъем с характеристиками");
                         foreach (var fact in socketFacts)
                             Console.Write(fact + " ");
@@ -86,7 +94,7 @@ namespace ExpertSystem.Client
                         break;
 
                     case Command.UpdateExistingSocket:
-                        WritePaddedTop("Обновление существующего разъема, введите имя разъема:");
+                        WritePaddedTop("Обновление существующего разъема, введите название разъема:");
                         var updatingSocketName = Console.ReadLine();
                         //Вызов метода для получения сокета
                         //If does not exist
@@ -102,6 +110,17 @@ namespace ExpertSystem.Client
                             Console.Write(fact + " ");
                         Console.WriteLine("был успешно добавлен.");
                         break;
+
+                    case Command.DeleteExistingSocket:
+                        WritePaddedTop("Удаление существующего разъема, введите название разъема:");
+                        var deleteSocketName = Console.ReadLine();
+                        //Вызов метода для получения сокета
+                        //If does not exist
+                        // Console.WriteLine("Разъем с введенным названием не найден");
+                        //else
+                        Console.WriteLine($"Разъем {deleteSocketName} был успешно добавлен.");
+                        break;
+
                     default:
                         WritePaddedTop("Команда не распознана");
                         break;
