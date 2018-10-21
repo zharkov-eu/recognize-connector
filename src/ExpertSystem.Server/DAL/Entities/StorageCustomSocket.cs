@@ -6,19 +6,15 @@ using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Server.DAL.Entities
 {
-	/// <summary>
-	/// Статические методы обработки CSV 
-	/// </summary>
+	/// <summary>Статические методы обработки CSV</summary>
 	public static class StorageCustomSocket
 	{
 		// Разделитель CSV файла
 		public static readonly char Delimiter = ';';
 		
-		/// <summary>
-		/// Преобразует разъём в CSV строку
-		/// </summary>
+		/// <summary>Преобразует разъём в CSV строку</summary>
 		/// <param name="socket">Разъём</param>
-		/// <returns></returns>
+		/// <returns>CSV cтрока на основании данных разъёма c предобпределённым разделителем</returns>
 		public static string Serialize(CustomSocket socket)
 		{
 			var socketType = typeof(CustomSocket); 
@@ -28,21 +24,17 @@ namespace ExpertSystem.Server.DAL.Entities
 			return result;
 		}
 
-		/// <summary>
-		/// Десериализация CSV строки
-		/// </summary>
+		/// <summary>Десериализация CSV строки</summary>
 		/// <param name="line">Строка</param>
-		/// <returns>Разъём</returns>
+		/// <returns>Разъём на основании переданной CSV строки</returns>
 		public static CustomSocket Deserialize(string line)
 		{
 			return Deserialize(line.Split(Delimiter));
 		}
 
-		/// <summary>
-		/// Десериализация CSV строки
-		/// </summary>
+		/// <summary>Десериализация CSV строки</summary>
 		/// <param name="parts">Значения</param>
-		/// <returns>Разъём</returns>
+		/// <returns>Разъём на основании переданной CSV строки</returns>
 		public static CustomSocket Deserialize(IList<string> parts)
 		{
 			var socket = new CustomSocket();
@@ -55,13 +47,11 @@ namespace ExpertSystem.Server.DAL.Entities
 			return socket;
 		}
 
-		/// <summary>
-		/// Преобразование к типу свойства
-		/// </summary>
+		/// <summary>Преобразование к типу свойства</summary>
 		/// <param name="domain">Домен свойства</param>
 		/// <param name="value">Строковое значение</param>
 		/// <returns>Значение свойства</returns>
-		/// <exception cref="Exception"></exception>
+		/// <exception cref="Exception">Тип не распознан</exception>
 		private static object ParseProperty(SocketDomain domain, string value)
 		{
 			var type = SocketDomainType[domain];
