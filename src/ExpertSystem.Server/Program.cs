@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using Grpc.Core;
 using ExpertSystem.Server.Services;
 using ExpertSystem.Common.Generated;
