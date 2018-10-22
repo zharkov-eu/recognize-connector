@@ -1,9 +1,10 @@
-using ExpertSystem.Common.Processors;
-using ExpertSystem.Common.RulesGenerators;
 using Xunit;
 using Xunit.Abstractions;
-using ExpertSystem.Models;
-using static ExpertSystem.Models.CustomSocketDomain;
+using ExpertSystem.Client.Models;
+using ExpertSystem.Client.Processors;
+using ExpertSystem.Client.RulesGenerators;
+using ExpertSystem.Tests.Parsers;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Processors
 {
@@ -15,9 +16,9 @@ namespace ExpertSystem.Tests.Processors
         public FuzzyRulesProcessorTest(ITestOutputHelper outputHelper)
         {
             var generator = new FuzzyRulesGenerator();
-            var socketFieldsProcessor = new SocketFieldsProcessorTest();
+            var socketParser = new SocketParserTest();
 
-            var sockets = socketFieldsProcessor.GetSockets();
+            var sockets = socketParser.GetSockets();
             var fuzzyDomains = generator.GetFuzzyDomains(sockets);
             var fuzzyFacts = generator.GetFuzzyFacts(fuzzyDomains, sockets);
 
@@ -40,10 +41,10 @@ namespace ExpertSystem.Tests.Processors
                 new Fact(SocketDomain.SizeLength, 0.03f),
                 new Fact(SocketDomain.SizeWidth, 0.0075f)
             );
-            var result = _processor.MamdaniProcesing(factSet);
+            var result = _processor.MamdaniProcessing(factSet);
 
             _output.WriteLine($"MamdaniProcessing for {factSet}: {result}");
-            Assert.True(result > 25 && result < 30);
+            Assert.True(result > 45 && result < 110);
         }
 
         [Fact]
@@ -54,10 +55,10 @@ namespace ExpertSystem.Tests.Processors
                 new Fact(SocketDomain.SizeLength, 0.03f),
                 new Fact(SocketDomain.SizeWidth, 0.0075f)
             );
-            var result = _processor.SugenoProcesing(factSet);
+            var result = _processor.SugenoProcessing(factSet);
 
             _output.WriteLine($"SugenoProcessing for {factSet}: {result}");
-            Assert.True(result > 25 && result < 30);
+            Assert.True(result > 45 && result < 110);
         }
     }
 }

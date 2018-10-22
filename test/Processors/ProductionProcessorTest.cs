@@ -1,9 +1,11 @@
-using System.Collections.Generic;
-using ExpertSystem.Common.Processors;
-using ExpertSystem.Common.RulesGenerators;
-using ExpertSystem.Models;
 using Xunit;
-using static ExpertSystem.Models.CustomSocketDomain;
+using System.Collections.Generic;
+using ExpertSystem.Common.Generated;
+using ExpertSystem.Client.Models;
+using ExpertSystem.Client.Processors;
+using ExpertSystem.Client.RulesGenerators;
+using ExpertSystem.Tests.Parsers;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Processors
 {
@@ -14,14 +16,13 @@ namespace ExpertSystem.Tests.Processors
 
         public ProductionProcessorTest()
         {
-            var socketFieldsProcessor = new SocketFieldsProcessorTest();
-            var sockets = socketFieldsProcessor.GetSockets();
-            var fieldValues = socketFieldsProcessor.GetFieldsWithPossibleValues(sockets);
+            var socketParser = new SocketParserTest();
+            var sockets = socketParser.GetSockets();
 
             var rulesGenerator = new ProductionRulesGenerator();
-            var rulesGraph = rulesGenerator.GenerateRules(sockets, fieldValues);
+            var rulesGraph = rulesGenerator.GenerateRules(sockets);
 
-            _socket = socketFieldsProcessor.TestSocket();
+            _socket = socketParser.TestSocket();
             _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = false });
         }
 

@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace ExpertSystem.Utils
+namespace ExpertSystem.Common.Utils
 {
     public static class RandUtil
     {

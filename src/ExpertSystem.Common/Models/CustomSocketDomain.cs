@@ -1,18 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using ExpertSystem.Models.FuzzyLogic;
+using System.Collections.Generic;
 
-namespace ExpertSystem.Models
+namespace ExpertSystem.Common.Models
 {
     public class CustomSocketDomain
     {
         public enum SocketDomain
         {
             [Output("не определен")] Empty,
-
-            [Output("максимальная сила тока при разрыве цепи")]
-            AmperageCircuit,
+            [Output("максимальная сила тока при разрыве цепи")] AmperageCircuit,
             [Output("пол разъема")] Gender,
             [Output("контактный материал")] ContactMaterial,
             [Output("контактная плата")] ContactPlating,
@@ -78,7 +75,7 @@ namespace ExpertSystem.Models
             {
                 var attrs = memInfo[0].GetCustomAttributes(typeof(Output), false);
                 if (attrs != null && attrs.Length > 0)
-                    return ((Output) attrs[0]).Text;
+                    return ((Output)attrs[0]).Text;
             }
 
             return domain.ToString();
@@ -87,37 +84,6 @@ namespace ExpertSystem.Models
         public static IEnumerable<SocketDomain> GetSocketDomains()
         {
             return Enum.GetValues(typeof(SocketDomain)).Cast<SocketDomain>().Where(p => !DomainIgnore.Contains(p));
-        }
-
-        public static Dictionary<SocketDomain, int> GetFuzzySocketDomains()
-        {
-            return new Dictionary<SocketDomain, int>
-            {
-                {SocketDomain.AmperageCircuit, 5},
-                {SocketDomain.NumberOfContacts, 5},
-                {SocketDomain.SizeLength, 3},
-                {SocketDomain.SizeWidth, 3}
-            };
-        }
-
-        /// <summary>
-        ///     NumberOfContacts: 2 - 184 контактов
-        ///     SizeLength: 0.0078 - 0.07 м
-        ///     SizeWidth: 0.005 - 0.02 м
-        ///     Return: 10 - 10000 мА
-        /// </summary>
-        /// <param name="clusterCount">Число кластеров</param>
-        /// <param name="values">Значения кластеров</param>
-        /// <param name="m">Чёткость алгоритма</param>
-        /// <param name="eps">Точность алгоритма</param>
-        public static Func<CustomSocket, double> GetAmperageCircuitFormula(Dictionary<SocketDomain, FuzzyRule> rules)
-        {
-            var nocCluster = rules[SocketDomain.NumberOfContacts].Cluster + 1; // 1..6
-            var slCluster = rules[SocketDomain.SizeLength].Cluster + 1; // 1..4
-            var swCluster = rules[SocketDomain.SizeWidth].Cluster + 1; // 1..4
-
-            return socket => socket.NumberOfContacts * (Math.Log(nocCluster, 10) + 1) + socket.SizeLength *
-                             (Math.Log(slCluster, 2) + 1) * 10 * (socket.SizeWidth * (Math.Log(swCluster, 2) + 1) * 10);
         }
 
         private class Output : Attribute

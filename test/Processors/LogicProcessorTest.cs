@@ -1,19 +1,20 @@
-using ExpertSystem.Common.Processors;
-using ExpertSystem.Common.RulesGenerators;
 using Xunit;
-using ExpertSystem.Models;
-using static ExpertSystem.Models.CustomSocketDomain;
+using ExpertSystem.Client.Models;
+using ExpertSystem.Client.Processors;
+using ExpertSystem.Client.RulesGenerators;
+using ExpertSystem.Tests.Parsers;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Processors
 {
     public class LogicProcessorTest
     {
-        private readonly Common.Processors.LogicProcessor _logicProcessor;
+        private readonly LogicProcessor _logicProcessor;
 
         public LogicProcessorTest()
         {
-            var socketFieldsProcessor = new SocketFieldsProcessorTest();
-            var sockets = socketFieldsProcessor.GetSockets();
+            var socketParser = new SocketParserTest();
+            var sockets = socketParser.GetSockets();
 
             var rulesGenerator = new LogicRulesGenerator();
             var logicRules = rulesGenerator.GenerateRules(sockets);

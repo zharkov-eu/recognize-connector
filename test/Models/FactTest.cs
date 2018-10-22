@@ -1,7 +1,8 @@
 ﻿using Xunit;
-using static ExpertSystem.Models.CustomSocketDomain;
+using ExpertSystem.Client.Models;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
-namespace ExpertSystem.Models
+namespace ExpertSystem.Tests.Models
 {
     public class Fact_IsCorrect
     {
