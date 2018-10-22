@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using ExpertSystem.Common.Generated;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
@@ -20,7 +21,11 @@ namespace ExpertSystem.Server.DAL.Entities
             var socketType = typeof(CustomSocket);
             string result = "";
             foreach (var field in Fields)
-                result += socketType.GetProperty(field.ToString()).GetValue(socket) + Delimiter.ToString();
+            {
+                var value = socketType.GetProperty(field.ToString()).GetValue(socket);
+                if (value is float f && f == -1f) value = "";
+                result += value + Delimiter.ToString();
+            }
             return result;
         }
 

@@ -1,4 +1,5 @@
-﻿using ExpertSystem.Common.Generated;
+﻿using System.Runtime.InteropServices;
+using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Server.DAL.Entities
 {
@@ -24,7 +25,7 @@ namespace ExpertSystem.Server.DAL.Entities
         internal readonly int HashCode;
         internal readonly CustomSocket Socket;
 
-        internal CsvEntity(CsvDbAction action, int hashCode, CustomSocket socket = null)
+        public CsvEntity(CsvDbAction action, int hashCode, CustomSocket socket = null)
         {
             Action = action;
             HashCode = hashCode;
@@ -33,7 +34,9 @@ namespace ExpertSystem.Server.DAL.Entities
 
         public override string ToString()
         {
-            return Action + Delimiter + HashCode + Delimiter + StorageCustomSocket.Serialize(Socket);
+            return Action + Delimiter + HashCode + Delimiter + (Socket != null
+                       ? StorageCustomSocket.Serialize(Socket)
+                       : "");
         }
     }
 
