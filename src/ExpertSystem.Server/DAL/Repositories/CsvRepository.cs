@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Server.DAL.Entities;
 using ExpertSystem.Server.Parsers;
 
 namespace ExpertSystem.Server.DAL.Repositories
 {
+    /// <inheritdoc />
     /// <summary>Класс для работы репозиторием на CSV файле</summary>
-    public class CsvRepository
+    public class CsvRepository : IDisposable
     {
         // Название файла CSV
         private readonly string _csvFileName;
@@ -18,7 +20,7 @@ namespace ExpertSystem.Server.DAL.Repositories
         private readonly string _walFileName;
 
         // Поток ввода в WAL-лог файл
-        private StreamWriter _walStream;
+        private readonly FileStream _walStream;
 
         // Разъёмы
         private Dictionary<int, CustomSocket> _sockets = new Dictionary<int, CustomSocket>();
@@ -31,25 +33,35 @@ namespace ExpertSystem.Server.DAL.Repositories
         /// <param name="walFileName">Название файла WAL-лога</param>
         public CsvRepository(string csvFileName, string walFileName)
         {
+            // Проверка существования CSV файла
             if (!File.Exists(csvFileName))
                 throw new FileNotFoundException($"Файл {csvFileName} не найден");
             _csvFileName = csvFileName;
+            // Создание WAL файла при необходимости
             if (!File.Exists(walFileName))
-                File.Create(walFileName);
+            {
+                var fs = File.Create(walFileName);
+                fs.Close();
+            }
+            // Открываем WAL файл на чтение и запись
             _walFileName = walFileName;
+            _walStream = File.Open(_walFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
         }
 
         /// <summary>Синхронизация</summary>
         public CsvRepository Sync()
         {
-            // Читаем доступные разъём CSV файла
+            // Читаем доступные разъёмы CSV файла
             using (var reader = new StreamReader(File.OpenRead(_csvFileName)))
             {
                 foreach (var socket in SocketParser.ParseSockets(reader))
                 {
                     var hashCode = socket.GetHashCode();
-                    _sockets.Add(hashCode, socket);
-                    _socketsByName.Add(socket.SocketName, hashCode);
+                    if (!_sockets.ContainsKey(hashCode))
+                    {
+                        _sockets.Add(hashCode, socket);
+                        _socketsByName.Add(socket.SocketName, hashCode);
+                    }
                 }
             }
 
@@ -79,7 +91,7 @@ namespace ExpertSystem.Server.DAL.Repositories
             }
 
             // Очищаем WAL файл
-            FileUtils.ClearFile(_walFileName);
+            FileUtils.ClearFile(_walStream);
 
             // Очищаем CSV файл и заполняем его новыми значениями
             FileUtils.ClearFile(_csvFileName);
@@ -90,8 +102,6 @@ namespace ExpertSystem.Server.DAL.Repositories
                     writer.WriteLine(StorageCustomSocket.Serialize(socket));
             }
 
-            // Открываем WAL файл на запись
-            _walStream = new StreamWriter(File.OpenWrite(_walFileName));
             return this;
         }
 
@@ -113,50 +123,67 @@ namespace ExpertSystem.Server.DAL.Repositories
         }
 
         /// <summary>Выполнить действие вставки</summary>
-        /// <param name="customSocket">Данные</param>
+        /// <param name="socket">Данные</param>
         /// <returns>Вставленный в репозиторий разъём</returns>
-        public CustomSocket Insert(CustomSocket customSocket)
+        public CustomSocket Insert(CustomSocket socket)
         {
-            _sockets.Add(customSocket.GetHashCode(), customSocket);
-            _walStream.WriteLine(new CsvEntity(CsvDbAction.Insert, customSocket.GetHashCode(), customSocket).ToString());
-            _socketsByName.Add(customSocket.SocketName, customSocket.GetHashCode());
-            return customSocket;
+            _socketsByName.Add(socket.SocketName, socket.GetHashCode());
+            _sockets.Add(socket.GetHashCode(), socket);
+            _walStream.Write(Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Insert, socket.GetHashCode(), socket).ToString()));
+            return socket;
         }
 
         /// <summary>Выполнить действие изменния</summary>
-        /// <param name="hashCode"></param>
-        /// <param name="customSocket">Данные</param>
+        /// <param name="hashCode">Хэш код разъёма</param>
+        /// <param name="socket">Данные</param>
         /// <returns>Обновлённый разъём</returns>
-        public CustomSocket Update(int hashCode, CustomSocket customSocket)
+        public CustomSocket Update(int hashCode, CustomSocket socket)
         {
+            _socketsByName.Add(socket.SocketName, hashCode);
             _sockets.Remove(hashCode);
-            _sockets.Add(customSocket.GetHashCode(), customSocket);
-            _walStream.WriteLine(new CsvEntity(CsvDbAction.Update, hashCode, customSocket).ToString());
-            _socketsByName.Add(customSocket.SocketName, hashCode);
-            return customSocket;
+            _sockets.Add(socket.GetHashCode(), socket);
+            _walStream.Write(Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Update, hashCode, socket).ToString()));
+            return socket;
         }
 
         /// <summary>Выполнить действие удаления</summary>
-        /// <param name="hashCode"></param>
+        /// <param name="hashCode">Хэш код разъёма</param>
         public void Delete(int hashCode)
         {
-            var socket = _sockets[hashCode];
-            _sockets.Remove(hashCode);
-            _socketsByName.Remove(socket.SocketName);
-            _walStream.WriteLine(new CsvEntity(CsvDbAction.Delete, hashCode).ToString());
+            if (_sockets.ContainsKey(hashCode))
+            {
+                var socket = _sockets[hashCode];
+                _socketsByName.Remove(socket.SocketName);
+                _sockets.Remove(hashCode);
+                _walStream.Write(Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Delete, hashCode).ToString()));
+            }
+        }
+        
+        public void Dispose()
+        {
+            _walStream.Close();
         }
     }
 
     /// <summary>Утилиты для работы с файлами</summary>
-    public static class FileUtils
+    public static partial class FileUtils
     {
+        /// <summary>Очистить файл</summary>
+        /// <param name="fs"></param>
+        public static void ClearFile(FileStream fs)
+        {
+            fs.SetLength(0);
+        }
+        
         /// <summary>Очистить файл</summary>
         /// <param name="path">Путь до файла</param>
         public static void ClearFile(string path)
         {
-            var fileStream = File.Open(path, FileMode.Open);
-            fileStream.SetLength(0);
-            fileStream.Close();
+            if (!File.Exists(path)) return;
+            using (var fs = File.Open(path, FileMode.Open))
+            {
+                fs.SetLength(0);
+            }
         }
     }
 }
