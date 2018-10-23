@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\ExpertSystem.Aggregator\ExpertSystem.Aggregator.csproj" />
     <ProjectReference Include="..\src\ExpertSystem.Client\ExpertSystem.Client.csproj" />
     <ProjectReference Include="..\src\ExpertSystem.Common\ExpertSystem.Common.csproj" />
     <ProjectReference Include="..\src\ExpertSystem.Server\ExpertSystem.Server.csproj" />

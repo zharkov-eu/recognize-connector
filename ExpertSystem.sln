@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpertSystem.Tests", "test\ExpertSystem.Tests.csproj", "{4660ADBB-1C0D-4366-81B2-5594A6C13CCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertSystem.Common", "src\ExpertSystem.Common\ExpertSystem.Common.csproj", "{3F233FC9-FA69-42D1-B407-67A3ACE348F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpertSystem.Common", "src\ExpertSystem.Common\ExpertSystem.Common.csproj", "{3F233FC9-FA69-42D1-B407-67A3ACE348F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertSystem.Server", "src\ExpertSystem.Server\ExpertSystem.Server.csproj", "{6E811732-959A-452A-A29F-5683BFCC2CD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpertSystem.Server", "src\ExpertSystem.Server\ExpertSystem.Server.csproj", "{6E811732-959A-452A-A29F-5683BFCC2CD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertSystem.Client", "src\ExpertSystem.Client\ExpertSystem.Client.csproj", "{01C65B13-B580-4D61-B1C7-6AE2272F1051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpertSystem.Client", "src\ExpertSystem.Client\ExpertSystem.Client.csproj", "{01C65B13-B580-4D61-B1C7-6AE2272F1051}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertSystem.Aggregator", "src\ExpertSystem.Aggregator\ExpertSystem.Aggregator.csproj", "{85BD220F-3590-449A-B498-3419C87E2615}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,18 @@ Global
 		{01C65B13-B580-4D61-B1C7-6AE2272F1051}.Release|x64.Build.0 = Release|Any CPU
 		{01C65B13-B580-4D61-B1C7-6AE2272F1051}.Release|x86.ActiveCfg = Release|Any CPU
 		{01C65B13-B580-4D61-B1C7-6AE2272F1051}.Release|x86.Build.0 = Release|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Debug|x64.Build.0 = Debug|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Debug|x86.Build.0 = Debug|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Release|x64.ActiveCfg = Release|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Release|x64.Build.0 = Release|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Release|x86.ActiveCfg = Release|Any CPU
+		{85BD220F-3590-449A-B498-3419C87E2615}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
