@@ -36,16 +36,13 @@ namespace ExpertSystem.Server.DAL.Repositories
             // Проверка существования CSV файла
             if (!File.Exists(csvFileName))
                 throw new FileNotFoundException($"Файл {csvFileName} не найден");
+
             _csvFileName = csvFileName;
-            // Создание WAL файла при необходимости
-            if (!File.Exists(walFileName))
-            {
-                var fs = File.Create(walFileName);
-                fs.Close();
-            }
-            // Открываем WAL файл на чтение и запись
             _walFileName = walFileName;
-            _walStream = File.Open(_walFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+            _walStream = !File.Exists(walFileName)
+                ? File.Create(walFileName)
+                : File.Open(_walFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
         }
 
         /// <summary>Синхронизация</summary>
@@ -66,7 +63,7 @@ namespace ExpertSystem.Server.DAL.Repositories
             }
 
             // Читаем требуемые изменения WAL файла и применяем их
-            using (var reader = new StreamReader(File.OpenRead(_walFileName)))
+            using (var reader = new StreamReader(_walStream))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -91,7 +88,7 @@ namespace ExpertSystem.Server.DAL.Repositories
             }
 
             // Очищаем WAL файл
-            FileUtils.ClearFile(_walStream);
+            FileUtils.ClearFile(_walFileName);
 
             // Очищаем CSV файл и заполняем его новыми значениями
             FileUtils.ClearFile(_csvFileName);
@@ -129,7 +126,8 @@ namespace ExpertSystem.Server.DAL.Repositories
         {
             _socketsByName.Add(socket.SocketName, socket.GetHashCode());
             _sockets.Add(socket.GetHashCode(), socket);
-            _walStream.Write(Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Insert, socket.GetHashCode(), socket).ToString()));
+            _walStream.Write(
+                Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Insert, socket.GetHashCode(), socket).ToString()));
             return socket;
         }
 
@@ -158,7 +156,7 @@ namespace ExpertSystem.Server.DAL.Repositories
                 _walStream.Write(Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Delete, hashCode).ToString()));
             }
         }
-        
+
         public void Dispose()
         {
             _walStream.Close();
@@ -174,7 +172,7 @@ namespace ExpertSystem.Server.DAL.Repositories
         {
             fs.SetLength(0);
         }
-        
+
         /// <summary>Очистить файл</summary>
         /// <param name="path">Путь до файла</param>
         public static void ClearFile(string path)
