@@ -211,7 +211,7 @@ namespace ExpertSystem.Tests.DAL.Repositories
 			// Arrange
 			var insertedSocket = _testSocket;
 			var expectedWalEntryLine = 
-				new CsvEntity(CsvDbAction.Insert, insertedSocket.GetHashCode(), insertedSocket).ToString();
+				new WalEntry(CsvDbAction.Insert, insertedSocket.GetHashCode(), insertedSocket).ToString();
 
 			// Act
 			_repositoryMock.Insert(insertedSocket);
@@ -232,7 +232,7 @@ namespace ExpertSystem.Tests.DAL.Repositories
 			var updatedSocket = originalSocket;
 			updatedSocket.NumberOfContacts++;
 			var expectedWalEntryLine =
-				new CsvEntity(CsvDbAction.Update, updatedSocket.GetHashCode(), updatedSocket).ToString();
+				new WalEntry(CsvDbAction.Update, updatedSocket.GetHashCode(), updatedSocket).ToString();
 
 
 			// Act
@@ -252,7 +252,7 @@ namespace ExpertSystem.Tests.DAL.Repositories
 			var deletedScoket = _repositoryMock.GetSockets()[0];
 			var hashCode = deletedScoket.GetHashCode();
 			var expectedWalEntryLine =
-				new CsvEntity(CsvDbAction.Update, deletedScoket.GetHashCode()).ToString();
+				new WalEntry(CsvDbAction.Update, deletedScoket.GetHashCode()).ToString();
 
 			// Act
 			_repositoryMock.Delete(hashCode);

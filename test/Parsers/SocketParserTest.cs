@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using ExpertSystem.Common.Generated;
-using ExpertSystem.Server.Parsers;
+using ExpertSystem.Common.Parsers;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Parsers

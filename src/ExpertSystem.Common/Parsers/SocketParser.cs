@@ -1,9 +1,9 @@
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using ExpertSystem.Common.Generated;
-using ExpertSystem.Server.DAL.Entities;
+using ExpertSystem.Common.Models;
 
-namespace ExpertSystem.Server.Parsers
+namespace ExpertSystem.Common.Parsers
 {
     public static class SocketParser
     {
@@ -12,12 +12,12 @@ namespace ExpertSystem.Server.Parsers
         public static List<CustomSocket> ParseSockets(StreamReader reader)
         {
             var sockets = new List<CustomSocket>();
-            var data = CsvParser.ParseHeadAndTail(reader, StorageCustomSocket.Delimiter, '"');
+            var data = CsvParser.ParseHeadAndTail(reader, CustomSocketExtension.Delimiter, '"');
             CsvHead = data.Item1;
             var lines = data.Item2;
 
             foreach (var line in lines)
-                sockets.Add(StorageCustomSocket.Deserialize(line));
+                sockets.Add(CustomSocketExtension.Deserialize(line));
             return sockets;
         }
     }

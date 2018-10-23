@@ -1,20 +1,21 @@
 ﻿using ExpertSystem.Common.Generated;
+using ExpertSystem.Common.Models;
 
 namespace ExpertSystem.Server.DAL.Entities
 {
     /// <summary>Структура записей в WAL</summary>
-    public class CsvEntity
+    public class WalEntry
     {
         /// <summary>Парсинг строки WAL файла </summary>
         /// <param name="line">Строка WAL файла</param>
         /// <returns>Запись </returns>
-        public static CsvEntity ParseFromString(string line)
+        public static WalEntry ParseFromString(string line)
         {
             var parts = line.Split(Delimiter);
             var action = (CsvDbAction) int.Parse(parts[0]);
             var hashCode = int.Parse(parts[1]);
-            var socket = StorageCustomSocket.Deserialize(parts[2]);
-            return new CsvEntity(action, hashCode, socket);
+            var socket = CustomSocketExtension.Deserialize(parts[2]);
+            return new WalEntry(action, hashCode, socket);
         }
 
         // Разделитель строки WAL-лога
@@ -24,7 +25,7 @@ namespace ExpertSystem.Server.DAL.Entities
         internal readonly int HashCode;
         internal readonly CustomSocket Socket;
 
-        public CsvEntity(CsvDbAction action, int hashCode, CustomSocket socket = null)
+        public WalEntry(CsvDbAction action, int hashCode, CustomSocket socket = null)
         {
             Action = action;
             HashCode = hashCode;
@@ -34,7 +35,7 @@ namespace ExpertSystem.Server.DAL.Entities
         public override string ToString()
         {
             return Action + Delimiter + HashCode + Delimiter + (Socket != null
-                       ? StorageCustomSocket.Serialize(Socket)
+                       ? CustomSocketExtension.Serialize(Socket)
                        : "");
         }
     }

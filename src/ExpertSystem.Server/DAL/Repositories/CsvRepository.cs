@@ -4,8 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using ExpertSystem.Common.Generated;
+using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Parsers;
 using ExpertSystem.Server.DAL.Entities;
-using ExpertSystem.Server.Parsers;
 
 namespace ExpertSystem.Server.DAL.Repositories
 {
@@ -70,7 +71,7 @@ namespace ExpertSystem.Server.DAL.Repositories
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    var entry = CsvEntity.ParseFromString(line);
+                    var entry = WalEntry.ParseFromString(line);
                     switch (entry.Action)
                     {
                         case CsvDbAction.Insert:
@@ -96,9 +97,9 @@ namespace ExpertSystem.Server.DAL.Repositories
             FileUtils.ClearFile(_csvFileName);
             using (var writer = new StreamWriter(File.OpenWrite(_csvFileName)))
             {
-                writer.WriteLine(string.Join(StorageCustomSocket.Delimiter, SocketParser.CsvHead));
+                writer.WriteLine(string.Join(CustomSocketExtension.Delimiter, SocketParser.CsvHead));
                 foreach (var socket in _sockets.Values)
-                    writer.WriteLine(StorageCustomSocket.Serialize(socket));
+                    writer.WriteLine(CustomSocketExtension.Serialize(socket));
             }
 
             return this;
@@ -129,7 +130,7 @@ namespace ExpertSystem.Server.DAL.Repositories
             _socketsByName.Add(socket.SocketName, socket.GetHashCode());
             _sockets.Add(socket.GetHashCode(), socket);
             _walStream.Write(
-                Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Insert, socket.GetHashCode(), socket).ToString()));
+                Encoding.UTF8.GetBytes(new WalEntry(CsvDbAction.Insert, socket.GetHashCode(), socket).ToString()));
             return socket;
         }
 
@@ -142,7 +143,7 @@ namespace ExpertSystem.Server.DAL.Repositories
             _socketsByName.Remove(_sockets[hashCode].SocketName);
             _socketsByName.Add(socket.SocketName, hashCode);
             _sockets.Add(socket.GetHashCode(), socket);
-            _walStream.Write(Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Update, hashCode, socket).ToString()));
+            _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry(CsvDbAction.Update, hashCode, socket).ToString()));
             return socket;
         }
 
@@ -155,7 +156,7 @@ namespace ExpertSystem.Server.DAL.Repositories
                 var socket = _sockets[hashCode];
                 _socketsByName.Remove(socket.SocketName);
                 _sockets.Remove(hashCode);
-                _walStream.Write(Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Delete, hashCode).ToString()));
+                _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry(CsvDbAction.Delete, hashCode).ToString()));
             }
         }
 
@@ -166,7 +167,7 @@ namespace ExpertSystem.Server.DAL.Repositories
     }
 
     /// <summary>Утилиты для работы с файлами</summary>
-    public static partial class FileUtils
+    public static class FileUtils
     {
         /// <summary>Очистить файл</summary>
         /// <param name="fs"></param>

@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using ExpertSystem.Common.Generated;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
-namespace ExpertSystem.Server.DAL.Entities
+namespace ExpertSystem.Common.Models
 {
-    /// <summary>Статические методы обработки CSV</summary>
-    public static class StorageCustomSocket
+    public class CustomSocketExtension
     {
+        public static readonly Type CustomSocketType = typeof(CustomSocket);
+
         // Разделитель CSV файла
         public static readonly char Delimiter = ';';
 

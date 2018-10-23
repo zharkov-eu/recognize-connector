@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ExpertSystem.Server.Parsers
+namespace ExpertSystem.Common.Parsers
 {
     public static class CsvParser
     {
