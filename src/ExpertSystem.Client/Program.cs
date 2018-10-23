@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using Grpc.Core;
 using ExpertSystem.Client.Processors;
@@ -10,6 +11,7 @@ namespace ExpertSystem.Client
 {
     public class Program
     {
+        private const string Version = "1.0.0";
         protected readonly SocketExchange.SocketExchangeClient Client;
         protected readonly SocketCache SocketCache;
         protected readonly ProgramOptions Options;
@@ -30,6 +32,17 @@ namespace ExpertSystem.Client
 
             var channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
             Client = new SocketExchange.SocketExchangeClient(channel);
+
+            try
+            {
+                var message = Client.SayHello(new HelloMessage {Version = Version});
+                Console.WriteLine($"Connected to SocketExchange v{message.Version} on 127.0.0.1:50051");
+            }
+            catch
+            {
+                Console.WriteLine("Error: Connection to SocketExchange on 127.0.0.1:50051 failed");
+                Environment.Exit(1);
+            }
         }
 
         private async Task<Program> Init()

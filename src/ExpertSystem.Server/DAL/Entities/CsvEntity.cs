@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using ExpertSystem.Common.Generated;
+﻿using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Server.DAL.Entities
 {
@@ -12,7 +11,7 @@ namespace ExpertSystem.Server.DAL.Entities
         public static CsvEntity ParseFromString(string line)
         {
             var parts = line.Split(Delimiter);
-            var action = (CsvDbAction)int.Parse(parts[0]);
+            var action = (CsvDbAction) int.Parse(parts[0]);
             var hashCode = int.Parse(parts[1]);
             var socket = StorageCustomSocket.Deserialize(parts[2]);
             return new CsvEntity(action, hashCode, socket);

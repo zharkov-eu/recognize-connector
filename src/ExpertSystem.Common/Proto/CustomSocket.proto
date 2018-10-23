@@ -5,12 +5,17 @@ option csharp_namespace = "ExpertSystem.Common.Generated";
 package ExpertSystem;
 
 service SocketExchange {
+    rpc SayHello (HelloMessage) returns (HelloMessage) {}
     rpc GetSockets (Empty) returns (stream CustomSocket) {}
     rpc UpsertSocket (CustomSocket) returns (CustomSocket) {}
     rpc DeleteSocket (CustomSocket) returns (Empty) {}
 }
 
 message Empty {}
+
+message HelloMessage {
+    string Version = 1;
+}
 
 message CustomSocket {
     string Color = 1;

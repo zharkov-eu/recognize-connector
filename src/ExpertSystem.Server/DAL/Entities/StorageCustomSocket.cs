@@ -23,9 +23,11 @@ namespace ExpertSystem.Server.DAL.Entities
             foreach (var field in Fields)
             {
                 var value = socketType.GetProperty(field.ToString()).GetValue(socket);
-                if (value is float f && f == -1f) value = "";
-                result += value + Delimiter.ToString();
+                if (!value.Equals(SocketDefaultValue[value.GetType()]))
+                    result += SerializeProperty(value);
+                result += Delimiter;
             }
+
             return result;
         }
 
@@ -49,7 +51,21 @@ namespace ExpertSystem.Server.DAL.Entities
                 var domain = Fields[i];
                 socketType.GetProperty(domain.ToString()).SetValue(socket, ParseProperty(domain, parts[i]));
             }
+
             return socket;
+        }
+
+        private static string SerializeProperty(object value)
+        {
+            switch (value)
+            {
+                case float f:
+                    return f.ToString(CultureInfo.InvariantCulture);
+                case double d:
+                    return d.ToString(CultureInfo.InvariantCulture);
+                default:
+                    return value.ToString();
+            }
         }
 
         /// <summary>Преобразование к типу свойства</summary>

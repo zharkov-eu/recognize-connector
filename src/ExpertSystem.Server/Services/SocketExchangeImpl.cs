@@ -9,7 +9,7 @@ namespace ExpertSystem.Server.Services
     /// <summary>Вызов удалённых процедур для разъёмов</summary>
     public class SocketExchangeImpl : SocketExchange.SocketExchangeBase
     {
-        // Репозиторий разъёмов
+        private const string Version = "1.0.0";
         private readonly CsvRepository _repository;
 
         public SocketExchangeImpl(CsvRepository repository)
@@ -17,12 +17,18 @@ namespace ExpertSystem.Server.Services
             _repository = repository;
         }
 
+        public override Task<HelloMessage> SayHello(HelloMessage request, ServerCallContext context)
+        {
+            return Task.FromResult(new HelloMessage {Version = Version});
+        }
+
         /// <summary>Вызов процедуры получения списка разъёмов</summary>
         /// <param name="request">Запрос</param>
         /// <param name="responseStream">Поток ответа</param>
         /// <param name="context">Контескт</param>
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
-        public override async Task GetSockets(Empty request, IServerStreamWriter<CustomSocket> responseStream, ServerCallContext context)
+        public override async Task GetSockets(Empty request, IServerStreamWriter<CustomSocket> responseStream,
+            ServerCallContext context)
         {
             foreach (var socket in _repository.GetSockets())
                 await responseStream.WriteAsync(socket);
