@@ -51,6 +51,10 @@ namespace ExpertSystem.Server.DAL.Repositories
         /// <summary>Синхронизация</summary>
         public CsvRepository Sync()
         {
+            // Очистака предыдущих значений разъёмов
+            _sockets.Clear();
+            _socketsByName.Clear();
+
             // Читаем доступные разъёмы CSV файла
             using (var reader = new StreamReader(File.OpenRead(_csvFileName)))
             {
@@ -139,8 +143,8 @@ namespace ExpertSystem.Server.DAL.Repositories
         /// <returns>Обновлённый разъём</returns>
         public CustomSocket Update(int hashCode, CustomSocket socket)
         {
+            _socketsByName.Remove(_sockets[hashCode].SocketName);
             _socketsByName.Add(socket.SocketName, hashCode);
-            _sockets.Remove(hashCode);
             _sockets.Add(socket.GetHashCode(), socket);
             _walStream.Write(Encoding.UTF8.GetBytes(new CsvEntity(CsvDbAction.Update, hashCode, socket).ToString()));
             return socket;

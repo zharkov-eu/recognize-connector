@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Server.DAL.Entities;
@@ -76,8 +77,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
 			Directory.CreateDirectory(_testDir);
 			// Определение имени тестового CSV файла
 			_testCsvFileName = Path.Combine(_testDir, "csvTest.csv");
-			// Создание и заполнение CSV файла
-			FileUtils.CreateFileAndFill(_testCsvFileName, _testCsvData);
+			// Обновление данных CSV файла
+			UpdateTestData();
 			// Определение имени тестового WAL файла
 			_testWalFileName = Path.Combine(_testDir, "walTest.txt");
 			// Создание мока репозитория
@@ -86,12 +87,19 @@ namespace ExpertSystem.Tests.DAL.Repositories
 			_repositoryMock.Sync();
 		}
 
+		/// <summary>Обновление данных CSV файла</summary>
+		private void UpdateTestData()
+		{
+			// Создание и заполнение CSV файла
+			FileUtils.CreateFileAndFill(_testCsvFileName, _testCsvData);
+		}
+
 		/// <summary>Проверка верности синхронизации</summary>
 		[Fact]
 		public void Sync_isCorrect()
 		{
 			// Arrange
-			FileUtils.CreateFileAndFill(_testCsvFileName, _testCsvData);
+			UpdateTestData();
 
 			// Act
 			_repositoryMock.Sync();
@@ -102,28 +110,69 @@ namespace ExpertSystem.Tests.DAL.Repositories
 			Assert.True(new FileInfo(_testWalFileName).Length == 0, "WAL файл не пуст");
 		}
 
-		// TODO: Имплементировать метод
 		/// <summary>Проверка верности синхронизации действия вставки</summary>
 		[Fact]
 		public void Sync_Insert_isCorrect()
 		{
-			
+			// Arrange
+			UpdateTestData();
+			var insertedSocket = _testSocket;
+
+			// Act
+			_repositoryMock.Insert(insertedSocket);
+			_repositoryMock.Sync();
+
+			//Assert
+			// CSV файл обновлён
+			Assert.True(File.ReadAllText(_testCsvData, Encoding.UTF8).Contains(insertedSocket.SocketName), 
+				"Вставленный разъём не присутсвует в CSV файле");
+			// WAL файл пуст
+			Assert.True(new FileInfo(_testWalFileName).Length == 0,
+				"WAL файл не пуст");
 		}
 
-		// TODO: Имплементировать метод
 		/// <summary>Проверка верности синхронизации действия обновления</summary>
 		[Fact]
 		public void Sync_Update_isCorrect()
 		{
-			
+			// Arrange
+			var originalSocket = _repositoryMock.GetSockets()[0];
+			var hashCode = originalSocket.GetHashCode();
+			var updatedSocket = originalSocket;
+			updatedSocket.MountingStyle = "Through hole";
+
+			// Act
+			_repositoryMock.Update(hashCode, updatedSocket);
+			_repositoryMock.Sync();
+
+			//Assert
+			// CSV файл обновлён
+			Assert.True(File.ReadAllText(_testCsvData, Encoding.UTF8).Contains(updatedSocket.SocketName), 
+				"Удалённый разъём не присутсвует в CSV файле");
+			// WAL файл пуст
+			Assert.True(new FileInfo(_testWalFileName).Length == 0, 
+				"WAL файл не пуст");
 		}
 
-		// TODO: Имплементировать метод
 		/// <summary>Проверка верности синхронизации действия удаления</summary>
 		[Fact]
 		public void Sync_Delete_isCorrect()
 		{
-			
+			// Arrange
+			var socketToDelete = _repositoryMock.GetSockets()[0];
+			var socketToDeleteHashCode = socketToDelete.GetHashCode();
+
+			// Act
+			_repositoryMock.Delete(socketToDeleteHashCode);
+			_repositoryMock.Sync();
+
+			//Assert
+			// CSV файл обновлён
+			Assert.True(!File.ReadAllText(_testCsvData, Encoding.UTF8).Contains(socketToDelete.SocketName), 
+				"Удалённый разъём всё ещё в CSV файле");
+			// WAL файл пуст
+			Assert.True(new FileInfo(_testWalFileName).Length == 0, 
+				"WAL файл не пуст");
 		}
 
 		/// <summary>Проверка верности получения списка разъёмов</summary>
@@ -160,18 +209,17 @@ namespace ExpertSystem.Tests.DAL.Repositories
 		public void Insert_isCorrect()
 		{
 			// Arrange
-			var inputSocket = _testSocket;
-			var expectedWalEntryLine = new CsvEntity(CsvDbAction.Insert, inputSocket.GetHashCode(), inputSocket).ToString();
+			var insertedSocket = _testSocket;
+			var expectedWalEntryLine = 
+				new CsvEntity(CsvDbAction.Insert, insertedSocket.GetHashCode(), insertedSocket).ToString();
 
 			// Act
-			_repositoryMock.Insert(inputSocket);
-			var actualString = File.ReadAllText(_testWalFileName);
+			_repositoryMock.Insert(insertedSocket);
 
 			// Assert
-			Assert.True(_repositoryMock.GetSockets().Contains(inputSocket),
+			Assert.True(_repositoryMock.GetSockets().Contains(insertedSocket),
 				"Ожидаемый разъём не найден в репозитории");
-//			Assert.True(actualString.Contains(expectedWalEntryLine),
-//				"Ожидаемая строка отсутсвует в WAL файле");
+			// TODO: Проверить WAL файл
 		}
 
 		/// <summary>Проверка правильности выполнения обновления</summary>
@@ -179,11 +227,21 @@ namespace ExpertSystem.Tests.DAL.Repositories
 		public void Update_isCorrect()
 		{
 			// Arrange
-			
+			var originalSocket = _repositoryMock.GetSockets()[0];
+			var hashCode = originalSocket.GetHashCode();
+			var updatedSocket = originalSocket;
+			updatedSocket.NumberOfContacts++;
+			var expectedWalEntryLine =
+				new CsvEntity(CsvDbAction.Update, updatedSocket.GetHashCode(), updatedSocket).ToString();
+
+
 			// Act
-			
+			_repositoryMock.Update(hashCode, updatedSocket);
+
 			// Assert
-			
+			Assert.True(_repositoryMock.GetSockets().Contains(updatedSocket),
+				"Обновлённый разъём не найден среди доступных");
+			// TODO: Проверить WAL файл
 		}
 
 		/// <summary>Проверка правильности выполнения удаления</summary>
@@ -191,15 +249,18 @@ namespace ExpertSystem.Tests.DAL.Repositories
 		public void Delete_isCorrect()
 		{
 			// Arrange
-			var socketName = _testSocket.SocketName;
-			const int hashCode = 1;
-			_repositoryMock.Sync();
+			var deletedScoket = _repositoryMock.GetSockets()[0];
+			var hashCode = deletedScoket.GetHashCode();
+			var expectedWalEntryLine =
+				new CsvEntity(CsvDbAction.Update, deletedScoket.GetHashCode()).ToString();
 
 			// Act
 			_repositoryMock.Delete(hashCode);
 
 			// Assert
-//			Assert.False(_repositoryMock.GetSockets().Select(socket => socket.SocketName == socketName).First());
+			Assert.True(!_repositoryMock.GetSockets().Contains(deletedScoket),
+				"Удалённый разъём найден среди доступных");
+			// TODO: Проверить WAL файл
 		}
 
 		/// <inheritdoc />
