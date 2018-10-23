@@ -14,6 +14,7 @@ namespace ExpertSystem.Client.Services
         {
             _input = Matrix<double>.Build.DenseOfArray(input);
             _output = Vector<double>.Build.DenseOfArray(output);
+            _consequence = Vector<double>.Build.Dense(consequenceNeuronsSize);
             _combinedOutput = Matrix<double>.Build.Dense(consequenceNeuronsSize, 3);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using Grpc.Core;
 using ExpertSystem.Server.Services;
 using ExpertSystem.Common.Generated;
@@ -22,14 +23,14 @@ namespace ExpertSystem.Server
         {
             Options = options;
 
-            var csvFileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data", "1.csv");
-            var walFileName = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "data", "wal.txt");
+            var csvFileName = Path.Combine(GetThisFileDirectory(), "..", "..", "data", "1.csv");
+            var walFileName = Path.Combine(GetThisFileDirectory(), "..", "..", "data", "wal.txt");
             var socketsRepository = new CsvRepository(csvFileName, walFileName).Sync();
 
             Server = new Grpc.Core.Server
             {
-                Services = { SocketExchange.BindService(new SocketExchangeImpl(socketsRepository)) },
-                Ports = { new ServerPort("localhost", Options.Port, ServerCredentials.Insecure) }
+                Services = {SocketExchange.BindService(new SocketExchangeImpl(socketsRepository))},
+                Ports = {new ServerPort("localhost", Options.Port, ServerCredentials.Insecure)}
             };
         }
 
@@ -56,8 +57,13 @@ namespace ExpertSystem.Server
 
         private static void Main()
         {
-            var program = new Program(new ProgramOptions { Debug = true, Port = 50051 });
+            var program = new Program(new ProgramOptions {Debug = true, Port = 50051});
             program.Run();
+        }
+        
+        private static string GetThisFileDirectory([CallerFilePath] string path = null)
+        {
+            return Path.GetDirectoryName(path);
         }
     }
 }
