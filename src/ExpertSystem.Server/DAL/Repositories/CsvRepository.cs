@@ -54,11 +54,9 @@ namespace ExpertSystem.Server.DAL.Repositories
                 foreach (var socket in SocketParser.ParseSockets(reader))
                 {
                     var hashCode = socket.GetHashCode();
-                    if (!_sockets.ContainsKey(hashCode))
-                    {
-                        _sockets.Add(hashCode, socket);
-                        _socketsByName.Add(socket.SocketName, hashCode);
-                    }
+                    if (_sockets.ContainsKey(hashCode)) continue;
+                    _sockets.Add(hashCode, socket);
+                    _socketsByName.Add(socket.SocketName, hashCode);
                 }
             }
 

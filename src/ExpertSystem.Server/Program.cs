@@ -38,7 +38,7 @@ namespace ExpertSystem.Server
             Server.Start();
             Console.WriteLine("SocketExchange server listening on port " + Options.Port);
 
-            Console.WriteLine("Press key 'q' to stop the server...");
+            Console.WriteLine("Press key 'Q' to stop the server...");
             CheckShutdown();
         }
 
