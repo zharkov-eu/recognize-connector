@@ -9,8 +9,4 @@
     <ProjectReference Include="..\ExpertSystem.Common\ExpertSystem.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MathNet.Numerics" Version="4.6.0" />
-  </ItemGroup>
-
 </Project>

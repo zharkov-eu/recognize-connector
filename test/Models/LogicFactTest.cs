@@ -1,6 +1,6 @@
 using Xunit;
 using System.Collections.Generic;
-using ExpertSystem.Client.Models.CommonLogic;
+using ExpertSystem.Aggregator.Models.CommonLogic;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Models
@@ -8,7 +8,7 @@ namespace ExpertSystem.Tests.Models
     public class LogicFactTest
     {
         [Fact]
-        public void CojunctionNormalForm_IsCorrectWithSingleFact()
+        public void ConjunctionNormalForm_IsCorrectWithSingleFact()
         {
             // Arrange
             var singleFact = new LogicFact(SocketDomain.Color, "value", LogicOperation.Operation.None, true);
@@ -16,14 +16,14 @@ namespace ExpertSystem.Tests.Models
             singleFacts.AddLast(singleFact);
 
             // Act
-            var cnfStatement = LogicFact.ConjuctionNormalFrom(singleFacts);
+            var cnfStatement = LogicFact.ConjunctionNormalFrom(singleFacts);
 
             // Assert
             Assert.True(singleFact.Equals(cnfStatement.First.Value), "Исходный факт не соответвует полученному");
         }
 
         [Fact]
-        public void CojunctionNormalForm_IsCorrectWithDisjunction()
+        public void ConjunctionNormalForm_IsCorrectWithDisjunction()
         {
             // Arrange
             var disjunctionFactA = new LogicFact(SocketDomain.Color, "valueA", LogicOperation.Operation.Disjunction);
@@ -33,14 +33,14 @@ namespace ExpertSystem.Tests.Models
             disjunctionFacts.AddLast(disjunctionFactB);
 
             // Act
-            disjunctionFacts = LogicFact.ConjuctionNormalFrom(disjunctionFacts);
+            disjunctionFacts = LogicFact.ConjunctionNormalFrom(disjunctionFacts);
 
             Assert.True(disjunctionFactA.Equals(disjunctionFacts.First.Value));
             Assert.True(disjunctionFactB.Equals(disjunctionFacts.Last.Value));
         }
 
         [Fact]
-        public void CojunctionNormalForm_IsCorrectWithImplication()
+        public void ConjunctionNormalForm_IsCorrectWithImplication()
         {
             var implicationFactA = new LogicFact(SocketDomain.Material, "valueA", LogicOperation.Operation.Conjunction);
             var implicationFactB =
@@ -50,7 +50,7 @@ namespace ExpertSystem.Tests.Models
             implicationFacts.AddLast(implicationFactA);
             implicationFacts.AddLast(implicationFactB);
             implicationFacts.AddLast(implicationResult);
-            implicationFacts = LogicFact.ConjuctionNormalFrom(implicationFacts);
+            implicationFacts = LogicFact.ConjunctionNormalFrom(implicationFacts);
 
             var cnfImplicationFactA =
                 new LogicFact(SocketDomain.Material, "valueA", LogicOperation.Operation.Disjunction, true);

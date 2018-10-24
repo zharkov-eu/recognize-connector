@@ -1,7 +1,7 @@
+using ExpertSystem.Aggregator.Processors;
+using ExpertSystem.Aggregator.RulesGenerators;
+using ExpertSystem.Common.Models;
 using Xunit;
-using ExpertSystem.Client.Models;
-using ExpertSystem.Client.Processors;
-using ExpertSystem.Client.RulesGenerators;
 using ExpertSystem.Tests.Parsers;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
@@ -19,7 +19,7 @@ namespace ExpertSystem.Tests.Processors
             var rulesGenerator = new LogicRulesGenerator();
             var logicRules = rulesGenerator.GenerateRules(sockets);
 
-            _logicProcessor = new LogicProcessor(logicRules, new ProcessorOptions { Debug = false });
+            _logicProcessor = new LogicProcessor(logicRules, new ProcessorOptions {Debug = false});
         }
 
         [Fact]

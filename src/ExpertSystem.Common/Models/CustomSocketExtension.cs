@@ -6,18 +6,8 @@ using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Common.Models
 {
-    /// <summary>Расширения для работы с записями типа CustomSocket</summary>
-    public class CustomSocketExtension : RecordExtension<CustomSocket>
+    public class CustomSocketExtension
     {
-//        private static CustomSocketExtension _instance;
-//
-//        public static CustomSocketExtension GetInstance()
-//        {
-//            if (_instance == null)
-//                _instance = new CustomSocketExtension();
-//            return _instance;
-//        }
-
         public static readonly Type CustomSocketType = typeof(CustomSocket);
 
         // TODO: Переместить CustomSocketExtension::Delimiter в RecordExtension

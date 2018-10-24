@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using Grpc.Core;
-using ExpertSystem.Client.Processors;
-using ExpertSystem.Client.RulesGenerators;
-using ExpertSystem.Client.Services;
 using ExpertSystem.Common.Generated;
 
 namespace ExpertSystem.Client
@@ -12,13 +7,8 @@ namespace ExpertSystem.Client
     public class Program
     {
         private const string Version = "1.0.0";
-        protected readonly SocketExchange.SocketExchangeClient Client;
-        protected readonly SocketCache SocketCache;
+        protected readonly SocketOperations.SocketOperationsClient Client;
         protected readonly ProgramOptions Options;
-        protected ProductionProcessor ProductionProcessor;
-        protected LogicProcessor LogicProcessor;
-        protected FuzzyProcessor FuzzyProcessor;
-        protected NeuralProcessor NeuralProcessor;
 
         public struct ProgramOptions
         {
@@ -28,56 +18,25 @@ namespace ExpertSystem.Client
         protected Program(ProgramOptions options)
         {
             Options = options;
-            SocketCache = new SocketCache();
 
-            var channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
-            Client = new SocketExchange.SocketExchangeClient(channel);
+            var channel = new Channel("127.0.0.1:50052", ChannelCredentials.Insecure);
+            Client = new SocketOperations.SocketOperationsClient(channel);
 
             try
             {
                 var message = Client.SayHello(new HelloMessage {Version = Version});
-                Console.WriteLine($"Connected to SocketExchange v{message.Version} on 127.0.0.1:50051");
+                Console.WriteLine($"Connected to SocketOperations v{message.Version} on 127.0.0.1:50052");
             }
             catch
             {
-                Console.WriteLine("Error: Connection to SocketExchange on 127.0.0.1:50051 failed");
+                Console.WriteLine("Error: Connection to SocketOperations on 127.0.0.1:50052 failed");
                 Environment.Exit(1);
             }
-        }
-
-        private async Task<Program> Init()
-        {
-            var stream = Client.GetSockets(new Empty()).ResponseStream;
-            while (await stream.MoveNext())
-                SocketCache.Add(stream.Current);
-
-            var rulesGenerator = new ProductionRulesGenerator();
-            var logicRulesGenerator = new LogicRulesGenerator();
-            var fuzzyRulesGenerator = new FuzzyRulesGenerator();
-            var neuralRulesGenerator = new NeuralRulesGenerator();
-
-            // Продукционный вывод
-            var rulesGraph = rulesGenerator.GenerateRules(SocketCache.GetAll());
-            // Логический вывод
-            var logicRules = logicRulesGenerator.GenerateRules(SocketCache.GetAll());
-            // Нечеткий вывод
-            var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(SocketCache.GetAll());
-            var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, SocketCache.GetAll());
-            // Нейро-нечеткий вывод
-            var neuralNetwork = neuralRulesGenerator.GetNeuralNetwork(SocketCache.GetAll());
-
-            ProductionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions {Debug = Options.Debug});
-            LogicProcessor = new LogicProcessor(logicRules, new ProcessorOptions {Debug = Options.Debug});
-            FuzzyProcessor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions {Debug = Options.Debug});
-            NeuralProcessor = new NeuralProcessor(neuralNetwork, new ProcessorOptions {Debug = Options.Debug});
-
-            return this;
         }
 
         private static void Main()
         {
             var consoleProgram = new ConsoleProgram(new ProgramOptions {Debug = true});
-            consoleProgram.Init().GetAwaiter().GetResult();
             consoleProgram.Run();
         }
     }

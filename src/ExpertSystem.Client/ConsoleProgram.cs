@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using ExpertSystem.Common.Generated;
-using ExpertSystem.Client.Models;
+using ExpertSystem.Common.Models;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Client

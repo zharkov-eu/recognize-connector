@@ -3,29 +3,38 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Server.DAL.Controllers;
+using ExpertSystem.Server.DAL.Repositories;
 
 namespace ExpertSystem.Server.Services
 {
+    public struct SocketExchangeOptions
+    {
+        public string Version;
+        public bool Debug;
+    }
+
     /// <inheritdoc />
     /// <summary>Вызов удалённых процедур для разъёмов</summary>
     public class SocketExchangeImpl : SocketExchange.SocketExchangeBase
     {
-        // Текущая версия сервера
-        private const string Version = "1.0.0";
+        private readonly SocketExchangeOptions _options;
 
         // Контроллеры
         private readonly SocketController _socketController;
         private readonly CategoryController _categoryController;
 
-        public SocketExchangeImpl(SocketController socketController, CategoryController categoryController)
+        public SocketExchangeImpl(SocketController socketController, CategoryController categoryController, 
+            SocketExchangeOptions options)
         {
             _socketController = socketController;
             _categoryController = categoryController;
+            _options = options;
         }
 
         public override Task<HelloMessage> SayHello(HelloMessage request, ServerCallContext context)
         {
-            return Task.FromResult(new HelloMessage {Version = Version});
+            DebugWrite($"RpcCall {{SayHello}}: '{{{request}}}' from {context.Peer}");
+            return Task.FromResult(new HelloMessage {Version = _options.Version});
         }
 
         /// <summary>Вызов процедуры получения списка разъёмов</summary>
@@ -63,29 +72,10 @@ namespace ExpertSystem.Server.Services
             return null;
         }
 
-        public override Task GetGroups(Empty request, IServerStreamWriter<Category> responseStream, ServerCallContext context)
+        private void DebugWrite(string message)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Task<Category> AddGroup(Category request, ServerCallContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<Empty> DeleteGroup(Category request, ServerCallContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<Category> AddSocketToGroup(Category request, ServerCallContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<Category> RemoveSocketFromGroup(AddSocket request, ServerCallContext context)
-        {
-            throw new NotImplementedException();
+            if (_options.Debug)
+                Console.WriteLine(message);
         }
     }
 }

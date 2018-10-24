@@ -6,13 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Utils\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\ExpertSystem.Common\ExpertSystem.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExpertSystem.Common\ExpertSystem.Common.csproj" />
+    <PackageReference Include="MathNet.Numerics" Version="4.6.0" />
   </ItemGroup>
 
 </Project>

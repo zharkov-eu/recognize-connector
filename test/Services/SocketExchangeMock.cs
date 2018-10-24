@@ -15,7 +15,8 @@ namespace ExpertSystem.Tests.Services
             _sockets = sockets;
         }
 
-        public override Task GetSockets(Empty request, IServerStreamWriter<CustomSocket> responseStream, ServerCallContext context)
+        public override Task GetSockets(Empty request, IServerStreamWriter<CustomSocket> responseStream,
+            ServerCallContext context)
         {
             throw new RpcException(new Status(StatusCode.Unimplemented, ""));
         }
@@ -25,7 +26,7 @@ namespace ExpertSystem.Tests.Services
             throw new RpcException(new Status(StatusCode.Unimplemented, ""));
         }
 
-        public override Task<Empty> DeleteSocket(CustomSocket request, ServerCallContext context)
+        public override Task<Empty> DeleteSocket(CustomSocketIdentity request, ServerCallContext context)
         {
             throw new RpcException(new Status(StatusCode.Unimplemented, ""));
         }

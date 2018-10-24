@@ -1,8 +1,8 @@
+using ExpertSystem.Aggregator.Processors;
+using ExpertSystem.Aggregator.RulesGenerators;
+using ExpertSystem.Common.Models;
 using Xunit;
 using Xunit.Abstractions;
-using ExpertSystem.Client.Models;
-using ExpertSystem.Client.Processors;
-using ExpertSystem.Client.RulesGenerators;
 using ExpertSystem.Tests.Parsers;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
@@ -23,7 +23,7 @@ namespace ExpertSystem.Tests.Processors
             var fuzzyFacts = generator.GetFuzzyFacts(fuzzyDomains, sockets);
 
             _output = outputHelper;
-            _processor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions { Debug = false });
+            _processor = new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions {Debug = false});
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace ExpertSystem.Tests.Processors
         }
 
         [Fact]
-        public void MamdaniProcesing_IsCorrect()
+        public void MamdaniProcessing_IsCorrect()
         {
             var factSet = new FactSet(
                 new Fact(SocketDomain.NumberOfContacts, 50),
@@ -48,7 +48,7 @@ namespace ExpertSystem.Tests.Processors
         }
 
         [Fact]
-        public void SugenoProcesing_IsCorrect()
+        public void SugenoProcessing_IsCorrect()
         {
             var factSet = new FactSet(
                 new Fact(SocketDomain.NumberOfContacts, 50),
