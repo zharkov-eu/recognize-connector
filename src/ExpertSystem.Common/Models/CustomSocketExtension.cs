@@ -6,9 +6,9 @@ using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Common.Models
 {
-    public class CustomSocketExtension
+    public static class CustomSocketExtension
     {
-        public static readonly Type CustomSocketType = typeof(CustomSocket);
+        public static readonly Type SocketType = typeof(CustomSocket);
 
         // Разделитель CSV файла
         public static readonly char Delimiter = ';';

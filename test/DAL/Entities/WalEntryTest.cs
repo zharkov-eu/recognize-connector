@@ -7,7 +7,6 @@ namespace ExpertSystem.Tests.DAL.Entities
 {
 	public class CsvEntityTest
 	{
-		// Для вывода данных теста в консоль
 		private readonly ITestOutputHelper _output;
 
 		// Тестовые данные

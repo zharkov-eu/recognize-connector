@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "ExpertSystem.Common.Generated";
+
+import "SocketExchange.proto";
+
+package ExpertSystem;
+
+service SocketOperations {
+    rpc SayHello (HelloMessage) returns (HelloMessage) {}
+    
+    rpc FindSocketsByParams (CustomSocket) returns (stream CustomSocket) {}
+    rpc FindSocketByIdentity (CustomSocketIdentity) returns (CustomSocket) {}
+    rpc IsParamsMatchSocket (CustomSocket) returns (CustomSocket) {}
+
+    rpc GetSocketGroups (Empty) returns (stream SocketGroup) {}
+    rpc GetSocketsInGroup (SocketGroupIdentity) returns (stream CustomSocket) {}
+    rpc CheckSocketInGroup (CustomSocketIdentityJoinGroup) returns (CustomSocket) {}
+    rpc FindSocketsByParamsInGroup (CustomSocketJoinGroup) returns (stream CustomSocketJoinGroup) {}
+
+    rpc UpsertSocket (CustomSocket) returns (CustomSocket) {}
+    rpc DeleteSocket (CustomSocketIdentity) returns (Empty) {}
+    rpc AddSocketGroup (SocketGroupIdentity) returns (SocketGroup) {}
+    rpc AddToSocketGroup (SocketGroup) returns (SocketGroup) {}
+    rpc DeleteSocketGroup (SocketGroupIdentity) returns (Empty) {}
+}
+
+message CustomSocketJoinGroup {
+    CustomSocket socket = 1;
+    SocketGroupIdentity group = 2;
+}
+
+message CustomSocketIdentityJoinGroup {
+    CustomSocketIdentity socket = 1;
+    SocketGroupIdentity group = 2;
+}

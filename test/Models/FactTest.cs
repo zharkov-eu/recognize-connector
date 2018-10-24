@@ -1,14 +1,14 @@
 ﻿using Xunit;
-using ExpertSystem.Client.Models;
+using ExpertSystem.Common.Models;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Models
 {
-    public class Fact_IsCorrect
+    public class FactTest
     {
         private readonly Fact _fact;
 
-        public Fact_IsCorrect()
+        public FactTest()
         {
             _fact = new Fact(SocketDomain.Color, "value");
         }
@@ -49,10 +49,10 @@ namespace ExpertSystem.Tests.Models
             Assert.False(_fact.Equals(_fact, factNotEqual), "Факт не должен быть равен различному по содержанию факту");
         }
 
-        public class FactSet_IsCorrect
+        public class FactSetTest
         {
             private readonly FactSet _factSet;
-            public FactSet_IsCorrect()
+            public FactSetTest()
             {
                 _factSet = new FactSet(
                     new Fact(SocketDomain.Color, "value_a"),

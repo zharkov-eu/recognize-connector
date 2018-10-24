@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using ExpertSystem.Aggregator.Services;
 using Xunit;
 using Xunit.Abstractions;
-using ExpertSystem.Client.Services;
+using ExpertSystem.Server.Services;
 
 namespace ExpertSystem.Tests.Services
 {
@@ -19,7 +20,7 @@ namespace ExpertSystem.Tests.Services
         [Fact]
         public void CMeans_isPlainCorrect()
         {
-            var plainClusters = new List<double> { 1, 1, 1, 5, 5, 5, 9, 9, 9 };
+            var plainClusters = new List<double> {1, 1, 1, 5, 5, 5, 9, 9, 9};
             const int plainClustersExpectedCount = 3;
             const int elements = 3;
 
@@ -28,7 +29,6 @@ namespace ExpertSystem.Tests.Services
             for (var k = 0; k < plainClustersExpectedCount; k++)
             {
                 var clusterDegree = result[k * elements].GetMostProbableCluster();
-                var threeElements = plainClusters.GetRange(k * elements, elements);
                 for (var j = k * elements; j < elements; j++)
                     Assert.Equal(clusterDegree.Key, result[j].GetMostProbableCluster().Key);
             }

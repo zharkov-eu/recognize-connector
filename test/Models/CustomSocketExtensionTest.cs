@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 namespace ExpertSystem.Tests.Models
 {
     /// <summary>Класс тестирования методов StorageCustomSocket</summary>
-    public class StorageCustomSocketTest
+    public class CustomSocketExtensionTest
     {
         // Для вывода данных теста в консоль
         private readonly ITestOutputHelper _output;
@@ -15,7 +15,7 @@ namespace ExpertSystem.Tests.Models
         private readonly string _testLine;
         private readonly CustomSocket _testSocket;
 
-        public StorageCustomSocketTest(ITestOutputHelper output)
+        public CustomSocketExtensionTest(ITestOutputHelper output)
         {
             _output = output;
 

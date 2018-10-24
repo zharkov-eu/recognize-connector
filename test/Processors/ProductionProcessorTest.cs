@@ -1,9 +1,9 @@
 using Xunit;
 using System.Collections.Generic;
+using ExpertSystem.Aggregator.Processors;
+using ExpertSystem.Aggregator.RulesGenerators;
 using ExpertSystem.Common.Generated;
-using ExpertSystem.Client.Models;
-using ExpertSystem.Client.Processors;
-using ExpertSystem.Client.RulesGenerators;
+using ExpertSystem.Common.Models;
 using ExpertSystem.Tests.Parsers;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
@@ -23,7 +23,7 @@ namespace ExpertSystem.Tests.Processors
             var rulesGraph = rulesGenerator.GenerateRules(sockets);
 
             _socket = socketParser.TestSocket();
-            _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions { Debug = false });
+            _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions {Debug = false});
         }
 
         [Fact]

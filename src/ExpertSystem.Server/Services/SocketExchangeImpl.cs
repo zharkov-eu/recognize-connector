@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using ExpertSystem.Common.Generated;
@@ -5,21 +6,29 @@ using ExpertSystem.Server.DAL.Repositories;
 
 namespace ExpertSystem.Server.Services
 {
+    public struct SocketExchangeOptions
+    {
+        public string Version;
+        public bool Debug;
+    }
+
     /// <inheritdoc />
     /// <summary>Вызов удалённых процедур для разъёмов</summary>
     public class SocketExchangeImpl : SocketExchange.SocketExchangeBase
     {
-        private const string Version = "1.0.0";
         private readonly CsvRepository _repository;
+        private readonly SocketExchangeOptions _options;
 
-        public SocketExchangeImpl(CsvRepository repository)
+        public SocketExchangeImpl(CsvRepository repository, SocketExchangeOptions options)
         {
             _repository = repository;
+            _options = options;
         }
 
         public override Task<HelloMessage> SayHello(HelloMessage request, ServerCallContext context)
         {
-            return Task.FromResult(new HelloMessage {Version = Version});
+            DebugWrite($"RpcCall {{SayHello}}: '{{{request}}}' from {context.Peer}");
+            return Task.FromResult(new HelloMessage {Version = _options.Version});
         }
 
         /// <summary>Вызов процедуры получения списка разъёмов</summary>
@@ -52,11 +61,17 @@ namespace ExpertSystem.Server.Services
         /// <param name="request">Запрос</param>
         /// <param name="context">Контекст</param>
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
-        public override Task<Empty> DeleteSocket(CustomSocket request, ServerCallContext context)
+        public override Task<Empty> DeleteSocket(CustomSocketIdentity request, ServerCallContext context)
         {
             var hashCode = _repository.Select(request.SocketName).Item1;
             _repository.Delete(hashCode);
             return null;
+        }
+
+        private void DebugWrite(string message)
+        {
+            if (_options.Debug)
+                Console.WriteLine(message);
         }
     }
 }
