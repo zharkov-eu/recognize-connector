@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 using Grpc.Core;
 using ExpertSystem.Server.Services;
 using ExpertSystem.Common.Generated;
+using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Parsers;
+using ExpertSystem.Server.DAL.Controllers;
 using ExpertSystem.Server.DAL.Repositories;
 
 namespace ExpertSystem.Server
@@ -23,13 +26,21 @@ namespace ExpertSystem.Server
         {
             Options = options;
 
-            var csvFileName = Path.Combine(GetThisFileDirectory(), "..", "..", "data", "1.csv");
-            var walFileName = Path.Combine(GetThisFileDirectory(), "..", "..", "data", "wal.txt");
-            var socketsRepository = new CsvRepository(csvFileName, walFileName).Sync();
+            var basePath = Path.Combine(GetThisFileDirectory(), "..", "..", "data");
+            
+            var socketCsvFileName = Path.Combine(basePath, "1.csv");
+            var socketWalFileName = Path.Combine(basePath, "wal.txt");
+            var socketRepository = new CsvRepository<CustomSocket, CustomParser<CustomSocket, CustomSocketExtension>, CustomSocketExtension>(socketCsvFileName, socketWalFileName).Sync();
+            var socketController = new SocketController(socketRepository);
+            
+            var categoryCsvFileName = Path.Combine(basePath, "category.csv");
+            var categoryWalFileName = Path.Combine(basePath, "categoryWal.txt");
+            var categoryRepository = new CsvRepository<Category, CustomParser, CategoryExtension>(categoryCsvFileName, categoryWalFileName);
+            var categoryController = new CategoryController(categoryRepository);
 
             Server = new Grpc.Core.Server
             {
-                Services = {SocketExchange.BindService(new SocketExchangeImpl(socketsRepository))},
+                Services = {SocketExchange.BindService(new SocketExchangeImpl(socketController, categoryController))},
                 Ports = {new ServerPort("localhost", Options.Port, ServerCredentials.Insecure)}
             };
         }

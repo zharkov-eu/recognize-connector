@@ -8,25 +8,25 @@ namespace ExpertSystem.Tests.RulesGenerators
     public class FuzzyRulesGeneratorTest
     {
         private readonly FuzzyRulesGenerator _generator;
-        private readonly SocketParserTest _socketParser;
+        private readonly CustomParserTest _customParser;
 
         public FuzzyRulesGeneratorTest()
         {
             _generator = new FuzzyRulesGenerator();
-            _socketParser = new SocketParserTest();
+            _customParser = new CustomParserTest();
         }
 
         [Fact]
         public void GetFuzzyDomains_isCorrect()
         {
-            var sockets = _socketParser.GetSockets();
+            var sockets = _customParser.GetSockets();
             var domains = _generator.GetFuzzyDomains(sockets);
         }
 
         [Fact]
         public void GetFuzzyFacts_isCorrect()
         {
-            var sockets = _socketParser.GetSockets();
+            var sockets = _customParser.GetSockets();
             var domains = _generator.GetFuzzyDomains(sockets);
             var facts = _generator.GetFuzzyFacts(domains, sockets);
         }

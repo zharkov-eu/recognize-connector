@@ -16,7 +16,7 @@ namespace ExpertSystem.Tests.Processors
         public FuzzyRulesProcessorTest(ITestOutputHelper outputHelper)
         {
             var generator = new FuzzyRulesGenerator();
-            var socketParser = new SocketParserTest();
+            var socketParser = new CustomParserTest();
 
             var sockets = socketParser.GetSockets();
             var fuzzyDomains = generator.GetFuzzyDomains(sockets);

@@ -10,9 +10,13 @@ using ExpertSystem.Server.DAL.Entities;
 
 namespace ExpertSystem.Server.DAL.Repositories
 {
-    /// <inheritdoc />
     /// <summary>Класс для работы репозиторием на CSV файле</summary>
-    public class CsvRepository : IDisposable
+    /// <typeparam name="TR">Тип записей</typeparam>
+    /// <typeparam name="TP">Тип парсера</typeparam>
+    /// <typeparam name="TE">Тип расширения</typeparam>
+    public class CsvRepository<TR, TP, TE> : IDisposable
+        where TP : CustomParser<TR, RecordExtension<TR>>
+        where TE : RecordExtension<TR>
     {
         // Название файла CSV
         private readonly string _csvFileName;
@@ -24,10 +28,10 @@ namespace ExpertSystem.Server.DAL.Repositories
         private readonly FileStream _walStream;
 
         // Разъёмы
-        private Dictionary<int, CustomSocket> _sockets = new Dictionary<int, CustomSocket>();
+        private Dictionary<int, TR> _records = new Dictionary<int, TR>();
 
         // Список доступных разъёмов по имени
-        private Dictionary<string, int> _socketsByName = new Dictionary<string, int>();
+        private Dictionary<string, int> _recordsByName = new Dictionary<string, int>();
 
         /// <summary>Конструктор репозитория</summary>
         /// <param name="csvFileName">Название файла CSV</param>
@@ -46,22 +50,22 @@ namespace ExpertSystem.Server.DAL.Repositories
                 : File.Open(_walFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
         }
 
-        /// <summary>Синхронизация</summary>
-        public CsvRepository Sync()
+        /// <summary>Синхронизация репозитория</summary>
+        public CsvRepository<TR, TP, TE> Sync()
         {
             // Очистака предыдущих значений разъёмов
-            _sockets.Clear();
-            _socketsByName.Clear();
+            _records.Clear();
+            _recordsByName.Clear();
 
             // Читаем доступные разъёмы CSV файла
             using (var reader = new StreamReader(File.OpenRead(_csvFileName)))
             {
-                foreach (var socket in SocketParser.ParseSockets(reader))
+                foreach (var record in TP.ParseRecords(reader))
                 {
-                    var hashCode = socket.GetHashCode();
-                    if (_sockets.ContainsKey(hashCode)) continue;
-                    _sockets.Add(hashCode, socket);
-                    _socketsByName.Add(socket.SocketName, hashCode);
+                    var hashCode = record.GetHashCode();
+                    if (_records.ContainsKey(hashCode)) continue;
+                    _records.Add(hashCode, record);
+                    _recordsByName.Add(record.SocketName, hashCode);
                 }
             }
 
@@ -71,20 +75,20 @@ namespace ExpertSystem.Server.DAL.Repositories
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    var entry = WalEntry.ParseFromString(line);
+                    var entry = WalEntry<TR, TE>.ParseFromString(line);
                     switch (entry.Action)
                     {
                         case CsvDbAction.Insert:
-                            _sockets.Add(entry.HashCode, entry.Socket);
-                            _socketsByName.Add(entry.Socket.SocketName, entry.HashCode);
+                            _records.Add(entry.HashCode, entry.Socket);
+                            _recordsByName.Add(entry.Socket.SocketName, entry.HashCode);
                             break;
                         case CsvDbAction.Update:
-                            _sockets.Remove(entry.HashCode);
-                            _sockets.Add(entry.Socket.GetHashCode(), entry.Socket);
+                            _records.Remove(entry.HashCode);
+                            _records.Add(entry.Socket.GetHashCode(), entry.Socket);
                             break;
                         case CsvDbAction.Delete:
-                            _sockets.Remove(entry.HashCode);
-                            _socketsByName.Remove(entry.Socket.SocketName);
+                            _records.Remove(entry.HashCode);
+                            _recordsByName.Remove(entry.Socket.SocketName);
                             break;
                     }
                 }
@@ -97,9 +101,9 @@ namespace ExpertSystem.Server.DAL.Repositories
             FileUtils.ClearFile(_csvFileName);
             using (var writer = new StreamWriter(File.OpenWrite(_csvFileName)))
             {
-                writer.WriteLine(string.Join(CustomSocketExtension.Delimiter, SocketParser.CsvHead));
-                foreach (var socket in _sockets.Values)
-                    writer.WriteLine(CustomSocketExtension.Serialize(socket));
+                writer.WriteLine(string.Join(CustomSocketExtension.Delimiter, TP.CsvHead));
+                foreach (var record in _records.Values)
+                    writer.WriteLine(TE.Serialize(record));
             }
 
             return this;
@@ -107,56 +111,56 @@ namespace ExpertSystem.Server.DAL.Repositories
 
         /// <summary>Получить список разъёмов</summary>
         /// <returns>Список разъёмов</returns>
-        public List<CustomSocket> GetSockets()
+        public List<TR> GetSockets()
         {
-            return _sockets.Values.ToList();
+            return _records.Values.ToList();
         }
 
         /// <summary>Выполнить действие выбора</summary>
-        /// <param name="socketName">Имя разъёма</param>
+        /// <param name="recordName">Имя разъёма</param>
         /// <returns>Кортеж из хэш кода и разъёма с переданым именем</returns>
-        public Tuple<int, CustomSocket> Select(string socketName)
+        public Tuple<int, TR> Select(string recordName)
         {
-            if (_socketsByName.TryGetValue(socketName, out var hashCode))
-                return new Tuple<int, CustomSocket>(hashCode, _sockets[hashCode]);
+            if (_recordsByName.TryGetValue(recordName, out var hashCode))
+                return new Tuple<int, TR>(hashCode, _records[hashCode]);
             return null;
         }
 
         /// <summary>Выполнить действие вставки</summary>
-        /// <param name="socket">Данные</param>
+        /// <param name="record">Данные</param>
         /// <returns>Вставленный в репозиторий разъём</returns>
-        public CustomSocket Insert(CustomSocket socket)
+        public TR Insert(TR record)
         {
-            _socketsByName.Add(socket.SocketName, socket.GetHashCode());
-            _sockets.Add(socket.GetHashCode(), socket);
+            _recordsByName.Add(record.SocketName, record.GetHashCode());
+            _records.Add(record.GetHashCode(), record);
             _walStream.Write(
-                Encoding.UTF8.GetBytes(new WalEntry(CsvDbAction.Insert, socket.GetHashCode(), socket).ToString()));
-            return socket;
+                Encoding.UTF8.GetBytes(new WalEntry<TR, TE>(CsvDbAction.Insert, record.GetHashCode(), record).ToString()));
+            return record;
         }
 
         /// <summary>Выполнить действие изменния</summary>
         /// <param name="hashCode">Хэш код разъёма</param>
-        /// <param name="socket">Данные</param>
+        /// <param name="record">Данные</param>
         /// <returns>Обновлённый разъём</returns>
-        public CustomSocket Update(int hashCode, CustomSocket socket)
+        public TR Update(int hashCode, TR record)
         {
-            _socketsByName.Remove(_sockets[hashCode].SocketName);
-            _socketsByName.Add(socket.SocketName, hashCode);
-            _sockets.Add(socket.GetHashCode(), socket);
-            _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry(CsvDbAction.Update, hashCode, socket).ToString()));
-            return socket;
+            _recordsByName.Remove(_records[hashCode].SocketName);
+            _recordsByName.Add(record.SocketName, hashCode);
+            _records.Add(record.GetHashCode(), record);
+            _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry<TR, TE>(CsvDbAction.Update, hashCode, record).ToString()));
+            return record;
         }
 
         /// <summary>Выполнить действие удаления</summary>
         /// <param name="hashCode">Хэш код разъёма</param>
         public void Delete(int hashCode)
         {
-            if (_sockets.ContainsKey(hashCode))
+            if (_records.ContainsKey(hashCode))
             {
-                var socket = _sockets[hashCode];
-                _socketsByName.Remove(socket.SocketName);
-                _sockets.Remove(hashCode);
-                _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry(CsvDbAction.Delete, hashCode).ToString()));
+                var record = _records[hashCode];
+                _recordsByName.Remove(record.SocketName);
+                _records.Remove(hashCode);
+                _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry<TR, TE>(CsvDbAction.Delete, hashCode).ToString()));
             }
         }
 
@@ -169,13 +173,6 @@ namespace ExpertSystem.Server.DAL.Repositories
     /// <summary>Утилиты для работы с файлами</summary>
     public static class FileUtils
     {
-        /// <summary>Очистить файл</summary>
-        /// <param name="fs"></param>
-        public static void ClearFile(FileStream fs)
-        {
-            fs.SetLength(0);
-        }
-
         /// <summary>Очистить файл</summary>
         /// <param name="path">Путь до файла</param>
         public static void ClearFile(string path)

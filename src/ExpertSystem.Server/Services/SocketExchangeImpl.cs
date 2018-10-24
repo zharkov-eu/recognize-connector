@@ -1,7 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using ExpertSystem.Common.Generated;
-using ExpertSystem.Server.DAL.Repositories;
+using ExpertSystem.Server.DAL.Controllers;
 
 namespace ExpertSystem.Server.Services
 {
@@ -9,12 +10,17 @@ namespace ExpertSystem.Server.Services
     /// <summary>Вызов удалённых процедур для разъёмов</summary>
     public class SocketExchangeImpl : SocketExchange.SocketExchangeBase
     {
+        // Текущая версия сервера
         private const string Version = "1.0.0";
-        private readonly CsvRepository _repository;
 
-        public SocketExchangeImpl(CsvRepository repository)
+        // Контроллеры
+        private readonly SocketController _socketController;
+        private readonly CategoryController _categoryController;
+
+        public SocketExchangeImpl(SocketController socketController, CategoryController categoryController)
         {
-            _repository = repository;
+            _socketController = socketController;
+            _categoryController = categoryController;
         }
 
         public override Task<HelloMessage> SayHello(HelloMessage request, ServerCallContext context)
@@ -30,7 +36,7 @@ namespace ExpertSystem.Server.Services
         public override async Task GetSockets(Empty request, IServerStreamWriter<CustomSocket> responseStream,
             ServerCallContext context)
         {
-            foreach (var socket in _repository.GetSockets())
+            foreach (var socket in _socketController.GetSockets())
                 await responseStream.WriteAsync(socket);
         }
 
@@ -40,12 +46,10 @@ namespace ExpertSystem.Server.Services
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
         public override Task<CustomSocket> UpsertSocket(CustomSocket request, ServerCallContext context)
         {
-            var socketName = request.SocketName;
-            var tmp = _repository.Select(socketName);
-            if (tmp != null)
-                return Task.FromResult(_repository.Update(tmp.Item1, request));
-            else
-                return Task.FromResult(_repository.Insert(request));
+            var existingSocket = _socketController.GetSocket(request.SocketName);
+            if (existingSocket != null)
+                return Task.FromResult(_socketController.UpdateSocket(existingSocket.Item1, request));
+            return Task.FromResult(_socketController.InsertSocket(request));
         }
 
         /// <summary>Вызов процедуры удаления</summary>
@@ -54,9 +58,34 @@ namespace ExpertSystem.Server.Services
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
         public override Task<Empty> DeleteSocket(CustomSocket request, ServerCallContext context)
         {
-            var hashCode = _repository.Select(request.SocketName).Item1;
-            _repository.Delete(hashCode);
+            var hashCode = _socketController.GetSocket(request.SocketName).Item1;
+            _socketController.DeleteSocket(hashCode);
             return null;
+        }
+
+        public override Task GetGroups(Empty request, IServerStreamWriter<Category> responseStream, ServerCallContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<Category> AddGroup(Category request, ServerCallContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<Empty> DeleteGroup(Category request, ServerCallContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<Category> AddSocketToGroup(Category request, ServerCallContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<Category> RemoveSocketFromGroup(AddSocket request, ServerCallContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,15 +6,16 @@ package ExpertSystem;
 
 service SocketExchange {
     rpc SayHello (HelloMessage) returns (HelloMessage) {}
-    
+
     rpc GetSockets (Empty) returns (stream CustomSocket) {}
     rpc UpsertSocket (CustomSocket) returns (CustomSocket) {}
     rpc DeleteSocket (CustomSocket) returns (Empty) {}
 
-    rpc GetGroups (Empty) returns (stream SocketGroup) {}
-    rpc AddGroup (SocketGroup) returns (SocketGroup) {}
-    rpc AddSocketToGroup (SocketGroup) returns (SocketGroup) {}
-    rpc DeleteGroup (SocketGroup) returns (Empty) {}
+    rpc GetGroups (Empty) returns (stream Category) {}
+    rpc AddGroup (Category) returns (Category) {}
+    rpc AddSocketToGroup (Category) returns (Category) {}
+    rpc RemoveSocketFromGroup (AddSocket) returns (Category) {}
+    rpc DeleteGroup (Category) returns (Empty) {}
 }
 
 message Empty {}
@@ -44,7 +45,12 @@ message CustomSocket {
     string SocketName = 18;
 }
 
-message SocketGroup {
+message Category {
     string Name = 1;
-    repeated string SocketName = 2; 
+    repeated string SocketName = 2;
+}
+
+message AddSocket {
+    string categoryName = 1;
+    CustomSocket socket = 2;
 }

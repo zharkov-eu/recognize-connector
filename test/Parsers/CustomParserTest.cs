@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using ExpertSystem.Common.Generated;
+using ExpertSystem.Common.Models;
 using ExpertSystem.Common.Parsers;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Parsers
 {
-    public class SocketParserTest
+    public class CustomParserTest
     {
         public CustomSocket TestSocket()
         {
@@ -85,7 +86,7 @@ namespace ExpertSystem.Tests.Parsers
 
             List<CustomSocket> sockets;
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(csvSnapshot)))
-                return sockets = SocketParser.ParseSockets(new StreamReader(stream));
+                return sockets = CustomParser<CustomSocket, CustomSocketExtension>.ParseRecords(new StreamReader(stream));
         }
 
         [Fact]
@@ -96,5 +97,7 @@ namespace ExpertSystem.Tests.Parsers
 
             Assert.True(socket.Equals(sockets[0]), "Данные разъема должны парситься правильно");
         }
+        
+        // TODO: Добавить тесты над категориями
     }
 }

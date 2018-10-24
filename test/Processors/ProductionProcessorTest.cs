@@ -16,7 +16,7 @@ namespace ExpertSystem.Tests.Processors
 
         public ProductionProcessorTest()
         {
-            var socketParser = new SocketParserTest();
+            var socketParser = new CustomParserTest();
             var sockets = socketParser.GetSockets();
 
             var rulesGenerator = new ProductionRulesGenerator();

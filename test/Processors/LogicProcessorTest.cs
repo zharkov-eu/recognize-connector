@@ -13,7 +13,7 @@ namespace ExpertSystem.Tests.Processors
 
         public LogicProcessorTest()
         {
-            var socketParser = new SocketParserTest();
+            var socketParser = new CustomParserTest();
             var sockets = socketParser.GetSockets();
 
             var rulesGenerator = new LogicRulesGenerator();

@@ -6,17 +6,28 @@ using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Common.Models
 {
-    public class CustomSocketExtension
+    /// <summary>Расширения для работы с записями типа CustomSocket</summary>
+    public class CustomSocketExtension : RecordExtension<CustomSocket>
     {
+//        private static CustomSocketExtension _instance;
+//
+//        public static CustomSocketExtension GetInstance()
+//        {
+//            if (_instance == null)
+//                _instance = new CustomSocketExtension();
+//            return _instance;
+//        }
+
         public static readonly Type CustomSocketType = typeof(CustomSocket);
 
+        // TODO: Переместить CustomSocketExtension::Delimiter в RecordExtension
         // Разделитель CSV файла
         public static readonly char Delimiter = ';';
 
         /// <summary>Преобразует разъём в CSV строку</summary>
         /// <param name="socket">Разъём</param>
         /// <returns>CSV cтрока на основании данных разъёма c предобпределённым разделителем</returns>
-        public static string Serialize(CustomSocket socket)
+        public override string Serialize(CustomSocket socket)
         {
             var socketType = typeof(CustomSocket);
             string result = "";
@@ -34,7 +45,7 @@ namespace ExpertSystem.Common.Models
         /// <summary>Десериализация CSV строки</summary>
         /// <param name="line">Строка</param>
         /// <returns>Разъём на основании переданной CSV строки</returns>
-        public static CustomSocket Deserialize(string line)
+        public override CustomSocket Deserialize(string line)
         {
             return Deserialize(line.Split(Delimiter));
         }
