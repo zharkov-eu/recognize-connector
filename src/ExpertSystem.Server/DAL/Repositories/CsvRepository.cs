@@ -3,69 +3,91 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
 using ExpertSystem.Common.Parsers;
 using ExpertSystem.Server.DAL.Entities;
+using ExpertSystem.Server.DAL.Extensions;
 
 namespace ExpertSystem.Server.DAL.Repositories
 {
-    /// <summary>Класс для работы репозиторием на CSV файле</summary>
-    /// <typeparam name="TR">Тип записей</typeparam>
-    /// <typeparam name="TP">Тип парсера</typeparam>
-    /// <typeparam name="TE">Тип расширения</typeparam>
-    public class CsvRepository<TR, TP, TE> : IDisposable
-        where TP : CustomParser<TR, RecordExtension<TR>>
-        where TE : RecordExtension<TR>
+    /// <summary>Структура опций CSV репозитория</summary>
+    public struct CsvRepositoryOptions
     {
+        // Имя Свойства-идентификатора
+        public string IdPropertyName;
+
         // Название файла CSV
-        private readonly string _csvFileName;
+        public string CsvFileName;
 
         // Название файла WAL-лога
-        private readonly string _walFileName;
+        public string WalFileName;
+    }
 
+    /// <inheritdoc />
+    /// <summary>Класс для работы репозиторием на CSV файле</summary>
+    /// <typeparam name="T">Тип записей</typeparam>
+    public class CsvRepository<T> : IDisposable
+    {
+        // Опции работы CSV репозитория
+        private readonly CsvRepositoryOptions _options;
+        
         // Поток ввода в WAL-лог файл
         private readonly FileStream _walStream;
 
-        // Разъёмы
-        private Dictionary<int, TR> _records = new Dictionary<int, TR>();
+        // Парсер
+        private readonly CustomParser<T> _parser; 
 
-        // Список доступных разъёмов по имени
+        // Расширение для работы с записи
+        private readonly IRecordExtension<T> _recordExtension;
+
+        // Расширение для работы с WAL-логом 
+        private readonly WalEntryExtension<T> _walExtension;
+
+        // Тип записи
+        private readonly Type _recordType = typeof(T);
+
+        // Записи
+        private readonly Dictionary<int, T> _records = new Dictionary<int, T>();
+
+        // Список доступных записей по имени
         private Dictionary<string, int> _recordsByName = new Dictionary<string, int>();
 
         /// <summary>Конструктор репозитория</summary>
-        /// <param name="csvFileName">Название файла CSV</param>
-        /// <param name="walFileName">Название файла WAL-лога</param>
-        public CsvRepository(string csvFileName, string walFileName)
+        /// <param name="options">Опции репозитория</param>
+        /// <param name="extension">Расшерение данного типа</param>
+        /// <param name="parser">Парсер данного типа</param>
+        public CsvRepository(CsvRepositoryOptions options, IRecordExtension<T> extension, CustomParser<T> parser)
         {
+            _options = options;
+            _recordExtension = extension;
+            _walExtension = new WalEntryExtension<T>(extension);
+            _parser = parser;
+            
             // Проверка существования CSV файла
-            if (!File.Exists(csvFileName))
-                throw new FileNotFoundException($"Файл {csvFileName} не найден");
+            if (!File.Exists(_options.CsvFileName))
+                throw new FileNotFoundException($"Файл {_options.CsvFileName} не найден");
 
-            _csvFileName = csvFileName;
-            _walFileName = walFileName;
-
-            _walStream = !File.Exists(walFileName)
-                ? File.Create(walFileName)
-                : File.Open(_walFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+            _walStream = !File.Exists(_options.WalFileName)
+                ? File.Create(_options.WalFileName)
+                : File.Open(_options.WalFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
         }
 
         /// <summary>Синхронизация репозитория</summary>
-        public CsvRepository<TR, TP, TE> Sync()
+        public CsvRepository<T> Sync()
         {
-            // Очистака предыдущих значений разъёмов
+            // Очистака предыдущих значений записей
             _records.Clear();
             _recordsByName.Clear();
 
-            // Читаем доступные разъёмы CSV файла
-            using (var reader = new StreamReader(File.OpenRead(_csvFileName)))
+            // Читаем доступные записи из CSV файла
+            using (var reader = new StreamReader(File.OpenRead(_options.CsvFileName)))
             {
-                foreach (var record in TP.ParseRecords(reader))
+                foreach (var record in _parser.ParseRecords(reader))
                 {
                     var hashCode = record.GetHashCode();
                     if (_records.ContainsKey(hashCode)) continue;
                     _records.Add(hashCode, record);
-                    _recordsByName.Add(record.SocketName, hashCode);
+                    _recordsByName.Add(GetRecordId(record), hashCode);
                 }
             }
 
@@ -75,93 +97,100 @@ namespace ExpertSystem.Server.DAL.Repositories
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    var entry = WalEntry<TR, TE>.ParseFromString(line);
+                    var entry = _walExtension.Deserialize(line);
                     switch (entry.Action)
                     {
                         case CsvDbAction.Insert:
-                            _records.Add(entry.HashCode, entry.Socket);
-                            _recordsByName.Add(entry.Socket.SocketName, entry.HashCode);
+                            _records.Add(entry.HashCode, entry.Record);
+                            _recordsByName.Add(GetRecordId(entry.Record), entry.HashCode);
                             break;
                         case CsvDbAction.Update:
                             _records.Remove(entry.HashCode);
-                            _records.Add(entry.Socket.GetHashCode(), entry.Socket);
+                            _records.Add(entry.Record.GetHashCode(), entry.Record);
                             break;
                         case CsvDbAction.Delete:
                             _records.Remove(entry.HashCode);
-                            _recordsByName.Remove(entry.Socket.SocketName);
+                            _recordsByName.Remove(GetRecordId(entry.Record));
                             break;
                     }
                 }
             }
 
             // Очищаем WAL файл
-            FileUtils.ClearFile(_walFileName);
+            FileUtils.ClearFile(_options.WalFileName);
 
             // Очищаем CSV файл и заполняем его новыми значениями
-            FileUtils.ClearFile(_csvFileName);
-            using (var writer = new StreamWriter(File.OpenWrite(_csvFileName)))
+            FileUtils.ClearFile(_options.CsvFileName);
+            using (var writer = new StreamWriter(File.OpenWrite(_options.CsvFileName)))
             {
-                writer.WriteLine(string.Join(CustomSocketExtension.Delimiter, TP.CsvHead));
+                writer.WriteLine(string.Join(CustomSocketExtension.Delimiter, _parser.CsvHead));
                 foreach (var record in _records.Values)
-                    writer.WriteLine(TE.Serialize(record));
+                    writer.WriteLine(_recordExtension.Serialize(record));
             }
 
             return this;
         }
 
-        /// <summary>Получить список разъёмов</summary>
-        /// <returns>Список разъёмов</returns>
-        public List<TR> GetSockets()
+        /// <summary>Получить список записей</summary>
+        /// <returns>Список записей</returns>
+        public List<T> GetSockets()
         {
             return _records.Values.ToList();
         }
 
         /// <summary>Выполнить действие выбора</summary>
-        /// <param name="recordName">Имя разъёма</param>
-        /// <returns>Кортеж из хэш кода и разъёма с переданым именем</returns>
-        public Tuple<int, TR> Select(string recordName)
+        /// <param name="recordName">Имя записи</param>
+        /// <returns>Кортеж из хэш кода и записи с переданым именем</returns>
+        public Tuple<int, T> Select(string recordName)
         {
             if (_recordsByName.TryGetValue(recordName, out var hashCode))
-                return new Tuple<int, TR>(hashCode, _records[hashCode]);
+                return new Tuple<int, T>(hashCode, _records[hashCode]);
             return null;
         }
 
         /// <summary>Выполнить действие вставки</summary>
         /// <param name="record">Данные</param>
-        /// <returns>Вставленный в репозиторий разъём</returns>
-        public TR Insert(TR record)
+        /// <returns>Вставленная в репозиторий запись</returns>
+        public T Insert(T record)
         {
-            _recordsByName.Add(record.SocketName, record.GetHashCode());
+            _recordsByName.Add(GetRecordId(record), record.GetHashCode());
             _records.Add(record.GetHashCode(), record);
             _walStream.Write(
-                Encoding.UTF8.GetBytes(new WalEntry<TR, TE>(CsvDbAction.Insert, record.GetHashCode(), record).ToString()));
+                Encoding.UTF8.GetBytes(new WalEntry<T>(CsvDbAction.Insert, record.GetHashCode(), record).ToString()));
             return record;
         }
 
         /// <summary>Выполнить действие изменния</summary>
-        /// <param name="hashCode">Хэш код разъёма</param>
+        /// <param name="hashCode">Хэш код записи</param>
         /// <param name="record">Данные</param>
-        /// <returns>Обновлённый разъём</returns>
-        public TR Update(int hashCode, TR record)
+        /// <returns>Обновлённая запись</returns>
+        public T Update(int hashCode, T record)
         {
-            _recordsByName.Remove(_records[hashCode].SocketName);
-            _recordsByName.Add(record.SocketName, hashCode);
+            _recordsByName.Remove(GetRecordId(_records[hashCode]));
+            _recordsByName.Add(GetRecordId(record), hashCode);
             _records.Add(record.GetHashCode(), record);
-            _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry<TR, TE>(CsvDbAction.Update, hashCode, record).ToString()));
+            _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry<T>(CsvDbAction.Update, hashCode, record).ToString()));
             return record;
         }
 
         /// <summary>Выполнить действие удаления</summary>
-        /// <param name="hashCode">Хэш код разъёма</param>
+        /// <param name="hashCode">Хэш код записи</param>
         public void Delete(int hashCode)
         {
-            if (_records.ContainsKey(hashCode))
+            if (_records.TryGetValue(hashCode, out var record))
             {
-                var record = _records[hashCode];
-                _recordsByName.Remove(record.SocketName);
+                _recordsByName.Remove(GetRecordId(record));
                 _records.Remove(hashCode);
-                _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry<TR, TE>(CsvDbAction.Delete, hashCode).ToString()));
+                _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry<T>(CsvDbAction.Delete, hashCode).ToString()));
             }
+        }
+
+        /// <summary>Получить идентификатор записи</summary>
+        /// <param name="record"></param>
+        /// <returns>Строка идентификатора записи</returns>
+        private string GetRecordId(T record)
+        {
+            return _recordType.GetProperty(_options.IdPropertyName).GetValue(record).ToString();
         }
 
         public void Dispose()

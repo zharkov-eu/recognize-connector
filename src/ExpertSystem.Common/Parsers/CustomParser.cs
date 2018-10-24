@@ -5,22 +5,27 @@ using ExpertSystem.Common.Models;
 namespace ExpertSystem.Common.Parsers
 {
     /// <summary>CSV парсер</summary>
-    /// <typeparam name="TR">Тип записи</typeparam>
-    /// <typeparam name="TE">Тип расширения</typeparam>
-    public class CustomParser<TR, TE>
-        where TE : RecordExtension<TR>
+    /// <typeparam name="T">Тип записи</typeparam>
+    public class CustomParser<T>
     {
-        public static IList<string> CsvHead;
+        public IList<string> CsvHead { get; private set; }
 
-        public static List<TR> ParseRecords(StreamReader reader)
+        private IRecordExtension<T> _extension;
+
+        public CustomParser(IRecordExtension<T> extension)
         {
-            var records = new List<TR>();
-            var data = CsvParser.ParseHeadAndTail(reader, TE.Delimiter, '"');
+            _extension = extension;
+        }
+
+        public List<T> ParseRecords(StreamReader reader)
+        {
+            var records = new List<T>();
+            var data = CsvParser.ParseHeadAndTail(reader, _extension.Delimiter, '"');
             CsvHead = data.Item1;
             var lines = data.Item2;
 
             foreach (var line in lines)
-                records.Add(TE.Deserialize(line));
+                records.Add(_extension.Deserialize(line));
             return records;
         }
     }

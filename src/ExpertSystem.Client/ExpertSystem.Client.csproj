@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ExpertSystem.Aggregator\ExpertSystem.Aggregator.csproj" />
     <ProjectReference Include="..\ExpertSystem.Common\ExpertSystem.Common.csproj" />
   </ItemGroup>
 

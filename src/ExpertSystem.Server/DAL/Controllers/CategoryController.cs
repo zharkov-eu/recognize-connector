@@ -7,10 +7,10 @@ namespace ExpertSystem.Server.DAL.Controllers
 	/// <summary>Класс для доступа к сущностям категорий</summary>
 	public class CategoryController
 	{
-		// Репозиторий
-		private CsvRepository<SocketGroup, CategoryParser> _categoryRepository;
+		// Репозиторий категорий
+		private CsvRepository<SocketGroup> _categoryRepository;
 
-		public CategoryController(CsvRepository<SocketGroup, CategoryParser> categoryRepository)
+		public CategoryController(CsvRepository<SocketGroup> categoryRepository)
 		{
 			_categoryRepository = categoryRepository;
 		}

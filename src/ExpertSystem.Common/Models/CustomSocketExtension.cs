@@ -6,7 +6,7 @@ using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Common.Models
 {
-    public class CustomSocketExtension
+    public static class CustomSocketExtension
     {
         public static readonly Type CustomSocketType = typeof(CustomSocket);
 
@@ -17,7 +17,7 @@ namespace ExpertSystem.Common.Models
         /// <summary>Преобразует разъём в CSV строку</summary>
         /// <param name="socket">Разъём</param>
         /// <returns>CSV cтрока на основании данных разъёма c предобпределённым разделителем</returns>
-        public override string Serialize(CustomSocket socket)
+        public static string Serialize(CustomSocket socket)
         {
             var socketType = typeof(CustomSocket);
             string result = "";
@@ -35,7 +35,7 @@ namespace ExpertSystem.Common.Models
         /// <summary>Десериализация CSV строки</summary>
         /// <param name="line">Строка</param>
         /// <returns>Разъём на основании переданной CSV строки</returns>
-        public override CustomSocket Deserialize(string line)
+        public static CustomSocket Deserialize(string line)
         {
             return Deserialize(line.Split(Delimiter));
         }

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using ExpertSystem.Common.Generated;
-using ExpertSystem.Common.Models;
-using ExpertSystem.Common.Parsers;
 using ExpertSystem.Server.DAL.Repositories;
 
 namespace ExpertSystem.Server.DAL.Controllers
@@ -10,10 +8,10 @@ namespace ExpertSystem.Server.DAL.Controllers
 	/// <summary>Класс для доступа к сущностям разъёмов</summary>
 	public class SocketController
 	{
-		// Репозиторий
-		private CsvRepository<CustomSocket, CustomParser<CustomSocket, CustomSocketExtension>, CustomSocketExtension> _socketRepository;
+		// Репозиторий разъёмов
+		private CsvRepository<CustomSocket> _socketRepository;
 
-		public SocketController(CsvRepository<CustomSocket, CustomParser<CustomSocket, CustomSocketExtension>, CustomSocketExtension> socketRepository)
+		public SocketController(CsvRepository<CustomSocket> socketRepository)
 		{
 			_socketRepository = socketRepository;
 		}

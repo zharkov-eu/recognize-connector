@@ -1,44 +1,23 @@
-﻿using ExpertSystem.Common.Generated;
-using ExpertSystem.Common.Models;
+﻿using ExpertSystem.Common.Models;
 
 namespace ExpertSystem.Server.DAL.Entities
 {
     /// <summary>Структура записей в WAL</summary>
-    /// <typeparam name="TR">Тип записи</typeparam>
-    /// <typeparam name="TE">Тип расширения</typeparam>
-    public class WalEntry<TR, TE>
+    /// <typeparam name="T">Тип записи</typeparam>
+    public class WalEntry<T>
     {
-        /// <summary>Парсинг строки WAL файла </summary>
-        /// <param name="line">Строка WAL файла</param>
-        /// <returns>Запись </returns>
-        public static WalEntry<TR, TE> ParseFromString(string line)
-        {
-            var parts = line.Split(Delimiter);
-            var action = (CsvDbAction) int.Parse(parts[0]);
-            var hashCode = int.Parse(parts[1]);
-            var socket = TE.Deserialize(parts[2]);
-            return new WalEntry<TR, TE>(action, hashCode, socket);
-        }
-
-        // Разделитель строки WAL-лога
-        private const string Delimiter = ":::";
+        // Расширение
+        private readonly IRecordExtension<T> _extension;
 
         internal readonly CsvDbAction Action;
         internal readonly int HashCode;
-        internal readonly CustomSocket Socket;
+        internal readonly T Record;
 
-        public WalEntry(CsvDbAction action, int hashCode, CustomSocket socket = null)
+        public WalEntry(CsvDbAction action, int hashCode, T record = default(T))
         {
             Action = action;
             HashCode = hashCode;
-            Socket = socket;
-        }
-
-        public override string ToString()
-        {
-            return Action + Delimiter + HashCode + Delimiter + (Socket != null
-                       ? TE.Serialize(Socket)
-                       : "");
+            Record = record;
         }
     }
 

@@ -13,7 +13,6 @@ namespace ExpertSystem.Server.Services
         public bool Debug;
     }
 
-    /// <inheritdoc />
     /// <summary>Вызов удалённых процедур для разъёмов</summary>
     public class SocketExchangeImpl : SocketExchange.SocketExchangeBase
     {
@@ -65,7 +64,7 @@ namespace ExpertSystem.Server.Services
         /// <param name="request">Запрос</param>
         /// <param name="context">Контекст</param>
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
-        public override Task<Empty> DeleteSocket(CustomSocket request, ServerCallContext context)
+        public override Task<Empty> DeleteSocket(CustomSocketIdentity request, ServerCallContext context)
         {
             var hashCode = _socketController.GetSocket(request.SocketName).Item1;
             _socketController.DeleteSocket(hashCode);
