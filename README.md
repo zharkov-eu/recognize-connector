@@ -7,6 +7,8 @@ Linux / MacOS X
 # Консоль 1:
 dotnet run --project ./src/ExpertSystem.Server/
 # Консоль 2:
+dotnet run --project ./src/ExpertSystem.Aggregator/
+# Консоль 3:
 dotnet run --project ./src/ExpertSystem.Client/
 ```
 Windows
@@ -15,6 +17,8 @@ Windows
 # Консоль 1:
 dotnet run --project .\src\ExpertSystem.Server\
 # Консоль 2:
+dotnet run --project .\src\ExpertSystem.Aggregator\
+# Консоль 3:
 dotnet run --project .\src\ExpertSystem.Client\
 ```
 

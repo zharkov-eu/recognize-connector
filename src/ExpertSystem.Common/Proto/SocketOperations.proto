@@ -2,9 +2,9 @@ syntax = "proto3";
 
 option csharp_namespace = "ExpertSystem.Common.Generated";
 
-import "SocketExchange.proto";
+import "SocketMessages.proto";
 
-package ExpertSystem;
+package ExpertSystem.SocketOperations;
 
 service SocketOperations {
     rpc SayHello (HelloMessage) returns (HelloMessage) {}

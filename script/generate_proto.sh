@@ -21,4 +21,4 @@ else
     PLUGIN=${HOME}/.nuget/packages/grpc.tools/1.14.1/tools/linux_x64/grpc_csharp_plugin
 fi
 
-$PROTOC -I${SRCDIR}/ExpertSystem.Common/Proto --csharp_out ${SRCDIR}/ExpertSystem.Common/Generated  ${SRCDIR}/ExpertSystem.Common/Proto/SocketExchange.proto ${SRCDIR}/ExpertSystem.Common/Proto/SocketOperations.proto --grpc_out ${SRCDIR}/ExpertSystem.Common/Generated --plugin=protoc-gen-grpc=$PLUGIN
+$PROTOC -I${SRCDIR}/ExpertSystem.Common/Proto --csharp_out ${SRCDIR}/ExpertSystem.Common/Generated ${SRCDIR}/ExpertSystem.Common/Proto/SocketMessages.proto ${SRCDIR}/ExpertSystem.Common/Proto/SocketExchange.proto ${SRCDIR}/ExpertSystem.Common/Proto/SocketOperations.proto --grpc_out ${SRCDIR}/ExpertSystem.Common/Generated --plugin=protoc-gen-grpc=$PLUGIN

@@ -2,7 +2,9 @@ syntax = "proto3";
 
 option csharp_namespace = "ExpertSystem.Common.Generated";
 
-package ExpertSystem;
+import "SocketMessages.proto";
+
+package ExpertSystem.SocketExchange;
 
 service SocketExchange {
     rpc SayHello (HelloMessage) returns (HelloMessage) {}
@@ -16,44 +18,4 @@ service SocketExchange {
     rpc AddToSocketGroup (SocketGroup) returns (SocketGroup) {}
     rpc RemoveSocketFromGroup (SocketGroupIdentity) returns (SocketGroup) {}
     rpc DeleteSocketGroup (SocketGroupIdentity) returns (Empty) {}
-}
-
-message Empty {}
-
-message HelloMessage {
-    string Version = 1;
-}
-
-message CustomSocket {
-    string Color = 1;
-    string ContactMaterial = 2;
-    string ContactPlating = 3;
-    string Gender = 4;
-    string HousingColor = 5;
-    string HousingMaterial = 6;
-    string Material = 7;
-    string MountingStyle = 8;
-    int32 NumberOfContacts = 9;
-    int32 NumberOfPositions = 10;
-    int32 NumberOfRows = 11;
-    string Orientation = 12;
-    float PinPitch = 13;
-    float SizeDiameter = 14;
-    float SizeHeight = 15;
-    float SizeLength = 16;
-    float SizeWidth = 17;
-    string SocketName = 18;
-}
-
-message CustomSocketIdentity {
-    string SocketName = 1;
-}
-
-message SocketGroup {
-    string Name = 1;
-    repeated string SocketName = 2; 
-}
-
-message SocketGroupIdentity {
-    string Name = 1;
 }
