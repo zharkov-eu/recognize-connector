@@ -5,7 +5,6 @@ using Grpc.Core;
 using ExpertSystem.Aggregator.Processors;
 using ExpertSystem.Aggregator.RulesGenerators;
 using ExpertSystem.Aggregator.Services;
-using ExpertSystem.Client.Services;
 using ExpertSystem.Common;
 using ExpertSystem.Common.Generated;
 

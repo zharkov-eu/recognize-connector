@@ -81,7 +81,7 @@ namespace ExpertSystem.Aggregator.Services
             throw new RpcException(new Status(StatusCode.Unimplemented, ""));
         }
 
-        public override Task<SocketGroup> AddToSocketGroup(SocketGroup request, ServerCallContext context)
+        public Task<SocketGroup> AddToSocketGroup(SocketGroup request, ServerCallContext context)
         {
             throw new RpcException(new Status(StatusCode.Unimplemented, ""));
         }

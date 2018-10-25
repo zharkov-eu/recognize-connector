@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ExpertSystem.Common.Generated;
 
-namespace ExpertSystem.Client.Services
+namespace ExpertSystem.Aggregator.Services
 {
     public class SocketCache : IEnumerable<CustomSocket>
     {

@@ -24,7 +24,7 @@ namespace ExpertSystem.Client
 
             try
             {
-                var message = Client.SayHello(new HelloMessage {Version = Version});
+                var message = Client.SayHello(new HelloMessage { Version = Version });
                 Console.WriteLine($"Connected to SocketOperations v{message.Version} on 127.0.0.1:50052");
             }
             catch
@@ -36,7 +36,7 @@ namespace ExpertSystem.Client
 
         private static void Main()
         {
-            var consoleProgram = new ConsoleProgram(new ProgramOptions {Debug = true});
+            var consoleProgram = new ConsoleProgram(new ProgramOptions { Debug = true });
             consoleProgram.Run();
         }
     }

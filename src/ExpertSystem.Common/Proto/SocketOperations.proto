@@ -12,7 +12,7 @@ service SocketOperations {
     rpc FindSocketsByParams (CustomSocket) returns (stream CustomSocket) {}
     rpc FindSocketByIdentity (CustomSocketIdentity) returns (CustomSocket) {}
     rpc IsParamsMatchSocket (CustomSocket) returns (CustomSocket) {}
-    rpc FuzzyGetAmperageCircuitByParams (FuzzyCustomSocketRequest) returns (stream CustomSocket) {}
+    rpc FuzzyGetAmperageCircuitByParams (FuzzyCustomSocketRequest) returns (stream CustomSocketAmperage) {}
 
     rpc GetSocketGroups (Empty) returns (stream SocketGroup) {}
     rpc GetSocketsInGroup (SocketGroupIdentity) returns (stream CustomSocket) {}
