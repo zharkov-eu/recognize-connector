@@ -8,10 +8,11 @@ package ExpertSystem.SocketOperations;
 
 service SocketOperations {
     rpc SayHello (HelloMessage) returns (HelloMessage) {}
-    
+
     rpc FindSocketsByParams (CustomSocket) returns (stream CustomSocket) {}
     rpc FindSocketByIdentity (CustomSocketIdentity) returns (CustomSocket) {}
     rpc IsParamsMatchSocket (CustomSocket) returns (CustomSocket) {}
+    rpc FuzzyGetAmperageCircuitByParams (FuzzyCustomSocketRequest) returns (stream CustomSocket) {}
 
     rpc GetSocketGroups (Empty) returns (stream SocketGroup) {}
     rpc GetSocketsInGroup (SocketGroupIdentity) returns (stream CustomSocket) {}
@@ -21,8 +22,30 @@ service SocketOperations {
     rpc UpsertSocket (CustomSocket) returns (CustomSocket) {}
     rpc DeleteSocket (CustomSocketIdentity) returns (Empty) {}
     rpc AddSocketGroup (SocketGroupIdentity) returns (SocketGroup) {}
-    rpc AddToSocketGroup (SocketGroup) returns (SocketGroup) {}
+    rpc AddToSocketGroup (CustomSocketIdentityJoinGroup) returns (SocketGroup) {}
+    rpc RemoveFromSocketGroup (CustomSocketIdentityJoinGroup) returns (SocketGroup) {}
     rpc DeleteSocketGroup (SocketGroupIdentity) returns (Empty) {}
+}
+
+enum FuzzyMethod {
+    MAMDANI = 0;
+    SUGENO = 1;
+    NEURAL = 2;
+}
+
+message FuzzyCustomSocket {
+    int32 NumberOfContacts = 1;
+    float SocketLength = 2;
+    float SocketWidth = 3;
+}
+
+message FuzzyCustomSocketRequest {
+    FuzzyCustomSocket socket = 1;
+    FuzzyMethod method = 2;
+}
+
+message CustomSocketAmperage {
+    double AmperageCircuit = 1;
 }
 
 message CustomSocketJoinGroup {
