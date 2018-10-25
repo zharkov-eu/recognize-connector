@@ -2,7 +2,6 @@ using Xunit;
 using System.Collections.Generic;
 using ExpertSystem.Aggregator.Processors;
 using ExpertSystem.Aggregator.RulesGenerators;
-using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
 using ExpertSystem.Tests.Parsers;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
@@ -11,18 +10,16 @@ namespace ExpertSystem.Tests.Processors
 {
     public class ProductionProcessorTest
     {
-        private readonly CustomSocket _socket;
         private readonly ProductionProcessor _productionProcessor;
 
         public ProductionProcessorTest()
         {
-            var socketParser = new CustomParserTest();
-            var sockets = socketParser.GetSockets();
+            var recordParser = new CsvRecordParserTest();
+            var sockets = recordParser.GetSockets();
 
             var rulesGenerator = new ProductionRulesGenerator();
             var rulesGraph = rulesGenerator.GenerateRules(sockets);
 
-            _socket = socketParser.TestSocket();
             _productionProcessor = new ProductionProcessor(rulesGraph, new ProcessorOptions {Debug = false});
         }
 

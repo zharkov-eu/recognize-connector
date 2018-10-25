@@ -1,15 +1,25 @@
 ﻿using Xunit;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Parsers;
+using ExpertSystem.Server.DAL.Serializers;
 
 namespace ExpertSystem.Tests.Parsers
 {
-    public class SocketParserTest
+    public class CsvRecordParserTest
     {
-        public CustomSocket TestSocket()
+        private readonly CsvRecordParser<CustomSocket> _socketParser;
+        private readonly CsvRecordParser<SocketGroup> _socketGroupParser;
+
+        public CsvRecordParserTest()
+        {
+            _socketParser = new CsvRecordParser<CustomSocket>(new CustomSocketSerializer());
+            _socketGroupParser = new CsvRecordParser<SocketGroup>(new SocketGroupSerializer());
+        }
+
+        public static CustomSocket TestSocket()
         {
             return new CustomSocket
             {
@@ -31,6 +41,15 @@ namespace ExpertSystem.Tests.Parsers
                 SizeLength = 0.0145f,
                 SizeHeight = 0.00415f,
                 SizeWidth = 0.0034f
+            };
+        }
+
+        public static SocketGroup TestGroup()
+        {
+            return new SocketGroup
+            {
+                Name = "Audio",
+                SocketName = {"5145167-4", "XF2L-0425-1A"}
             };
         }
 
@@ -83,7 +102,16 @@ namespace ExpertSystem.Tests.Parsers
 
 
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(csvSnapshot)))
-                return sockets = SocketParser.ParseSockets(new StreamReader(stream));
+                return _socketParser.ParseRecords(new StreamReader(stream));
+        }
+
+        public List<SocketGroup> GetSocketGroups()
+        {
+            var csvSnapshot = "group_name;sockets;\n";
+            csvSnapshot += "Audio;5145167-4;XF2L-0425-1A;";
+
+            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(csvSnapshot)))
+                return _socketGroupParser.ParseRecords(new StreamReader(stream));
         }
 
         [Fact]
@@ -93,6 +121,15 @@ namespace ExpertSystem.Tests.Parsers
             var socket = TestSocket();
 
             Assert.True(socket.Equals(sockets[0]), "Данные разъема должны парситься правильно");
+        }
+
+        [Fact]
+        public void SocketParser_GetSocketGroups()
+        {
+            var socketGroups = GetSocketGroups();
+            var socketGroup = TestGroup();
+
+            Assert.True(socketGroup.Equals(socketGroups[0]), "Данные группы разъемов должны парситься правильно");
         }
     }
 }

@@ -1,24 +1,18 @@
+using Xunit;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
-using Xunit;
-using Xunit.Abstractions;
 
 namespace ExpertSystem.Tests.Models
 {
     /// <summary>Класс тестирования методов StorageCustomSocket</summary>
     public class CustomSocketExtensionTest
     {
-        // Для вывода данных теста в консоль
-        private readonly ITestOutputHelper _output;
-
         // Тестовые данные
         private readonly string _testLine;
         private readonly CustomSocket _testSocket;
 
-        public CustomSocketExtensionTest(ITestOutputHelper output)
+        public CustomSocketExtensionTest()
         {
-            _output = output;
-
             // Заполняем тестовые данные
             _testLine =
                 "5747871-8;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.008128;0.012548;";

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Server.DAL.Controllers;
-using ExpertSystem.Server.DAL.Repositories;
 
 namespace ExpertSystem.Server.Services
 {
@@ -19,14 +18,14 @@ namespace ExpertSystem.Server.Services
         private readonly SocketExchangeOptions _options;
 
         // Контроллеры
-        private readonly SocketController _socketController;
-        private readonly CategoryController _categoryController;
+        private readonly CustomSocketController _socketController;
+        private readonly SocketGroupController _socketGroupController;
 
-        public SocketExchangeImpl(SocketController socketController, CategoryController categoryController, 
+        public SocketExchangeImpl(CustomSocketController socketController, SocketGroupController socketGroupController,
             SocketExchangeOptions options)
         {
             _socketController = socketController;
-            _categoryController = categoryController;
+            _socketGroupController = socketGroupController;
             _options = options;
         }
 

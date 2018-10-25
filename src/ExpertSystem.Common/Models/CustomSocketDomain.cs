@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ExpertSystem.Common.Models
 {
-    public class CustomSocketDomain
+    public static class CustomSocketDomain
     {
         public enum SocketDomain
         {

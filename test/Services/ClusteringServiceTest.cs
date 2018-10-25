@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using ExpertSystem.Aggregator.Services;
 using Xunit;
 using Xunit.Abstractions;
-using ExpertSystem.Server.Services;
+using ExpertSystem.Aggregator.Services;
 
 namespace ExpertSystem.Tests.Services
 {

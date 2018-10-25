@@ -1,14 +1,9 @@
-﻿using ExpertSystem.Common.Models;
-
-namespace ExpertSystem.Server.DAL.Entities
+﻿namespace ExpertSystem.Server.DAL.Entities
 {
     /// <summary>Структура записей в WAL</summary>
     /// <typeparam name="T">Тип записи</typeparam>
     public class WalEntry<T>
     {
-        // Расширение
-        private readonly IRecordExtension<T> _extension;
-
         internal readonly CsvDbAction Action;
         internal readonly int HashCode;
         internal readonly T Record;

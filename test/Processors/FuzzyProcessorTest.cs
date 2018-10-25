@@ -1,8 +1,8 @@
+using Xunit;
+using Xunit.Abstractions;
 using ExpertSystem.Aggregator.Processors;
 using ExpertSystem.Aggregator.RulesGenerators;
 using ExpertSystem.Common.Models;
-using Xunit;
-using Xunit.Abstractions;
 using ExpertSystem.Tests.Parsers;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
@@ -16,9 +16,9 @@ namespace ExpertSystem.Tests.Processors
         public FuzzyRulesProcessorTest(ITestOutputHelper outputHelper)
         {
             var generator = new FuzzyRulesGenerator();
-            var socketParser = new CustomParserTest();
+            var recordParser = new CsvRecordParserTest();
 
-            var sockets = socketParser.GetSockets();
+            var sockets = recordParser.GetSockets();
             var fuzzyDomains = generator.GetFuzzyDomains(sockets);
             var fuzzyFacts = generator.GetFuzzyFacts(fuzzyDomains, sockets);
 

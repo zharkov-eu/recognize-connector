@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using ExpertSystem.Common.Models;
 using ExpertSystem.Common.Parsers;
 using ExpertSystem.Server.DAL.Entities;
-using ExpertSystem.Server.DAL.Extensions;
+using ExpertSystem.Server.DAL.Serializers;
 
 namespace ExpertSystem.Server.DAL.Repositories
 {
     /// <summary>Структура опций CSV репозитория</summary>
     public struct CsvRepositoryOptions
     {
-        // Имя Свойства-идентификатора
+        // Имя свойства-идентификатора
         public string IdPropertyName;
 
         // Название файла CSV
@@ -30,18 +29,18 @@ namespace ExpertSystem.Server.DAL.Repositories
     {
         // Опции работы CSV репозитория
         private readonly CsvRepositoryOptions _options;
-        
+
         // Поток ввода в WAL-лог файл
         private readonly FileStream _walStream;
 
         // Парсер
-        private readonly CustomParser<T> _parser; 
+        private readonly CsvRecordParser<T> _parser;
 
-        // Расширение для работы с записи
-        private readonly IRecordExtension<T> _recordExtension;
+        // Сериализатор записи
+        private readonly ICsvRecordSerializer<T> _recordSerializer;
 
-        // Расширение для работы с WAL-логом 
-        private readonly WalEntryExtension<T> _walExtension;
+        // Сериализатор WAL-лога 
+        private readonly WalEntrySerializer<T> _walSerializer;
 
         // Тип записи
         private readonly Type _recordType = typeof(T);
@@ -49,20 +48,21 @@ namespace ExpertSystem.Server.DAL.Repositories
         // Записи
         private readonly Dictionary<int, T> _records = new Dictionary<int, T>();
 
-        // Список доступных записей по имени
-        private Dictionary<string, int> _recordsByName = new Dictionary<string, int>();
+        // Список доступных записей по идентификатору
+        private readonly Dictionary<string, int> _recordsByName = new Dictionary<string, int>();
 
         /// <summary>Конструктор репозитория</summary>
         /// <param name="options">Опции репозитория</param>
-        /// <param name="extension">Расшерение данного типа</param>
+        /// <param name="serializer">Расшерение данного типа</param>
         /// <param name="parser">Парсер данного типа</param>
-        public CsvRepository(CsvRepositoryOptions options, IRecordExtension<T> extension, CustomParser<T> parser)
+        public CsvRepository(ICsvRecordSerializer<T> serializer, CsvRecordParser<T> parser,
+            CsvRepositoryOptions options)
         {
-            _options = options;
-            _recordExtension = extension;
-            _walExtension = new WalEntryExtension<T>(extension);
+            _recordSerializer = serializer;
+            _walSerializer = new WalEntrySerializer<T>(serializer);
             _parser = parser;
-            
+            _options = options;
+
             // Проверка существования CSV файла
             if (!File.Exists(_options.CsvFileName))
                 throw new FileNotFoundException($"Файл {_options.CsvFileName} не найден");
@@ -97,7 +97,7 @@ namespace ExpertSystem.Server.DAL.Repositories
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    var entry = _walExtension.Deserialize(line);
+                    var entry = _walSerializer.Deserialize(line);
                     switch (entry.Action)
                     {
                         case CsvDbAction.Insert:
@@ -123,9 +123,9 @@ namespace ExpertSystem.Server.DAL.Repositories
             FileUtils.ClearFile(_options.CsvFileName);
             using (var writer = new StreamWriter(File.OpenWrite(_options.CsvFileName)))
             {
-                writer.WriteLine(string.Join(CustomSocketExtension.Delimiter, _parser.CsvHead));
+                writer.WriteLine(string.Join(_recordSerializer.Delimiter, _parser.CsvHead));
                 foreach (var record in _records.Values)
-                    writer.WriteLine(_recordExtension.Serialize(record));
+                    writer.WriteLine(_recordSerializer.Serialize(record));
             }
 
             return this;
@@ -143,9 +143,7 @@ namespace ExpertSystem.Server.DAL.Repositories
         /// <returns>Кортеж из хэш кода и записи с переданым именем</returns>
         public Tuple<int, T> Select(string recordName)
         {
-            if (_recordsByName.TryGetValue(recordName, out var hashCode))
-                return new Tuple<int, T>(hashCode, _records[hashCode]);
-            return null;
+            return _recordsByName.TryGetValue(recordName, out var hashCode) ? new Tuple<int, T>(hashCode, _records[hashCode]) : null;
         }
 
         /// <summary>Выполнить действие вставки</summary>
@@ -208,9 +206,7 @@ namespace ExpertSystem.Server.DAL.Repositories
         {
             if (!File.Exists(path)) return;
             using (var fs = File.Open(path, FileMode.Open))
-            {
                 fs.SetLength(0);
-            }
         }
     }
 }

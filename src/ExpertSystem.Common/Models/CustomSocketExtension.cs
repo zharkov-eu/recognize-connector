@@ -8,10 +8,8 @@ namespace ExpertSystem.Common.Models
 {
     public static class CustomSocketExtension
     {
-        public static readonly Type CustomSocketType = typeof(CustomSocket);
+        public static readonly Type SocketType = typeof(CustomSocket);
 
-        // TODO: Переместить CustomSocketExtension::Delimiter в RecordExtension
-        // Разделитель CSV файла
         public static readonly char Delimiter = ';';
 
         /// <summary>Преобразует разъём в CSV строку</summary>

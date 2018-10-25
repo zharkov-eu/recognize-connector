@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Grpc.Core;
 using ExpertSystem.Aggregator.Processors;
 using ExpertSystem.Aggregator.RulesGenerators;
 using ExpertSystem.Aggregator.Services;
 using ExpertSystem.Client.Services;
 using ExpertSystem.Common;
 using ExpertSystem.Common.Generated;
-using Grpc.Core;
 
 namespace ExpertSystem.Aggregator
 {
@@ -56,7 +56,7 @@ namespace ExpertSystem.Aggregator
             // Нейро-нечеткий вывод
             var neuralNetwork = neuralRulesGenerator.GetNeuralNetwork(_socketCache.GetAll());
 
-            Server = new Server
+            Server = new Grpc.Core.Server
             {
                 Services =
                 {

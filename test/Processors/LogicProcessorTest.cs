@@ -1,7 +1,7 @@
+using Xunit;
 using ExpertSystem.Aggregator.Processors;
 using ExpertSystem.Aggregator.RulesGenerators;
 using ExpertSystem.Common.Models;
-using Xunit;
 using ExpertSystem.Tests.Parsers;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
@@ -13,8 +13,8 @@ namespace ExpertSystem.Tests.Processors
 
         public LogicProcessorTest()
         {
-            var socketParser = new CustomParserTest();
-            var sockets = socketParser.GetSockets();
+            var recordParser = new CsvRecordParserTest();
+            var sockets = recordParser.GetSockets();
 
             var rulesGenerator = new LogicRulesGenerator();
             var logicRules = rulesGenerator.GenerateRules(sockets);
