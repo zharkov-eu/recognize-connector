@@ -1,9 +1,13 @@
 using System;
+using System.Linq;
 using Grpc.Core;
 using System.Threading.Tasks;
+using ExpertSystem.Aggregator.Exceptions;
 using ExpertSystem.Aggregator.Processors;
 using ExpertSystem.Aggregator.RulesGenerators;
 using ExpertSystem.Common.Generated;
+using ExpertSystem.Common.Models;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Aggregator.Services
 {
@@ -57,41 +61,92 @@ namespace ExpertSystem.Aggregator.Services
         public override Task<HelloMessage> SayHello(HelloMessage request, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'SayHello': '{request}' from {context.Peer}");
+
             return Task.FromResult(new HelloMessage {Version = _options.Version});
         }
 
-        public override Task FindSocketsByParams(CustomSocket request, IServerStreamWriter<CustomSocket> responseStream,
+        public override async Task FindSocketsByParams(CustomSocket request,
+            IServerStreamWriter<CustomSocket> responseStream,
             ServerCallContext context)
         {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            DebugWrite($"RpcCall 'FindSocketsByParams': '{request}' from {context.Peer}");
+
+            var socketNames = _productionProcessor.ForwardProcessing(SocketToFactSet(request));
+            var sockets = socketNames.Select(p => _socketCache.Get(p));
+
+            foreach (var socket in sockets)
+                await responseStream.WriteAsync(socket);
         }
 
         public override Task<CustomSocket> FindSocketByIdentity(CustomSocketIdentity request, ServerCallContext context)
         {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            DebugWrite($"RpcCall 'FindSocketByIdentity': '{request}' from {context.Peer}");
+
+            try
+            {
+                var factSet = _productionProcessor.BackProcessing(request.SocketName);
+                return Task.FromResult(FactSetToSocket(factSet));
+            }
+            catch (Exception exception)
+            {
+                if (exception is EntityNotFoundException)
+                    throw new RpcException(new Status(StatusCode.NotFound, exception.Message));
+                throw new RpcException(new Status(StatusCode.Aborted, "BackProcessing throws unhandled exception"));
+            }
         }
 
         public override Task<CustomSocket> IsParamsMatchSocket(CustomSocket request, ServerCallContext context)
         {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            DebugWrite($"RpcCall 'IsParamsMatchSocket': '{request}' from {context.Peer}");
+
+            if (request.SocketName == null)
+                throw new RpcException(new Status(StatusCode.FailedPrecondition, "SocketName must be provided"));
+
+            var isResolved = _logicProcessor.Processing(SocketToFactSet(request), request.SocketName);
+            return isResolved
+                ? Task.FromResult(_socketCache.Get(request.SocketName))
+                : Task.FromResult(new CustomSocket());
         }
 
-        public override Task GetSocketGroups(Empty request, IServerStreamWriter<SocketGroup> responseStream,
+        public override async Task GetSocketGroups(Empty request, IServerStreamWriter<SocketGroup> responseStream,
             ServerCallContext context)
         {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            DebugWrite($"RpcCall 'GetSocketGroups': '{request}' from {context.Peer}");
+
+            foreach (var socketGroup in _socketGroupCache.GetAll())
+                await responseStream.WriteAsync(socketGroup);
         }
 
-        public override Task GetSocketsInGroup(SocketGroupIdentity request,
+        public override async Task GetSocketsInGroup(SocketGroupIdentity request,
             IServerStreamWriter<CustomSocket> responseStream, ServerCallContext context)
         {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            DebugWrite($"RpcCall 'GetSocketsInGroup': '{request}' from {context.Peer}");
+
+            if (!_socketGroupCache.EntityExists(request.GroupName))
+                throw new RpcException(new Status(StatusCode.NotFound, $"SocketGroup {request.GroupName} not found"));
+            var socketGroup = _socketGroupCache.Get(request.GroupName);
+
+            foreach (var socketName in socketGroup.SocketNames)
+                await responseStream.WriteAsync(_socketCache.Get(socketName));
         }
 
         public override Task<CustomSocket> CheckSocketInGroup(CustomSocketIdentityJoinGroup request,
             ServerCallContext context)
         {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            DebugWrite($"RpcCall 'CheckSocketInGroup': '{request}' from {context.Peer}");
+
+            if (!_socketGroupCache.EntityExists(request.Group.GroupName))
+                throw new RpcException(
+                    new Status(StatusCode.NotFound, $"SocketGroup {request.Group.GroupName} not found")
+                );
+            var socketGroup = _socketGroupCache.Get(request.Group.GroupName);
+
+            if (!socketGroup.SocketNames.Contains(request.Socket.SocketName))
+                throw new RpcException(new Status(StatusCode.NotFound,
+                    $"Socket {request.Socket.SocketName} in SocketGroup {request.Group.GroupName} not found")
+                );
+
+            return Task.FromResult(_socketCache.Get(request.Socket.SocketName));
         }
 
         public override Task FindSocketsByParamsInGroup(CustomSocketJoinGroup request,
@@ -103,11 +158,12 @@ namespace ExpertSystem.Aggregator.Services
         public override Task<CustomSocket> UpsertSocket(CustomSocket request, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'UpsertSocket': '{request}' from {context.Peer}");
+
             var socket = new CustomSocket();
             if (_socketCache.EntityExists(request.SocketName))
                 socket = _socketCache.Get(request.SocketName);
             socket.MergeFrom(request);
-            
+
             _client.UpsertSocket(socket);
             _socketCache.Upsert(socket);
 
@@ -117,6 +173,7 @@ namespace ExpertSystem.Aggregator.Services
         public override Task<Empty> DeleteSocket(CustomSocketIdentity request, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'DeleteSocket': '{request}' from {context.Peer}");
+
             if (!_socketCache.EntityExists(request.SocketName))
                 throw new RpcException(new Status(StatusCode.NotFound, $"Socket {request.SocketName} not found"));
             _client.DeleteSocket(new CustomSocketIdentity {SocketName = request.SocketName});
@@ -126,17 +183,23 @@ namespace ExpertSystem.Aggregator.Services
 
         public override Task<SocketGroup> AddSocketGroup(SocketGroupIdentity request, ServerCallContext context)
         {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
-        }
+            DebugWrite($"RpcCall 'AddSocketGroup': '{request}' from {context.Peer}");
 
-        public Task<SocketGroup> AddToSocketGroup(SocketGroup request, ServerCallContext context)
-        {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            if (_socketGroupCache.EntityExists(request.GroupName))
+                throw new RpcException(
+                    new Status(StatusCode.AlreadyExists, $"SocketGroup {request.GroupName} already exists")
+                );
+
+            var socketGroup = _client.AddSocketGroup(new SocketGroupIdentity {GroupName = request.GroupName});
+            _socketGroupCache.Add(socketGroup);
+
+            return Task.FromResult(socketGroup);
         }
 
         public override Task<Empty> DeleteSocketGroup(SocketGroupIdentity request, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'DeleteSocketGroup': '{request}' from {context.Peer}");
+
             if (!_socketGroupCache.EntityExists(request.GroupName))
                 throw new RpcException(new Status(StatusCode.NotFound, $"SocketGroup {request.GroupName} not found"));
             _client.DeleteSocketGroup(new SocketGroupIdentity {GroupName = request.GroupName});
@@ -148,6 +211,27 @@ namespace ExpertSystem.Aggregator.Services
         {
             if (_options.Debug)
                 Console.WriteLine(message);
+        }
+
+        private static FactSet SocketToFactSet(CustomSocket socket)
+        {
+            var factSet = new FactSet();
+            foreach (var domain in GetSocketDomains())
+            {
+                var value = CustomSocketExtension.SocketType.GetProperty(domain.ToString()).GetValue(socket);
+                if (value != SocketDefaultValue[SocketDomainType[domain]])
+                    factSet.Add(new Fact(domain, value));
+            }
+
+            return factSet;
+        }
+
+        private static CustomSocket FactSetToSocket(FactSet factSet)
+        {
+            var socket = new CustomSocket();
+            foreach (var fact in factSet)
+                CustomSocketExtension.SocketType.GetProperty(fact.Domain.ToString()).SetValue(socket, fact.Value);
+            return socket;
         }
     }
 }

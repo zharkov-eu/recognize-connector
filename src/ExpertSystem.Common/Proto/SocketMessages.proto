@@ -35,7 +35,7 @@ message CustomSocketIdentity {
 
 message SocketGroup {
     string GroupName = 1;
-    repeated string SocketName = 2;
+    repeated string SocketNames = 2;
 }
 
 message SocketGroupIdentity {

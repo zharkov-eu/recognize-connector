@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using ExpertSystem.Aggregator.Exceptions;
 using ExpertSystem.Aggregator.Models.Graph;
 using ExpertSystem.Common.Models;
 
@@ -82,7 +82,7 @@ namespace ExpertSystem.Aggregator.Processors
             }
 
             if (targetSocket == null)
-                throw new Exception("Разъем '{" + socketName + "}' не найден");
+                throw new EntityNotFoundException("Разъем '{" + socketName + "}' не найден");
 
             // Разворачиваем лист правил
             DebugWrite("Разворачиваем лист правил");
