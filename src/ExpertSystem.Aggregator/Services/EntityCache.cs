@@ -12,7 +12,7 @@ namespace ExpertSystem.Aggregator.Services
     }
 
     public class EntityCache<T> : IEnumerable<T>
-        where T : IDeepCloneable<T>
+        where T : IMessage<T>
     {
         private readonly Type _entityType = typeof(T);
         private readonly EntityCacheOptions _options;
@@ -49,6 +49,15 @@ namespace ExpertSystem.Aggregator.Services
             if (!EntityExists(id))
                 throw new Exception($"Entity {id} not exists");
             _cache[id] = entity;
+        }
+
+        public void Upsert(T entity)
+        {
+            var id = GetEntityId(entity);
+            if (EntityExists(id))
+                Update(id, entity);
+            else
+                Add(entity);
         }
 
         public void Remove(string id)

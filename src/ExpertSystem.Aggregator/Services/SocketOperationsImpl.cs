@@ -102,7 +102,16 @@ namespace ExpertSystem.Aggregator.Services
 
         public override Task<CustomSocket> UpsertSocket(CustomSocket request, ServerCallContext context)
         {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            DebugWrite($"RpcCall 'UpsertSocket': '{request}' from {context.Peer}");
+            var socket = new CustomSocket();
+            if (_socketCache.EntityExists(request.SocketName))
+                socket = _socketCache.Get(request.SocketName);
+            socket.MergeFrom(request);
+            
+            _client.UpsertSocket(socket);
+            _socketCache.Upsert(socket);
+
+            return Task.FromResult(socket);
         }
 
         public override Task<Empty> DeleteSocket(CustomSocketIdentity request, ServerCallContext context)
@@ -127,7 +136,12 @@ namespace ExpertSystem.Aggregator.Services
 
         public override Task<Empty> DeleteSocketGroup(SocketGroupIdentity request, ServerCallContext context)
         {
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            DebugWrite($"RpcCall 'DeleteSocketGroup': '{request}' from {context.Peer}");
+            if (!_socketGroupCache.EntityExists(request.GroupName))
+                throw new RpcException(new Status(StatusCode.NotFound, $"SocketGroup {request.GroupName} not found"));
+            _client.DeleteSocketGroup(new SocketGroupIdentity {GroupName = request.GroupName});
+            _socketGroupCache.Remove(request.GroupName);
+            return Task.FromResult(new Empty());
         }
 
         private void DebugWrite(string message)
