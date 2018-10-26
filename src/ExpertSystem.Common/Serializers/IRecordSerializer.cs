@@ -1,4 +1,4 @@
-namespace ExpertSystem.Server.DAL.Serializers
+namespace ExpertSystem.Common.Serializers
 {
     /// <summary>Интерфейс сериализации над CSV-записью</summary>
     /// <typeparam name="T">Тип записи</typeparam>

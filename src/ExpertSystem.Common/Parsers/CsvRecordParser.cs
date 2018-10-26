@@ -1,6 +1,6 @@
-using System.IO;
 using System.Collections.Generic;
-using ExpertSystem.Server.DAL.Serializers;
+using System.IO;
+using ExpertSystem.Common.Serializers;
 
 namespace ExpertSystem.Common.Parsers
 {

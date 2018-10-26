@@ -4,9 +4,9 @@ using Grpc.Core;
 using ExpertSystem.Common;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Parsers;
-using ExpertSystem.Server.DAL.Controllers;
 using ExpertSystem.Server.DAL.Repositories;
 using ExpertSystem.Server.DAL.Serializers;
+using ExpertSystem.Server.DAL.Services;
 using ExpertSystem.Server.Services;
 
 namespace ExpertSystem.Server
@@ -27,7 +27,7 @@ namespace ExpertSystem.Server
             };
             var socketsRepository =
                 new CsvRepository<CustomSocket>(socketSerializer, socketParser, socketOptions).Sync();
-            var socketController = new CustomSocketController(socketsRepository);
+            var socketService = new SocketService(socketsRepository);
 
             var socketGroupSerializer = new SocketGroupSerializer();
             var socketGroupParser = new CsvRecordParser<SocketGroup>(socketGroupSerializer);
@@ -39,10 +39,10 @@ namespace ExpertSystem.Server
             };
             var socketGroupRepository =
                 new CsvRepository<SocketGroup>(socketGroupSerializer, socketGroupParser, socketGroupOptions).Sync();
-            var socketGroupController = new SocketGroupController(socketGroupRepository);
+            var socketGroupService = new GroupService(socketGroupRepository);
 
             var socketExchangeOptions = new SocketExchangeOptions {Version = Options.Version, Debug = options.Debug};
-            var socketExchange = new SocketExchangeImpl(socketController, socketGroupController, socketExchangeOptions);
+            var socketExchange = new SocketExchangeImpl(socketService, socketGroupService, socketExchangeOptions);
 
             Server = new Grpc.Core.Server
             {

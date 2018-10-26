@@ -1,3 +1,4 @@
+using ExpertSystem.Common.Serializers;
 using ExpertSystem.Server.DAL.Entities;
 
 namespace ExpertSystem.Server.DAL.Serializers

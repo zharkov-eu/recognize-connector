@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Server.DAL.Repositories;
 
-namespace ExpertSystem.Server.DAL.Controllers
+namespace ExpertSystem.Server.DAL.Services
 {
     /// <summary>Класс для доступа к сущностям разъёмов</summary>
-    public class CustomSocketController
+    public class SocketService
     {
-        private CsvRepository<CustomSocket> _socketRepository;
+        private readonly CsvRepository<CustomSocket> _socketRepository;
 
-        public CustomSocketController(CsvRepository<CustomSocket> socketRepository)
+        public SocketService(CsvRepository<CustomSocket> socketRepository)
         {
             _socketRepository = socketRepository;
         }
@@ -19,7 +19,7 @@ namespace ExpertSystem.Server.DAL.Controllers
         /// <returns>Список доступных разъёмов</returns>
         public List<CustomSocket> GetSockets()
         {
-            throw new NotImplementedException();
+            return _socketRepository.GetAllRecords();
         }
 
         /// <summary>Получить разъём</summary>
@@ -27,7 +27,7 @@ namespace ExpertSystem.Server.DAL.Controllers
         /// <returns>Хэш код и разъём</returns>
         public Tuple<int, CustomSocket> GetSocket(string socketName)
         {
-            throw new NotImplementedException();
+            return _socketRepository.Select(socketName);
         }
 
         /// <summary>Вставить новый разъём</summary>
@@ -35,23 +35,23 @@ namespace ExpertSystem.Server.DAL.Controllers
         /// <returns>Вставленный разъём</returns>
         public CustomSocket InsertSocket(CustomSocket socket)
         {
-            throw new NotImplementedException();
+            return _socketRepository.Insert(socket);
         }
 
         /// <summary>Обновить существующий разъём</summary>
         /// <param name="hashCode">Хэш код разъёма</param>
         /// <param name="socket">Обновлённый разъём</param>
-        /// <returns></returns>
+        /// <returns>Обновлённый разъём</returns>
         public CustomSocket UpdateSocket(int hashCode, CustomSocket socket)
         {
-            throw new NotImplementedException();
+            return _socketRepository.Update(hashCode, socket);
         }
 
         /// <summary>Удалить существующий разъём</summary>
-        /// <param name="hashCode">Хэш код разъма</param>
-        public void DeleteSocket(int hashCode)
+        /// <param name="socketName">Имя разъма</param>
+        public void DeleteSocket(string socketName)
         {
-            throw new NotImplementedException();
+            _socketRepository.Delete(socketName);
         }
     }
 }

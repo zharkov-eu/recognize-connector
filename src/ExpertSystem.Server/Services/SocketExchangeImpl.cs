@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using ExpertSystem.Common.Generated;
-using ExpertSystem.Server.DAL.Controllers;
+using ExpertSystem.Server.DAL.Services;
 
 namespace ExpertSystem.Server.Services
 {
@@ -12,20 +12,21 @@ namespace ExpertSystem.Server.Services
         public bool Debug;
     }
 
+    /// <inheritdoc />
     /// <summary>Вызов удалённых процедур для разъёмов</summary>
     public class SocketExchangeImpl : SocketExchange.SocketExchangeBase
     {
         private readonly SocketExchangeOptions _options;
 
         // Контроллеры
-        private readonly CustomSocketController _socketController;
-        private readonly SocketGroupController _socketGroupController;
+        private readonly SocketService _socketService;
+        private readonly GroupService _groupService;
 
-        public SocketExchangeImpl(CustomSocketController socketController, SocketGroupController socketGroupController,
+        public SocketExchangeImpl(SocketService socketService, GroupService groupService,
             SocketExchangeOptions options)
         {
-            _socketController = socketController;
-            _socketGroupController = socketGroupController;
+            _socketService = socketService;
+            _groupService = groupService;
             _options = options;
         }
 
@@ -36,6 +37,10 @@ namespace ExpertSystem.Server.Services
             return Task.FromResult(new HelloMessage {Version = _options.Version});
         }
 
+        // ===========================================================================================================
+        // Процедуры над разъёмами
+        // ===========================================================================================================
+
         /// <summary>Вызов процедуры получения списка разъёмов</summary>
         /// <param name="request">Запрос</param>
         /// <param name="responseStream">Поток ответа</param>
@@ -44,7 +49,7 @@ namespace ExpertSystem.Server.Services
         public override async Task GetSockets(Empty request, IServerStreamWriter<CustomSocket> responseStream,
             ServerCallContext context)
         {
-            foreach (var socket in _socketController.GetSockets())
+            foreach (var socket in _socketService.GetSockets())
                 await responseStream.WriteAsync(socket);
         }
 
@@ -54,10 +59,10 @@ namespace ExpertSystem.Server.Services
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
         public override Task<CustomSocket> UpsertSocket(CustomSocket request, ServerCallContext context)
         {
-            var existingSocket = _socketController.GetSocket(request.SocketName);
+            var existingSocket = _socketService.GetSocket(request.SocketName);
             if (existingSocket != null)
-                return Task.FromResult(_socketController.UpdateSocket(existingSocket.Item1, request));
-            return Task.FromResult(_socketController.InsertSocket(request));
+                return Task.FromResult(_socketService.UpdateSocket(existingSocket.Item1, request));
+            return Task.FromResult(_socketService.InsertSocket(request));
         }
 
         /// <summary>Вызов процедуры удаления</summary>
@@ -66,9 +71,81 @@ namespace ExpertSystem.Server.Services
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
         public override Task<Empty> DeleteSocket(CustomSocketIdentity request, ServerCallContext context)
         {
-            var hashCode = _socketController.GetSocket(request.SocketName).Item1;
-            _socketController.DeleteSocket(hashCode);
+            _socketService.DeleteSocket(request.SocketName);
+            return Task.FromResult<Empty>(null);
+        }
+
+        // ===========================================================================================================
+        // Процедуры над группами
+        // ===========================================================================================================
+
+        /// <summary>Вызов процедуры получения всех групп разъёмов</summary>
+        /// <param name="request">Запрос</param>
+        /// <param name="responseStream">Поток ответа</param>
+        /// <param name="context">Контекст</param>
+        /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
+        public override async Task GetSocketGroups(Empty request, IServerStreamWriter<SocketGroup> responseStream, 
+            ServerCallContext context)
+        {
+            foreach (var socketGroup in _groupService.GetSocketGroups())
+                await responseStream.WriteAsync(socketGroup);
+        }
+
+        /// <summary>Вызов процедуры создания группы разъёмов</summary>
+        /// <param name="request">Запрос</param>
+        /// <param name="context">Контекст</param>
+        /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
+        public override Task<SocketGroup> AddSocketGroup(SocketGroupIdentity request, ServerCallContext context)
+        {
+            return Task.FromResult(_groupService.CreateSocketGroup(
+                new SocketGroup{GroupName = request.GroupName}));
+        }
+
+        /// <summary>Вызов процедуры удаления группы разъёмов</summary>
+        /// <param name="request">Запрос</param>
+        /// <param name="context">Контекст</param>
+        /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
+        public override Task<Empty> DeleteSocketGroup(SocketGroupIdentity request, ServerCallContext context)
+        {
+            _groupService.DeleteSocketGroup(request.GroupName);
+            return Task.FromResult<Empty>(null);
+        }
+
+        /// <summary>Добавления разъёма в группу разъёмов</summary>
+        /// <param name="request">Запрос</param>
+        /// <param name="context">Контекст</param>
+        /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
+        public override Task<SocketGroup> AddToSocketGroup(SocketGroup request, ServerCallContext context)
+        {
+            var groupName = request.GroupName;
+            var socketName = request.SocketNames[0];
+            // Проверка существования такого разъёма и такой группы
+            var socket = _socketService.GetSocket(socketName);
+            var socketGroup = _groupService.GetSocketGroup(groupName);
+            if (socket != null && socketGroup != null)
+            {
+                return Task.FromResult(_groupService.AddSocketToGroup(groupName, socketName));
+            }
             return null;
+        }
+
+        /// <summary>Удаление разъёма из группы разъёмов</summary>
+        /// <param name="request">Запрос</param>
+        /// <param name="context">Контекст</param>
+        /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
+        public override Task<SocketGroup> RemoveSocketFromGroup(SocketGroup request, ServerCallContext context)
+        {
+            var groupName = request.GroupName;
+            var socketName = request.SocketNames[0];
+            // Проверка существования такого разъёма и такой группы
+            var socket = _socketService.GetSocket(socketName);
+            var socketGroup = _groupService.GetSocketGroup(groupName);
+            if (socket != null && socketGroup != null && socket.Item2 != null)
+            {
+                _groupService.RemoveSocketFromGroup(groupName, socket.Item2.SocketName);
+                return null;
+            }
+            else return null;
         }
 
         private void DebugWrite(string message)

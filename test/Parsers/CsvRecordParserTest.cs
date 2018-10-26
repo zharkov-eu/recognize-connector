@@ -48,8 +48,8 @@ namespace ExpertSystem.Tests.Parsers
         {
             return new SocketGroup
             {
-                Name = "Audio",
-                SocketName = {"5145167-4", "XF2L-0425-1A"}
+                GroupName = "Audio",
+                SocketNames = {"5145167-4", "XF2L-0425-1A"}
             };
         }
 

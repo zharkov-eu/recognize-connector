@@ -15,7 +15,7 @@ service SocketExchange {
 
     rpc GetSocketGroups (Empty) returns (stream SocketGroup) {}
     rpc AddSocketGroup (SocketGroupIdentity) returns (SocketGroup) {}
-    rpc AddToSocketGroup (SocketGroup) returns (SocketGroup) {}
-    rpc RemoveSocketFromGroup (SocketGroupIdentity) returns (SocketGroup) {}
     rpc DeleteSocketGroup (SocketGroupIdentity) returns (Empty) {}
+    rpc AddToSocketGroup (SocketGroup) returns (SocketGroup) {}
+    rpc RemoveSocketFromGroup (SocketGroup) returns (SocketGroup) {}
 }

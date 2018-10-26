@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using ExpertSystem.Common.Parsers;
+using ExpertSystem.Common.Serializers;
 using ExpertSystem.Server.DAL.Entities;
 using ExpertSystem.Server.DAL.Serializers;
 
@@ -133,7 +134,7 @@ namespace ExpertSystem.Server.DAL.Repositories
 
         /// <summary>Получить список записей</summary>
         /// <returns>Список записей</returns>
-        public List<T> GetSockets()
+        public List<T> GetAllRecords()
         {
             return _records.Values.ToList();
         }
@@ -143,7 +144,9 @@ namespace ExpertSystem.Server.DAL.Repositories
         /// <returns>Кортеж из хэш кода и записи с переданым именем</returns>
         public Tuple<int, T> Select(string recordName)
         {
-            return _recordsByName.TryGetValue(recordName, out var hashCode) ? new Tuple<int, T>(hashCode, _records[hashCode]) : null;
+            return _recordsByName.TryGetValue(recordName, out var hashCode)
+                ? new Tuple<int, T>(hashCode, _records[hashCode]) 
+                : null;
         }
 
         /// <summary>Выполнить действие вставки</summary>
@@ -172,11 +175,12 @@ namespace ExpertSystem.Server.DAL.Repositories
         }
 
         /// <summary>Выполнить действие удаления</summary>
-        /// <param name="hashCode">Хэш код записи</param>
-        public void Delete(int hashCode)
+        /// <param name="recordName">Имя записи</param>
+        public void Delete(string recordName)
         {
-            if (_records.TryGetValue(hashCode, out var record))
+            if (_recordsByName.TryGetValue(recordName, out var hashCode))
             {
+                var record = _records[hashCode];
                 _recordsByName.Remove(GetRecordId(record));
                 _records.Remove(hashCode);
                 _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry<T>(CsvDbAction.Delete, hashCode).ToString()));
@@ -191,6 +195,8 @@ namespace ExpertSystem.Server.DAL.Repositories
             return _recordType.GetProperty(_options.IdPropertyName).GetValue(record).ToString();
         }
 
+        /// <inheritdoc />
+        /// <summary>Действия по окончании работы репозитория</summary>
         public void Dispose()
         {
             _walStream.Close();

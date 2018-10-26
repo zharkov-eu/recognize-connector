@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ExpertSystem.Server.DAL.Serializers
+namespace ExpertSystem.Common.Serializers
 {
     public interface ICsvRecordSerializer<T> : IRecordSerializer<T>
     {
