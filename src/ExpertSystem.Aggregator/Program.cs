@@ -2,8 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
-using ExpertSystem.Aggregator.Processors;
-using ExpertSystem.Aggregator.RulesGenerators;
 using ExpertSystem.Aggregator.Services;
 using ExpertSystem.Common;
 using ExpertSystem.Common.Generated;
@@ -13,12 +11,9 @@ namespace ExpertSystem.Aggregator
     public class Program : ServerProgram
     {
         private readonly SocketExchange.SocketExchangeClient _client;
-        private readonly SocketCache _socketCache;
 
         private Program(ServerProgramOptions options) : base(options)
         {
-            _socketCache = new SocketCache();
-
             var channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
             _client = new SocketExchange.SocketExchangeClient(channel);
 
@@ -36,37 +31,23 @@ namespace ExpertSystem.Aggregator
 
         private async Task<Program> Init()
         {
-            var stream = _client.GetSockets(new Empty()).ResponseStream;
-            while (await stream.MoveNext(CancellationToken.None))
-                _socketCache.Add(stream.Current);
+            var socketCache = new EntityCache<CustomSocket>(new EntityCacheOptions {IdPropertyName = "SocketName"});
+            var socketGroupCache = new EntityCache<SocketGroup>(new EntityCacheOptions {IdPropertyName = "GroupName"});
 
-            var rulesGenerator = new ProductionRulesGenerator();
-            var logicRulesGenerator = new LogicRulesGenerator();
-            var fuzzyRulesGenerator = new FuzzyRulesGenerator();
-            var neuralRulesGenerator = new NeuralRulesGenerator();
+            var socketStream = _client.GetSockets(new Empty()).ResponseStream;
+            while (await socketStream.MoveNext(CancellationToken.None))
+                socketCache.Add(socketStream.Current);
 
-            // Продукционный вывод
-            var rulesGraph = rulesGenerator.GenerateRules(_socketCache.GetAll());
-            // Логический вывод
-            var logicRules = logicRulesGenerator.GenerateRules(_socketCache.GetAll());
-            // Нечеткий вывод
-            var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(_socketCache.GetAll());
-            var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, _socketCache.GetAll());
-            // Нейро-нечеткий вывод
-            var neuralNetwork = neuralRulesGenerator.GetNeuralNetwork(_socketCache.GetAll());
+            var socketGroupStream = _client.GetSocketGroups(new Empty()).ResponseStream;
+            while (await socketGroupStream.MoveNext(CancellationToken.None))
+                socketGroupCache.Add(socketGroupStream.Current);
+
+            var operationsOptions = new SocketOperationsOptions {Debug = Options.Debug, Version = Options.Version};
+            var socketOperations = new SocketOperationsImpl(socketCache, socketGroupCache, _client, operationsOptions);
 
             Server = new Grpc.Core.Server
             {
-                Services =
-                {
-                    SocketOperations.BindService(new SocketOperationsImpl(
-                        new ProductionProcessor(rulesGraph, new ProcessorOptions {Debug = Options.Debug}),
-                        new LogicProcessor(logicRules, new ProcessorOptions {Debug = Options.Debug}),
-                        new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions {Debug = Options.Debug}),
-                        new NeuralProcessor(neuralNetwork, new ProcessorOptions {Debug = Options.Debug}),
-                        new SocketOperationsOptions {Debug = Options.Debug, Version = Options.Version}
-                    ))
-                },
+                Services = {SocketOperations.BindService(socketOperations)},
                 Ports = {new ServerPort("localhost", Options.Port, ServerCredentials.Insecure)}
             };
 

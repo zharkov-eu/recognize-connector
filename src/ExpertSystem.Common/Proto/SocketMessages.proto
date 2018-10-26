@@ -34,10 +34,10 @@ message CustomSocketIdentity {
 }
 
 message SocketGroup {
-    string Name = 1;
+    string GroupName = 1;
     repeated string SocketName = 2;
 }
 
 message SocketGroupIdentity {
-    string Name = 1;
+    string GroupName = 1;
 }
