@@ -15,15 +15,15 @@ namespace ExpertSystem.Server
     {
         private Program(ServerProgramOptions options) : base(options)
         {
-            var dataPath = Path.Combine(GetThisFileDirectory(), "..", "..", "data");
+            var dataPath = Path.Combine(GetThisFileDirectory(), "..", "..", "data", "csvdb");
 
             var socketSerializer = new CustomSocketSerializer();
             var socketParser = new CsvRecordParser<CustomSocket>(socketSerializer);
             var socketOptions = new CsvRepositoryOptions
             {
                 IdPropertyName = "SocketName",
-                CsvFileName = Path.Combine(dataPath, "1.csv"),
-                WalFileName = Path.Combine(dataPath, "wal.txt")
+                CsvFileName = Path.Combine(dataPath, "socket.csv"),
+                WalFileName = Path.Combine(dataPath, "wal_socket.txt")
             };
             var socketsRepository =
                 new CsvRepository<CustomSocket>(socketSerializer, socketParser, socketOptions).Sync();
@@ -34,8 +34,8 @@ namespace ExpertSystem.Server
             var socketGroupOptions = new CsvRepositoryOptions
             {
                 IdPropertyName = "SocketName",
-                CsvFileName = Path.Combine(dataPath, "categoryData.csv"),
-                WalFileName = Path.Combine(dataPath, "categoryWal.txt")
+                CsvFileName = Path.Combine(dataPath, "socketGroup.csv"),
+                WalFileName = Path.Combine(dataPath, "wal_socketGroup.txt")
             };
             var socketGroupRepository =
                 new CsvRepository<SocketGroup>(socketGroupSerializer, socketGroupParser, socketGroupOptions).Sync();

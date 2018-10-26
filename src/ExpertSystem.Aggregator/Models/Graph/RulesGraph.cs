@@ -1,4 +1,5 @@
 ﻿using ExpertSystem.Common.Models;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Aggregator.Models.Graph
 {
@@ -7,8 +8,8 @@ namespace ExpertSystem.Aggregator.Models.Graph
         public RulesGraph()
         {
             Root = new GraphNode(new Fact(
-                CustomSocketDomain.SocketDomain.Empty,
-                CustomSocketDomain.SocketDefaultValue[typeof(string)]
+                SocketDomain.Empty,
+                SocketDefaultValue[typeof(string)]
             ));
         }
 

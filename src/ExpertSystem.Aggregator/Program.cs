@@ -63,7 +63,8 @@ namespace ExpertSystem.Aggregator
                         new ProductionProcessor(rulesGraph, new ProcessorOptions {Debug = Options.Debug}),
                         new LogicProcessor(logicRules, new ProcessorOptions {Debug = Options.Debug}),
                         new FuzzyProcessor(fuzzyDomains, fuzzyFacts, new ProcessorOptions {Debug = Options.Debug}),
-                        new NeuralProcessor(neuralNetwork, new ProcessorOptions {Debug = Options.Debug})
+                        new NeuralProcessor(neuralNetwork, new ProcessorOptions {Debug = Options.Debug}),
+                        new SocketOperationsOptions {Debug = Options.Debug, Version = Options.Version}
                     ))
                 },
                 Ports = {new ServerPort("localhost", Options.Port, ServerCredentials.Insecure)}

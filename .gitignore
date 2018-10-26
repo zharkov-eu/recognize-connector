@@ -456,5 +456,5 @@ ASALocalRun/
 src/ExpertSystem.Common/Generated/*
 !src/ExpertSystem.Common/Generated/readme.txt
 
-# WAL file
-data/wal.txt
+# WAL files
+data/csvdb/wal_*

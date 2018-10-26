@@ -31,7 +31,7 @@ namespace ExpertSystem.Server.Services
 
         public override Task<HelloMessage> SayHello(HelloMessage request, ServerCallContext context)
         {
-            DebugWrite($"RpcCall {{SayHello}}: '{{{request}}}' from {context.Peer}");
+            DebugWrite($"RpcCall 'SayHello': '{request}' from {context.Peer}");
             return Task.FromResult(new HelloMessage {Version = _options.Version});
         }
 

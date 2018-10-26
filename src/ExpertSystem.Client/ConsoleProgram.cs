@@ -215,11 +215,11 @@ namespace ExpertSystem.Client
             WritePaddedBottom($"Нечеткий вывод (Мамдани) максимальной силы тока при разрыве цепи при известных {factSet}");
 
             var socketType = typeof(CustomSocket);
-            var customSocket = new FuzzyCustomSocket();
+            var customSocket = new FuzzySocketParams();
             foreach (var fact in factSet)
                 socketType.GetProperty(fact.Domain.ToString()).SetValue(customSocket, fact.Value);
 
-            var amperageCircuit = Client.FuzzyGetAmperageCircuitByParams(new FuzzyCustomSocketRequest
+            var amperageCircuit = Client.FuzzyGetAmperageCircuitByParams(new FuzzySocketRequest
             {
                 Method = FuzzyMethod.Mamdani,
                 Socket = customSocket
@@ -233,11 +233,11 @@ namespace ExpertSystem.Client
         {
             WritePaddedBottom($"Нечеткий вывод (Сугэно) максимальной силы тока при разрыве цепи при известных {factSet}");
             var socketType = typeof(CustomSocket);
-            var customSocket = new FuzzyCustomSocket();
+            var customSocket = new FuzzySocketParams();
             foreach (var fact in factSet)
                 socketType.GetProperty(fact.Domain.ToString()).SetValue(customSocket, fact.Value);
 
-            var amperageCircuit = Client.FuzzyGetAmperageCircuitByParams(new FuzzyCustomSocketRequest
+            var amperageCircuit = Client.FuzzyGetAmperageCircuitByParams(new FuzzySocketRequest
             {
                 Method = FuzzyMethod.Sugeno,
                 Socket = customSocket
@@ -253,11 +253,11 @@ namespace ExpertSystem.Client
                 $"Нейро-нечеткий вывод (ANFIS) максимальной силы тока при разрыве цепи при известных {factSet}");
 
             var socketType = typeof(CustomSocket);
-            var customSocket = new FuzzyCustomSocket();
+            var customSocket = new FuzzySocketParams();
             foreach (var fact in factSet)
                 socketType.GetProperty(fact.Domain.ToString()).SetValue(customSocket, fact.Value);
 
-            var amperageCircuit = Client.FuzzyGetAmperageCircuitByParams(new FuzzyCustomSocketRequest
+            var amperageCircuit = Client.FuzzyGetAmperageCircuitByParams(new FuzzySocketRequest
             {
                 Method = FuzzyMethod.Neural,
                 Socket = customSocket
