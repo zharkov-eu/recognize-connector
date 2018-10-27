@@ -6,6 +6,7 @@ using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Common.Models
 {
+    /// <summary>Расширение для работы с классом разъёма</summary>
     public static class CustomSocketExtension
     {
         public static readonly Type SocketType = typeof(CustomSocket);
@@ -17,11 +18,10 @@ namespace ExpertSystem.Common.Models
         /// <returns>CSV cтрока на основании данных разъёма c предобпределённым разделителем</returns>
         public static string Serialize(CustomSocket socket)
         {
-            var socketType = typeof(CustomSocket);
             string result = "";
             foreach (var field in Fields)
             {
-                var value = socketType.GetProperty(field.ToString()).GetValue(socket);
+                var value = SocketType.GetProperty(field.ToString()).GetValue(socket);
                 if (!value.Equals(SocketDefaultValue[value.GetType()]))
                     result += SerializeProperty(value);
                 result += Delimiter;
@@ -44,11 +44,10 @@ namespace ExpertSystem.Common.Models
         public static CustomSocket Deserialize(IList<string> parts)
         {
             var socket = new CustomSocket();
-            var socketType = typeof(CustomSocket);
             for (var i = 0; i < Fields.Length; i++)
             {
                 var domain = Fields[i];
-                socketType.GetProperty(domain.ToString()).SetValue(socket, ParseProperty(domain, parts[i]));
+                SocketType.GetProperty(domain.ToString()).SetValue(socket, ParseProperty(domain, parts[i]));
             }
 
             return socket;

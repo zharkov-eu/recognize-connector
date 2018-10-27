@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ExpertSystem.Common.Generated;
+using ExpertSystem.Common.Models;
 using ExpertSystem.Common.Serializers;
 
 namespace ExpertSystem.Server.DAL.Serializers
@@ -8,19 +9,24 @@ namespace ExpertSystem.Server.DAL.Serializers
     {
         public char Delimiter { get; }
 
-        public string Serialize(SocketGroup record)
+        public SocketGroupSerializer()
         {
-            throw new System.NotImplementedException();
+            Delimiter = SocketGroupExtension.Delimiter;
+        }
+
+        public string Serialize(SocketGroup group)
+        {
+            return SocketGroupExtension.Serialize(group);
         }
 
         public SocketGroup Deserialize(string line)
         {
-            throw new System.NotImplementedException();
+            return SocketGroupExtension.Deserialize(line);
         }
 
         public SocketGroup Deserialize(IList<string> parts)
         {
-            throw new System.NotImplementedException();
+            return SocketGroupExtension.Deserialize(parts);
         }
     }
 }
