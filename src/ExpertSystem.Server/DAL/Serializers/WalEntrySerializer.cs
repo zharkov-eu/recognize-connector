@@ -1,3 +1,4 @@
+using System;
 using ExpertSystem.Common.Serializers;
 using ExpertSystem.Server.DAL.Entities;
 
@@ -23,7 +24,7 @@ namespace ExpertSystem.Server.DAL.Serializers
         public WalEntry<T> Deserialize(string line)
         {
             var parts = line.Split(Delimiter);
-            var action = (CsvDbAction) int.Parse(parts[0]);
+            Enum.TryParse(parts[0], out CsvDbAction action);
             var hashCode = int.Parse(parts[1]);
             var socket = _serializer.Deserialize(parts[2]);
             return new WalEntry<T>(action, hashCode, socket);
