@@ -223,7 +223,7 @@ namespace ExpertSystem.Client
             {
                 Method = FuzzyMethod.Mamdani,
                 Socket = customSocket
-            }).ResponseStream.Current.AmperageCircuit;
+            }).AmperageCircuit;
 
             WritePaddedTop($"Максимальная сила тока при разрыве цепи: {amperageCircuit} мА");
             return amperageCircuit;
@@ -241,7 +241,7 @@ namespace ExpertSystem.Client
             {
                 Method = FuzzyMethod.Sugeno,
                 Socket = customSocket
-            }).ResponseStream.Current.AmperageCircuit;
+            }).AmperageCircuit;
 
             WritePaddedTop($"Максимальная сила тока при разрыве цепи: {amperageCircuit} мА");
             return amperageCircuit;
@@ -261,7 +261,7 @@ namespace ExpertSystem.Client
             {
                 Method = FuzzyMethod.Neural,
                 Socket = customSocket
-            }).ResponseStream.Current.AmperageCircuit;
+            }).AmperageCircuit;
 
             WritePaddedTop($"Максимальная сила тока при разрыве цепи: {amperageCircuit} мА");
             return amperageCircuit;

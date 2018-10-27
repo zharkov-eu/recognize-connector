@@ -108,6 +108,35 @@ namespace ExpertSystem.Aggregator.Services
                 : Task.FromResult(new CustomSocket());
         }
 
+        public override Task<CustomSocketAmperage> FuzzyGetAmperageCircuitByParams(FuzzySocketRequest request,
+            ServerCallContext context)
+        {
+            DebugWrite($"RpcCall 'FuzzyGetAmperageCircuitByParams': '{request}' from {context.Peer}");
+
+            var socketAmperage = new CustomSocketAmperage();
+            switch (request.Method)
+            {
+                case FuzzyMethod.Mamdani:
+                    socketAmperage.AmperageCircuit =
+                        _fuzzyProcessor.MamdaniProcessing(SocketParamsToFactSet(request.Socket));
+                    break;
+                case FuzzyMethod.Sugeno:
+                    socketAmperage.AmperageCircuit =
+                        _fuzzyProcessor.SugenoProcessing(SocketParamsToFactSet(request.Socket));
+                    break;
+                case FuzzyMethod.Neural:
+                    socketAmperage.AmperageCircuit =
+                        _neuralProcessor.Process(SocketParamsToFactSet(request.Socket));
+                    break;
+                default:
+                    throw new RpcException(new Status(StatusCode.FailedPrecondition,
+                        $"Method must be one of '{FuzzyMethod.Mamdani}', '{FuzzyMethod.Sugeno}', '{FuzzyMethod.Neural}'"
+                    ));
+            }
+
+            return Task.FromResult(socketAmperage);
+        }
+
         public override async Task GetSocketGroups(Empty request, IServerStreamWriter<SocketGroup> responseStream,
             ServerCallContext context)
         {
@@ -152,6 +181,8 @@ namespace ExpertSystem.Aggregator.Services
         public override Task FindSocketsByParamsInGroup(CustomSocketJoinGroup request,
             IServerStreamWriter<CustomSocketJoinGroup> responseStream, ServerCallContext context)
         {
+            DebugWrite($"RpcCall 'FindSocketsByParamsInGroup': '{request}' from {context.Peer}");
+            
             throw new RpcException(new Status(StatusCode.Unimplemented, ""));
         }
 
@@ -196,6 +227,20 @@ namespace ExpertSystem.Aggregator.Services
             return Task.FromResult(socketGroup);
         }
 
+        public override Task<SocketGroup> AddToSocketGroup(CustomSocketIdentityJoinGroup request, ServerCallContext context)
+        {
+            DebugWrite($"RpcCall 'AddToSocketGroup': '{request}' from {context.Peer}");
+            
+            return base.AddToSocketGroup(request, context);
+        }
+
+        public override Task<SocketGroup> RemoveFromSocketGroup(CustomSocketIdentityJoinGroup request, ServerCallContext context)
+        {
+            DebugWrite($"RpcCall 'RemoveFromSocketGroup': '{request}' from {context.Peer}");
+            
+            return base.RemoveFromSocketGroup(request, context);
+        }
+
         public override Task<Empty> DeleteSocketGroup(SocketGroupIdentity request, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'DeleteSocketGroup': '{request}' from {context.Peer}");
@@ -211,6 +256,15 @@ namespace ExpertSystem.Aggregator.Services
         {
             if (_options.Debug)
                 Console.WriteLine(message);
+        }
+
+        private static FactSet SocketParamsToFactSet(FuzzySocketParams socket)
+        {
+            return new FactSet(
+                new Fact(SocketDomain.NumberOfContacts, socket.NumberOfContacts),
+                new Fact(SocketDomain.SizeLength, socket.SizeLength),
+                new Fact(SocketDomain.SizeWidth, socket.SizeWidth)
+            );
         }
 
         private static FactSet SocketToFactSet(CustomSocket socket)
