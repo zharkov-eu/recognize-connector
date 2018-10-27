@@ -84,7 +84,7 @@ namespace ExpertSystem.Server.Services
         /// <param name="responseStream">Поток ответа</param>
         /// <param name="context">Контекст</param>
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
-        public override async Task GetSocketGroups(Empty request, IServerStreamWriter<SocketGroup> responseStream, 
+        public override async Task GetSocketGroups(Empty request, IServerStreamWriter<SocketGroup> responseStream,
             ServerCallContext context)
         {
             foreach (var socketGroup in _groupService.GetSocketGroups())
@@ -98,7 +98,7 @@ namespace ExpertSystem.Server.Services
         public override Task<SocketGroup> AddSocketGroup(SocketGroupIdentity request, ServerCallContext context)
         {
             return Task.FromResult(_groupService.CreateSocketGroup(
-                new SocketGroup{GroupName = request.GroupName}));
+                new SocketGroup {GroupName = request.GroupName}));
         }
 
         /// <summary>Вызов процедуры удаления группы разъёмов</summary>
@@ -115,10 +115,11 @@ namespace ExpertSystem.Server.Services
         /// <param name="request">Запрос</param>
         /// <param name="context">Контекст</param>
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
-        public override Task<SocketGroup> AddToSocketGroup(SocketGroup request, ServerCallContext context)
+        public override Task<SocketGroup> AddToSocketGroup(CustomSocketIdentityJoinGroup request,
+            ServerCallContext context)
         {
-            var groupName = request.GroupName;
-            var socketName = request.SocketNames[0];
+            var groupName = request.Group.GroupName;
+            var socketName = request.Socket.SocketName;
             // Проверка существования такого разъёма и такой группы
             var socket = _socketService.GetSocket(socketName);
             var socketGroup = _groupService.GetSocketGroup(groupName);
@@ -126,6 +127,7 @@ namespace ExpertSystem.Server.Services
             {
                 return Task.FromResult(_groupService.AddSocketToGroup(groupName, socketName));
             }
+
             return null;
         }
 
@@ -133,10 +135,11 @@ namespace ExpertSystem.Server.Services
         /// <param name="request">Запрос</param>
         /// <param name="context">Контекст</param>
         /// <returns>Завершённая задача после того, как были написаны заголовки ответов</returns>
-        public override Task<SocketGroup> RemoveSocketFromGroup(SocketGroup request, ServerCallContext context)
+        public override Task<SocketGroup> RemoveSocketFromGroup(CustomSocketIdentityJoinGroup request,
+            ServerCallContext context)
         {
-            var groupName = request.GroupName;
-            var socketName = request.SocketNames[0];
+            var groupName = request.Group.GroupName;
+            var socketName = request.Socket.SocketName;
             // Проверка существования такого разъёма и такой группы
             var socket = _socketService.GetSocket(socketName);
             var socketGroup = _groupService.GetSocketGroup(groupName);
