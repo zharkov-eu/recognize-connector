@@ -1,6 +1,7 @@
 using Xunit;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
+using ExpertSystem.Tests.Configuration;
 
 namespace ExpertSystem.Tests.Models
 {
@@ -8,36 +9,8 @@ namespace ExpertSystem.Tests.Models
     public class CustomSocketExtensionTest
     {
         // Тестовые данные
-        private readonly string _testLine;
-        private readonly CustomSocket _testSocket;
-
-        public CustomSocketExtensionTest()
-        {
-            // Заполняем тестовые данные
-            _testLine =
-                "5747871-8;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.008128;0.012548;";
-            _testSocket = new CustomSocket
-            {
-                SocketName = "5747871-8",
-                Gender = "Male",
-                ContactMaterial = "Brass",
-                ContactPlating = "Tin",
-                Color = "Black",
-                HousingColor = "Black",
-                HousingMaterial = "Thermoplastic",
-                MountingStyle = "Through Hole",
-                NumberOfContacts = 9,
-                NumberOfPositions = 9,
-                NumberOfRows = 2,
-                Orientation = "Vertical",
-                PinPitch = 0.002743f,
-                Material = "",
-                SizeDiameter = -1f,
-                SizeLength = 0.03081f,
-                SizeHeight = 0.008128f,
-                SizeWidth = 0.012548f
-            };
-        }
+        private readonly string _testLine = TestData.GetSocketCsvLine();
+        private readonly CustomSocket _testSocket = TestData.GetSocket();
 
         /// <summary>Проверка коректности серизации CustomSocket в CSV</summary>
         [Fact]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ExpertSystem.Aggregator.Processors;
 using ExpertSystem.Aggregator.RulesGenerators;
 using ExpertSystem.Common.Models;
-using ExpertSystem.Tests.Parsers;
+using ExpertSystem.Tests.Configuration;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Tests.Processors
@@ -14,8 +14,7 @@ namespace ExpertSystem.Tests.Processors
 
         public ProductionProcessorTest()
         {
-            var recordParser = new CsvRecordParserTest();
-            var sockets = recordParser.GetSockets();
+            var sockets = TestData.GetSockets();
 
             var rulesGenerator = new ProductionRulesGenerator();
             var rulesGraph = rulesGenerator.GenerateRules(sockets);

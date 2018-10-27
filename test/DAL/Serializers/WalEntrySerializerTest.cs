@@ -1,15 +1,16 @@
+using Xunit;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Server.DAL.Entities;
 using ExpertSystem.Server.DAL.Serializers;
-using Xunit;
+using ExpertSystem.Tests.Configuration;
 
 namespace ExpertSystem.Tests.DAL.Serializers
 {
     public class WallEntrySerializerTest
     {
-        // TODO: Перенести разъёмы в единый файл
-        private readonly CustomSocket _socket;
-        private readonly string _socketCsvLine;
+        // Тестовые данные
+        private readonly CustomSocket _socket = TestData.GetSocket();
+        private readonly string _socketCsvLine = TestData.GetSocketCsvLine();
         private readonly WalEntry<CustomSocket> _walEntryInsert;
         private readonly string _insertString;
         private readonly WalEntry<CustomSocket> _walEntryUpdate;
@@ -17,6 +18,7 @@ namespace ExpertSystem.Tests.DAL.Serializers
         private readonly WalEntry<CustomSocket> _walEntryDelete;
         private readonly string _deleteString;
 
+        // Мок объект сериализатора
         private readonly WalEntrySerializer<CustomSocket> _walSerializer;
 
         public WallEntrySerializerTest()
@@ -25,29 +27,6 @@ namespace ExpertSystem.Tests.DAL.Serializers
             _walSerializer = new WalEntrySerializer<CustomSocket>(new CustomSocketSerializer());
 
             // Заполнение тестовых данных
-            _socket = new CustomSocket
-            {
-                SocketName = "5747871-8",
-                Gender = "Male",
-                ContactMaterial = "Brass",
-                ContactPlating = "Tin",
-                Color = "Black",
-                HousingColor = "Black",
-                HousingMaterial = "Thermoplastic",
-                MountingStyle = "Through Hole",
-                NumberOfContacts = 9,
-                NumberOfPositions = 9,
-                NumberOfRows = 2,
-                Orientation = "Vertical",
-                PinPitch = 0.002743f,
-                Material = "",
-                SizeDiameter = -1f,
-                SizeLength = 0.03081f,
-                SizeHeight = 0.008128f,
-                SizeWidth = 0.012548f
-            };
-            _socketCsvLine =
-                "5747871-8;Male;Brass;Tin;Black;Black;Thermoplastic;Through Hole;9;9;2;Vertical;0.002743;;;0.03081;0.008128;0.012548;";
             _walEntryInsert = new WalEntry<CustomSocket>(CsvDbAction.Insert, _socket.GetHashCode(), _socket);
             _insertString = $"Insert:::{_socket.GetHashCode()}:::{_socketCsvLine}";
             _walEntryUpdate = new WalEntry<CustomSocket>(CsvDbAction.Update, _socket.GetHashCode(), _socket);

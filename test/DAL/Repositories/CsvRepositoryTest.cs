@@ -3,11 +3,11 @@ using System;
 using System.IO;
 using System.Text;
 using ExpertSystem.Common.Generated;
-using ExpertSystem.Common.Models;
 using ExpertSystem.Common.Parsers;
 using ExpertSystem.Server.DAL.Entities;
 using ExpertSystem.Server.DAL.Repositories;
 using ExpertSystem.Server.DAL.Serializers;
+using ExpertSystem.Tests.Configuration;
 
 namespace ExpertSystem.Tests.DAL.Repositories
 {
@@ -24,54 +24,15 @@ namespace ExpertSystem.Tests.DAL.Repositories
         // Путь до тестового WAL файла
         private readonly string _testWalFileName;
 
-        // Тестовые данные в формате CSV
-        private readonly string _testCsvData;
-
         // Мок репозитория
         private readonly CsvRepository<CustomSocket> _repositoryMock;
 
         // Тестовые данные
-        private readonly CustomSocket _testSocket;
+        private readonly string _testCsvData = TestData.GetSocketCsvLine();
+        private readonly CustomSocket _testSocket = TestData.GetSocket();
 
         public CsvRepositoryTest()
         {
-            // Заполнение тестовых данных
-            _testSocket = new CustomSocket
-            {
-                SocketName = "5747871-8",
-                Gender = "Male",
-                ContactMaterial = "Brass",
-                ContactPlating = "Tin",
-                Color = "Black",
-                HousingColor = "Black",
-                HousingMaterial = "Thermoplastic",
-                MountingStyle = "Through Hole",
-                NumberOfContacts = 9,
-                NumberOfPositions = 9,
-                NumberOfRows = 2,
-                Orientation = "Vertical",
-                PinPitch = 0.002743f,
-                Material = "",
-                SizeDiameter = -1f,
-                SizeLength = 0.03081f,
-                SizeHeight = 0.008128f,
-                SizeWidth = 0.012548f
-            };
-
-            _testCsvData =
-                "mpn;gender;contact_material;contact_plating;color;housing_color;housing_material;mounting_style;number_of_contacts;number_of_positions;number_of_rows;orientation;pin_pitch;material;size_diameter;size_length;size_height;size_width\n" +
-                "3-640428-7;Female;Copper Alloy;Tin;Red;Red;Nylon;;7;7;1;;0.00396;;;0.027737;0.018415;0.009017\n" +
-                "3-640599-6;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;6;6;1;;0.00396;;;0.023774;0.018415;0.009779\n" +
-                "3-644540-7;Female;Copper Alloy;Tin;Red;Red;Nylon;Through Hole;7;7;1;;0.00254;;;0.01778;0.013208;0.007747\n" +
-                "3-643816-5;Female;Copper Alloy;Tin;Green;Green;Nylon;Through Hole;5;5;1;;0.00254;;;0.0127;0.013208;0.006985\n" +
-                "3-640426-7;Female;Copper Alloy;Tin;Orange;Orange;Nylon;Through Hole;7;7;1;;0.00396;;;0.027737;0.018415;0.009017\n" +
-                "3-643819-5;Female;Copper Alloy;Tin;Red;Red;Nylon;;5;5;1;;0.00396;;;0.019812;0.018415;0.009017\n" +
-                "4-643817-0;Female;Copper Alloy;Tin;Orange;Orange;Nylon;;10;10;1;;0.00396;;;0.039624;0.009017;0.018415\n" +
-                "640440-2;Female;Copper Alloy;Tin Lead;Red;Red;Nylon;;2;2;1;;0.00254;;;0.00508;0.013208;0.006985\n" +
-                "1-640440-2;Female;Copper Alloy;Tin Lead;;Red;Nylon;;12;12;1;;0.00254;;;0.03048;0.013208;0.006985\n" +
-                "3-641535-2;Female;Copper Alloy;Tin;White;White;Nylon;PC Board;2;2;1;;0.00254;;;0.00508;0.013462;0.006985\n" +
-                "84953-4;Female;Phosphor Bronze;Tin;Natural;White;Plastic;Surface Mount;4;4;;Right Angle;0.001;Thermoplastic;;0.01192;0.00256;0.0054\n";
-
             // Определение пути тестовой директории
             _testDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ExpertSystem");
             // Создание тестовой директории
