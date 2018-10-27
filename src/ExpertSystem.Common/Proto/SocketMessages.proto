@@ -41,3 +41,8 @@ message SocketGroup {
 message SocketGroupIdentity {
     string GroupName = 1;
 }
+
+message CustomSocketIdentityJoinGroup {
+    CustomSocketIdentity socket = 1;
+    SocketGroupIdentity group = 2;
+}

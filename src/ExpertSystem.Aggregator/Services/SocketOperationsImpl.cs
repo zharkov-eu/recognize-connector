@@ -182,37 +182,37 @@ namespace ExpertSystem.Aggregator.Services
             IServerStreamWriter<CustomSocketJoinGroup> responseStream, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'FindSocketsByParamsInGroup': '{request}' from {context.Peer}");
-            
+
             throw new RpcException(new Status(StatusCode.Unimplemented, ""));
         }
 
-        public override Task<CustomSocket> UpsertSocket(CustomSocket request, ServerCallContext context)
+        public override async Task<CustomSocket> UpsertSocket(CustomSocket request, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'UpsertSocket': '{request}' from {context.Peer}");
 
-            var socket = new CustomSocket();
+            var socketTemplate = new CustomSocket();
             if (_socketCache.EntityExists(request.SocketName))
-                socket = _socketCache.Get(request.SocketName);
-            socket.MergeFrom(request);
+                socketTemplate = _socketCache.Get(request.SocketName);
+            socketTemplate.MergeFrom(request);
 
-            _client.UpsertSocket(socket);
+            var socket = await _client.UpsertSocketAsync(socketTemplate);
             _socketCache.Upsert(socket);
 
-            return Task.FromResult(socket);
+            return socket;
         }
 
-        public override Task<Empty> DeleteSocket(CustomSocketIdentity request, ServerCallContext context)
+        public override async Task<Empty> DeleteSocket(CustomSocketIdentity request, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'DeleteSocket': '{request}' from {context.Peer}");
 
             if (!_socketCache.EntityExists(request.SocketName))
                 throw new RpcException(new Status(StatusCode.NotFound, $"Socket {request.SocketName} not found"));
-            _client.DeleteSocket(new CustomSocketIdentity {SocketName = request.SocketName});
+            await _client.DeleteSocketAsync(new CustomSocketIdentity {SocketName = request.SocketName});
             _socketCache.Remove(request.SocketName);
-            return Task.FromResult(new Empty());
+            return new Empty();
         }
 
-        public override Task<SocketGroup> AddSocketGroup(SocketGroupIdentity request, ServerCallContext context)
+        public override async Task<SocketGroup> AddSocketGroup(SocketGroupIdentity request, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'AddSocketGroup': '{request}' from {context.Peer}");
 
@@ -221,35 +221,73 @@ namespace ExpertSystem.Aggregator.Services
                     new Status(StatusCode.AlreadyExists, $"SocketGroup {request.GroupName} already exists")
                 );
 
-            var socketGroup = _client.AddSocketGroup(new SocketGroupIdentity {GroupName = request.GroupName});
+            var socketGroup =
+                await _client.AddSocketGroupAsync(new SocketGroupIdentity {GroupName = request.GroupName});
             _socketGroupCache.Add(socketGroup);
 
-            return Task.FromResult(socketGroup);
+            return socketGroup;
         }
 
-        public override Task<SocketGroup> AddToSocketGroup(CustomSocketIdentityJoinGroup request, ServerCallContext context)
+        public override async Task<SocketGroup> AddToSocketGroup(CustomSocketIdentityJoinGroup request,
+            ServerCallContext context)
         {
             DebugWrite($"RpcCall 'AddToSocketGroup': '{request}' from {context.Peer}");
-            
-            return base.AddToSocketGroup(request, context);
+
+            if (!_socketGroupCache.EntityExists(request.Group.GroupName))
+                throw new RpcException(
+                    new Status(StatusCode.NotFound, $"SocketGroup {request.Group.GroupName} not found")
+                );
+            var socketGroup = _socketGroupCache.Get(request.Group.GroupName);
+            var socketName = request.Socket.SocketName;
+
+            socketGroup.SocketNames.Add(socketName);
+            _socketGroupCache.Update(socketGroup.GroupName, socketGroup);
+            await _client.AddToSocketGroupAsync(new CustomSocketIdentityJoinGroup
+            {
+                Group = {GroupName = socketGroup.GroupName},
+                Socket = {SocketName = socketName}
+            });
+
+            return socketGroup;
         }
 
-        public override Task<SocketGroup> RemoveFromSocketGroup(CustomSocketIdentityJoinGroup request, ServerCallContext context)
+        public override async Task<SocketGroup> RemoveFromSocketGroup(CustomSocketIdentityJoinGroup request,
+            ServerCallContext context)
         {
             DebugWrite($"RpcCall 'RemoveFromSocketGroup': '{request}' from {context.Peer}");
-            
-            return base.RemoveFromSocketGroup(request, context);
+
+            if (!_socketGroupCache.EntityExists(request.Group.GroupName))
+                throw new RpcException(
+                    new Status(StatusCode.NotFound, $"SocketGroup {request.Group.GroupName} not found")
+                );
+            var socketGroup = _socketGroupCache.Get(request.Group.GroupName);
+            var socketName = request.Socket.SocketName;
+
+            if (!socketGroup.SocketNames.Contains(socketName))
+                throw new RpcException(
+                    new Status(StatusCode.NotFound, $"Socket {socketName} not in group {socketGroup.GroupName}")
+                );
+            await _client.RemoveSocketFromGroupAsync(new CustomSocketIdentityJoinGroup
+            {
+                Group = {GroupName = socketGroup.GroupName},
+                Socket = {SocketName = socketName}
+            });
+
+            socketGroup.SocketNames.Remove(socketName);
+            _socketGroupCache.Update(socketGroup.GroupName, socketGroup);
+
+            return socketGroup;
         }
 
-        public override Task<Empty> DeleteSocketGroup(SocketGroupIdentity request, ServerCallContext context)
+        public override async Task<Empty> DeleteSocketGroup(SocketGroupIdentity request, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'DeleteSocketGroup': '{request}' from {context.Peer}");
 
             if (!_socketGroupCache.EntityExists(request.GroupName))
                 throw new RpcException(new Status(StatusCode.NotFound, $"SocketGroup {request.GroupName} not found"));
-            _client.DeleteSocketGroup(new SocketGroupIdentity {GroupName = request.GroupName});
+            await _client.DeleteSocketGroupAsync(new SocketGroupIdentity {GroupName = request.GroupName});
             _socketGroupCache.Remove(request.GroupName);
-            return Task.FromResult(new Empty());
+            return new Empty();
         }
 
         private void DebugWrite(string message)
