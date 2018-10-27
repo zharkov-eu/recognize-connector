@@ -1,29 +1,18 @@
+using Xunit;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
-using Xunit;
+using ExpertSystem.Tests.Configuration;
 
 namespace ExpertSystem.Tests.Models
 {
 	/// <summary>Класс для тестирования методов SocketGroupExtension</summary>
 	public class SocketGroupExtensionTest
 	{
-
-		private readonly string _line;
-		private readonly string[] _parts;
-		private readonly SocketGroup _group;
+		// Тестовые данные
+		private readonly string _line = TestData.GetSocketGroupCsvLine();
+		private readonly string[] _parts = TestData.GetSocketGroupCsvLine().Split(SocketGroupExtension.Delimiter);
+		private readonly SocketGroup _group = TestData.GetSocketGroup();
 		
-		public SocketGroupExtensionTest()
-		{
-			_line = "Audio;5145167-4;XF2L-0425-1A;";
-			_parts = _line.Split(SocketGroupExtension.Delimiter);
-			
-			_group = new SocketGroup
-			{
-				GroupName = "Audio",
-				SocketNames = {"5145167-4", "XF2L-0425-1A"}
-			};
-		}
-
 		/// <summary>Проверка десериалзициции CSV частей в SocketGroup</summary>
 		[Fact]
 		public void Serialize_isCorrect()

@@ -33,7 +33,7 @@ namespace ExpertSystem.Tests.Parsers
         public void SocketParser_GetSocketGroups()
         {
             var socketGroups = TestData.GetSocketGroups();
-            var socketGroup = TestData.GetTestGroup();
+            var socketGroup = TestData.GetSocketGroup();
 
             Assert.True(socketGroup.Equals(socketGroups[0]), "Данные группы разъемов должны парситься правильно");
         }

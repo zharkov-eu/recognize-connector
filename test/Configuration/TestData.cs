@@ -115,7 +115,7 @@ namespace ExpertSystem.Tests.Configuration
 
 		/// <summary>Получить тестовую группу разъёмов</summary>
 		/// <returns>Группа разъёмов для дальнешего тестирования</returns>
-		public static SocketGroup GetTestGroup()
+		public static SocketGroup GetSocketGroup()
 		{
 			return new SocketGroup
 			{
