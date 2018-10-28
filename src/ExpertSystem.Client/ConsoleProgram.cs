@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using ExpertSystem.Client.Models;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
 using Grpc.Core.Utils;
@@ -10,29 +11,6 @@ using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Client
 {
-    public enum Command
-    {
-        Exit,
-        ForwardProcessing,
-        BackProcessing,
-        LogicProcessing,
-        FuzzyProcessingMamdani,
-        FuzzyProcessingSugeno,
-        FuzzyNeuralProcessing,
-
-        AddNewSocket,
-        UpdateExistingSocket,
-        DeleteExistingSocket,
-
-        GetSocketGroups,
-        AddSocketGroup,
-        RemoveSocketGroup,
-
-        GetSocketsInGroup,
-        AddSocketToGroup,
-        RemoveSocketFromGroup
-    }
-
     public class ConsoleProgram : Program
     {
         public ConsoleProgram(ProgramOptions options)
@@ -45,28 +23,28 @@ namespace ExpertSystem.Client
             string choice;
             PrintCommands();
 
-            while ((choice = Console.ReadLine()) != ((int)Command.Exit).ToString())
+            while ((choice = Console.ReadLine()) != ((int)ConsoleCommands.Exit).ToString())
             {
                 string socketName;
                 List<Fact> socketFacts;
 
-                var choiceNum = (Command)int.Parse(choice);
+                var choiceNum = (ConsoleCommands)int.Parse(choice);
                 switch (choiceNum)
                 {
-                    case Command.ForwardProcessing:
+                    case ConsoleCommands.ForwardProcessing:
                         WritePaddedTop("Прямой продукционный вывод, введите факты:");
                         socketFacts = GetSocketFactsFromConsole();
                         ForwardProcessing(new FactSet(socketFacts.ToArray())).ConfigureAwait(false);
                         break;
 
-                    case Command.BackProcessing:
+                    case ConsoleCommands.BackProcessing:
                         WritePaddedTop("Обратный продукционный вывод, введите название разъема:");
                         Console.Write("Название разъема: ");
                         socketName = Console.ReadLine();
                         BackProcessing(socketName).ConfigureAwait(false);
                         break;
 
-                    case Command.LogicProcessing:
+                    case ConsoleCommands.LogicProcessing:
                         WritePaddedTop("Логический вывод, введите посылки:");
                         socketFacts = GetSocketFactsFromConsole();
                         WritePaddedTop("Логический вывод, введите утверждение:");
@@ -75,34 +53,34 @@ namespace ExpertSystem.Client
                         LogicProcessing(new FactSet(socketFacts.ToArray()), socketName).ConfigureAwait(false);
                         break;
 
-                    case Command.FuzzyProcessingMamdani:
+                    case ConsoleCommands.FuzzyProcessingMamdani:
                         WritePaddedTop("Нечеткий вывод Мамдани, введите факты:");
-                        socketFacts = GetSocketFactsFromConsole(new[]
+                        socketFacts = GetSocketFactsFromConsole(new List<SocketDomain>
                         {
                             SocketDomain.NumberOfContacts, SocketDomain.SizeLength, SocketDomain.SizeWidth
                         });
                         FuzzyProcessingMamdani(new FactSet(socketFacts.ToArray())).ConfigureAwait(false);
                         break;
 
-                    case Command.FuzzyProcessingSugeno:
+                    case ConsoleCommands.FuzzyProcessingSugeno:
                         WritePaddedTop("Нечеткий вывод Сугэно, введите факты:");
-                        socketFacts = GetSocketFactsFromConsole(new[]
+                        socketFacts = GetSocketFactsFromConsole(new List<SocketDomain>
                         {
                             SocketDomain.NumberOfContacts, SocketDomain.SizeLength, SocketDomain.SizeWidth
                         });
                         FuzzyProcessingSugeno(new FactSet(socketFacts.ToArray())).ConfigureAwait(false);
                         break;
 
-                    case Command.FuzzyNeuralProcessing:
+                    case ConsoleCommands.FuzzyNeuralProcessing:
                         WritePaddedTop("Нейро-нечеткий вывод с использованием ANFIS, введите факты:");
-                        socketFacts = GetSocketFactsFromConsole(new[]
+                        socketFacts = GetSocketFactsFromConsole(new List<SocketDomain>
                         {
                             SocketDomain.NumberOfContacts, SocketDomain.SizeLength, SocketDomain.SizeWidth
                         });
                         FuzzyNeuralProcessing(new FactSet(socketFacts.ToArray())).ConfigureAwait(false);
                         break;
 
-                    case Command.AddNewSocket:
+                    case ConsoleCommands.AddNewSocket:
                         WritePaddedTop("Добавление нового разъема, введите название:");
                         var newSocketName = Console.ReadLine();
                         if (GetSocketByName(newSocketName).Result != null)
@@ -116,7 +94,7 @@ namespace ExpertSystem.Client
                         CreateSocket(socketFacts, newSocketName).ConfigureAwait(false);
                         break;
 
-                    case Command.UpdateExistingSocket:
+                    case ConsoleCommands.UpdateExistingSocket:
                         WritePaddedTop("Обновление существующего разъема, введите название разъема:");
                         var updatingSocketName = Console.ReadLine();
                         var updatingSocket = GetSocketByName(updatingSocketName).Result;
@@ -132,7 +110,7 @@ namespace ExpertSystem.Client
                         UpdateSocket(socketFacts, updatingSocket).ConfigureAwait(false);
                         break;
 
-                    case Command.DeleteExistingSocket:
+                    case ConsoleCommands.DeleteExistingSocket:
                         WritePaddedTop("Удаление существующего разъема, введите название разъема:");
                         var deletingSocketName = Console.ReadLine();
                         var deletingSocket = GetSocketByName(deletingSocketName).Result;
@@ -145,11 +123,13 @@ namespace ExpertSystem.Client
                         DeleteSocketByName(deletingSocketName).ConfigureAwait(false);
                         break;
 
-                    case Command.GetSocketsInGroup:
+                    case ConsoleCommands.GetSocketsInGroup:
                         WritePaddedTop("Получение разъемов группы, введите название группы:");
+                        var groupName = Console.ReadLine();
+                        GetSocketsByGroupName(groupName).ConfigureAwait(false);
                         break;
 
-                    case Command.AddSocketToGroup:
+                    case ConsoleCommands.AddSocketToGroup:
                         WritePaddedTop("Добавление существующего разъема в группу, введите название разъема:");
                         var requiredSocketName = Console.ReadLine();
                         var socket = GetSocketByName(requiredSocketName).Result;
@@ -160,24 +140,41 @@ namespace ExpertSystem.Client
                         }
 
                         WritePaddedTop("Введите название группы:");
-                        var groupName = Console.ReadLine();
-
+                        groupName = Console.ReadLine();
+                        AddSocketToGroup(socket, groupName).ConfigureAwait(false);
                         break;
 
-                    case Command.RemoveSocketFromGroup:
+                    case ConsoleCommands.RemoveSocketFromGroup:
                         WritePaddedTop("Удаление существующего разъема из группы, введите название разъема:");
+                        requiredSocketName = Console.ReadLine();
+                        socket = GetSocketByName(requiredSocketName).Result;
+                        if (socket == null)
+                        {
+                            Console.WriteLine($"Разъем {requiredSocketName} не существует");
+                            break;
+                        }
+
+                        WritePaddedTop("Введите название группы:");
+                        groupName = Console.ReadLine();
+
+                        RemoveSocketFromGroup(socket, groupName).ConfigureAwait(false);
                         break;
 
-                    case Command.GetSocketGroups:
+                    case ConsoleCommands.GetSocketGroups:
                         WritePaddedTop("Получение всех групп");
+                        GetSocketsGroups().ConfigureAwait(false);
                         break;
 
-                    case Command.AddSocketGroup:
+                    case ConsoleCommands.AddSocketGroup:
                         WritePaddedTop("Добавление новой группы, введите название группы:");
+                        groupName = Console.ReadLine();
+                        AddNewGroup(groupName).ConfigureAwait(false);
                         break;
 
-                    case Command.RemoveSocketGroup:
+                    case ConsoleCommands.RemoveSocketGroup:
                         WritePaddedTop("Удаление существующей группы, введите название группы:");
+                        groupName = Console.ReadLine();
+                        RemoveGroup(groupName).ConfigureAwait(false);
                         break;
 
                     default:
@@ -347,7 +344,7 @@ namespace ExpertSystem.Client
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                WritePaddedTop(e.Message);
             }
         }
 
@@ -363,7 +360,7 @@ namespace ExpertSystem.Client
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                WritePaddedTop(e.Message);
             }
         }
 
@@ -377,51 +374,123 @@ namespace ExpertSystem.Client
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                WritePaddedTop(e.Message);
             }
         }
 
-        //private async Task<bool> IsSocketInGroup(string socketName)
-        //{
-        //    var s = new CustomSocketIdentityJoinGroup();
-        //    s.
-        //    return Client.CheckSocketInGroupAsync()
-        //}
+        private async Task GetSocketsByGroupName(string groupName)
+        {
+            var groupIdentity = new SocketGroupIdentity { GroupName = groupName };
+            try
+            {
+                var socketsInGroup = await Client.GetSocketsInGroup(groupIdentity).ResponseStream.ToListAsync();
+                WritePaddedTop($"Разъемы принадлежащие группе {groupName}");
+                var socketsNamesResultString = string.Empty;
+                foreach (var socket in socketsInGroup)
+                    socketsNamesResultString += $"{socket.SocketName}; ";
+                Console.WriteLine(socketsNamesResultString);
+            }
+            catch (Exception e)
+            {
+                WritePaddedTop(e.Message);
+            }
+        }
 
-        //private async Task AddSocketToGroup()
-        //{
-        //    try
-        //    {
-        //        await Client.AddToSocketGroupAsync();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-        //}
+        private async Task AddSocketToGroup(CustomSocket socket, string groupName)
+        {
+            var socketJoinGroup = new CustomSocketIdentityJoinGroup
+            {
+                Socket = new CustomSocketIdentity { SocketName = socket.SocketName },
+                Group = new SocketGroupIdentity { GroupName = groupName }
+            };
+            try
+            {
+                await Client.AddToSocketGroupAsync(socketJoinGroup);
+                Console.WriteLine($"Разъем: {socket.SocketName} был успешно добавлен в группу {groupName}.");
+            }
+            catch (Exception e)
+            {
+                WritePaddedTop(e.Message);
+            }
+        }
 
-        //private async Task<CustomSocket> GetGroupByName(string groupName)
-        //{
-        //    var groupIdentity = new SocketGroupIdentity{ GroupName = groupName };
-        //    var socket = await Client.groa(socketIdentity);
-        //    return socket;
-        //}
+        private async Task RemoveSocketFromGroup(CustomSocket socket, string groupName)
+        {
+            var socketJoinGroup = new CustomSocketIdentityJoinGroup()
+            {
+                Socket = new CustomSocketIdentity { SocketName = socket.SocketName },
+                Group = new SocketGroupIdentity { GroupName = groupName }
+            };
+            try
+            {
+                await Client.RemoveFromSocketGroupAsync(socketJoinGroup);
+                Console.WriteLine($"Разъем: {socket.SocketName} был успешно удалён из группы {groupName}.");
+            }
+            catch (Exception e)
+            {
+                WritePaddedTop(e.Message);
+            }
+        }
+
+        private async Task GetSocketsGroups()
+        {
+            try
+            {
+                var groups = await Client.GetSocketGroups(new Empty()).ResponseStream.ToListAsync();
+                var socketsGroupsResultString = string.Empty;
+                foreach (var group in groups)
+                    socketsGroupsResultString += $"{group.GroupName}; ";
+                Console.WriteLine(socketsGroupsResultString);
+            }
+            catch (Exception e)
+            {
+                WritePaddedTop(e.Message);
+            }
+        }
+
+        private async Task AddNewGroup(string groupName)
+        {
+            var groupIdentity = new SocketGroupIdentity { GroupName = groupName };
+            try
+            {
+                await Client.AddSocketGroupAsync(groupIdentity);
+                Console.WriteLine($"Группа: {groupName} была успешно добавлена.");
+            }
+            catch (Exception e)
+            {
+                WritePaddedTop(e.Message);
+            }
+        }
+
+        private async Task RemoveGroup(string groupName)
+        {
+            var groupIdentity = new SocketGroupIdentity { GroupName = groupName };
+            try
+            {
+                await Client.DeleteSocketGroupAsync(groupIdentity);
+                Console.WriteLine($"Группа: {groupName} была успешно удалена.");
+            }
+            catch (Exception e)
+            {
+                WritePaddedTop(e.Message);
+            }
+        }
 
         #endregion
 
         private static void PrintCommands()
         {
             WritePaddedTop("Выберите действие: ");
-            Console.WriteLine($"{(int)Command.ForwardProcessing} - прямой продукционный вывод");
-            Console.WriteLine($"{(int)Command.BackProcessing} - обратный продукционный вывод");
-            Console.WriteLine($"{(int)Command.LogicProcessing} - логический вывод");
-            Console.WriteLine($"{(int)Command.FuzzyProcessingMamdani} - нечеткий вывод (Мамдани)");
-            Console.WriteLine($"{(int)Command.FuzzyProcessingSugeno} - нечеткий вывод (Сугэно)");
-            Console.WriteLine($"{(int)Command.FuzzyNeuralProcessing} - нейро-нечеткий вывод (ANFIS)");
-            Console.WriteLine($"{(int)Command.AddNewSocket} - добавление нового разъёма");
-            Console.WriteLine($"{(int)Command.UpdateExistingSocket} - обновление существующего разъёма");
-            Console.WriteLine($"{(int)Command.DeleteExistingSocket} - удаление существующего разъёма");
-            WritePaddedBottom($"{(int)Command.Exit} - выход");
+            Console.WriteLine($"{(int)ConsoleCommands.ForwardProcessing} - прямой продукционный вывод");
+            Console.WriteLine($"{(int)ConsoleCommands.BackProcessing} - обратный продукционный вывод");
+            Console.WriteLine($"{(int)ConsoleCommands.LogicProcessing} - логический вывод");
+            Console.WriteLine($"{(int)ConsoleCommands.FuzzyProcessingMamdani} - нечеткий вывод (Мамдани)");
+            Console.WriteLine($"{(int)ConsoleCommands.FuzzyProcessingSugeno} - нечеткий вывод (Сугэно)");
+            Console.WriteLine($"{(int)ConsoleCommands.FuzzyNeuralProcessing} - нейро-нечеткий вывод (ANFIS)");
+            Console.WriteLine($"{(int)ConsoleCommands.AddNewSocket} - добавление нового разъёма");
+            Console.WriteLine($"{(int)ConsoleCommands.UpdateExistingSocket} - обновление существующего разъёма");
+            Console.WriteLine($"{(int)ConsoleCommands.DeleteExistingSocket} - удаление существующего разъёма");
+            WritePaddedBottom($"{(int)ConsoleCommands.Exit} - выход");
         }
 
         private static void PrintDomains(IEnumerable<SocketDomain> domains = null)
@@ -439,7 +508,7 @@ namespace ExpertSystem.Client
             Console.WriteLine($"{0.ToString().PadRight(3)} - завершить ввод и продолжить");
         }
 
-        private static List<Fact> GetSocketFactsFromConsole(IEnumerable<SocketDomain> domains = null)
+        private static List<Fact> GetSocketFactsFromConsole(List<SocketDomain> domains = null)
         {
             WritePaddedTop("Добавьте следующее свойство: ");
             string domainChoice;
@@ -490,9 +559,12 @@ namespace ExpertSystem.Client
         {
             switch (input)
             {
-                case null: throw new ArgumentNullException(nameof(input));
-                case "": throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input));
-                default: return input.First().ToString().ToUpper() + input.Substring(1);
+                case null:
+                    throw new ArgumentNullException(nameof(input));
+                case "":
+                    throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input));
+                default:
+                    return input.First().ToString().ToUpper() + input.Substring(1);
             }
         }
     }
