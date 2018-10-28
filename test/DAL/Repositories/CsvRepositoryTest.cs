@@ -27,8 +27,12 @@ namespace ExpertSystem.Tests.DAL.Repositories
         // Мок репозитория
         private readonly CsvRepository<CustomSocket> _repositoryMock;
 
+        // Сериализатор WAL-записей
+        private readonly WalEntrySerializer<CustomSocket> _walSerializer 
+            = new WalEntrySerializer<CustomSocket>(new CustomSocketSerializer());
+        
         // Тестовые данные
-        private readonly string _testCsvData = TestData.GetSocketCsvLine();
+        private readonly string _testCsvData = TestData.GetSocketsCsv();
         private readonly CustomSocket _testSocket = TestData.GetSocket();
 
         public CsvRepositoryTest()
@@ -39,10 +43,10 @@ namespace ExpertSystem.Tests.DAL.Repositories
             Directory.CreateDirectory(_testDir);
             // Определение имени тестового CSV файла
             _testCsvFileName = Path.Combine(_testDir, "csvTest.csv");
-            // Обновление данных CSV файла
-            UpdateTestData();
             // Определение имени тестового WAL файла
             _testWalFileName = Path.Combine(_testDir, "walTest.txt");
+            // Обновление тестовых CSV данных
+            UpdateTestCsvData();
             // Создание мока репозитория
             var serializer = new CustomSocketSerializer();
             var parser = new CsvRecordParser<CustomSocket>(serializer);
@@ -54,14 +58,27 @@ namespace ExpertSystem.Tests.DAL.Repositories
             };
             _repositoryMock = new CsvRepository<CustomSocket>(serializer, parser, options);
             // Синхронизируем репозиторий
+            UpdateTestWalData();
             _repositoryMock.Sync();
         }
 
         /// <summary>Обновление данных CSV файла</summary>
+        private void UpdateTestCsvData()
+        {
+            FileUtils.CreateFileAndFill(_testCsvFileName, _testCsvData);
+        }
+
+        /// <summary>Обновление данных WAL файла</summary>
+        private void UpdateTestWalData()
+        {
+            FileUtils.CreateFileAndFill(_testWalFileName, "");
+        }
+
+        /// <summary>Обновление данных тестовых файлов</summary>
         private void UpdateTestData()
         {
-            // Создание и заполнение CSV файла
-            FileUtils.CreateFileAndFill(_testCsvFileName, _testCsvData);
+            UpdateTestCsvData();
+            UpdateTestWalData();
         }
 
         /// <summary>Проверка верности синхронизации</summary>
@@ -85,20 +102,23 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void Sync_Insert_isCorrect()
         {
             // Arrange
-            UpdateTestData();
-            var insertedSocket = _testSocket;
+            var socketToInsert = _testSocket.Clone();
+            socketToInsert.SocketName = socketToInsert.SocketName + "#";
 
             // Act
-            _repositoryMock.Insert(insertedSocket);
+            _repositoryMock.Insert(socketToInsert);
             _repositoryMock.Sync();
 
             //Assert
             // CSV файл обновлён
-            Assert.True(File.ReadAllText(_testCsvData, Encoding.UTF8).Contains(insertedSocket.SocketName),
-                "Вставленный разъём не присутсвует в CSV файле");
+            Assert.True(File.ReadAllText(_testCsvFileName, Encoding.UTF8).Contains(socketToInsert.SocketName),
+                "Вставленный разъём не присутствует в CSV файле");
             // WAL файл пуст
             Assert.True(new FileInfo(_testWalFileName).Length == 0,
-                "WAL файл не пуст");
+                "WAL файл пуст");
+
+            // Clear
+            UpdateTestData();
         }
 
         /// <summary>Проверка верности синхронизации действия обновления</summary>
@@ -106,9 +126,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void Sync_Update_isCorrect()
         {
             // Arrange
-            var originalSocket = _repositoryMock.GetAllRecords()[0];
-            var hashCode = originalSocket.GetHashCode();
-            var updatedSocket = originalSocket;
+            var updatedSocket = _testSocket.Clone();
+            var hashCode = updatedSocket.GetHashCode();
             updatedSocket.MountingStyle = "Through hole";
 
             // Act
@@ -117,11 +136,14 @@ namespace ExpertSystem.Tests.DAL.Repositories
 
             //Assert
             // CSV файл обновлён
-            Assert.True(File.ReadAllText(_testCsvData, Encoding.UTF8).Contains(updatedSocket.SocketName),
-                "Удалённый разъём не присутсвует в CSV файле");
+            Assert.True(File.ReadAllText(_testCsvFileName, Encoding.UTF8).Contains(updatedSocket.SocketName),
+                "Удалённый разъём не присутствует в CSV файле");
             // WAL файл пуст
             Assert.True(new FileInfo(_testWalFileName).Length == 0,
                 "WAL файл не пуст");
+
+            // Clear
+            UpdateTestData();
         }
 
         /// <summary>Проверка верности синхронизации действия удаления</summary>
@@ -129,20 +151,22 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void Sync_Delete_isCorrect()
         {
             // Arrange
-            var socketToDelete = _repositoryMock.GetAllRecords()[0];
-            var socketToDeleteHashCode = socketToDelete.GetHashCode();
+            var socketToDelete = _testSocket.Clone();
 
             // Act
-//            _repositoryMock.Delete(socketToDeleteHashCode);
+            _repositoryMock.Delete(socketToDelete.SocketName);
             _repositoryMock.Sync();
 
             //Assert
             // CSV файл обновлён
-            Assert.True(!File.ReadAllText(_testCsvData, Encoding.UTF8).Contains(socketToDelete.SocketName),
-                "Удалённый разъём всё ещё в CSV файле");
+            Assert.True(!File.ReadAllText(_testCsvFileName, Encoding.UTF8).Contains(socketToDelete.SocketName),
+                "Удалённый разъём найден в CSV файле");
             // WAL файл пуст
             Assert.True(new FileInfo(_testWalFileName).Length == 0,
                 "WAL файл не пуст");
+
+            // Clear
+            UpdateTestData();
         }
 
         /// <summary>Проверка верности получения списка разъёмов</summary>
@@ -150,7 +174,6 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void GetSockets_isCorrect()
         {
             // Arrange
-            FileUtils.CreateFileAndFill(_testCsvFileName, _testCsvData);
             _repositoryMock.Sync();
 
             // Act
@@ -165,7 +188,7 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void Select_isCorrect()
         {
             // Arrange
-            const string socketName = "3-640428-7";
+            var socketName = _testSocket.SocketName;
 
             // Act
             var actualSocket = _repositoryMock.Select(socketName).Item2;
@@ -179,17 +202,22 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void Insert_isCorrect()
         {
             // Arrange
-            var insertedSocket = _testSocket;
+            var socketToInsert = _testSocket.Clone();
+            socketToInsert.SocketName = socketToInsert.SocketName + "#";
             var expectedWalEntryLine =
-                new WalEntry<CustomSocket>(CsvDbAction.Insert, insertedSocket.GetHashCode(), insertedSocket);
+                new WalEntry<CustomSocket>(CsvDbAction.Insert, socketToInsert.GetHashCode(), socketToInsert);
 
             // Act
-            _repositoryMock.Insert(insertedSocket);
+            _repositoryMock.Insert(socketToInsert);
 
             // Assert
-            Assert.True(_repositoryMock.GetAllRecords().Contains(insertedSocket),
+            Assert.True(_repositoryMock.GetAllRecords().Contains(socketToInsert),
                 "Ожидаемый разъём не найден в репозитории");
-            // TODO: Проверить WAL файл
+            Assert.True(File.ReadAllText(_testWalFileName, Encoding.UTF8).Contains(_walSerializer.Serialize(expectedWalEntryLine)),
+                "Вставленный разъём не присутствует в WAL файле");
+
+            // Clear
+            UpdateTestData();
         }
 
         /// <summary>Проверка правильности выполнения обновления</summary>
@@ -197,11 +225,10 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void Update_isCorrect()
         {
             // Arrange
-            var originalSocket = _repositoryMock.GetAllRecords()[0];
-            var hashCode = originalSocket.GetHashCode();
-            var updatedSocket = originalSocket;
+            var hashCode = _testSocket.GetHashCode();
+            var updatedSocket = _testSocket.Clone();
             updatedSocket.NumberOfContacts++;
-            var expectedWalEntryLine =
+//            var expectedWalEntryLine =
 //                new WalEntry(CsvDbAction.Update, updatedSocket.GetHashCode(), updatedSocket).ToString();
 
             // Act
@@ -211,6 +238,9 @@ namespace ExpertSystem.Tests.DAL.Repositories
             Assert.True(_repositoryMock.GetAllRecords().Contains(updatedSocket),
                 "Обновлённый разъём не найден среди доступных");
             // TODO: Проверить WAL файл
+
+            // Clear
+            UpdateTestData();
         }
 
         /// <summary>Проверка правильности выполнения удаления</summary>
@@ -218,18 +248,20 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void Delete_isCorrect()
         {
             // Arrange
-            var deletedScoket = _repositoryMock.GetAllRecords()[0];
-            var hashCode = deletedScoket.GetHashCode();
+            var socketToDelete = _testSocket.Clone();
 //            var expectedWalEntryLine =
 //                new WalEntry(CsvDbAction.Update, deletedScoket.GetHashCode()).ToString();
 
             // Act
-//            _repositoryMock.Delete(hashCode);
+            _repositoryMock.Delete(socketToDelete.SocketName);
 
             // Assert
-            Assert.True(!_repositoryMock.GetAllRecords().Contains(deletedScoket),
+            Assert.True(!_repositoryMock.GetAllRecords().Contains(socketToDelete),
                 "Удалённый разъём найден среди доступных");
             // TODO: Проверить WAL файл
+
+            // Clear
+            UpdateTestData();
         }
 
         /// <inheritdoc />

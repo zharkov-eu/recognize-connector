@@ -54,7 +54,7 @@ namespace ExpertSystem.Server.DAL.Repositories
 
         /// <summary>Конструктор репозитория</summary>
         /// <param name="options">Опции репозитория</param>
-        /// <param name="serializer">Расшерение данного типа</param>
+        /// <param name="serializer">Расширение данного типа</param>
         /// <param name="parser">Парсер данного типа</param>
         public CsvRepository(ICsvRecordSerializer<T> serializer, CsvRecordParser<T> parser,
             CsvRepositoryOptions options)
@@ -76,14 +76,14 @@ namespace ExpertSystem.Server.DAL.Repositories
         /// <summary>Синхронизация репозитория</summary>
         public CsvRepository<T> Sync()
         {
-            // Очистака предыдущих значений записей
+            // Очистка предыдущих значений записей
             _records.Clear();
             _recordsByName.Clear();
 
             // Читаем доступные записи из CSV файла
-            using (var reader = new StreamReader(File.OpenRead(_options.CsvFileName)))
+            using (var csvReader = new StreamReader(File.OpenRead(_options.CsvFileName)))
             {
-                foreach (var record in _parser.ParseRecords(reader))
+                foreach (var record in _parser.ParseRecords(csvReader))
                 {
                     var hashCode = record.GetHashCode();
                     if (_records.ContainsKey(hashCode)) continue;
@@ -93,10 +93,10 @@ namespace ExpertSystem.Server.DAL.Repositories
             }
 
             // Читаем требуемые изменения WAL файла и применяем их
-            using (var reader = new StreamReader(_walStream))
+            var walReader = new StreamReader(_walStream, Encoding.UTF8, false, 1024, true);
             {
                 string line;
-                while ((line = reader.ReadLine()) != null)
+                while ((line = walReader.ReadLine()) != null)
                 {
                     var entry = _walSerializer.Deserialize(line);
                     switch (entry.Action)
@@ -118,7 +118,7 @@ namespace ExpertSystem.Server.DAL.Repositories
             }
 
             // Очищаем WAL файл
-            FileUtils.ClearFile(_options.WalFileName);
+            _walStream.SetLength(0);
 
             // Очищаем CSV файл и заполняем его новыми значениями
             FileUtils.ClearFile(_options.CsvFileName);
@@ -141,7 +141,7 @@ namespace ExpertSystem.Server.DAL.Repositories
 
         /// <summary>Выполнить действие выбора</summary>
         /// <param name="recordName">Имя записи</param>
-        /// <returns>Кортеж из хэш кода и записи с переданым именем</returns>
+        /// <returns>Кортеж из хэш кода и записи с переданным именем</returns>
         public Tuple<int, T> Select(string recordName)
         {
             return _recordsByName.TryGetValue(recordName, out var hashCode)
@@ -156,12 +156,12 @@ namespace ExpertSystem.Server.DAL.Repositories
         {
             _recordsByName.Add(GetRecordId(record), record.GetHashCode());
             _records.Add(record.GetHashCode(), record);
-            _walStream.Write(
-                Encoding.UTF8.GetBytes(new WalEntry<T>(CsvDbAction.Insert, record.GetHashCode(), record).ToString()));
+            using (var streamWriter = new StreamWriter(_walStream, Encoding.UTF8, 1024, true))
+                streamWriter.WriteLine(_walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Insert, record.GetHashCode(), record)));
             return record;
         }
 
-        /// <summary>Выполнить действие изменния</summary>
+        /// <summary>Выполнить действие изменения</summary>
         /// <param name="hashCode">Хэш код записи</param>
         /// <param name="record">Данные</param>
         /// <returns>Обновлённая запись</returns>
@@ -170,7 +170,8 @@ namespace ExpertSystem.Server.DAL.Repositories
             _recordsByName.Remove(GetRecordId(_records[hashCode]));
             _recordsByName.Add(GetRecordId(record), hashCode);
             _records.Add(record.GetHashCode(), record);
-            _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry<T>(CsvDbAction.Update, hashCode, record).ToString()));
+            using (var streamWriter = new StreamWriter(_walStream, Encoding.UTF8, 1024, true))
+                streamWriter.WriteLine(_walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Update, hashCode, record)));
             return record;
         }
 
@@ -183,7 +184,8 @@ namespace ExpertSystem.Server.DAL.Repositories
                 var record = _records[hashCode];
                 _recordsByName.Remove(GetRecordId(record));
                 _records.Remove(hashCode);
-                _walStream.Write(Encoding.UTF8.GetBytes(new WalEntry<T>(CsvDbAction.Delete, hashCode).ToString()));
+                using (var streamWriter = new StreamWriter(_walStream, Encoding.UTF8, 1024, true))
+                    streamWriter.Write(_walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Delete, hashCode)));
             }
         }
 
