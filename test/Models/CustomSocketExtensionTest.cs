@@ -12,7 +12,7 @@ namespace ExpertSystem.Tests.Models
         private readonly string _testLine = TestData.GetSocketCsvLine();
         private readonly CustomSocket _testSocket = TestData.GetSocket();
 
-        /// <summary>Проверка коректности серизации CustomSocket в CSV</summary>
+        /// <summary>Проверка корректности сериализации CustomSocket в CSV</summary>
         [Fact]
         public void Serialize_isCorrect()
         {

@@ -25,7 +25,8 @@ namespace ExpertSystem.Tests.Parsers
             var sockets = TestData.GetSockets();
             var socket = TestData.GetSocket();
 
-            Assert.True(socket.Equals(sockets[0]), "Данные разъема должны парситься правильно");
+            Assert.True(socket.Equals(sockets[0]),
+                "Данные разъема должны десериализироваться правильно");
         }
 
         /// <summary></summary>
@@ -35,7 +36,8 @@ namespace ExpertSystem.Tests.Parsers
             var socketGroups = TestData.GetSocketGroups();
             var socketGroup = TestData.GetSocketGroup();
 
-            Assert.True(socketGroup.Equals(socketGroups[0]), "Данные группы разъемов должны парситься правильно");
+            Assert.True(socketGroup.Equals(socketGroups[0]),
+                "Данные группы разъемов должны десериализироваться правильно");
         }
     }
 }

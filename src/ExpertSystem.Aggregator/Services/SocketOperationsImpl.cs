@@ -35,21 +35,22 @@ namespace ExpertSystem.Aggregator.Services
             _socketCache = socketCache;
             _socketGroupCache = socketGroupCache;
             _options = options;
-
-            var rulesGenerator = new ProductionRulesGenerator();
+            
+            var sockets = _socketCache.GetAll();
+            var productionRulesGenerator = new ProductionRulesGenerator();
             var logicRulesGenerator = new LogicRulesGenerator();
             var fuzzyRulesGenerator = new FuzzyRulesGenerator();
             var neuralRulesGenerator = new NeuralRulesGenerator();
 
             // Продукционный вывод
-            var rulesGraph = rulesGenerator.GenerateRules(_socketCache.GetAll());
+            var rulesGraph = productionRulesGenerator.GenerateRules(sockets);
             // Логический вывод
-            var logicRules = logicRulesGenerator.GenerateRules(_socketCache.GetAll());
+            var logicRules = logicRulesGenerator.GenerateRules(sockets);
             // Нечеткий вывод
-            var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(_socketCache.GetAll());
-            var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, _socketCache.GetAll());
+            var fuzzyDomains = fuzzyRulesGenerator.GetFuzzyDomains(sockets);
+            var fuzzyFacts = fuzzyRulesGenerator.GetFuzzyFacts(fuzzyDomains, sockets);
             // Нейро-нечеткий вывод
-            var neuralNetwork = neuralRulesGenerator.GetNeuralNetwork(_socketCache.GetAll());
+            var neuralNetwork = neuralRulesGenerator.GetNeuralNetwork(sockets);
 
             var processorOptions = new ProcessorOptions {Debug = _options.Debug};
             _productionProcessor = new ProductionProcessor(rulesGraph, processorOptions);

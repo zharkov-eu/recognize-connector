@@ -301,7 +301,7 @@ namespace ExpertSystem.Tests.DAL.Repositories
         }
     }
 
-    public static partial class FileUtils
+    public static class FileUtils
     {
         /// <summary>Создать файл и заполнить данными</summary>
         /// <param name="path">Путь до файла</param>

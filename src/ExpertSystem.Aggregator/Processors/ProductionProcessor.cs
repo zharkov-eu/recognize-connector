@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using ExpertSystem.Aggregator.Exceptions;
 using ExpertSystem.Aggregator.Models.Graph;
+using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
+using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Aggregator.Processors
 {
@@ -29,7 +31,7 @@ namespace ExpertSystem.Aggregator.Processors
         /// var socketList = processor.ForwardProcessing(factSet);
         /// </code>
         /// </example>
-        public List<string> ForwardProcessing(FactSet factSet)
+        public IEnumerable<string> ForwardProcessing(FactSet factSet)
         {
             var socketList = new List<string>();
             var queue = new Queue<GraphNode>();
@@ -98,10 +100,12 @@ namespace ExpertSystem.Aggregator.Processors
             return facts;
         }
 
+        public void AddSocket(CustomSocket socket) => _graph.AddSocket(socket);
+
         private static bool CompareDomains(FactSet current, FactSet expected)
         {
             var compared = true;
-            var facts = new Dictionary<CustomSocketDomain.SocketDomain, object>();
+            var facts = new Dictionary<SocketDomain, object>();
             foreach (var fact in expected.Facts)
                 facts.Add(fact.Domain, fact.Value);
             foreach (var fact in current.Facts)

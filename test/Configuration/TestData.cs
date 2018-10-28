@@ -114,7 +114,7 @@ namespace ExpertSystem.Tests.Configuration
 		}
 
 		/// <summary>Получить тестовую группу разъёмов</summary>
-		/// <returns>Группа разъёмов для дальнешего тестирования</returns>
+		/// <returns>Группа разъёмов для дальнейшего тестирования</returns>
 		public static SocketGroup GetSocketGroup()
 		{
 			return new SocketGroup
@@ -132,7 +132,7 @@ namespace ExpertSystem.Tests.Configuration
 		}
 
 		/// <summary>Получить CSV файл группы разъёмов</summary>
-		/// <returns>Строка CSV файла группы разъёмов для дельнейшего тестирования</returns>
+		/// <returns>Строка CSV файла группы разъёмов для дальнейшего тестирования</returns>
 		public static string GetSocketGroupCsv()
 		{
 			var csvSnapshot = "group_name;sockets;\n";
