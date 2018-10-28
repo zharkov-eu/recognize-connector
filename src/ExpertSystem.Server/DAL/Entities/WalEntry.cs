@@ -10,7 +10,7 @@ namespace ExpertSystem.Server.DAL.Entities
         internal readonly int HashCode;
         internal readonly T Record;
 
-        public WalEntry(CsvDbAction action, int hashCode, T record = default(T))
+        public WalEntry(CsvDbAction action, int hashCode, T record)
         {
             Action = action;
             HashCode = hashCode;

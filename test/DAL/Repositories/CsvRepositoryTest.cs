@@ -86,15 +86,17 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void Sync_isCorrect()
         {
             // Arrange
-            UpdateTestData();
 
             // Act
             _repositoryMock.Sync();
 
             // Assert
-            Assert.Equal(GetNumLinesInFile(_testCsvFileName, 1), _repositoryMock.GetAllRecords().Count);
-            Assert.True(File.Exists(_testWalFileName), "WAL файл не создан");
-            Assert.True(new FileInfo(_testWalFileName).Length == 0, "WAL файл не пуст");
+            Assert.True(GetNumLinesInFile(_testCsvFileName, 1).Equals(_repositoryMock.GetAllRecords().Count), 
+                "Новое число записей в CSV должно равнять числу разъёмов в памяти");
+            Assert.True(File.Exists(_testWalFileName), 
+                "WAL файл не существует");
+            Assert.True(new FileInfo(_testWalFileName).Length == 0, 
+                "WAL файл не пуст");
         }
 
         /// <summary>Проверка верности синхронизации действия вставки</summary>
@@ -180,7 +182,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
             var actualSockets = _repositoryMock.GetAllRecords();
 
             // Assert
-            Assert.Equal(GetNumLines(_testCsvData, 1), actualSockets.Count);
+            Assert.True(GetNumLines(_testCsvData, 1).Equals(actualSockets.Count), 
+                "Полученное число разъёмов не соответствует ожидаемому числу");
         }
 
         /// <summary>Проверка правильности выполнения выборки</summary>
@@ -194,7 +197,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
             var actualSocket = _repositoryMock.Select(socketName).Item2;
 
             // Assert
-            Assert.Equal(socketName, actualSocket.SocketName);
+            Assert.True(socketName.Equals(actualSocket.SocketName), 
+                "Полученный разъём не соответствует ожидаемому по имени");
         }
 
         /// <summary>Проверка правильности выполнения вставки</summary>
@@ -204,8 +208,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
             // Arrange
             var socketToInsert = _testSocket.Clone();
             socketToInsert.SocketName = socketToInsert.SocketName + "#";
-            var expectedWalEntryLine =
-                new WalEntry<CustomSocket>(CsvDbAction.Insert, socketToInsert.GetHashCode(), socketToInsert);
+            var expectedWalEntryLine = _walSerializer.Serialize(
+                new WalEntry<CustomSocket>(CsvDbAction.Insert, socketToInsert.GetHashCode(), socketToInsert));
 
             // Act
             _repositoryMock.Insert(socketToInsert);
@@ -213,8 +217,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
             // Assert
             Assert.True(_repositoryMock.GetAllRecords().Contains(socketToInsert),
                 "Ожидаемый разъём не найден в репозитории");
-            Assert.True(File.ReadAllText(_testWalFileName, Encoding.UTF8).Contains(_walSerializer.Serialize(expectedWalEntryLine)),
-                "Вставленный разъём не присутствует в WAL файле");
+            Assert.True(File.ReadAllText(_testWalFileName, Encoding.UTF8).Contains(expectedWalEntryLine),
+                "Запись о вставке разъёма не присутствует в WAL файле");
 
             // Clear
             UpdateTestData();
@@ -225,11 +229,11 @@ namespace ExpertSystem.Tests.DAL.Repositories
         public void Update_isCorrect()
         {
             // Arrange
-            var hashCode = _testSocket.GetHashCode();
             var updatedSocket = _testSocket.Clone();
-            updatedSocket.NumberOfContacts++;
-//            var expectedWalEntryLine =
-//                new WalEntry(CsvDbAction.Update, updatedSocket.GetHashCode(), updatedSocket).ToString();
+            var hashCode = updatedSocket.GetHashCode();
+            updatedSocket.MountingStyle = "Through hole";
+            var expectedWalLine = _walSerializer.Serialize(
+                new WalEntry<CustomSocket>(CsvDbAction.Update, updatedSocket.GetHashCode(), updatedSocket));
 
             // Act
             _repositoryMock.Update(hashCode, updatedSocket);
@@ -238,6 +242,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
             Assert.True(_repositoryMock.GetAllRecords().Contains(updatedSocket),
                 "Обновлённый разъём не найден среди доступных");
             // TODO: Проверить WAL файл
+//            Assert.True(File.ReadAllText(_testWalFileName, Encoding.UTF8).Contains(expectedWalLine),
+//                "Запись об обновлении разъёма не присутствует в WAL файле");
 
             // Clear
             UpdateTestData();
@@ -249,8 +255,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
         {
             // Arrange
             var socketToDelete = _testSocket.Clone();
-//            var expectedWalEntryLine =
-//                new WalEntry(CsvDbAction.Update, deletedScoket.GetHashCode()).ToString();
+            var expectedWalLine = _walSerializer.Serialize(
+                new WalEntry<CustomSocket>(CsvDbAction.Delete, socketToDelete.GetHashCode(), socketToDelete));
 
             // Act
             _repositoryMock.Delete(socketToDelete.SocketName);
@@ -258,7 +264,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
             // Assert
             Assert.True(!_repositoryMock.GetAllRecords().Contains(socketToDelete),
                 "Удалённый разъём найден среди доступных");
-            // TODO: Проверить WAL файл
+            Assert.True(File.ReadAllText(_testWalFileName, Encoding.UTF8).Contains(expectedWalLine),
+                "Запись об удалении разъёма не присутствует в WAL файле");
 
             // Clear
             UpdateTestData();
@@ -272,10 +279,10 @@ namespace ExpertSystem.Tests.DAL.Repositories
                 Directory.Delete(_testDir, true);
         }
 
-        /// <summary>Получить число линий в файле</summary>
-        /// <param name="fileName"></param>
-        /// <param name="extra"></param>
-        /// <returns></returns>
+        /// <summary>Получить число линий (строк) в файле</summary>
+        /// <param name="fileName">Имя файла</param>
+        /// <param name="extra">Число лишних строк</param>
+        /// <returns>Число линий в файле</returns>
         private static int GetNumLinesInFile(string fileName, int extra)
         {
             return GetNumLines(File.ReadAllText(fileName, Encoding.UTF8), extra);

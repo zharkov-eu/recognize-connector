@@ -31,8 +31,8 @@ namespace ExpertSystem.Tests.DAL.Serializers
             _insertString = $"Insert:::{_socket.GetHashCode()}:::{_socketCsvLine}";
             _walEntryUpdate = new WalEntry<CustomSocket>(CsvDbAction.Update, _socket.GetHashCode(), _socket);
             _updateString = $"Update:::{_socket.GetHashCode()}:::{_socketCsvLine}";
-            _walEntryDelete = new WalEntry<CustomSocket>(CsvDbAction.Delete, _socket.GetHashCode());
-            _deleteString = $"Delete:::{_socket.GetHashCode()}:::";
+            _walEntryDelete = new WalEntry<CustomSocket>(CsvDbAction.Delete, _socket.GetHashCode(), _socket);
+            _deleteString = $"Delete:::{_socket.GetHashCode()}:::{_socketCsvLine}";
         }
 
         /// <summary>Проверка правильности преобразования WAL записи вставки в строку</summary>
