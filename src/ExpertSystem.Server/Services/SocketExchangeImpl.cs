@@ -115,8 +115,9 @@ namespace ExpertSystem.Server.Services
 
             var group = _groupService.GetSocketGroup(request.GroupName);
             if (group != null)
-                throw new RpcException(new Status(StatusCode.AlreadyExists, 
-                    $"SocketGroup {request.GroupName} already exists"));
+                throw new RpcException(
+                    new Status(StatusCode.AlreadyExists, $"SocketGroup {request.GroupName} already exists")
+                );
             return Task.FromResult(_groupService.CreateSocketGroup(
                 new SocketGroup {GroupName = request.GroupName}));
         }

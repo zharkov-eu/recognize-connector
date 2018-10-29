@@ -43,7 +43,8 @@ namespace ExpertSystem.Aggregator.RulesGenerators
                 values.Add(statement.Result(socket));
             var domain = new FuzzyDomain(CustomSocketDomain.SocketDomain.AmperageCircuit, new FuzzyDomainOption
             {
-                ClusterCount = FuzzyCustomSocket.GetFuzzySocketDomains()[CustomSocketDomain.SocketDomain.AmperageCircuit],
+                ClusterCount =
+                    FuzzyCustomSocket.GetFuzzySocketDomains()[CustomSocketDomain.SocketDomain.AmperageCircuit],
                 Min = values.Min(),
                 Max = values.Max()
             });
@@ -128,6 +129,9 @@ namespace ExpertSystem.Aggregator.RulesGenerators
 
         private List<FuzzyFact> SortClusters(List<FuzzyFact> facts)
         {
+            if (facts.Count == 0)
+                return facts;
+
             var domain = facts.FirstOrDefault().Domain;
 
             var factClusters = new Dictionary<int, List<double>>();
@@ -140,7 +144,9 @@ namespace ExpertSystem.Aggregator.RulesGenerators
 
             foreach (var fact in facts)
                 factClusters[fact.GetMostProbableCluster()].Add(fact.Value);
-            sortedClusters = sortedClusters.OrderBy(id => factClusters[id].Average()).ToArray();
+            sortedClusters = sortedClusters
+                .OrderBy(id => factClusters[id].Count == 0 ? -1 : factClusters[id].Average())
+                .ToArray();
 
             foreach (var fact in facts)
             {

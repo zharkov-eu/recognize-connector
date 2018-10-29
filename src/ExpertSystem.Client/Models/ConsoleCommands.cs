@@ -14,6 +14,7 @@ namespace ExpertSystem.Client.Models
         FuzzyProcessingSugeno,
         FuzzyNeuralProcessing,
 
+        LoadSockets,
         AddNewSocket,
         UpdateExistingSocket,
         DeleteExistingSocket,

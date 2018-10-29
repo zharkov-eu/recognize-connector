@@ -38,8 +38,8 @@ namespace ExpertSystem.Aggregator.Services
             if (randSeed != 0)
                 RandUtil.SetSeed(randSeed);
 
-            if (!values.Any())
-                throw new Exception("Values is empty");
+            if (values.Count == 0)
+                return new List<FuzzyValue>();
 
             // Создаём матрицу принадлежности
             var u = Enumerable.Range(0, values.Count).Select(x =>

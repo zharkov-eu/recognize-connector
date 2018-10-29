@@ -45,7 +45,7 @@ namespace ExpertSystem.Aggregator
             var operationsOptions = new SocketOperationsOptions {Debug = Options.Debug, Version = Options.Version};
             var socketOperations = new SocketOperationsImpl(socketCache, socketGroupCache, _client, operationsOptions);
 
-            Server = new Grpc.Core.Server
+            Server = new Server
             {
                 Services = {SocketOperations.BindService(socketOperations)},
                 Ports = {new ServerPort("localhost", Options.Port, ServerCredentials.Insecure)}
