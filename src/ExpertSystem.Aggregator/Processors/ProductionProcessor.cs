@@ -7,7 +7,7 @@ using static ExpertSystem.Common.Models.CustomSocketDomain;
 
 namespace ExpertSystem.Aggregator.Processors
 {
-    public class ProductionProcessor : AbstractProcessor
+    public class ProductionProcessor : AbstractMutableProcessor
     {
         private readonly RulesGraph _graph;
 
@@ -16,10 +16,12 @@ namespace ExpertSystem.Aggregator.Processors
         {
             _graph = graph;
         }
+        
+        public override void AddSocket(CustomSocket socket) => _graph.AddSocket(socket);
 
-        /// <summary>
-        ///     Прямой продукционный вывод
-        /// </summary>
+        public override void RemoveSocket(CustomSocket socket) => _graph.RemoveSocket(socket);
+
+        /// <summary>Прямой продукционный вывод</summary>
         /// <param name="factSet">Множество входных фактов</param>
         /// <example>
         /// Поиск разъемов для множества входных фактов
@@ -99,8 +101,6 @@ namespace ExpertSystem.Aggregator.Processors
 
             return facts;
         }
-
-        public void AddSocket(CustomSocket socket) => _graph.AddSocket(socket);
 
         private static bool CompareDomains(FactSet current, FactSet expected)
         {

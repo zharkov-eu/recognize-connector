@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
@@ -30,6 +31,48 @@ namespace ExpertSystem.Aggregator.Models.Graph
         {
             AddSocketRules(socket);
             Compress(Root);
+        }
+
+        public void RemoveSocket(CustomSocket socket)
+        {
+            // Начинаем с корня
+            var currentNode = Root;
+            var removableNodes = new List<GraphNode>();
+            
+            // Итерируемся по списку доменов
+            foreach (var domain in _domains)
+            {
+                GraphNode node = null;
+
+                // Конструируем факт
+                var facts = new FactSet(new Fact(
+                    domain, CustomSocketExtension.SocketType.GetProperty(domain.ToString()).GetValue(socket)
+                ));
+
+                // Выбираем факт из текущего списка фактов
+                foreach (var childNode in currentNode.ChildNodes)
+                    if (facts.Equals(childNode.FactSet))
+                        node = childNode;
+
+                // В списке фактов нет этого факта, возвращаем управление
+                // Это означает, что удаляемый разъём не присутствовал в продукционном графе
+                if (node == null)
+                    return;
+                
+                removableNodes.Add(node);
+            }
+
+            // Приводим список помеченных для удаления узлов в обратный порядок
+            removableNodes.Reverse();
+            // Удаляем все узлы, начиная с листовых, пока у них имеется
+            // единственный потомок (или ни одного, в случае листового)
+            foreach (var node in removableNodes)
+            {
+                if (node.ChildNodes.Count - 1 <= 0)
+                    node.ParentNode.ChildNodes = node.ParentNode.ChildNodes.Where(p => p != node).ToList();
+                else
+                    return;
+            }
         }
 
         public void AddSocketRules(CustomSocket socket)

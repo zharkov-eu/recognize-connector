@@ -35,7 +35,7 @@ namespace ExpertSystem.Aggregator.Services
             _socketCache = socketCache;
             _socketGroupCache = socketGroupCache;
             _options = options;
-            
+
             var sockets = _socketCache.GetAll();
             var productionRulesGenerator = new ProductionRulesGenerator();
             var logicRulesGenerator = new LogicRulesGenerator();
@@ -197,6 +197,9 @@ namespace ExpertSystem.Aggregator.Services
             socketTemplate.MergeFrom(request);
 
             var socket = await _client.UpsertSocketAsync(socketTemplate);
+            if (_socketCache.EntityExists(request.SocketName))
+                SyncProcessors(SyncProcessorsAction.Remove, _socketCache.Get(request.SocketName));
+            SyncProcessors(SyncProcessorsAction.Add, socket);
             _socketCache.Upsert(socket);
 
             return socket;
@@ -209,6 +212,7 @@ namespace ExpertSystem.Aggregator.Services
             if (!_socketCache.EntityExists(request.SocketName))
                 throw new RpcException(new Status(StatusCode.NotFound, $"Socket {request.SocketName} not found"));
             await _client.DeleteSocketAsync(new CustomSocketIdentity {SocketName = request.SocketName});
+            SyncProcessors(SyncProcessorsAction.Remove, _socketCache.Get(request.SocketName));
             _socketCache.Remove(request.SocketName);
             return new Empty();
         }
@@ -295,6 +299,25 @@ namespace ExpertSystem.Aggregator.Services
         {
             if (_options.Debug)
                 Console.WriteLine(message);
+        }
+
+        private enum SyncProcessorsAction { Add, Remove }
+
+        private void SyncProcessors(SyncProcessorsAction action, CustomSocket socket)
+        {
+            switch (action)
+            {
+                case SyncProcessorsAction.Add:
+                    _productionProcessor.AddSocket(socket);
+                    _logicProcessor.AddSocket(socket);
+                    break;
+                case SyncProcessorsAction.Remove:
+                    _productionProcessor.RemoveSocket(socket);
+                    _logicProcessor.RemoveSocket(socket);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(action), action, null);
+            }
         }
 
         private static FactSet SocketParamsToFactSet(FuzzySocketParams socket)
