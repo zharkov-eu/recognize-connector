@@ -179,12 +179,25 @@ namespace ExpertSystem.Aggregator.Services
             return Task.FromResult(_socketCache.Get(request.Socket.SocketName));
         }
 
-        public override Task FindSocketsByParamsInGroup(CustomSocketJoinGroup request,
+        public override async Task FindSocketsByParamsInGroup(CustomSocketJoinGroup request,
             IServerStreamWriter<CustomSocketJoinGroup> responseStream, ServerCallContext context)
         {
             DebugWrite($"RpcCall 'FindSocketsByParamsInGroup': '{request}' from {context.Peer}");
 
-            throw new RpcException(new Status(StatusCode.Unimplemented, ""));
+            if (!_socketGroupCache.EntityExists(request.Group.GroupName))
+                throw new RpcException(
+                    new Status(StatusCode.NotFound, $"SocketGroup {request.Group.GroupName} not found")
+                );
+            var socketGroup = _socketGroupCache.Get(request.Group.GroupName);
+            var socketNames = _productionProcessor.ForwardProcessing(SocketToFactSet(request.Socket));
+            var sockets = socketNames.Select(p => _socketCache.Get(p));
+
+            foreach (var socket in sockets)
+            {
+                var groupMatch = socketGroup.SocketNames.Contains(socket.SocketName);
+                var group = groupMatch ? new SocketGroupIdentity {GroupName = socketGroup.GroupName} : null;
+                await responseStream.WriteAsync(new CustomSocketJoinGroup {Socket = socket, Group = group});
+            }
         }
 
         public override async Task<CustomSocket> UpsertSocket(CustomSocket request, ServerCallContext context)
