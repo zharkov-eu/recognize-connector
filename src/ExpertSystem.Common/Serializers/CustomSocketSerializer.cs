@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
-using ExpertSystem.Common.Serializers;
 
-namespace ExpertSystem.Server.DAL.Serializers
+namespace ExpertSystem.Common.Serializers
 {
     public class CustomSocketSerializer : ICsvRecordSerializer<CustomSocket>
     {

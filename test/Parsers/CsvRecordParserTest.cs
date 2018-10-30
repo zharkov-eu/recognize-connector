@@ -1,6 +1,7 @@
 ﻿using Xunit;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Parsers;
+using ExpertSystem.Common.Serializers;
 using ExpertSystem.Server.DAL.Serializers;
 using ExpertSystem.Tests.Configuration;
 

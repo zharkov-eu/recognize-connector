@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ExpertSystem.Client.Models;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Models;
+using ExpertSystem.Common.Parsers;
+using ExpertSystem.Common.Serializers;
 using Grpc.Core.Utils;
 using static ExpertSystem.Common.Models.CustomSocketDomain;
 using static ExpertSystem.Common.Models.CustomSocketExtension;
@@ -75,7 +78,8 @@ namespace ExpertSystem.Client
 
                     case ConsoleCommands.LoadSockets:
                         WritePaddedTop("Загрузка разъемов из CSV-файла:");
-                        Console.WriteLine("Загрузка разъемов из CSV-файла завершена успешно");
+                        var csvFileName = Console.ReadLine();
+                        LoadSockets(csvFileName).GetAwaiter().GetResult();
                         break;
 
                     case ConsoleCommands.AddNewSocket:
@@ -250,6 +254,29 @@ namespace ExpertSystem.Client
         #endregion
 
         #region Sockets/Groups manipulation methods
+        
+        private async Task LoadSockets(string fileName)
+        {
+            try
+            {
+                var sockets = new List<CustomSocket>();
+                var socketParser = new CsvRecordParser<CustomSocket>(new CustomSocketSerializer());
+                using (var csvReader = new StreamReader(File.OpenRead(fileName)))
+                {
+                    foreach (var record in socketParser.ParseRecords(csvReader))
+                        sockets.Add(record);
+                }
+                
+                var upsertSockets = sockets.Select(p => Client.UpsertSocketAsync(p).ResponseAsync);
+                var createdSockets = await Task.WhenAll(upsertSockets);
+                
+                Console.WriteLine($"Загрузка разъемов ({createdSockets.Length}) из CSV-файла завершена успешно");
+            }
+            catch (Exception e)
+            {
+                WritePaddedTop(e.Message);
+            }
+        }
 
         private async Task CreateSocket(List<Fact> socketFacts, string socketName)
         {

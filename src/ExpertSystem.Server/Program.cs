@@ -4,6 +4,7 @@ using Grpc.Core;
 using ExpertSystem.Common;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Parsers;
+using ExpertSystem.Common.Serializers;
 using ExpertSystem.Server.DAL.Repositories;
 using ExpertSystem.Server.DAL.Serializers;
 using ExpertSystem.Server.DAL.Services;

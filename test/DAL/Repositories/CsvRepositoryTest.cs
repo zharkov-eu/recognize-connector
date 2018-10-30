@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Parsers;
+using ExpertSystem.Common.Serializers;
 using ExpertSystem.Server.DAL.Entities;
 using ExpertSystem.Server.DAL.Repositories;
 using ExpertSystem.Server.DAL.Serializers;
