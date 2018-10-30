@@ -33,7 +33,16 @@ namespace ExpertSystem.Client
                 string socketGroupName;
                 List<Fact> socketFacts;
 
-                var choiceNum = (ConsoleCommands) int.Parse(choice);
+                ConsoleCommands choiceNum;
+                try
+                {
+                    choiceNum = (ConsoleCommands) int.Parse(choice);
+                }
+                catch
+                {
+                    WritePaddedTop("Ошибка распознания введённой команды");
+                    continue;
+                }
                 switch (choiceNum)
                 {
                     case ConsoleCommands.ForwardProcessing:
