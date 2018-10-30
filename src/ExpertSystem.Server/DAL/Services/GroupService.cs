@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Server.DAL.Repositories;
@@ -9,7 +8,7 @@ namespace ExpertSystem.Server.DAL.Services
     public class GroupService
     {
         // Репозиторий категорий
-        private CsvRepository<SocketGroup> _groupRepository;
+        private readonly CsvRepository<SocketGroup> _groupRepository;
 
         public GroupService(CsvRepository<SocketGroup> groupRepository)
         {
@@ -43,7 +42,7 @@ namespace ExpertSystem.Server.DAL.Services
         /// <returns>Обновлённая группа разъёмов</returns>
         public SocketGroup GetSocketGroup(string groupName)
         {
-            return _groupRepository.Select(groupName).Item2;
+            return _groupRepository.Select(groupName)?.Item2;
         }
 
         /// <summary>Добавить разъём в группу</summary>
@@ -53,7 +52,7 @@ namespace ExpertSystem.Server.DAL.Services
         public SocketGroup AddSocketToGroup(string groupName, string socketName)
         {
             // Получить группу разъёмов
-            var group = _groupRepository.Select(groupName).Item2;
+            var group = GetSocketGroup(groupName);
             // Проверить существование группы разъёмов
             if (group != null)
             {

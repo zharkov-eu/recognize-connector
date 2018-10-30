@@ -33,7 +33,7 @@ namespace ExpertSystem.Server
             var socketGroupParser = new CsvRecordParser<SocketGroup>(socketGroupSerializer);
             var socketGroupOptions = new CsvRepositoryOptions
             {
-                IdPropertyName = "SocketName",
+                IdPropertyName = "GroupName",
                 CsvFileName = Path.Combine(dataPath, "socketGroup.csv"),
                 WalFileName = Path.Combine(dataPath, "wal_socketGroup.txt")
             };
