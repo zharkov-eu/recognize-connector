@@ -19,7 +19,7 @@ namespace ExpertSystem.Tests.RulesGenerators
         {
             var sockets = TestData.GetSockets();
             _network = _generator.GetNeuralNetwork(sockets);
-            return _network.Learn();
+            return _generator.LearnNeuralNetwork(_network);
         }
 
         [Fact]

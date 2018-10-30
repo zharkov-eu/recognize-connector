@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ExpertSystem.Aggregator.Models.FuzzyLogic;
 using ExpertSystem.Common.Generated;
 
@@ -28,11 +29,11 @@ namespace ExpertSystem.Aggregator.Models.ANFIS
             {
                 var conclusionNeuron = new Neuron();
                 conclusionNeurons.Add(conclusionNeuron);
-                resultNeuron.Dendrites.Add(new Dendrite(conclusionNeuron, 1d));
+                resultNeuron.Dendrites.Add(new Dendrite(conclusionNeuron, 0.001d));
 
                 var activationNeuron = new Neuron();
                 activationNeurons.Add(activationNeuron);
-                conclusionNeuron.Dendrites.Add(new Dendrite(activationNeuron, 1d));
+                conclusionNeuron.Dendrites.Add(new Dendrite(activationNeuron, 0.005d));
             }
 
             _layers.AddFirst(new ResultNeuralLayer(resultNeuron));
@@ -45,9 +46,9 @@ namespace ExpertSystem.Aggregator.Models.ANFIS
             {
                 var statementNeuron = new Neuron();
                 statementNeurons.Add(statementNeuron);
-                resultNeuron.PassthroughDendrites.Add(new Dendrite(statementNeuron, 1d));
+                resultNeuron.PassthroughDendrites.Add(new Dendrite(statementNeuron, 0.0005d));
                 foreach (var neuron in activationLayer.Neurons)
-                    neuron.Dendrites.Add(new Dendrite(statementNeuron, 1d));
+                    neuron.Dendrites.Add(new Dendrite(statementNeuron, 0.00001d));
 
                 foreach (var rule in statement.Rules)
                 {
@@ -89,7 +90,8 @@ namespace ExpertSystem.Aggregator.Models.ANFIS
                 layer.Process();
             }
 
-            return ((ResultNeuralLayer) _layers.Last.Value).GetResult;
+            var result = ((ResultNeuralLayer) _layers.Last.Value).GetResult;
+            return result % 110 > 45 ? result : result + 45 ; 
         }
     }
 }
