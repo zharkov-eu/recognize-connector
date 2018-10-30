@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using ExpertSystem.Common.Parsers;
 using ExpertSystem.Common.Serializers;
 using ExpertSystem.Server.DAL.Entities;
@@ -39,6 +41,9 @@ namespace ExpertSystem.Server.DAL.Repositories
         // Сериализатор WAL-лога 
         private readonly WalEntrySerializer<T> _walSerializer;
 
+        // Записыватель WAL-лога 
+        private readonly WalWriter _walWriter;
+
         // Тип записи
         private readonly Type _recordType = typeof(T);
 
@@ -57,12 +62,16 @@ namespace ExpertSystem.Server.DAL.Repositories
         {
             _recordSerializer = serializer;
             _walSerializer = new WalEntrySerializer<T>(serializer);
+            _walWriter = new WalWriter(options.WalFileName);
             _parser = parser;
             _options = options;
 
             // Проверка существования CSV файла
             if (!File.Exists(_options.CsvFileName))
                 throw new FileNotFoundException($"Файл {_options.CsvFileName} не найден");
+            
+            // Запустить записыватель
+            _walWriter.Run();
         }
 
         /// <summary>Получить поток файла WAL-лога</summary>
@@ -71,7 +80,7 @@ namespace ExpertSystem.Server.DAL.Repositories
         {
             return File.Open(_options.WalFileName, FileMode.Open);
         }
-        
+
         /// <summary>Получить StreamWriter для файла WAL-лога</summary>
         /// <returns>StreamWriter для файла WAL-лога</returns>
         protected StreamWriter GetWalWriter()
@@ -85,7 +94,7 @@ namespace ExpertSystem.Server.DAL.Repositories
         {
             return new StreamReader(_options.WalFileName, Encoding.UTF8);
         }
-        
+
         /// <summary>Синхронизация репозитория</summary>
         public CsvRepository<T> Sync()
         {
@@ -159,7 +168,7 @@ namespace ExpertSystem.Server.DAL.Repositories
         public Tuple<int, T> Select(string recordName)
         {
             return _recordsByName.TryGetValue(recordName, out var hashCode)
-                ? new Tuple<int, T>(hashCode, _records[hashCode]) 
+                ? new Tuple<int, T>(hashCode, _records[hashCode])
                 : null;
         }
 
@@ -170,8 +179,9 @@ namespace ExpertSystem.Server.DAL.Repositories
         {
             _recordsByName.Add(GetRecordId(record), record.GetHashCode());
             _records.Add(record.GetHashCode(), record);
-            using (var writer = GetWalWriter())
-                writer.WriteLine(_walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Insert, record.GetHashCode(), record)));
+            _walWriter.Enqueue(
+                _walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Insert, record.GetHashCode(), record))
+            );
             return record;
         }
 
@@ -184,8 +194,9 @@ namespace ExpertSystem.Server.DAL.Repositories
             _recordsByName.Remove(GetRecordId(_records[hashCode]));
             _recordsByName.Add(GetRecordId(record), hashCode);
             _records.Add(record.GetHashCode(), record);
-            using (var writer = GetWalWriter())
-                writer.WriteLine(_walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Update, hashCode, record)));
+            _walWriter.Enqueue(
+                _walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Update, hashCode, record))
+            );
             return record;
         }
 
@@ -193,14 +204,14 @@ namespace ExpertSystem.Server.DAL.Repositories
         /// <param name="recordName">Имя записи</param>
         public void Delete(string recordName)
         {
-            if (_recordsByName.TryGetValue(recordName, out var hashCode))
-            {
-                var record = _records[hashCode];
-                _recordsByName.Remove(GetRecordId(record));
-                _records.Remove(hashCode);
-                using (var writer = GetWalWriter())
-                    writer.WriteLine(_walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Delete, hashCode, record)));
-            }
+            if (!_recordsByName.TryGetValue(recordName, out var hashCode)) return;
+
+            var record = _records[hashCode];
+            _recordsByName.Remove(GetRecordId(record));
+            _records.Remove(hashCode);
+            _walWriter.Enqueue(
+                _walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Delete, hashCode, record))
+            );
         }
 
         /// <summary>Получить идентификатор записи</summary>
@@ -222,6 +233,38 @@ namespace ExpertSystem.Server.DAL.Repositories
             if (!File.Exists(path)) return;
             using (var fs = File.Open(path, FileMode.Open, FileAccess.ReadWrite))
                 fs.SetLength(0);
+        }
+    }
+
+    public class WalWriter
+    {
+        internal bool IsRunning = true;
+        private readonly ConcurrentQueue<string> _queue;
+        private readonly string _walFileName;
+
+        public WalWriter(string walFileName)
+        {
+            _queue = new ConcurrentQueue<string>();
+            _walFileName = walFileName;
+        }
+        
+        public void Run() => new Thread(WriteToFile).Start();
+
+        public void Enqueue(string line) => _queue.Enqueue(line);
+
+        private void WriteToFile()
+        {
+            while (IsRunning)
+            {
+                while (_queue.IsEmpty)
+                    Thread.Sleep(1000);
+
+                if (_queue.TryDequeue(out var line))
+                {
+                    using (var writer = new StreamWriter(_walFileName, true, Encoding.UTF8))
+                        writer.WriteLine(line);
+                }   
+            }
         }
     }
 }
