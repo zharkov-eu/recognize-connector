@@ -199,7 +199,7 @@ namespace ExpertSystem.Server.DAL.Repositories
                 _recordsByName.Remove(GetRecordId(record));
                 _records.Remove(hashCode);
                 using (var writer = GetWalWriter())
-                    writer.Write(_walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Delete, hashCode, record)));
+                    writer.WriteLine(_walSerializer.Serialize(new WalEntry<T>(CsvDbAction.Delete, hashCode, record)));
             }
         }
 

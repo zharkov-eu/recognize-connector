@@ -84,7 +84,7 @@ namespace ExpertSystem.Server.Services
                 throw new RpcException(new Status(StatusCode.NotFound,
                     $"Socket {request.SocketName} not found"));
             _socketService.DeleteSocket(request.SocketName);
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         // ===========================================================================================================
@@ -131,7 +131,7 @@ namespace ExpertSystem.Server.Services
             DebugWrite($"RpcCall 'DeleteSocketGroup': '{request}' from {context.Peer}");
 
             _groupService.DeleteSocketGroup(request.GroupName);
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         /// <summary>Добавления разъёма в группу разъёмов</summary>
