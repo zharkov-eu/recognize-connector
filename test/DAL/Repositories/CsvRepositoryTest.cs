@@ -2,6 +2,7 @@ using Xunit;
 using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 using ExpertSystem.Common.Generated;
 using ExpertSystem.Common.Parsers;
 using ExpertSystem.Common.Serializers;
@@ -110,6 +111,7 @@ namespace ExpertSystem.Tests.DAL.Repositories
 
             // Act
             _repositoryMock.Insert(socketToInsert);
+            Thread.Sleep(1500);
             _repositoryMock.Sync();
 
             //Assert
@@ -135,6 +137,7 @@ namespace ExpertSystem.Tests.DAL.Repositories
 
             // Act
             _repositoryMock.Update(hashCode, updatedSocket);
+            Thread.Sleep(1500);
             _repositoryMock.Sync();
 
             //Assert
@@ -158,8 +161,10 @@ namespace ExpertSystem.Tests.DAL.Repositories
 
             // Act
             _repositoryMock.Delete(socketToDelete.SocketName);
+            Thread.Sleep(1500);
             _repositoryMock.Sync();
 
+            
             //Assert
             // CSV файл обновлён
             Assert.True(!File.ReadAllText(_testCsvFileName, Encoding.UTF8).Contains(socketToDelete.SocketName),
@@ -215,6 +220,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
             // Act
             _repositoryMock.Insert(socketToInsert);
 
+            Thread.Sleep(1500);
+            
             // Assert
             Assert.True(_repositoryMock.GetAllRecords().Contains(socketToInsert),
                 "Ожидаемый разъём не найден в репозитории");
@@ -239,6 +246,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
             // Act
             _repositoryMock.Update(hashCode, updatedSocket);
 
+            Thread.Sleep(1500);
+
             // Assert
             Assert.True(_repositoryMock.GetAllRecords().Contains(updatedSocket),
                 "Обновлённый разъём не найден среди доступных");
@@ -261,6 +270,8 @@ namespace ExpertSystem.Tests.DAL.Repositories
 
             // Act
             _repositoryMock.Delete(socketToDelete.SocketName);
+
+            Thread.Sleep(1500);
 
             // Assert
             Assert.True(!_repositoryMock.GetAllRecords().Contains(socketToDelete),
