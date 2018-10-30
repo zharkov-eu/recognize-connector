@@ -9,7 +9,9 @@ namespace ExpertSystem.Common.Models
         public enum SocketDomain
         {
             [Output("не определен")] Empty,
-            [Output("максимальная сила тока при разрыве цепи")] AmperageCircuit,
+
+            [Output("максимальная сила тока при разрыве цепи")]
+            AmperageCircuit,
             [Output("пол разъема")] Gender,
             [Output("контактный материал")] ContactMaterial,
             [Output("контактная плата")] ContactPlating,
@@ -61,7 +63,7 @@ namespace ExpertSystem.Common.Models
             {typeof(float), -1.0f}
         };
 
-        public static List<SocketDomain> DomainIgnore = new List<SocketDomain>
+        public static readonly List<SocketDomain> DomainIgnore = new List<SocketDomain>
         {
             SocketDomain.Empty,
             SocketDomain.AmperageCircuit
@@ -75,7 +77,7 @@ namespace ExpertSystem.Common.Models
             {
                 var attrs = memInfo[0].GetCustomAttributes(typeof(Output), false);
                 if (attrs != null && attrs.Length > 0)
-                    return ((Output)attrs[0]).Text;
+                    return ((Output) attrs[0]).Text;
             }
 
             return domain.ToString();
@@ -84,6 +86,14 @@ namespace ExpertSystem.Common.Models
         public static IEnumerable<SocketDomain> GetSocketDomains()
         {
             return Enum.GetValues(typeof(SocketDomain)).Cast<SocketDomain>().Where(p => !DomainIgnore.Contains(p));
+        }
+
+        public static IEnumerable<SocketDomain> GetFuzzySocketDomains()
+        {
+            return new List<SocketDomain>
+            {
+                SocketDomain.NumberOfContacts, SocketDomain.SizeLength, SocketDomain.SizeWidth
+            };
         }
 
         private class Output : Attribute
