@@ -262,8 +262,8 @@ namespace ExpertSystem.Aggregator.Services
             _socketGroupCache.Update(socketGroup.GroupName, socketGroup);
             await _client.AddToSocketGroupAsync(new CustomSocketIdentityJoinGroup
             {
-                Group = {GroupName = socketGroup.GroupName},
-                Socket = {SocketName = socketName}
+                Group = new SocketGroupIdentity {GroupName = socketGroup.GroupName},
+                Socket = new CustomSocketIdentity {SocketName = socketName}
             });
 
             return socketGroup;
@@ -287,8 +287,8 @@ namespace ExpertSystem.Aggregator.Services
                 );
             await _client.RemoveSocketFromGroupAsync(new CustomSocketIdentityJoinGroup
             {
-                Group = {GroupName = socketGroup.GroupName},
-                Socket = {SocketName = socketName}
+                Group = new SocketGroupIdentity {GroupName = socketGroup.GroupName},
+                Socket = new CustomSocketIdentity {SocketName = socketName}
             });
 
             socketGroup.SocketNames.Remove(socketName);
