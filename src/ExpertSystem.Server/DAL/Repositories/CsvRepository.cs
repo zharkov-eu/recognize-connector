@@ -69,21 +69,21 @@ namespace ExpertSystem.Server.DAL.Repositories
         /// <returns>Поток файла WAL-лога</returns>
         protected FileStream GetWalStream()
         {
-            return File.Open(_options.WalFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            return File.Open(_options.WalFileName, FileMode.Open);
         }
         
         /// <summary>Получить StreamWriter для файла WAL-лога</summary>
         /// <returns>StreamWriter для файла WAL-лога</returns>
         protected StreamWriter GetWalWriter()
         {
-            return new StreamWriter(GetWalStream());
+            return new StreamWriter(_options.WalFileName, true, Encoding.UTF8);
         }
 
         /// <summary>Получить StreamReader для файла WAL-лога</summary>
         /// <returns>StreamReader для файла WAL-лога</returns>
         protected StreamReader GetWalReader()
         {
-            return new StreamReader(GetWalStream());
+            return new StreamReader(_options.WalFileName, Encoding.UTF8);
         }
         
         /// <summary>Синхронизация репозитория</summary>
